@@ -18,14 +18,14 @@ background: blue;
 
 .main{
 width: calc(100% - 280px);
-height: 1400px;
+height: 1450px;
 float: left;
 background: yellow;
 }
 
 .footer{
 width: calc(100% - 280px);
-height: 100px;
+height: 50px;
 float: left;
 background: purple;
 }
