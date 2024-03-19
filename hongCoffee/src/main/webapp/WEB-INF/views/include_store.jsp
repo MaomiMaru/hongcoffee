@@ -2,6 +2,29 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+<style>
+.sidebar .nav.sub-menu {
+    margin-bottom: 0;
+    margin-top: 0;
+    list-style: none;
+    padding: 0.25rem 0 0 3.07rem;
+    background: #EFBDBC !important;
+    padding-bottom: 12px;
+}
+
+.sidebar .nav:not(.sub-menu) > .nav-item > .nav-link[aria-expanded="true"] {
+    border-radius: 8px 8px 0 0;
+  	background: #EFBDBC !important;
+    color: #fff;
+}
+
+
+
+
+#settings-trigger{
+  	background: #EFBDBC !important;
+}
+</style>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">

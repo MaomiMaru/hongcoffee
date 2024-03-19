@@ -177,19 +177,7 @@
   <script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
-<!--   <script> -->
-//   $(function(){
-// 	  $(".nav-link").on({ 'mouseover' : function(){
-// 		   $(".nav-link").css({
-// 			   'backgroudColor' : '#EFBDBC'
-// 		   })
-// 	   }
-// 	  })
-//   })
-   
-	  
-  
-<!--   </script> -->
+
   
 </body>
 
