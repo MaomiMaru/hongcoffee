@@ -2,6 +2,29 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+<style>
+.sidebar .nav.sub-menu {
+    margin-bottom: 0;
+    margin-top: 0;
+    list-style: none;
+    padding: 0.25rem 0 0 3.07rem;
+    background: #EFBDBC !important;
+    padding-bottom: 12px;
+}
+
+.sidebar .nav:not(.sub-menu) > .nav-item > .nav-link[aria-expanded="true"] {
+    border-radius: 8px 8px 0 0;
+  	background: #EFBDBC !important;
+    color: #fff;
+}
+
+
+
+
+#settings-trigger{
+  	background: #EFBDBC !important;
+}
+</style>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -60,7 +83,7 @@
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" >
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="#">
@@ -154,6 +177,20 @@
   <script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
+<!--   <script> -->
+//   $(function(){
+// 	  $(".nav-link").on({ 'mouseover' : function(){
+// 		   $(".nav-link").css({
+// 			   'backgroudColor' : '#EFBDBC'
+// 		   })
+// 	   }
+// 	  })
+//   })
+   
+	  
+  
+<!--   </script> -->
+  
 </body>
 
 </html>
