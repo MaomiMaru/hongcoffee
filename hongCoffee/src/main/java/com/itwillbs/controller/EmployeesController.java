@@ -20,6 +20,10 @@ public class EmployeesController {
 		return "main/main";
 	}
 	
-	
+	@GetMapping("/include_employee")
+	public String include_employee() {
+		System.out.println("include_employee");
+		return "include_employee";
+	}
 	
 }
