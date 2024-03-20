@@ -26,4 +26,12 @@ public class EmployeesController {
 		return "include_employee";
 	}
 	
+	@GetMapping("/sawon/jijum")
+	public String sawon_jijum() {
+		System.out.println("sawon_jijum");
+		return "sawon/jijum";
+	}
+	
+	
 }
+
