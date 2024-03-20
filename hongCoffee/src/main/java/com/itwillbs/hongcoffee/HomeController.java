@@ -25,7 +25,9 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
 		System.out.println("HomeController main()");
-		return "main/main";
+
+		return "sawon/include_employee";
+
 	}
 	
 }

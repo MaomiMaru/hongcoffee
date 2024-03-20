@@ -83,8 +83,11 @@
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar" >
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+        <ul class="logo-nav">
+			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
+		</ul>
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="icon-grid menu-icon"></i>
@@ -141,11 +144,8 @@
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-          </div>
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">© Hong coffee, 2024 Hong coffee Corp. 
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Hand-crafted & made with 2Team <i class="ti-heart text-danger ml-1"></i></span>
           </div>
         </footer> 
         <!-- partial -->
@@ -177,9 +177,6 @@
   <script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
-
-  <!-- nav mouseover 고유색 -->
-  <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script>
 </body>
 
 </html>

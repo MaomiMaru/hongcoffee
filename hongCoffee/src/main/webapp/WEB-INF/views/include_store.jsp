@@ -179,6 +179,9 @@
   <script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
+  
+   <!-- nav mouseover 고유색 -->
+  <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script>
 </body>
 
 </html>
