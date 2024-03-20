@@ -1,7 +1,5 @@
 package com.itwillbs.hongcoffee;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -25,7 +23,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
 		System.out.println("HomeController main()");
-		return "sawon/include_employee";
+		return "sawon/main";
 	}
 	
 }

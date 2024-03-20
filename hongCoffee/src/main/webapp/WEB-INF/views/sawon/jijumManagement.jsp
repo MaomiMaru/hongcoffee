@@ -34,12 +34,6 @@
 </button>
 <ul class="navbar-nav navbar-nav-right">
 </ul>
-<div class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false">관리자 님</a>
-		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			<li><a class="dropdown-item" href="#">로그아웃</a></li>
-		</ul>
-	</div>
 </div>
 </nav>
     <!-- partial -->
