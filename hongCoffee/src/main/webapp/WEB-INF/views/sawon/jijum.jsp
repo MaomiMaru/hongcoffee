@@ -24,7 +24,9 @@
   	background: #EFBDBC !important;
 }
 
-
+.sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"]
+{ 	background: #EFBDBC !important;
+}
 #settings-trigger{
   	background: #EFBDBC !important;
 }
@@ -68,8 +70,8 @@
 
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false">관리자 님</a>
-		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
+	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<li><a class="dropdown-item" href="#">로그아웃</a></li>
 		</ul>
 	</div>
@@ -202,7 +204,7 @@
   <!-- End custom js for this page-->
   
   <!-- nav mouseover 고유색 -->
-  <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script>
+<%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
 </body>
 
 </html>
