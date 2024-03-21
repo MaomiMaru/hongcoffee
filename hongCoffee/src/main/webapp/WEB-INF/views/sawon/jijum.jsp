@@ -31,6 +31,46 @@
   	background: #EFBDBC !important;
 }
 
+#search {
+	height: 300px;
+	margin: 0 auto;
+}
+
+ul{
+	list-style:none;
+}
+
+#search {
+	height: 250px;
+	width: 100%;
+	border: 1px solid black;
+}
+
+.name {
+	width: 100px;
+	margin: 35px 0 20px 50px;
+	text-align: left;
+}
+
+.choose {
+	width: 300px;
+}
+
+#search li {
+	width: 600px;
+	height: 50px;
+}
+
+input[type=text]{
+	width: 300px;
+	margin-bottom: 10px;
+	color: white;
+}
+
+.button{
+	margin-left: 10px;
+}
+
 /* 항목 스타일 끝 */
 </style>
 <head>
@@ -160,7 +200,33 @@
       <div class="main-panel">
         <div class="content-wrapper">
 		<h2>지점 관리</h2>
-		<div style="background: gray;    height:300px; border: black 1px solid;">필터</div>
+		
+		<form action="">
+			<div id="search">
+				<ul>
+					<li><label class="name">부서</label>
+					<select class="choose">
+					<option value="">------</option>
+					<option value="인사">인사</option>
+					<option value="관리">관리</option></select></li>
+				
+					<li><label class="name">직급</label>
+					<select class="choose">
+					<option value="">------</option>
+					<option>사원</option>
+					<option>관리</option></select></li>
+				
+				<li><label class="name">사원번호</label>
+					<input type="text"></li>
+				<li><label class="name">사원이름</label>
+					<input type="text">
+					<span class="button"><button type="button">조회</button></span></li>
+				</ul>	
+			</div>
+		</form>
+
+		<hr>
+   	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" ><button>추가</button><button>수정</button><button>삭제</button></div>
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">내용</div>
