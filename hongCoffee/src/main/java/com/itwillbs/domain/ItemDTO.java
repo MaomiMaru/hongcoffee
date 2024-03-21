@@ -5,7 +5,7 @@ public class ItemDTO {
 	private int item_num; //물품 번호 PK, AUTO_INCREMENT
 	private String item_name; //물품명
 	private String item_type; //유형
-	private int org_price; //원가
+
 	private int item_price; //단가
 	private String item_note; //물품 적요
 	
@@ -27,12 +27,7 @@ public class ItemDTO {
 	public void setItem_type(String item_type) {
 		this.item_type = item_type;
 	}
-	public int getOrg_price() {
-		return org_price;
-	}
-	public void setOrg_price(int org_price) {
-		this.org_price = org_price;
-	}
+
 	public int getItem_price() {
 		return item_price;
 	}

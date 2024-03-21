@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="ko">
+<!-- 목록 스타일 템플릿 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <style>
 /* 항목 스타일 */
 .sidebar .nav.sub-menu {
@@ -32,6 +36,20 @@
 }
 
 /* 항목 스타일 끝 */
+/* 목록 스타일 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #F0F0F0;}
+/* 목록 스타일 끝 */
 </style>
 <head>
   <!-- Required meta tags -->
@@ -163,7 +181,35 @@
 		<div style="background: gray;    height:300px; border: black 1px solid;">필터</div>
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" ><button>추가</button><button>수정</button><button>삭제</button></div>
-		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">내용</div>
+		
+<!-- 		목록 -->
+		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
+		<table class="table">
+  			<tr style="background-color: transparent !important;">
+    		<th style=" font-size:20px !important; color: black;">지점번호</th>
+    		<th style=" font-size:20px !important; color: black;">지점명</th>
+    		<th style=" font-size:20px !important; color: black;">대표자명</th>
+    		<th style=" font-size:20px !important; color: black;">연락처</th>
+    		<th style=" font-size:20px !important; color: black;">이메일</th>
+    		<th style=" font-size:20px !important; color: black;">주소</th>
+    		<th style=" font-size:20px !important; color: black;">상태</th>
+ 		 </tr>
+ 		 <c:forEach var="StoreDTO" items="${jijumList}">
+  <tr >
+    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.name}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.boss}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.email}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.address}</td>
+      <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.state}</td>
+  </tr>
+  		</c:forEach>
+  
+ 		 </table>
+		</div>
+        
+        
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->

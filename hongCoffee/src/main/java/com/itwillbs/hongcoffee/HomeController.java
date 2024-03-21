@@ -26,7 +26,7 @@ public class HomeController {
 	public String index(Locale locale, Model model) {
 		System.out.println("HomeController main()");
 
-		return "sawon/include_employee";
+		return "sawon/reference_employee";
 
 	}
 	

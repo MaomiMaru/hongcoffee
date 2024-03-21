@@ -1,7 +1,5 @@
 package com.itwillbs.domain;
 
-import java.sql.Timestamp;
-
 public class StoreDTO {
 
 	private int num; //지점번호

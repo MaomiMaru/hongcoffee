@@ -6,7 +6,7 @@ public class OrderDTO {
 	
 	private int od_num; //거래 번호
 	private int num; //지점 번호
-	private int item_num; //물품 번호
+	private int item_num; //재료 번호
 	private int od_amount; //발주량/수주량
 	private Timestamp od_time; //발주일시
 	private int received_not; //입고여부
