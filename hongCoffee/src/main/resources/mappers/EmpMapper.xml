@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- namespace="com.itwillbs.mappers.boardMapper"  -->
+<!--        => boardMapper 파일 => xml 파일이름  -->
+<mapper namespace="com.itwillbs.mappers.EmpMapper">
+
+	<select id="getStoreList" resultType="com.itwillbs.domain.StoreDTO"> 
+ 		select * from store 
+ 	</select>
+ 	
+ 	<select id="getIngredientList" resultType="com.itwillbs.domain.ItemDTO"> 
+ 		select * from item 
+ 	</select>
+ 	
+ 	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
+ 		select o.od_num, s.name, i.item_name, o.od_amount, o.od_time, o.received_not  
+ 		from `order` o join store s on o.num = s.num 
+ 		join item i on o.item_num = i.item_num;
+ 	</select>
+ 	
+ 	<select id="getShipmenthaList" resultType="com.itwillbs.domain.ReceiveDTO"> 
+ 		select r.od_num, s.name, i.item_name, r.rc_amount, i.item_price, r.rc_time
+ 		from receive r join store s on r.num = s.num
+ 		join item i on r.item_num = i.item_num
+ 	</select>
+ 	
+ 	<select id="getEmpList" resultType="com.itwillbs.domain.EmployeeDTO"> 
+ 		select * from employee 
+ 	</select>
+
+</mapper>
+
+

@@ -15,7 +15,8 @@
           var $menuItem = $(this);
           if (ev.type === 'mouseenter') {
             $menuItem.addClass('hover-open')
-          } else {
+            
+          } else { 
             $menuItem.removeClass('hover-open')
           }
         }

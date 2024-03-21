@@ -16,7 +16,14 @@ public class EmployeeDTO {
 	private int emp_right; //권한(일반=0, 관리자=1)
 	private Timestamp hire_date; //입사일
 	private Timestamp quit_date; //퇴사일
+	private String emp_note; //사원 적요
 	
+	public String getEmp_note() {
+		return emp_note;
+	}
+	public void setEmp_note(String emp_note) {
+		this.emp_note = emp_note;
+	}
 	public int getEmp_num() {
 		return emp_num;
 	}

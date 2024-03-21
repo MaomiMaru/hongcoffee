@@ -23,7 +23,9 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
 		System.out.println("HomeController main()");
-		return "popup/emp/emp_update";
+
+		return "emp/login";
+
 	}
 	
 }

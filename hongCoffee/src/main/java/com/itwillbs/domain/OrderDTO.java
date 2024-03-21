@@ -6,14 +6,28 @@ public class OrderDTO {
 	
 	private int od_num; //거래 번호
 	private int num; //지점 번호
-	private int item_num; //물품 번호
+	private int item_num; //재료 번호
 	private int od_amount; //발주량/수주량
 	private Timestamp od_time; //발주일시
 	private int received_not; //입고여부
 	private String od_note; //발주적요
 	private String ob_note; //수주적요
+	private String name; //지점명
+	private String item_name; //재료명
 	
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
 	public int getOd_num() {
 		return od_num;
 	}
