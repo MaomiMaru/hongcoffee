@@ -8,6 +8,10 @@
 
 <style>
 /* 항목 스타일 */
+.sidebar .nav .nav-item.active > .nav-link
+{
+    background: #EFBDBC !important;
+}
 .sidebar .nav.sub-menu {
     margin-bottom: 0;
     margin-top: 0;
@@ -54,10 +58,12 @@ ul{
 	width: 100px;
 	margin: 35px 0 20px 50px;
 	text-align: left;
+	font-size: 15px;
 }
 
 .choose {
 	width: 300px;
+		font-size: 15px;
 }
 
 #search li {
@@ -180,10 +186,10 @@ tr:hover {background-color: #F0F0F0;}
               <span class="menu-title">기준 정보 관리</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">품목 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/jijum">지점 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/jeryo">재료 관리</a></li>
               </ul>
             </div>
           </li>
@@ -195,8 +201,8 @@ tr:hover {background-color: #F0F0F0;}
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="#">수주 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">출하 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/suju">수주 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/chulha">출하 관리</a></li>
               </ul>
             </div>
           </li>
@@ -208,7 +214,7 @@ tr:hover {background-color: #F0F0F0;}
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">사원 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/sawon">사원 관리</a></li>
               </ul>
             </div>
           </li>
@@ -217,7 +223,7 @@ tr:hover {background-color: #F0F0F0;}
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>지점 관리</h2>
+		<h2>출하 관리</h2>
 		
 		<form action="">
 			<div id="search">
@@ -245,30 +251,31 @@ tr:hover {background-color: #F0F0F0;}
 
 		<hr>
    	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
-		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" ><button>추가</button><button>수정</button><button>삭제</button></div>
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">출하 목록</h3></div>
+		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
+		<button>추가</button>
+		<button>수정</button>
+		<button>삭제</button></div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">지점번호</th>
+    		<th style=" font-size:20px !important; color: black;">거래번호</th>
     		<th style=" font-size:20px !important; color: black;">지점명</th>
-    		<th style=" font-size:20px !important; color: black;">대표자명</th>
-    		<th style=" font-size:20px !important; color: black;">연락처</th>
-    		<th style=" font-size:20px !important; color: black;">이메일</th>
-    		<th style=" font-size:20px !important; color: black;">주소</th>
-    		<th style=" font-size:20px !important; color: black;">상태</th>
+    		<th style=" font-size:20px !important; color: black;">재료명</th>
+    		<th style=" font-size:20px !important; color: black;">출하량</th>
+    		<th style=" font-size:20px !important; color: black;">단가</th>
+    		<th style=" font-size:20px !important; color: black;">출하일시</th>
  		 </tr>
- 		 <c:forEach var="StoreDTO" items="${jijumList}">
-  <tr >
-    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.boss}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.email}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.address}</td>
-      <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.state}</td>
+ 		 <c:forEach var="ReceiveDTO" items="${chulhaList}">
+  <tr>
+    <td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.od_num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.name}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_name}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_amount}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_price}</td>
+ 	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_time}</td>
   </tr>
   		</c:forEach>
   

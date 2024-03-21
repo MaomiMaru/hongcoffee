@@ -2,12 +2,20 @@ package com.itwillbs.domain;
 
 public class ItemDTO {
 
-	private int item_num; //물품 번호 PK, AUTO_INCREMENT
-	private String item_name; //물품명
+	private int item_num; //재료 번호 PK, AUTO_INCREMENT
+	private String item_name; //재료명
 	private String item_type; //유형
-
 	private int item_price; //단가
+	private int item_state; //재료 상태
 	private String item_note; //물품 적요
+	
+	
+	public int getItem_state() {
+		return item_state;
+	}
+	public void setItem_state(int item_state) {
+		this.item_state = item_state;
+	}
 	
 	public int getItem_num() {
 		return item_num;

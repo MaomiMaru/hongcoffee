@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="ko">
+<!-- 목록 스타일 템플릿 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <style>
 /* 항목 스타일 */
+
+.sidebar .nav .nav-item.active > .nav-link
+{
+    background: #EFBDBC !important;
+}
 .sidebar .nav.sub-menu {
     margin-bottom: 0;
     margin-top: 0;
@@ -31,7 +40,63 @@
   	background: #EFBDBC !important;
 }
 
+#search {
+	height: 300px;
+	margin: 0 auto;
+}
+
+ul{
+	list-style:none;
+}
+
+#search {
+	height: 250px;
+	width: 100%;
+	border: 1px solid black;
+}
+
+.name {
+	width: 100px;
+	margin: 35px 0 20px 50px;
+	text-align: left;
+	font-size: 15px;
+}
+
+.choose {
+	width: 300px;
+		font-size: 15px;
+}
+
+#search li {
+	width: 600px;
+	height: 50px;
+}
+
+input[type=text]{
+	width: 300px;
+	margin-bottom: 10px;
+	color: white;
+}
+
+.button{
+	margin-left: 10px;
+}
+
 /* 항목 스타일 끝 */
+/* 목록 스타일 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #F0F0F0;}
+/* 목록 스타일 끝 */
 </style>
 <head>
   <!-- Required meta tags -->
@@ -66,13 +131,18 @@
 <ul class="navbar-nav navbar-nav-right">
 </ul>
 
+
+
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
-		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
+	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<li><a class="dropdown-item" href="#">로그아웃</a></li>
 		</ul>
-</div>
+	</div>
+	
+	
+	
 	
 </div>
 </nav>
@@ -119,8 +189,8 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">품목 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/jijum">지점 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/jeryo">재료 관리</a></li>
               </ul>
             </div>
           </li>
@@ -132,8 +202,8 @@
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="#">수주 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">출하 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/suju">수주 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/chulha">출하 관리</a></li>
               </ul>
             </div>
           </li>
@@ -145,7 +215,7 @@
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">사원 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/sawon">사원 관리</a></li>
               </ul>
             </div>
           </li>
@@ -154,8 +224,74 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-         컨텐츠 영역
+		<h2>사원 관리</h2>
+		
+		<form action="">
+			<div id="search">
+				<ul>
+					<li><label class="name">부서</label>
+					<select class="choose">
+					<option value="">------</option>
+					<option value="인사">인사</option>
+					<option value="관리">관리</option></select></li>
+				
+					<li><label class="name">직급</label>
+					<select class="choose">
+					<option value="">------</option>
+					<option>사원</option>
+					<option>관리</option></select></li>
+				
+				<li><label class="name">사원번호</label>
+					<input type="text"></li>
+				<li><label class="name">사원이름</label>
+					<input type="text">
+					<span class="button"><button type="button">조회</button></span></li>
+				</ul>	
+			</div>
+		</form>
 
+		<hr>
+   	
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">사원 목록</h3></div>
+		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
+		<button>추가</button>
+		<button>수정</button>
+		<button>삭제</button></div>
+		
+<!-- 		목록 -->
+		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
+		<table class="table">
+  			<tr style="background-color: transparent !important;">
+    		<th style=" font-size:20px !important; color: black;">사원번호</th>
+    		<th style=" font-size:20px !important; color: black;">이름</th>
+    		<th style=" font-size:20px !important; color: black;">생년월일</th>
+    		<th style=" font-size:20px !important; color: black;">부서</th>
+    		<th style=" font-size:20px !important; color: black;">직급</th>
+    		<th style=" font-size:20px !important; color: black;">권한</th>
+    		<th style=" font-size:20px !important; color: black;">연락처</th>
+    		<th style=" font-size:20px !important; color: black;">이메일</th>
+    		<th style=" font-size:20px !important; color: black;">입사일</th>
+    		<th style=" font-size:20px !important; color: black;">상태</th>
+ 		 </tr>
+ 		 <c:forEach var="EmployeeDTO" items="${sawonList}">
+  <tr>
+    <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_name}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_birth}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_dept}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_rank}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_right}</td>
+ 	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_phone}</td>
+ 	 <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>
+ 	 <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.hire_date}</td>
+ 	 <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_state}</td>
+  </tr>
+  		</c:forEach>
+  
+ 		 </table>
+		</div>
+        
+        
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->

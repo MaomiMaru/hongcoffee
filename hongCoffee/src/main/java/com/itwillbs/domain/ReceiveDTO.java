@@ -12,7 +12,29 @@ public class ReceiveDTO {
 	private String rc_note; //입고적요
 	private String sh_note; //출하적요
 	private int pay; //결제여부
+	private int item_price;
+	private String name;
+	private String item_name;
 	
+	
+	public int getItem_price() {
+		return item_price;
+	}
+	public void setItem_price(int item_price) {
+		this.item_price = item_price;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
 	public int getOd_num() {
 		return od_num;
 	}
