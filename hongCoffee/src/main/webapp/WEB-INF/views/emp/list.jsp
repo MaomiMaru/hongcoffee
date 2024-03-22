@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -118,7 +118,8 @@ tr:hover {background-color: #F0F0F0;}
   <!-- endinject -->
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/imgs/logo.png" />
 </head>
-<body>
+
+<body onload="cola()">
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -181,7 +182,7 @@ tr:hover {background-color: #F0F0F0;}
               <span class="menu-title">대시 보드</span>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="pjh1">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
               <span class="menu-title">기준 정보 관리</span>
@@ -219,7 +220,7 @@ tr:hover {background-color: #F0F0F0;}
               </ul>
             </div>
           </li>
- 
+ 		</ul>
       </nav>
       <!-- partial -->
       <div class="main-panel">
@@ -333,7 +334,16 @@ tr:hover {background-color: #F0F0F0;}
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+
+<script>
+function cola() {
+	document.querySelector("#ui-basic").className = 'collapse';
+	document.querySelector("#pjh1").className = 'nav-item';
+}
+</script>
+
 </body>
+
 
 </html>
 
