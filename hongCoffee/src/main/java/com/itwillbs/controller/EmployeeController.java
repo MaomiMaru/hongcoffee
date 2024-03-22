@@ -99,5 +99,26 @@ public String empList(HttpServletRequest request, Model model) {
 	
 		return "emp/list";
 	}//sawonList
+
+//지점 추가 팝업
+@GetMapping("/popup/store_insert")
+public String store_insert() {
+	System.out.println("EmployeeController store_insert()");
+	
+	return "/emp/popup/store_insert";
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

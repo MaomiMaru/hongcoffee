@@ -252,7 +252,13 @@ tr:hover {background-color: #F0F0F0;}
 		<hr>
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
-		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" ><button>추가</button><button>수정</button><button>삭제</button></div>
+		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
+		
+<%-- 		<input type="button" value="추가" name="store_insert" onclick="location.href='${pageContext.request.contextPath}/popup/emp/store_insert'">  --%>
+		<input type="button" value="추가" name="store_insert" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=366,height=518,location=no,status=no,scrollbars=yes')"> 
+		<input type="button" value="수정" name="store_update" onclick="location.href='${pageContext.request.contextPath}/popup/emp/store_update'">
+		<input type="button" value="삭제">
+		</div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
@@ -321,8 +327,12 @@ tr:hover {background-color: #F0F0F0;}
   <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
   
-  <!-- nav mouseover 고유색 -->
-<%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+  <script type="text/javascript">
+
+  
+  
+  </script>
+  
 </body>
 
 </html>
