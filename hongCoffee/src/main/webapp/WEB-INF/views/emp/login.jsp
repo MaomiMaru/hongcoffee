@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>사원 로그인</title>
+<title>홍커피</title>
 <style>
 .container{
 text-align: center;
@@ -18,12 +18,13 @@ background-color: #EEEEEE;
 }
 </style>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/imgs/logo.png" />
 </head>
 <body>
 <div class="container">
 <img src="${pageContext.request.contextPath}/resources/imgs/logo.png" width="265" height="265" alt="Hong Coffee"><br>
 <div class="loginform">
-<form action="${pageContext.request.contextPath}/main/main" method="post" id="login">
+<form action="${pageContext.request.contextPath}/emp/main" method="post" id="login">
 <label></label>
 <div id="checkdiv"></div>
 <div class="inner">

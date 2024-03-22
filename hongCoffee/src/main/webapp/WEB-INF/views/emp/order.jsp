@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="ko">
+<!-- 목록 스타일 템플릿 -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <style>
 /* 항목 스타일 */
+
+.sidebar .nav .nav-item.active > .nav-link
+{
+    background: #EFBDBC !important;
+}
 .sidebar .nav.sub-menu {
     margin-bottom: 0;
     margin-top: 0;
@@ -31,13 +40,69 @@
   	background: #EFBDBC !important;
 }
 
+#search {
+	height: 300px;
+	margin: 0 auto;
+}
+
+ul{
+	list-style:none;
+}
+
+#search {
+	height: 250px;
+	width: 100%;
+	border: 1px solid black;
+}
+
+.name {
+	width: 100px;
+	margin: 35px 0 20px 50px;
+	text-align: left;
+	font-size: 15px;
+}
+
+.choose {
+	width: 300px;
+		font-size: 15px;
+}
+
+#search li {
+	width: 600px;
+	height: 50px;
+}
+
+input[type=text]{
+	width: 300px;
+	margin-bottom: 10px;
+	color: white;
+}
+
+.button{
+	margin-left: 10px;
+}
+
 /* 항목 스타일 끝 */
+/* 목록 스타일 */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #F0F0F0;}
+/* 목록 스타일 끝 */
 </style>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>지점</title>
+  <title>사원</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendors/ti-icons/css/themify-icons.css">
@@ -66,13 +131,18 @@
 <ul class="navbar-nav navbar-nav-right">
 </ul>
 
+
+
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
-		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
+	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<li><a class="dropdown-item" href="#">로그아웃</a></li>
 		</ul>
-</div>
+	</div>
+	
+	
+	
 	
 </div>
 </nav>
@@ -101,10 +171,10 @@
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
         <ul class="logo-nav">
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
 		</ul>
-        <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="icon-grid menu-icon"></i>
@@ -114,55 +184,111 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">상품 거래</span>
+              <span class="menu-title">기준 정보 관리</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">품목 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store_list">지점 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">물류 관리</span>
+              <span class="menu-title">영업 관리</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="#">재고 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">발주 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">입고 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/order">수주 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/shipment">출하 관리</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">영업 관리</span>
+              <span class="menu-title">사원 관리</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">실적 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/list">사원 관리</a></li>
               </ul>
             </div>
           </li>
  
       </nav>
       <!-- partial -->
-<!-- 컨텐츠 영역 -->
       <div class="main-panel">
         <div class="content-wrapper">
-         컨텐츠 영역
+		<h2>수주 관리</h2>
+		
+		<form action="">
+			<div id="search">
+				<ul>
+					<li><label class="name">부서</label>
+					<select class="choose">
+					<option value="">------</option>
+					<option value="인사">인사</option>
+					<option value="관리">관리</option></select></li>
+				
+					<li><label class="name">직급</label>
+					<select class="choose">
+					<option value="">------</option>
+					<option>사원</option>
+					<option>관리</option></select></li>
+				
+				<li><label class="name">사원번호</label>
+					<input type="text"></li>
+				<li><label class="name">사원이름</label>
+					<input type="text">
+					<span class="button"><button type="button">조회</button></span></li>
+				</ul>	
+			</div>
+		</form>
 
+		<hr>
+   	
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">수주 목록</h3></div>
+		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
+		<button>추가</button>
+		<button>수정</button>
+		<button>삭제</button></div>
+		
+<!-- 		목록 -->
+		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
+		<table class="table">
+  			<tr style="background-color: transparent !important;">
+    		<th style=" font-size:20px !important; color: black;">거래번호</th>
+    		<th style=" font-size:20px !important; color: black;">지점명</th>
+    		<th style=" font-size:20px !important; color: black;">재료명</th>
+    		<th style=" font-size:20px !important; color: black;">수주량</th>
+    		<th style=" font-size:20px !important; color: black;">수주일시</th>
+    		<th style=" font-size:20px !important; color: black;">입고여부</th>
+ 		 </tr>
+ 		 <c:forEach var="OrderDTO" items="${orderList}">
+  <tr>
+    <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.name}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_amount}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_time}</td>
+	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.received_not}</td>
+  </tr>
+  		</c:forEach>
+  
+ 		 </table>
+		</div>
+        
+        
         </div>
         <!-- content-wrapper ends -->
-<!-- 컨텐츠 영역 끝 -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
-        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">© Hong coffee, 2024 Hong coffee Corp. 
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Hand-crafted & made with 2Team <i class="ti-heart text-danger ml-1"></i></span>
           </div>

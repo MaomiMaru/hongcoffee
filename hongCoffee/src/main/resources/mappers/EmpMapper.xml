@@ -7,27 +7,27 @@
 <!--        => boardMapper 파일 => xml 파일이름  -->
 <mapper namespace="com.itwillbs.mappers.EmpMapper">
 
-	<select id="getJijumList" resultType="com.itwillbs.domain.StoreDTO"> 
+	<select id="getStoreList" resultType="com.itwillbs.domain.StoreDTO"> 
  		select * from store 
  	</select>
  	
- 	<select id="getJeryoList" resultType="com.itwillbs.domain.ItemDTO"> 
+ 	<select id="getIngredientList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select * from item 
  	</select>
  	
- 	<select id="getSujuList" resultType="com.itwillbs.domain.OrderDTO"> 
+ 	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
  		select o.od_num, s.name, i.item_name, o.od_amount, o.od_time, o.received_not  
  		from `order` o join store s on o.num = s.num 
  		join item i on o.item_num = i.item_num;
  	</select>
  	
- 	<select id="getChulhaList" resultType="com.itwillbs.domain.ReceiveDTO"> 
+ 	<select id="getShipmentList" resultType="com.itwillbs.domain.ReceiveDTO"> 
  		select r.od_num, s.name, i.item_name, r.rc_amount, i.item_price, r.rc_time
  		from receive r join store s on r.num = s.num
  		join item i on r.item_num = i.item_num
  	</select>
  	
- 	<select id="getSawonList" resultType="com.itwillbs.domain.EmployeeDTO"> 
+ 	<select id="getEmpList" resultType="com.itwillbs.domain.EmployeeDTO"> 
  		select * from employee 
  	</select>
 

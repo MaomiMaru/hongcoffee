@@ -1,7 +1,5 @@
 package com.itwillbs.hongcoffee;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -26,7 +24,7 @@ public class HomeController {
 	public String index(Locale locale, Model model) {
 		System.out.println("HomeController main()");
 
-		return "emp/reference_employee";
+		return "emp/login";
 
 	}
 	
