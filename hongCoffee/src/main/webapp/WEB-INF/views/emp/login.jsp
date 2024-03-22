@@ -18,6 +18,7 @@ background-color: #EEEEEE;
 }
 </style>
 <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/imgs/logo.png" />
 </head>
 <body>
 <div class="container">
