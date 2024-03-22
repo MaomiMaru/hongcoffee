@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
-import com.itwillbs.dao.EmployeesDAO;
+import com.itwillbs.dao.EmployeeDAO;
 import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
@@ -15,10 +15,10 @@ import com.itwillbs.domain.StoreDTO;
 
 
 @Service
-public class EmployeesService {
+public class EmployeeService {
 	
 	@Inject
-	private EmployeesDAO employeesDAO;
+	private EmployeeDAO employeesDAO;
 
 	//지점 출력
 	public List<StoreDTO> getStoreList(){

@@ -8,29 +8,34 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.StoreDTO;
-import com.itwillbs.service.EmployeesService;
+import com.itwillbs.service.EmployeeService;
 
 @Controller
-public class EmployeesController {
+@RequestMapping("/emp/*")
+public class EmployeeController {
 	
 @Inject
-private EmployeesService employeesService;
+private EmployeeService employeesService;
 
-//	@GetMapping("/")
-//	public String login() {
-//		
-//		return "";
-//	}
-//	
+
+//로그인
+@PostMapping("main")
+public String main() {
+	System.out.println();
+	return "emp/main";
+}
+
 	
 //지점 목록
-@GetMapping("/emp/store_list")
+@GetMapping("store_list")
 public String store_list(HttpServletRequest request, Model model) {
 	System.out.println("store_list");
 	
@@ -43,7 +48,7 @@ public String store_list(HttpServletRequest request, Model model) {
 	
 
 //재료 목록
-@GetMapping("/emp/ingredient")
+@GetMapping("ingredient")
 public String jeryoList(HttpServletRequest request, Model model) {
 	System.out.println("ingredient");
 	
@@ -57,7 +62,7 @@ public String jeryoList(HttpServletRequest request, Model model) {
 	
 
 //수주 목록
-@GetMapping("/emp/order")
+@GetMapping("order")
 public String sujuList(HttpServletRequest request, Model model) {
 	System.out.println("order");
 	

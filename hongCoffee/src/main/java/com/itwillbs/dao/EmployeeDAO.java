@@ -13,7 +13,7 @@ import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.StoreDTO;
 @Repository
-public class EmployeesDAO {
+public class EmployeeDAO {
 
 	// 마이바티스 객체생성 주입
 	@Inject
