@@ -136,7 +136,10 @@ tr:hover {background-color: #F0F0F0;}
 
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
+			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">
+					<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
+					<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
+			
 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<li><a class="dropdown-item" href="#">로그아웃</a></li>
 		</ul>
