@@ -134,7 +134,7 @@ tr:hover {background-color: #F0F0F0;}
 
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
+	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">지점 님</a>
 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 		<li><a class="dropdown-item" href="#">로그아웃</a></li>
 	</ul>
@@ -167,15 +167,15 @@ tr:hover {background-color: #F0F0F0;}
         </div>
       </div>
 
-      <!-- partial -->
+            <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
         <ul class="logo-nav">
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
 		</ul>
+        <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/emp/main">
+            <a class="nav-link" href="#">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
@@ -186,35 +186,35 @@ tr:hover {background-color: #F0F0F0;}
               <span class="menu-title">기준 정보 관리</span>
               <i class="menu-arrow"></i>
             </a>
-             <div class="collapse" id="ui-basic">
+            <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/ingredient">재료 관리</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">영업 관리</span>
+              <span class="menu-title">물류 관리</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/order">수주 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/shipment">출하 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/stock">재고 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/order">발주 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/receive">입고 관리</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">사원 관리</span>
+              <span class="menu-title">영업 관리</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/emp">사원 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/result">실적 관리</a></li>
               </ul>
             </div>
           </li>
@@ -223,18 +223,22 @@ tr:hover {background-color: #F0F0F0;}
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>출하 관리</h2>
+		<h2>재고 관리</h2>
 		
 		<form action="">
 			<div id="search">
 				<ul>
-					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
-						<input type="text"></div></li>
-						
+					<li><div class="search_div"><label class="search_name"><b>유형</b></label>
+						<select class="choose">
+							<option value="">------</option>
+							<option value="식품">식품</option>
+							<option value="비식품">비식품</option>
+						</select></div></li>
+				
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
 						<input type="text"></div></li>
 						
-					<li><div class="search_div"><label class="search_name"><b>출하일시</b></label>
+					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
 						<input type="text">
 						
 						<span class="button"><button type="button">조회</button></span></div></li>
@@ -244,7 +248,7 @@ tr:hover {background-color: #F0F0F0;}
 
 		<hr>
    	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">출하 목록</h3></div>
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">재료 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button>추가</button>
 		<button>수정</button>
@@ -254,21 +258,19 @@ tr:hover {background-color: #F0F0F0;}
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">거래번호</th>
-    		<th style=" font-size:20px !important; color: black;">지점명</th>
+    		<th style=" font-size:20px !important; color: black;">재료번호</th>
     		<th style=" font-size:20px !important; color: black;">재료명</th>
-    		<th style=" font-size:20px !important; color: black;">출하량</th>
+    		<th style=" font-size:20px !important; color: black;">유형</th>
     		<th style=" font-size:20px !important; color: black;">단가</th>
-    		<th style=" font-size:20px !important; color: black;">출하일시</th>
+    		<th style=" font-size:20px !important; color: black;">재료상태</th>
  		 </tr>
- 		 <c:forEach var="ReceiveDTO" items="${shipmentList}">
+ 		 <c:forEach var="ItemDTO" items="${ingredientList}">
   <tr>
-    <td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.od_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_name}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_amount}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_price}</td>
- 	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_time}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_type}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_price}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_state}</td>
   </tr>
   		</c:forEach>
   

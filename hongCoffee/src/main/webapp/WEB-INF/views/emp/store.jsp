@@ -46,7 +46,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 40px;
+	padding-top: 10px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -69,7 +69,7 @@ ul{
 
 #search li {
 	width: 600px;
-	height: 30px;
+	height: 20px;
 }
 
 input[type=text]{
@@ -134,11 +134,11 @@ tr:hover {background-color: #F0F0F0;}
 
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
-	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
+			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-		<li><a class="dropdown-item" href="#">로그아웃</a></li>
-	</ul>
-</div>
+			<li><a class="dropdown-item" href="#">로그아웃</a></li>
+		</ul>
+	</div>
 	
 	
 	
@@ -186,7 +186,7 @@ tr:hover {background-color: #F0F0F0;}
               <span class="menu-title">기준 정보 관리</span>
               <i class="menu-arrow"></i>
             </a>
-             <div class="collapse" id="ui-basic">
+           <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
@@ -223,52 +223,65 @@ tr:hover {background-color: #F0F0F0;}
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>출하 관리</h2>
+		<h2>지점 관리</h2>
 		
 		<form action="">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
 						<input type="text"></div></li>
+					
+					<li><div class="search_div"><label class="search_name"><b>대표자명</b></label>
+						<input type="text"></div></li>	
+				
+					<li><div class="search_div"><label class="search_name"><b>지역</b></label>
+						<input type="text"></div></li>	
 						
-					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text"></div></li>
-						
-					<li><div class="search_div"><label class="search_name"><b>출하일시</b></label>
-						<input type="text">
-						
-						<span class="button"><button type="button">조회</button></span></div></li>
+					<li><div class="search_div"><label class="search_name"><b>연락처</b></label>
+						<input type="text"></div>
+				
+					<li><div class="search_div"><label class="search_name"><b>상태</b></label>
+						<select class="choose">
+							<option value="">------</option>
+							<option value="정상영업">정상영업</option>
+							<option value="미영업">미영업</option></select>
+				
+					<span class="button"><button type="button">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
 
 		<hr>
    	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">출하 목록</h3></div>
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button>추가</button>
-		<button>수정</button>
-		<button>삭제</button></div>
+		<input type="button" value="추가" name="store_insert" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=370,height=525,scrollbars=no, toolbars=no, menubar=no')"> 
+		<input type="button" value="수정" name="store_update" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update','홍커피','width=370,height=525,scrollbars=no, toolbars=no, menubar=no')">
+		<input type="button" value="삭제"></div>
+		
+		
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">거래번호</th>
+    		<th style=" font-size:20px !important; color: black;">지점번호</th>
     		<th style=" font-size:20px !important; color: black;">지점명</th>
-    		<th style=" font-size:20px !important; color: black;">재료명</th>
-    		<th style=" font-size:20px !important; color: black;">출하량</th>
-    		<th style=" font-size:20px !important; color: black;">단가</th>
-    		<th style=" font-size:20px !important; color: black;">출하일시</th>
+    		<th style=" font-size:20px !important; color: black;">대표자명</th>
+    		<th style=" font-size:20px !important; color: black;">연락처</th>
+    		<th style=" font-size:20px !important; color: black;">이메일</th>
+    		<th style=" font-size:20px !important; color: black;">주소</th>
+    		<th style=" font-size:20px !important; color: black;">상태</th>
  		 </tr>
- 		 <c:forEach var="ReceiveDTO" items="${shipmentList}">
-  <tr>
-    <td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.od_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_name}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_amount}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_price}</td>
- 	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_time}</td>
+ 		 <c:forEach var="StoreDTO" items="${storeList}">
+  <tr >
+    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.name}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.boss}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.email}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.address}</td>
+      <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.state}</td>
   </tr>
   		</c:forEach>
   

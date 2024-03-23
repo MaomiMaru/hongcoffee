@@ -18,45 +18,53 @@ import com.itwillbs.domain.StoreDTO;
 public class EmployeeService {
 	
 	@Inject
-	private EmployeeDAO employeesDAO;
+	private EmployeeDAO employeeDAO;
 
+	//사원번호, 비밀번호 확인
+	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
+		System.out.println("EMployeeService userCheck()");
+		return employeeDAO.userCheck(employeeDTO);
+	}
+	
+	
 	//지점 출력
 	public List<StoreDTO> getStoreList(){
-		System.out.println("EmployeesService getStoreList()");
+		System.out.println("EmployeeService getStoreList()");
 		
-		return employeesDAO.getStoreList();
+		return employeeDAO.getStoreList();
 	}//getJijumList
 	
 	//재료 출력
 	public List<ItemDTO> getIngredientList(){
-		System.out.println("EmployeesService getIngredientList()");
+		System.out.println("EmployeeService getIngredientList()");
 		
-		return employeesDAO.getIngredientList();
+		return employeeDAO.getIngredientList();
 	}//getJeryoList
 	
 	
 	//수주 출력
 	public List<OrderDTO> getOrderList(){
-		System.out.println("EmployeesService getOrderList()");
+		System.out.println("EmployeeService getOrderList()");
 		
-		return employeesDAO.getOrderList();
+		return employeeDAO.getOrderList();
 	}//getSujuList
 	
 	
 	
 	//출하 출력
 	public List<ReceiveDTO> getShipmentList(){
-		System.out.println("EmployeesService getChulList()");
+		System.out.println("EmployeeService getChulList()");
 		
-		return employeesDAO.getShipmentList();
+		return employeeDAO.getShipmentList();
 	}//getChulhaList
 	
 
 	
 	//사원 출력
 	public List<EmployeeDTO> getEmpList(){
-		System.out.println("EmployeesService getEmpList()");
+		System.out.println("EmployeeService getEmpList()");
 		
-		return employeesDAO.getEmpList();
+		return employeeDAO.getEmpList();
 	}//getSawonList
+
 }

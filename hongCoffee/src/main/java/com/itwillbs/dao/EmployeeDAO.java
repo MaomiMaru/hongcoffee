@@ -56,4 +56,9 @@ public class EmployeeDAO {
 			
 			return sqlSession.selectList(namespace + ".getEmpList");
 		}//getSawonList()
+
+		public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
+			System.out.println("EmployeeDAO userCheck()");
+			return sqlSession.selectOne(namespace + ".userCheck", employeeDTO);
+		}
 }

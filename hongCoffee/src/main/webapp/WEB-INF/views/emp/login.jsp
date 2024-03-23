@@ -24,7 +24,7 @@ background-color: #EEEEEE;
 <div class="container">
 <img src="${pageContext.request.contextPath}/resources/imgs/logo.png" width="265" height="265" alt="Hong Coffee"><br>
 <div class="loginform">
-<form action="${pageContext.request.contextPath}/emp/main" method="post" id="login">
+<form action="${pageContext.request.contextPath}/emp/loginPro" method="post" id="login">
 <label></label>
 <div id="checkdiv"></div>
 <div class="inner">
