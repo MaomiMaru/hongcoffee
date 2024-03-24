@@ -18,12 +18,12 @@
 /* 텍스트 왼쪽 정렬 */
  th{
  	text-align: left;
- } 
+ }  
 </style>
 </head>
 <body>
 <div class="container">
-<form>
+<form action="">
 <h3 style="margin-left: 10px">지점 수정</h3>
 <fieldset style="margin-top : 100px; border:0px">
 <table>

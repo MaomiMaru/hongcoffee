@@ -12,6 +12,7 @@
 .container{
 	height: 500px;
 	width: 350px;
+	border: 1px solid;
  
 }
 
@@ -23,8 +24,9 @@
 </head>
 <body>
 <div class="container">
-<form action="" method="get">
+<form action="" method="get" class="form">
 <h3 style="margin-left: 10px">지점 추가</h3>
+<fieldset style="margin-top : 100px; border:0px">
 <table>
 <tr><th>지점번호</th><td><input type="text" name="num"><td> 
 <tr><th>비밀번호</th><td><input type="password" name="pw"><td> 
@@ -37,7 +39,8 @@
 <tr><th>적요</th><td><input type="text" name="note"><td>
 </table>
 <br>
-<input type="submit" value="추가하기" style="float:right; margin-right: 100px;">
+<input type="submit" value="추가하기" style="float:right; margin-right: 75px; background-color: black; color: #EFBDBC;">
+</fieldset>
 </form>
 </div>
 </body>

@@ -248,7 +248,7 @@ tr:hover {background-color: #F0F0F0;}
 							<option value="정상영업">정상영업</option>
 							<option value="미영업">미영업</option></select>
 				
-					<span class="button"><button type="button">조회</button></span></div></li>
+					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
@@ -257,9 +257,9 @@ tr:hover {background-color: #F0F0F0;}
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<input type="button" value="추가" name="store_insert" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=370,height=525,scrollbars=no, toolbars=no, menubar=no')"> 
-		<input type="button" value="수정" name="store_update" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update','홍커피','width=370,height=525,scrollbars=no, toolbars=no, menubar=no')">
-		<input type="button" value="삭제"></div>
+		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=370,height=520')"> 
+		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update','홍커피','width=370,height=520')">
+		<input type="button" value="삭제" style="background-color: black; color: #EFBDBC;"></div>
 		
 		
 		
