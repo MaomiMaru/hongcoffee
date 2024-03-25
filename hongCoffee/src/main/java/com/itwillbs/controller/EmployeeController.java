@@ -26,8 +26,8 @@ public class EmployeeController {
 private EmployeeService employeesService;
 
 
-//로그인
-@PostMapping("main")
+
+@GetMapping("main")
 public String main() {
 	System.out.println();
 	return "emp/main";

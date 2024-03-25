@@ -8,7 +8,9 @@
 
 <style>
 /* 항목 스타일 */
-
+.sidebar .nav:not(.sub-menu) > .nav-item.active{
+   background: #EFBDBC !important;
+}
 .sidebar .nav .nav-item.active > .nav-link
 {
     background: #EFBDBC !important;
@@ -170,7 +172,7 @@ tr:hover {background-color: #F0F0F0;}
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+     <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
         <ul class="logo-nav">
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
@@ -219,7 +221,9 @@ tr:hover {background-color: #F0F0F0;}
               </ul>
             </div>
           </li>
- 
+          
+          
+          
       </nav>
       <!-- partial -->
       <div class="main-panel">
