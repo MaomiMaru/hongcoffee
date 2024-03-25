@@ -139,10 +139,10 @@ tr:hover {background-color: #F0F0F0;}
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
 	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">
-		<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
-		<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
+				<c:if test="${sessionScope.emp_right eq 1 }">${sessionScope.emp_name } / 관리자 님</c:if>
+				<c:if test="${sessionScope.emp_right eq 0 }">${sessionScope.emp_name } / 사원 님</c:if></a>
 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-		<li><a class="dropdown-item" href="#">로그아웃</a></li>
+	<li><a class="dropdown-item" href="${pageContext.request.contextPath}/emp/logout">로그아웃</a></li>
 	</ul>
 </div>
 	
@@ -243,7 +243,7 @@ tr:hover {background-color: #F0F0F0;}
 					<li><div class="search_div"><label class="search_name"><b>출하일시</b></label>
 						<input type="text">
 						
-						<span class="button"><button type="button">조회</button></span></div></li>
+						<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
@@ -252,9 +252,9 @@ tr:hover {background-color: #F0F0F0;}
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">출하 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button>추가</button>
-		<button>수정</button>
-		<button>삭제</button></div>
+		<button style="background-color: black; color: #EFBDBC;">추가</button>
+		<button style="background-color: black; color: #EFBDBC;">수정</button>
+		<button style="background-color: black; color: #EFBDBC;">삭제</button></div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">

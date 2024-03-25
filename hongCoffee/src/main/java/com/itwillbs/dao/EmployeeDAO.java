@@ -62,6 +62,35 @@ public class EmployeeDAO {
 		System.out.println("EmployeeDAO userCheck()");
 		return sqlSession.selectOne(namespace + ".userCheck", employeeDTO);
 	}
+
+	public void storeInsert(StoreDTO storeDTO) {
+		System.out.println("EmployeeDAO storeInsert()");
+		sqlSession.insert(namespace+".storeInsert", storeDTO);
+		
+	}
+
+	public void storeUpdate(StoreDTO storeDTO) {
+		System.out.println("EmployeeDAO storeUpdate()");
+		sqlSession.update(namespace+".storeUpdate", storeDTO);
+	}
+
+	public void employeeInsert(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO employeeInsert()");
+		sqlSession.insert(namespace+".employeeInsert", employeeDTO);
+	}
+
+	public void employeeUpdate1(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO employeeUpdate_admin()");
+		sqlSession.update(namespace+".employeeUpdate1", employeeDTO);
+	}
+
+	public void employeeUpdate(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO employeeUpdate()");
+		sqlSession.update(namespace+".employeeUpdate", employeeDTO);
+		
+	}
+
+
 	
 	
 	

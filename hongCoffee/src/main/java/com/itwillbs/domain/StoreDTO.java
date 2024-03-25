@@ -3,6 +3,7 @@ package com.itwillbs.domain;
 public class StoreDTO {
 
 	private int num; //지점번호
+	private String pw; //지점비밀번호
 	private String name; //지점명
 	private String boss; //점주명
 	private String phone; //연락처
@@ -19,6 +20,14 @@ public class StoreDTO {
 	public void setNum(int num) {
 		this.num = num;
 	}
+	
+	public String getPw() {
+		return pw;
+	}
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
+	
 	public String getName() {
 		return name;
 	}

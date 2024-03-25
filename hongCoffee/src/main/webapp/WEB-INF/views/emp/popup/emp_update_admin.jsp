@@ -22,11 +22,11 @@
 </head>
 <body>
 <div class="container">
-<form>
+<form action="${pageContext.request.contextPath}/emp/popup/emp_updatePro1" method="post" class="form">
 <h3 style="margin-left: 10px">사원 수정</h3>
-<fieldset style="margin-top : 100px; border:0px">
+<fieldset style="margin-top : 70px; border:0px">
 <table>
-<tr><th>사원번호</th><td><input type="text" name="emp_num"></tr> 
+<tr><th>사원번호</th><td><input type="text" name="emp_num" readonly></tr> 
 <tr><th>비밀번호</th><td><input type="password" name="emp_pw"></tr> 
 <tr><th>사원명</th><td><input type="text" name="emp_name"></td>
 <tr><th>생년월일</th><td><input type="date" name="emp_birth"><td>
@@ -64,7 +64,8 @@
 </tr>
 <tr><th>적요</th><td><input type="text" name="emp_note"><td>
 </table>
-<input type="submit" value="등록하기">
+<br>
+<input type="submit" value="등록하기" style="float:right; margin-right: 75px; background-color: black; color: #EFBDBC;">
 </fieldset>
 </form>
 </div>

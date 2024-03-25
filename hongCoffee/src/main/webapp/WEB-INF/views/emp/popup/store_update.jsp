@@ -23,7 +23,7 @@
 </head>
 <body>
 <div class="container">
-<form action="">
+<form action="${pageContext.request.contextPath}/emp/popup/store_updatePro" method="post" class="form">
 <h3 style="margin-left: 10px">지점 수정</h3>
 <fieldset style="margin-top : 100px; border:0px">
 <table>
@@ -36,7 +36,7 @@
 <tr><th>상태</th><td><input type="text" name="state"><td>
 <tr><th>적요</th><td><input type="text" name="note"><td>
 </table>
-<input type="submit" value="수정하기">
+<input type="submit" value="수정하기" style="float:right; margin-right: 75px; background-color: black; color: #EFBDBC;">
 </fieldset>
 </form>
 </div>

@@ -120,11 +120,11 @@ input[type=text]{
 </ul>
 <div class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">
-		<c:if test="${sessionScope.emp_right eq 1 }">${sessionScope.emp_name } / 관리자 님</c:if>
-		<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
+				<c:if test="${sessionScope.emp_right eq 1 }">${sessionScope.emp_name } / 관리자 님</c:if>
+				<c:if test="${sessionScope.emp_right eq 0 }">${sessionScope.emp_name } / 사원 님</c:if></a>
 		
 		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			<li><a class="dropdown-item" href="#">로그아웃</a></li>
+			<li><a class="dropdown-item" href="${pageContext.request.contextPath}/emp/logout">로그아웃</a></li>
 		</ul>
 	</div>
 
@@ -219,7 +219,7 @@ input[type=text]{
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-        <footer class="footer">
+       <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>

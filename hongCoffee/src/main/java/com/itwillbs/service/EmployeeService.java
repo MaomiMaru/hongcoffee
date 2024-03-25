@@ -67,4 +67,37 @@ public class EmployeeService {
 		return employeeDAO.getEmpList();
 	}//getSawonList
 
+	//지점 추가
+	public void storeInsert(StoreDTO storeDTO) {
+		System.out.println("EmployeeService storeInsert()");
+		employeeDAO.storeInsert(storeDTO);
+	}
+
+	//지점 수정
+	public void storeUpdate(StoreDTO storeDTO) {
+		System.out.println("EmployeeService storeUpdate()");
+		employeeDAO.storeUpdate(storeDTO);
+	}
+
+	//사원 추가
+	public void employeeInsert(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService employeeInsert()");
+		employeeDAO.employeeInsert(employeeDTO);
+	}
+
+	//사원 수정(관리자)
+	public void employeeUpdate1(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService employeeUpdate_admin()");
+		employeeDAO.employeeUpdate1(employeeDTO);
+	}
+
+	//사원 수정(사원)
+	public void employeeUpdate(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService employeeUpdate()");
+		employeeDAO.employeeUpdate(employeeDTO);
+		
+	}
+
+
+
 }

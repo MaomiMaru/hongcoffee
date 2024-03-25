@@ -31,7 +31,8 @@
 <tr><th>단가</th><td><input type="text" name="item_price"><td>
 <tr><th>적요</th><td><input type="text" name="od_note"><td>
 </table>
-<input type="submit" value="추가하기">
+<br>
+<input type="submit" value="추가하기" style="float:right; margin-right: 90px; background-color: black; color: #EFBDBC;">
 </fieldset>
 </form>
 </div>
