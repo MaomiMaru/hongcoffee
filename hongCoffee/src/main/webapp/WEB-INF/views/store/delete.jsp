@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -8,9 +8,6 @@
 
 <style>
 /* 항목 스타일 */
-.sidebar .nav:not(.sub-menu) > .nav-item.active{
-   background: #EFBDBC !important;
-}
 .sidebar .nav .nav-item.active > .nav-link
 {
     background: #EFBDBC !important;
@@ -120,8 +117,7 @@ tr:hover {background-color: #F0F0F0;}
   <!-- endinject -->
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/imgs/logo.png" />
 </head>
-
-<body onload="cola()">
+<body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -184,13 +180,13 @@ tr:hover {background-color: #F0F0F0;}
               <span class="menu-title">대시 보드</span>
             </a>
           </li>
-          <li class="nav-item" id="pjh1">
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
               <span class="menu-title">기준 정보 관리</span>
               <i class="menu-arrow"></i>
             </a>
-          <div class="collapse" id="ui-basic">
+           <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store_list">지점 관리</a></li>
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
@@ -222,12 +218,12 @@ tr:hover {background-color: #F0F0F0;}
               </ul>
             </div>
           </li>
- 		</ul>
+ 
       </nav>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>사원 관리</h2>
+		<h2>지점 관리</h2>
 		
 		<form action="">
 			<div id="search">
@@ -255,39 +251,30 @@ tr:hover {background-color: #F0F0F0;}
 
 		<hr>
    	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">사원 목록</h3></div>
-		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button>추가</button>
-		<button>수정</button>
-		<button>삭제</button></div>
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
+		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" ><button>추가</button><button>수정</button><button>삭제</button></div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">사원번호</th>
-    		<th style=" font-size:20px !important; color: black;">이름</th>
-    		<th style=" font-size:20px !important; color: black;">생년월일</th>
-    		<th style=" font-size:20px !important; color: black;">부서</th>
-    		<th style=" font-size:20px !important; color: black;">직급</th>
-    		<th style=" font-size:20px !important; color: black;">권한</th>
+    		<th style=" font-size:20px !important; color: black;">지점번호</th>
+    		<th style=" font-size:20px !important; color: black;">지점명</th>
+    		<th style=" font-size:20px !important; color: black;">대표자명</th>
     		<th style=" font-size:20px !important; color: black;">연락처</th>
     		<th style=" font-size:20px !important; color: black;">이메일</th>
-    		<th style=" font-size:20px !important; color: black;">입사일</th>
+    		<th style=" font-size:20px !important; color: black;">주소</th>
     		<th style=" font-size:20px !important; color: black;">상태</th>
  		 </tr>
- 		 <c:forEach var="EmployeeDTO" items="${empList}">
-  <tr>
-    <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_birth}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_dept}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_rank}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_right}</td>
- 	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_phone}</td>
- 	 <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>
- 	 <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.hire_date}</td>
- 	 <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_state}</td>
+ 		 <c:forEach var="StoreDTO" items="${storeList}">
+  <tr >
+    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.name}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.boss}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.email}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.address}</td>
+      <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.state}</td>
   </tr>
   		</c:forEach>
   
@@ -336,16 +323,7 @@ tr:hover {background-color: #F0F0F0;}
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
-
-<script>
-function cola() {
-	document.querySelector("#ui-basic").className = 'collapse';
-	document.querySelector("#pjh1").className = 'nav-item';
-}
-</script>
-
 </body>
-
 
 </html>
 
