@@ -205,7 +205,15 @@ input[type=text]{
         <div class="content-wrapper">
         <h1>메인페이지</h1>
          <fieldset>
-         실적이 높은 지점
+    
+	<script>
+	
+		</script>
+		<div class="card-body">
+                  <h4 class="card-title">Pie chart</h4>
+                  <canvas id="pieChart"></canvas>
+<!--                   <canvas id="pieChart" width="293" height="146" style="display: block; width: 293px; height: 146px;" class="chartjs-render-monitor"></canvas> -->
+                </div>
          </fieldset>
          <fieldset>
          달력
@@ -235,6 +243,7 @@ input[type=text]{
   <script src="${pageContext.request.contextPath}/resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
+
   <script src="${pageContext.request.contextPath}/resources/vendors/chart.js/Chart.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/vendors/datatables.net/jquery.dataTables.js"></script>
   <script src="${pageContext.request.contextPath}/resources/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
@@ -249,6 +258,7 @@ input[type=text]{
   <script src="${pageContext.request.contextPath}/resources/js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
+   <script src="${pageContext.request.contextPath}/resources/js/chart.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
