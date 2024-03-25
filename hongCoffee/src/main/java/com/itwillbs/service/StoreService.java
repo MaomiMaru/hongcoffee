@@ -7,13 +7,11 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.dao.StoreDAO;
-import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
-import com.itwillbs.domain.StoreDTO;
 
 
 @Service
@@ -23,11 +21,11 @@ public class StoreService {
 	private StoreDAO storeDAO;
 	
 	//재료 출력
-	public List<ItemDTO> getIngredientList(){
-		System.out.println("StoreService getIngredientList()");
-		
-		return storeDAO.getIngredientList();
-	}//getIngredientList
+			public List<ItemDTO> getIngredientList(){
+				System.out.println("StoreService getIngredientList()");
+				
+				return storeDAO.getIngredientList();
+			}//getJeryoList
 	
 	
 	//재고 출력
@@ -63,5 +61,6 @@ public class StoreService {
 		
 		return storeDAO.getResultList();
 	}//getResultList
+
 
 }

@@ -3,6 +3,88 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
+
+<style>
+/* 항목 스타일 */
+.sidebar .nav:not(.sub-menu) > .nav-item.active{
+   background: #EFBDBC !important;
+}
+.sidebar .nav .nav-item.active > .nav-link
+{
+    background: #EFBDBC !important;
+}
+.sidebar .nav.sub-menu {
+    margin-bottom: 0;
+    margin-top: 0;
+    list-style: none;
+    padding: 0.25rem 0 0 3.07rem;
+    background: #EFBDBC !important;
+    padding-bottom: 12px;
+}
+
+.sidebar .nav:not(.sub-menu) > .nav-item > .nav-link[aria-expanded="true"] {
+    border-radius: 8px 8px 0 0;
+  	background: #EFBDBC !important;
+    color: #fff;
+}
+
+
+.sidebar-icon-only .sidebar .nav .nav-item .nav-link .menu-title{
+  	background: #EFBDBC !important;
+}
+
+.sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded="true"]
+{ 	background: #EFBDBC !important;
+}
+#settings-trigger{
+  	background: #EFBDBC !important;
+}
+
+#search {
+	height: 300px;
+	margin: 0 auto;
+}
+
+ul{
+	list-style:none;
+}
+
+#search {
+	height: 250px;
+	width: 100%;
+	border: 1px solid black;
+}
+
+.name {
+	width: 100px;
+	margin: 35px 0 20px 50px;
+	text-align: left;
+	font-size: 15px;
+}
+
+.choose {
+	width: 300px;
+		font-size: 15px;
+}
+
+#search li {
+	width: 600px;
+	height: 50px;
+}
+
+input[type=text]{
+	width: 300px;
+	margin-bottom: 10px;
+	color: white;
+}
+
+.button{
+	margin-left: 10px;
+}
+
+/* 항목 스타일 끝 */
+
+</style>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -177,7 +259,7 @@
   <!-- End custom js for this page-->
   
 <!--   nav 고유색 -->
-<script src="${pageContext.request.contextPath}/resources/js/navSawon.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/js/navSawon.js"></script> --%>
 </body>
 
 </html>

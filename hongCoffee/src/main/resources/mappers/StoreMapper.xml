@@ -8,6 +8,30 @@
 <mapper namespace="com.itwillbs.mappers.StoreMapper">
 
 
+	<select id="getIngredientList" resultType="com.itwillbs.domain.ItemDTO"> 
+ 		select * from item 
+ 	</select>
+
+	<select id="getStockList" resultType="com.itwillbs.domain.StockDTO"> 
+ 		select s.stock_num, t.item_type, t.item_name, t.item_price, s.amount, t.item_state
+ 		from stock s join item t on s.item_num = t.item_num
+ 	</select>
+
+	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
+ 		select o.od_num, t.item_name, t.item_price, o.od_time, o.received_not
+ 		from `order` o join item t on o.item_num = t.item_num
+ 	</select>
+ 	
+ 	<select id="getReceiveList" resultType="com.itwillbs.domain.ReceiveDTO"> 
+		select r.od_num, t.item_name, r.rc_amount, t.item_price, r.rc_time, r.pay
+		from receive r join item t on r.item_num = t.item_num
+ 	</select>
+
+	 <select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
+		select rs_num, rs_date, sales, consume
+		from result
+ 	</select>
+
 </mapper>
 
 

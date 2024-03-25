@@ -8,7 +8,9 @@
 
 <style>
 /* 항목 스타일 */
-
+.sidebar .nav:not(.sub-menu) > .nav-item.active{
+   background: #EFBDBC !important;
+}
 .sidebar .nav .nav-item.active > .nav-link
 {
     background: #EFBDBC !important;
@@ -175,7 +177,7 @@ tr:hover {background-color: #F0F0F0;}
 		</ul>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+           <a class="nav-link" href="${pageContext.request.contextPath}/store/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
@@ -258,19 +260,21 @@ tr:hover {background-color: #F0F0F0;}
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">재료번호</th>
-    		<th style=" font-size:20px !important; color: black;">재료명</th>
+    		<th style=" font-size:20px !important; color: black;">재고번호</th>
     		<th style=" font-size:20px !important; color: black;">유형</th>
+    		<th style=" font-size:20px !important; color: black;">재료명</th>
     		<th style=" font-size:20px !important; color: black;">단가</th>
-    		<th style=" font-size:20px !important; color: black;">재료상태</th>
+    		<th style=" font-size:20px !important; color: black;">보유량</th>
+    		<th style=" font-size:20px !important; color: black;">상태</th>
  		 </tr>
- 		 <c:forEach var="ItemDTO" items="${ingredientList}">
+ 		 <c:forEach var="StockDTO" items="${stockList}">
   <tr>
-    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_type}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_price}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_state}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${StockDTO.stock_num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_type}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_name}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_price}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.amount}</td>
+   	 <td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_state}</td>
   </tr>
   		</c:forEach>
   

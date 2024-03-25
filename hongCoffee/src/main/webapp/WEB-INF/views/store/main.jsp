@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="ko">
-<!-- 목록 스타일 템플릿 -->
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <style>
 /* 항목 스타일 */
@@ -42,41 +39,42 @@
   	background: #EFBDBC !important;
 }
 
+#search {
+	height: 300px;
+	margin: 0 auto;
+}
+
 ul{
 	list-style:none;
 }
 
 #search {
 	height: 250px;
-	padding-top: 10px;
 	width: 100%;
 	border: 1px solid black;
 }
 
-.search_name {
+.name {
 	width: 100px;
+	margin: 35px 0 20px 50px;
 	text-align: left;
 	font-size: 15px;
 }
 
-.search_div {
- 	margin: 20px 0 0 50px;
-}
-
 .choose {
 	width: 300px;
-	height: 29.63px;
-	font-size: 15px;
+		font-size: 15px;
 }
 
 #search li {
 	width: 600px;
-	height: 20px;
+	height: 50px;
 }
 
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
+	color: white;
 }
 
 .button{
@@ -84,20 +82,7 @@ input[type=text]{
 }
 
 /* 항목 스타일 끝 */
-/* 목록 스타일 */
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
 
-th, td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-tr:hover {background-color: #F0F0F0;}
-/* 목록 스타일 끝 */
 </style>
 <head>
   <!-- Required meta tags -->
@@ -131,22 +116,13 @@ tr:hover {background-color: #F0F0F0;}
 </button>
 <ul class="navbar-nav navbar-nav-right">
 </ul>
-
-
-
-<!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">
-					<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
-					<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
-	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">관리자 님</a>
+		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<li><a class="dropdown-item" href="#">로그아웃</a></li>
 		</ul>
 	</div>
-	
-	
-	
-	
+
 </div>
 </nav>
     <!-- partial -->
@@ -179,7 +155,7 @@ tr:hover {background-color: #F0F0F0;}
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
 		</ul>
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/emp/main">
+             <a class="nav-link" href="${pageContext.request.contextPath}/store/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
@@ -187,38 +163,38 @@ tr:hover {background-color: #F0F0F0;}
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">기준 정보 관리</span>
+                     <span class="menu-title">기준 정보 관리</span>
               <i class="menu-arrow"></i>
             </a>
-           <div class="collapse" id="ui-basic">
+            <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/ingredient">재료 관리</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">영업 관리</span>
+              <span class="menu-title">물류 관리</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/order">수주 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/shipment">출하 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/stock">재고 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/order">발주 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/receive">입고 관리</a></li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">사원 관리</span>
+              <span class="menu-title">영업 관리</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/emp">사원 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/result">실적 관리</a></li>
               </ul>
             </div>
           </li>
@@ -227,79 +203,24 @@ tr:hover {background-color: #F0F0F0;}
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>지점 관리</h2>
-		
-		<form action="">
-			<div id="search">
-				<ul>
-					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
-						<input type="text"></div></li>
-					
-					<li><div class="search_div"><label class="search_name"><b>대표자명</b></label>
-						<input type="text"></div></li>	
-				
-					<li><div class="search_div"><label class="search_name"><b>지역</b></label>
-						<input type="text"></div></li>	
-						
-					<li><div class="search_div"><label class="search_name"><b>연락처</b></label>
-						<input type="text"></div>
-				
-					<li><div class="search_div"><label class="search_name"><b>상태</b></label>
-						<select class="choose">
-							<option value="">------</option>
-							<option value="정상영업">정상영업</option>
-							<option value="미영업">미영업</option></select>
-				
-					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
-				</ul>	
-			</div>
-		</form>
+        <h1>메인페이지</h1>
+         <fieldset>
+         실적이 높은 지점
+         </fieldset>
+         <fieldset>
+         달력
+         </fieldset>
 
-		<hr>
-   	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
-		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=370,height=520')"> 
-		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update','홍커피','width=370,height=520')">
-		<input type="button" value="삭제" style="background-color: black; color: #EFBDBC;"></div>
-		
-		
-		
-<!-- 		목록 -->
-		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
-		<table class="table">
-  			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">지점번호</th>
-    		<th style=" font-size:20px !important; color: black;">지점명</th>
-    		<th style=" font-size:20px !important; color: black;">대표자명</th>
-    		<th style=" font-size:20px !important; color: black;">연락처</th>
-    		<th style=" font-size:20px !important; color: black;">이메일</th>
-    		<th style=" font-size:20px !important; color: black;">주소</th>
-    		<th style=" font-size:20px !important; color: black;">상태</th>
- 		 </tr>
- 		 <c:forEach var="StoreDTO" items="${storeList}">
-  <tr >
-    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.boss}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.email}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.address}</td>
-      <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.state}</td>
-  </tr>
-  		</c:forEach>
-  
- 		 </table>
-		</div>
-        
-        
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">© Hong coffee, 2024 Hong coffee Corp. 
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Hand-crafted & made with 2Team <i class="ti-heart text-danger ml-1"></i></span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
           </div>
         </footer> 
         <!-- partial -->
@@ -332,8 +253,8 @@ tr:hover {background-color: #F0F0F0;}
   <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
   
-  <!-- nav mouseover 고유색 -->
-<%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+<!--   nav 고유색 -->
+<%-- <script src="${pageContext.request.contextPath}/resources/js/navSawon.js"></script> --%>
 </body>
 
 </html>

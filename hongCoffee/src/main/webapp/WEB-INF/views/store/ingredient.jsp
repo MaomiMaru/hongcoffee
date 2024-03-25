@@ -9,6 +9,9 @@
 <style>
 /* 항목 스타일 */
 
+.sidebar .nav:not(.sub-menu) > .nav-item.active{
+   background: #EFBDBC !important;
+}
 .sidebar .nav .nav-item.active > .nav-link
 {
     background: #EFBDBC !important;
@@ -175,7 +178,7 @@ tr:hover {background-color: #F0F0F0;}
 		</ul>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+              <a class="nav-link" href="${pageContext.request.contextPath}/store/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
@@ -322,4 +325,3 @@ tr:hover {background-color: #F0F0F0;}
 </body>
 
 </html>
-

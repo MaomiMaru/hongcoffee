@@ -9,6 +9,10 @@
 <style>
 /* 항목 스타일 */
 
+.sidebar .nav:not(.sub-menu) > .nav-item.active{
+   background: #EFBDBC !important;
+}
+
 .sidebar .nav .nav-item.active > .nav-link
 {
     background: #EFBDBC !important;

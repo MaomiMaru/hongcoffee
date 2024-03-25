@@ -25,8 +25,6 @@ public class EmployeeController {
 	
 @Inject
 private EmployeeService employeeService;
-	
-	//기본 페이지 매핑
 
 	//0. login 진행 과정
 	//로그인 과정
@@ -44,6 +42,7 @@ private EmployeeService employeeService;
 			return "/emp/msg";
 		}
 	}
+
 	
 	//1. 대시 보드
 	@GetMapping("/main")

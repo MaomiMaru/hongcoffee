@@ -9,6 +9,10 @@
 <style>
 /* 항목 스타일 */
 
+.sidebar .nav:not(.sub-menu) > .nav-item.active{
+   background: #EFBDBC !important;
+}
+
 .sidebar .nav .nav-item.active > .nav-link
 {
     background: #EFBDBC !important;
@@ -39,6 +43,7 @@
 #settings-trigger{
   	background: #EFBDBC !important;
 }
+
 
 ul{
 	list-style:none;
@@ -75,6 +80,7 @@ ul{
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
+
 }
 
 .button{
@@ -190,8 +196,10 @@ tr:hover {background-color: #F0F0F0;}
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
+
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
+
               </ul>
             </div>
           </li>
@@ -225,6 +233,8 @@ tr:hover {background-color: #F0F0F0;}
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+        
+        
 		<h2>재료 관리</h2>
 		
 		<form action="">

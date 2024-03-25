@@ -28,7 +28,7 @@ public class StoreDAO {
 		System.out.println("StoreDAO getIngredientList()");
 		
 		return sqlSession.selectList(namespace + ".getIngredientList");
-	}//getIngredientList
+	}//getJeryoList()
 
 	//재고 목록
 	public List<StockDTO> getStockList() {
@@ -57,6 +57,5 @@ public class StoreDAO {
 		
 		return sqlSession.selectList(namespace + ".getResultList");
 	}//getResultList
-	
 	
 }
