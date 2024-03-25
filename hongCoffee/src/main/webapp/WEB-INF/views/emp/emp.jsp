@@ -180,13 +180,13 @@ tr:hover {background-color: #F0F0F0;}
         <ul class="logo-nav">
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
 		</ul>
-          <li class="nav-item">
+          <li class="nav-item" id="pjh1">
             <a class="nav-link" href="${pageContext.request.contextPath}/emp/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
           </li>
-          <li class="nav-item" id="pjh1">
+          <li class="nav-item" id="pjh2">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-layout menu-icon"></i>
               <span class="menu-title">기준 정보 관리</span>
@@ -199,7 +199,7 @@ tr:hover {background-color: #F0F0F0;}
               </ul>
             </div>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" id="pjh3">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="icon-columns menu-icon"></i>
               <span class="menu-title">영업 관리</span>
@@ -342,7 +342,10 @@ tr:hover {background-color: #F0F0F0;}
 <script>
 function cola() {
 	document.querySelector("#ui-basic").className = 'collapse';
+	document.querySelector("#form-elements").className = 'collapse';
 	document.querySelector("#pjh1").className = 'nav-item';
+	document.querySelector("#pjh2").className = 'nav-item';
+	document.querySelector("#pjh3").className = 'nav-item';
 }
 </script>
 
