@@ -33,12 +33,12 @@ private EmployeeService employeeService;
 	@PostMapping("/loginPro")
 	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
 		System.out.println("EmployeeService loginPro()");
-		System.out.println("emp_right : " + employeeDTO.getEmp_right());
-		employeeDTO = employeeService.userCheck(employeeDTO);
 		
-		if(employeeDTO != null) {
-			session.setAttribute("id", employeeDTO.getEmp_num());
-			session.setAttribute("emp_right", employeeDTO.getEmp_right());
+		EmployeeDTO employeeDTO1 = employeeService.userCheck(employeeDTO);
+		if(employeeDTO1 != null) {
+			session.setAttribute("id", employeeDTO1.getEmp_num());
+			session.setAttribute("emp_name", employeeDTO1.getEmp_name());
+			session.setAttribute("emp_right", employeeDTO1.getEmp_right());
 			return "redirect/emp/main";
 		} else {
 			return "/emp/msg";

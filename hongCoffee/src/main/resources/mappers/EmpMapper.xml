@@ -8,8 +8,7 @@
 <mapper namespace="com.itwillbs.mappers.EmpMapper">
 
 	<select id="userCheck" resultType="com.itwillbs.domain.EmployeeDTO">
-		select *
-		from employee
+		select * from employee
 		where emp_num = #{emp_num} and emp_pw = #{emp_pw}
 	</select>
 
