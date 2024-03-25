@@ -169,7 +169,7 @@ tr:hover {background-color: #F0F0F0;}
         </div>
       </div>
 
-            <!-- partial -->
+            <!-- partiala -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="logo-nav">
