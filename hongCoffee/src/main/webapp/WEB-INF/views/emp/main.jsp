@@ -38,7 +38,7 @@
 </ul>
 <div class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">
-		<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
+		<c:if test="${sessionScope.emp_right eq 1 }">${sessionScope.emp_name } / 관리자 님</c:if>
 		<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
 		
 		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">

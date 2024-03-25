@@ -22,7 +22,7 @@ public class EmployeeService {
 
 	//사원번호, 비밀번호 확인
 	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
-		System.out.println("EMployeeService userCheck()");
+		System.out.println("EmployeeService userCheck()");
 		return employeeDAO.userCheck(employeeDTO);
 	}
 	

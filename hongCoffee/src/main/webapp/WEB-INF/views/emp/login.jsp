@@ -29,9 +29,9 @@ background-color: #EEEEEE;
 <div id="checkdiv"></div>
 <div class="inner">
 <label>사원번호</label>
-<input type="text" name="employee_num" class="employee_num"><br>
+<input type="text" name="emp_num" class="emp_num"><br>
 <label>비밀번호</label>
-<input type="password" name="employee_pw" class="employee_pw"><br>
+<input type="password" name="emp_pw" class="emp_pw"><br>
 <input type="submit" value="로그인" class="submit" style="margin-left: 70px; width: 177px; background-color: #C9DAF8">
 <hr width="315">
 <input type="checkbox">사원번호 기억하기
@@ -47,14 +47,14 @@ background-color: #EEEEEE;
 
 	$(function(){
 		$('#login').submit(function(){
-		if($('.employee_num').val() === ''|| $('.employee_num').val === null || $('.employee_num').val === undefined){
+		if($('.emp_num').val() === ''|| $('.emp_num').val === null || $('.emp_num').val === undefined){
 			$('#checkdiv').html("사원번호를 입력해주세요.").css("color","red");
-			$('.employee_num').focus();
+			$('.emp_num').focus();
 			return false;
 		}
-		if($('.employee_pw').val() === ''|| $('.employee_pw').val === null || $('.employee_pw').val === undefined){
+		if($('.emp_pw').val() === ''|| $('.emp_pw').val === null || $('.emp_pw').val === undefined){
 			$('#checkdiv').html("비밀번호를 입력해주세요.").css("color","red");
-			$('.employee_pw').focus();
+			$('.emp_pw').focus();
 			return false;
 		}
 	});
