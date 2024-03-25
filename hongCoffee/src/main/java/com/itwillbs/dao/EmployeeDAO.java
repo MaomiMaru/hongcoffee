@@ -43,17 +43,31 @@ public class EmployeeDAO {
 	}//getSujuList()
 	
 	//출하 목록
-		public List<ReceiveDTO> getShipmentList() {
-			System.out.println("EmployeesDAO getShipmentList()");
-			
-			return sqlSession.selectList(namespace + ".getShipmentList");
-		}//getChulhaList()
+	public List<ReceiveDTO> getShipmentList() {
+		System.out.println("EmployeesDAO getShipmentList()");
+		
+		return sqlSession.selectList(namespace + ".getShipmentList");
+	}//getChulhaList()
 	
 		
-		//사원 목록
-		public List<EmployeeDTO> getEmpList() {
-			System.out.println("EmployeesDAO getEmpList()");
-			
-			return sqlSession.selectList(namespace + ".getEmpList");
-		}//getSawonList()
+	//사원 목록
+	public List<EmployeeDTO> getEmpList() {
+		System.out.println("EmployeesDAO getEmpList()");
+		
+		return sqlSession.selectList(namespace + ".getEmpList");
+	}//getSawonList()
+
+	//로그인
+	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO userCheck()");
+		return sqlSession.selectOne(namespace + ".userCheck", employeeDTO);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

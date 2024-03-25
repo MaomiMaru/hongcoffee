@@ -7,9 +7,12 @@
 <!--        => boardMapper 파일 => xml 파일이름  -->
 <mapper namespace="com.itwillbs.mappers.StoreMapper">
 
+
 	<select id="getIngredientList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select * from item 
  	</select>
+
+
 
 </mapper>
 

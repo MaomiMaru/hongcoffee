@@ -24,7 +24,7 @@ background-color: #EEEEEE;
 <div class="container">
 <img src="${pageContext.request.contextPath}/resources/imgs/logo.png" width="265" height="265" alt="Hong Coffee"><br>
 <div class="loginform">
-<form action="${pageContext.request.contextPath}/emp/main" method="post" id="login">
+<form action="${pageContext.request.contextPath}/emp/loginPro" method="post" id="login">
 <label></label>
 <div id="checkdiv"></div>
 <div class="inner">
@@ -32,7 +32,7 @@ background-color: #EEEEEE;
 <input type="text" name="employee_num" class="employee_num"><br>
 <label>비밀번호</label>
 <input type="password" name="employee_pw" class="employee_pw"><br>
-<input type="submit" value="로그인" class="submit" style="width: 265px; background-color: #C9DAF8">
+<input type="submit" value="로그인" class="submit" style="margin-left: 70px; width: 177px; background-color: #C9DAF8">
 <hr width="315">
 <input type="checkbox">사원번호 기억하기
 </div>

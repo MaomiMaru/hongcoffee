@@ -8,6 +8,7 @@
 
 <style>
 /* 항목 스타일 */
+
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
    background: #EFBDBC !important;
 }
@@ -42,42 +43,41 @@
   	background: #EFBDBC !important;
 }
 
-#search {
-	height: 300px;
-	margin: 0 auto;
-}
-
 ul{
 	list-style:none;
 }
 
 #search {
 	height: 250px;
+	padding-top: 40px;
 	width: 100%;
 	border: 1px solid black;
 }
 
-.name {
+.search_name {
 	width: 100px;
-	margin: 35px 0 20px 50px;
 	text-align: left;
 	font-size: 15px;
 }
 
+.search_div {
+ 	margin: 20px 0 0 50px;
+}
+
 .choose {
 	width: 300px;
-		font-size: 15px;
+	height: 29.63px;
+	font-size: 15px;
 }
 
 #search li {
 	width: 600px;
-	height: 50px;
+	height: 30px;
 }
 
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
-	color: white;
 }
 
 .button{
@@ -137,11 +137,11 @@ tr:hover {background-color: #F0F0F0;}
 
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
+	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">지점 님</a>
 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			<li><a class="dropdown-item" href="#">로그아웃</a></li>
-		</ul>
-	</div>
+		<li><a class="dropdown-item" href="#">로그아웃</a></li>
+	</ul>
+</div>
 	
 	
 	
@@ -173,10 +173,10 @@ tr:hover {background-color: #F0F0F0;}
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
         <ul class="logo-nav">
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
 		</ul>
+        <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="#">
               <i class="icon-grid menu-icon"></i>
@@ -189,10 +189,9 @@ tr:hover {background-color: #F0F0F0;}
               <span class="menu-title">기준 정보 관리</span>
               <i class="menu-arrow"></i>
             </a>
-              <div class="collapse" id="ui-basic">
+            <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/ingredient">재료 관리</a></li>
               </ul>
             </div>
           </li>
@@ -204,9 +203,9 @@ tr:hover {background-color: #F0F0F0;}
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/order">재고 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/shipment">발주 관리</a></li>
-             	<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/shipment">입고 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/stock">재고 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/order">발주 관리</a></li>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/receive">입고 관리</a></li>
               </ul>
             </div>
           </li>
@@ -218,7 +217,7 @@ tr:hover {background-color: #F0F0F0;}
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/list">실적 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/result">실적 관리</a></li>
               </ul>
             </div>
           </li>
@@ -232,23 +231,20 @@ tr:hover {background-color: #F0F0F0;}
 		<form action="">
 			<div id="search">
 				<ul>
-					<li><label class="name">부서</label>
-					<select class="choose">
-					<option value="">------</option>
-					<option value="인사">인사</option>
-					<option value="관리">관리</option></select></li>
+					<li><div class="search_div"><label class="search_name"><b>유형</b></label>
+						<select class="choose">
+							<option value="">------</option>
+							<option value="식품">식품</option>
+							<option value="비식품">비식품</option>
+						</select></div></li>
 				
-					<li><label class="name">직급</label>
-					<select class="choose">
-					<option value="">------</option>
-					<option>사원</option>
-					<option>관리</option></select></li>
-				
-				<li><label class="name">사원번호</label>
-					<input type="text"></li>
-				<li><label class="name">사원이름</label>
-					<input type="text">
-					<span class="button"><button type="button">조회</button></span></li>
+					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
+						<input type="text"></div></li>
+						
+					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
+						<input type="text">
+						
+						<span class="button"><button type="button">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
@@ -329,4 +325,3 @@ tr:hover {background-color: #F0F0F0;}
 </body>
 
 </html>
-

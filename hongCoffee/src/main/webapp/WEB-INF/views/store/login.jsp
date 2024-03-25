@@ -31,7 +31,7 @@ background-color: #EEEEEE;
 <input type="text" name="num" class="num"><br>
 <label>비밀번호</label>
 <input type="password" name="pw" class="pw"><br>
-<input type="submit" value="로그인" class="submit" style="width: 265px; background-color: #C9DAF8">
+<input type="submit" value="로그인" class="submit" style="margin-left: 70px; width: 177px; background-color: #C9DAF8">
 <hr width="315">
 <input type="checkbox">지점번호 기억하기
 </div>

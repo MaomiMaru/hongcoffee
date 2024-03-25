@@ -7,6 +7,11 @@
 <!--        => boardMapper 파일 => xml 파일이름  -->
 <mapper namespace="com.itwillbs.mappers.EmpMapper">
 
+	<select id="userCheck" resultType="com.itwillbs.domain.EmployeeDTO">
+		select * from employee
+		where emp_num = #{emp_num} and emp_pw = #{emp_pw}
+	</select>
+
 	<select id="getStoreList" resultType="com.itwillbs.domain.StoreDTO"> 
  		select * from store 
  	</select>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -42,42 +42,41 @@
   	background: #EFBDBC !important;
 }
 
-#search {
-	height: 300px;
-	margin: 0 auto;
-}
-
 ul{
 	list-style:none;
 }
 
 #search {
 	height: 250px;
+	padding-top: 10px;
 	width: 100%;
 	border: 1px solid black;
 }
 
-.name {
+.search_name {
 	width: 100px;
-	margin: 35px 0 20px 50px;
 	text-align: left;
 	font-size: 15px;
 }
 
+.search_div {
+ 	margin: 20px 0 0 50px;
+}
+
 .choose {
 	width: 300px;
-		font-size: 15px;
+	height: 29.63px;
+	font-size: 15px;
 }
 
 #search li {
 	width: 600px;
-	height: 50px;
+	height: 20px;
 }
 
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
-	color: white;
 }
 
 .button{
@@ -137,7 +136,9 @@ tr:hover {background-color: #F0F0F0;}
 
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">관리자 님</a>
+			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">
+					<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
+					<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<li><a class="dropdown-item" href="#">로그아웃</a></li>
 		</ul>
@@ -178,7 +179,7 @@ tr:hover {background-color: #F0F0F0;}
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
 		</ul>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="${pageContext.request.contextPath}/emp/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
@@ -191,7 +192,7 @@ tr:hover {background-color: #F0F0F0;}
             </a>
            <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store_list">지점 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
               </ul>
             </div>
@@ -217,7 +218,7 @@ tr:hover {background-color: #F0F0F0;}
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/list">사원 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/emp">사원 관리</a></li>
               </ul>
             </div>
           </li>
@@ -231,23 +232,25 @@ tr:hover {background-color: #F0F0F0;}
 		<form action="">
 			<div id="search">
 				<ul>
-					<li><label class="name">부서</label>
-					<select class="choose">
-					<option value="">------</option>
-					<option value="인사">인사</option>
-					<option value="관리">관리</option></select></li>
+					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
+						<input type="text"></div></li>
+					
+					<li><div class="search_div"><label class="search_name"><b>대표자명</b></label>
+						<input type="text"></div></li>	
 				
-					<li><label class="name">직급</label>
-					<select class="choose">
-					<option value="">------</option>
-					<option>사원</option>
-					<option>관리</option></select></li>
+					<li><div class="search_div"><label class="search_name"><b>지역</b></label>
+						<input type="text"></div></li>	
+						
+					<li><div class="search_div"><label class="search_name"><b>연락처</b></label>
+						<input type="text"></div>
 				
-				<li><label class="name">사원번호</label>
-					<input type="text"></li>
-				<li><label class="name">사원이름</label>
-					<input type="text">
-					<span class="button"><button type="button">조회</button></span></li>
+					<li><div class="search_div"><label class="search_name"><b>상태</b></label>
+						<select class="choose">
+							<option value="">------</option>
+							<option value="정상영업">정상영업</option>
+							<option value="미영업">미영업</option></select>
+				
+					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
@@ -255,7 +258,12 @@ tr:hover {background-color: #F0F0F0;}
 		<hr>
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
-		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" ><button>추가</button><button>수정</button><button>삭제</button></div>
+		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
+		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=370,height=520')"> 
+		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update','홍커피','width=370,height=520')">
+		<input type="button" value="삭제" style="background-color: black; color: #EFBDBC;"></div>
+		
+		
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">

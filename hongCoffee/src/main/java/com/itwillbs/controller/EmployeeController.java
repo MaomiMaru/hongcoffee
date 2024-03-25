@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,81 +24,124 @@ import com.itwillbs.service.EmployeeService;
 public class EmployeeController {
 	
 @Inject
-private EmployeeService employeesService;
+private EmployeeService employeeService;
+
+	//0. login 진행 과정
+	//로그인 과정
+	@PostMapping("/loginPro")
+	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
+		System.out.println("EmployeeService loginPro()");
+		
+		EmployeeDTO employeeDTO1 = employeeService.userCheck(employeeDTO);
+		if(employeeDTO1 != null) {
+			session.setAttribute("id", employeeDTO1.getEmp_num());
+			session.setAttribute("emp_name", employeeDTO1.getEmp_name());
+			session.setAttribute("emp_right", employeeDTO1.getEmp_right());
+			return "redirect/emp/main";
+		} else {
+			return "/emp/msg";
+		}
+	}
+
+	
+	//1. 대시 보드
+	@GetMapping("/main")
+	public String main() {
+		System.out.println("EmployeeController main()");
+		
+		return "/emp/main";
+	}
+	
+	//2-1. 기준 정보 관리 - 지점 목록
+	@GetMapping("/store")
+	public String store(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController store()");
+		
+		List<StoreDTO> storeList = employeeService.getStoreList();
+		
+			model.addAttribute("storeList",storeList);
+		
+			return "/emp/store";
+		}//jijumList
+	
+
+	//2-2. 기준 정보 관리 - 재료 목록
+	@GetMapping("/ingredient")
+	public String ingredient(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController ingredient()");
+		
+			List<ItemDTO> ingredientList = employeeService.getIngredientList();
+		
+			model.addAttribute("ingredientList",ingredientList);
+		
+			return "/emp/ingredient";
+		}//jijumList
+
+
+	//3-1. 영업 관리 - 수주 목록
+	@GetMapping("/order")
+	public String order(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController order()");
+		
+			List<OrderDTO> orderList = employeeService.getOrderList();
+		
+			model.addAttribute("orderList",orderList);
+		
+			return "/emp/order";
+		}//sujuList
+
+
+	//3-2. 영업관리 - 출하 목록
+	@GetMapping("/shipment")
+	public String shipment(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController shipment()");
+		
+			List<ReceiveDTO> shipmentList = employeeService.getShipmentList();
+		
+			model.addAttribute("shipmentList",shipmentList);
+		
+			return "/emp/shipment";
+		}//chulhaList
 
 
 
-@GetMapping("main")
-public String main() {
-	System.out.println();
-	return "emp/main";
-}
+	//4. 사원 관리 - 사원 목록
+	@GetMapping("/emp")
+	public String emp(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController emp()");
+		
+			List<EmployeeDTO> empList = employeeService.getEmpList();
+		
+			model.addAttribute("empList",empList);
+		
+			return "/emp/emp";
+		}//sawonList
+	
+	
+	//팝업 주소 매핑
+	//2-1-1. 지점 관리 - 추가 팝업
+	@GetMapping("popup/store_insert")
+	public String store_insert() {
+		System.out.println("EmployeeController store_insert()");
+
+		return "/emp/popup/store_insert";
+	}
+	
+	
+	//2-1-2. 지점 관리 - 수정 팝업
+	@GetMapping("popup/store_update")
+	public String store_update() {
+		System.out.println("EmployeeController store_update()");
+		
+		return "/emp/popup/store_update";
+	}
+	
 
 	
-//지점 목록
-@GetMapping("store_list")
-public String store_list(HttpServletRequest request, Model model) {
-	System.out.println("store_list");
 	
-	List<StoreDTO> storeList = employeesService.getStoreList();
 	
-		model.addAttribute("storeList",storeList);
 	
-		return "emp/store_list";
-	}//jijumList
 	
-
-//재료 목록
-@GetMapping("ingredient")
-public String jeryoList(HttpServletRequest request, Model model) {
-	System.out.println("ingredient");
 	
-		List<ItemDTO> ingredientList = employeesService.getIngredientList();
-	
-		model.addAttribute("ingredientList",ingredientList);
-	
-		return "emp/ingredient";
-	}//jijumList
-
-	
-
-//수주 목록
-@GetMapping("order")
-public String sujuList(HttpServletRequest request, Model model) {
-	System.out.println("order");
-	
-		List<OrderDTO> orderList = employeesService.getOrderList();
-	
-		model.addAttribute("orderList",orderList);
-	
-		return "emp/order";
-	}//sujuList
-
-
-//출하 목록
-@GetMapping("/emp/shipment")
-public String shipmentList(HttpServletRequest request, Model model) {
-	System.out.println("shipmentList");
-	
-		List<ReceiveDTO> shipmentList = employeesService.getShipmentList();
-	
-		model.addAttribute("shipmentList",shipmentList);
-	
-		return "emp/shipment";
-	}//chulhaList
-
-
-
-//수주 목록
-@GetMapping("/emp/list")
-public String empList(HttpServletRequest request, Model model) {
-	System.out.println("empList");
-	
-		List<EmployeeDTO> empList = employeesService.getEmpList();
-	
-		model.addAttribute("empList",empList);
-	
-		return "emp/list";
-	}//sawonList
 }
 

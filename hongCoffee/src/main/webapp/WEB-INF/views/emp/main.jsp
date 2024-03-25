@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -105,6 +106,7 @@ input[type=text]{
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/imgs/logo.png" />
 </head>
 <body>
+
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -117,7 +119,10 @@ input[type=text]{
 <ul class="navbar-nav navbar-nav-right">
 </ul>
 <div class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">관리자 님</a>
+		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">
+		<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
+		<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
+		
 		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<li><a class="dropdown-item" href="#">로그아웃</a></li>
 		</ul>
@@ -155,7 +160,7 @@ input[type=text]{
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
 		</ul>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="${pageContext.request.contextPath}/emp/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
@@ -168,7 +173,7 @@ input[type=text]{
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store_list">지점 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
               </ul>
             </div>
@@ -194,7 +199,7 @@ input[type=text]{
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/list">사원 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/emp">사원 관리</a></li>
               </ul>
             </div>
           </li>
