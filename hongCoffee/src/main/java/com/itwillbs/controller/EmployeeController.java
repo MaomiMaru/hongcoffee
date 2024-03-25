@@ -34,10 +34,10 @@ private EmployeeService employeeService;
 		
 		EmployeeDTO employeeDTO1 = employeeService.userCheck(employeeDTO);
 		if(employeeDTO1 != null) {
-			session.setAttribute("id", employeeDTO1.getEmp_num());
+			session.setAttribute("emp_num", employeeDTO1.getEmp_num());
 			session.setAttribute("emp_name", employeeDTO1.getEmp_name());
 			session.setAttribute("emp_right", employeeDTO1.getEmp_right());
-			return "redirect/emp/main";
+			return "redirect:/emp/main";
 		} else {
 			return "/emp/msg";
 		}
