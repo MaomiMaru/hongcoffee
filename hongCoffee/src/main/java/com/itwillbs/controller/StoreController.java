@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwillbs.domain.ItemDTO;
+import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.ResultDTO;
+import com.itwillbs.domain.StockDTO;
 import com.itwillbs.service.StoreService;
 
 @Controller
-@RequestMapping("/store/*")
+//@RequestMapping("/store/*")
 public class StoreController {
 	
 @Inject
@@ -23,7 +27,7 @@ private StoreService storeService;
 
 
 //로그인
-@GetMapping("main")
+@GetMapping("/store/main")
 public String main() {
 	System.out.println();
 	return "store/main";
@@ -40,44 +44,59 @@ public String jeryoList(HttpServletRequest request, Model model) {
 		model.addAttribute("ingredientList",ingredientList);
 	
 		return "store/ingredient";
-	}//jijumList
+	}//jeryoList
 
 
 //재고 목록
-@GetMapping("stock")
-public String stock() {
+@GetMapping("/store/stock")
+public String stockList(HttpServletRequest request, Model model) {
 	System.out.println("stock");
 	
+		List<StockDTO> stockList = storeService.getStockList();
+	
+		model.addAttribute("stockList",stockList);
+	
 		return "store/stock";
-	}//stock
+	}//stockList
 	
 
 //발주 목록
-@GetMapping("order")
-public String order() {
+@GetMapping("/store/order")
+public String orderList(HttpServletRequest request, Model model) {
 	System.out.println("order");
 	
+		List<OrderDTO> orderList = storeService.getOrderList();
+	
+		model.addAttribute("orderList",orderList);
+	
 		return "store/order";
-	}//order
+	}//orderList
 
 
 //입고 목록
-@GetMapping("receive")
-public String receive() {
+@GetMapping("/store/receive")
+public String receiveList(HttpServletRequest request, Model model) {
 	System.out.println("receive");
 	
+		List<ReceiveDTO> receiveList = storeService.getReceiveList();
+	
+		model.addAttribute("receiveList",receiveList);
+	
 		return "store/receive";
-	}//receive
+	}//receiveList
 
 
 
 //실적
-@GetMapping("result")
-public String result() {
+@GetMapping("/store/result")
+public String resultList(HttpServletRequest request, Model model) {
 	System.out.println("result");
 	
+		List<ResultDTO> resultList = storeService.getResultList();
+	
+		model.addAttribute("resultList",resultList);
+	
 		return "store/result";
-	}//result
-
+	}//resultList
 }
 

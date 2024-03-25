@@ -178,7 +178,7 @@ tr:hover {background-color: #F0F0F0;}
 		</ul>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+              <a class="nav-link" href="${pageContext.request.contextPath}/store/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>

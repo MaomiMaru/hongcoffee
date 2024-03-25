@@ -177,7 +177,7 @@ tr:hover {background-color: #F0F0F0;}
 		</ul>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="${pageContext.request.contextPath}/store/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
@@ -264,18 +264,18 @@ tr:hover {background-color: #F0F0F0;}
 		<table class="table">
   			<tr style="background-color: transparent !important;">
     		<th style=" font-size:20px !important; color: black;">거래번호</th>
-    		<th style=" font-size:20px !important; color: black;">지점명</th>
+    	
     		<th style=" font-size:20px !important; color: black;">재료명</th>
-    		<th style=" font-size:20px !important; color: black;">수주량</th>
-    		<th style=" font-size:20px !important; color: black;">수주일시</th>
+    		<th style=" font-size:20px !important; color: black;">단가</th>
+    		<th style=" font-size:20px !important; color: black;">발주일시</th>
     		<th style=" font-size:20px !important; color: black;">입고여부</th>
  		 </tr>
  		 <c:forEach var="OrderDTO" items="${orderList}">
   <tr>
     <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.name}</td>
+
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_amount}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_price}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_time}</td>
 	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.received_not}</td>
   </tr>

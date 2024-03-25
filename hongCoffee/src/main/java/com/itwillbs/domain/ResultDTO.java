@@ -9,7 +9,21 @@ public class ResultDTO {
 	private int prod_num;//상품번호
 	private int item_num;//재료번호
 	private Timestamp rs_date; //영업일
-	private int re_amount;//판매량/소모량
+	private int sales;//판매량
+	private int consume;//판매량
+	
+	public int getSales() {
+		return sales;
+	}
+	public void setSales(int sales) {
+		this.sales = sales;
+	}
+	public int getConsume() {
+		return consume;
+	}
+	public void setConsume(int consume) {
+		this.consume = consume;
+	}
 	private String rs_note;//실적 적요
 	
 	public int getRs_num() {
@@ -36,12 +50,7 @@ public class ResultDTO {
 	public void setItem_num(int item_num) {
 		this.item_num = item_num;
 	}
-	public int getRe_amount() {
-		return re_amount;
-	}
-	public void setRe_amount(int re_amount) {
-		this.re_amount = re_amount;
-	}
+
 	public String getRs_note() {
 		return rs_note;
 	}

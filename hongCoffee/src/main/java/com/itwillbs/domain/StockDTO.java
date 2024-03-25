@@ -9,10 +9,22 @@ public class StockDTO {
 	private String item_name; //물품명
 	private String item_type; //유형
 	private int amount; //보유량
-
+	private int item_price; //단가
 	private String stock_note; //재고 적요
-	
+	private int item_state; //재료상태
 
+	public int getItem_price() {
+		return item_price;
+	}
+	public void setItem_price(int item_price) {
+		this.item_price = item_price;
+	}
+	public int getItem_state() {
+		return item_state;
+	}
+	public void setItem_state(int item_state) {
+		this.item_state = item_state;
+	}
 	public int getStock_num() {
 		return stock_num;
 	}

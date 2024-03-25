@@ -177,7 +177,7 @@ tr:hover {background-color: #F0F0F0;}
 		</ul>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+           <a class="nav-link" href="${pageContext.request.contextPath}/store/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
@@ -267,13 +267,14 @@ tr:hover {background-color: #F0F0F0;}
     		<th style=" font-size:20px !important; color: black;">보유량</th>
     		<th style=" font-size:20px !important; color: black;">상태</th>
  		 </tr>
- 		 <c:forEach var="ItemDTO" items="${ingredientList}">
+ 		 <c:forEach var="StockDTO" items="${stockList}">
   <tr>
-    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_type}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_price}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_state}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${StockDTO.stock_num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_type}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_name}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_price}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.amount}</td>
+   	 <td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_state}</td>
   </tr>
   		</c:forEach>
   

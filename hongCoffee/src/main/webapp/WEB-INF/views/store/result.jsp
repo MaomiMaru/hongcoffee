@@ -177,7 +177,7 @@ tr:hover {background-color: #F0F0F0;}
 		</ul>
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+             <a class="nav-link" href="${pageContext.request.contextPath}/store/main">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">대시 보드</span>
             </a>
@@ -240,7 +240,7 @@ tr:hover {background-color: #F0F0F0;}
 
 		<hr>
    	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">재료 목록</h3></div>
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">실적 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button>추가</button>
 		<button>수정</button>
@@ -250,19 +250,19 @@ tr:hover {background-color: #F0F0F0;}
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">재료번호</th>
-    		<th style=" font-size:20px !important; color: black;">재료명</th>
-    		<th style=" font-size:20px !important; color: black;">유형</th>
-    		<th style=" font-size:20px !important; color: black;">단가</th>
-    		<th style=" font-size:20px !important; color: black;">재료상태</th>
+    		<th style=" font-size:20px !important; color: black;">번호</th>
+    		<th style=" font-size:20px !important; color: black;">등록일</th>
+    		<th style=" font-size:20px !important; color: black;">일 지출</th>
+    		<th style=" font-size:20px !important; color: black;">일 매출</th>
+    		<th style=" font-size:20px !important; color: black;">순이익</th>
  		 </tr>
- 		 <c:forEach var="ItemDTO" items="${ingredientList}">
+ 		 <c:forEach var="ResultDTO" items="${resultList}">
   <tr>
-    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_type}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_price}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_state}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${ResultDTO.rs_num}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.rs_date}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.sales}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${ResultDTO.consume}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.sales -ResultDTO.consume}</td>
   </tr>
   		</c:forEach>
   

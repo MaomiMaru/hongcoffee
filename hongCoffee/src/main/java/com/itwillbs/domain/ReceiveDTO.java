@@ -12,9 +12,9 @@ public class ReceiveDTO {
 	private String rc_note; //입고적요
 	private String sh_note; //출하적요
 	private int pay; //결제여부
-	private int item_price;
-	private String name;
-	private String item_name;
+	private int item_price; //단가
+	private String name; //지졈명
+	private String item_name; //재료명
 	
 	
 	public int getItem_price() {
