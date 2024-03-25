@@ -245,7 +245,7 @@ tr:hover {background-color: #F0F0F0;}
 						
 					<li><div class="search_div"><label class="search_name"><b>처리여부</b></label>
 						<select class="choose">
-							<option value="">------</option>
+							<option value="">-----------------------------------------------</option>
 							<option value="미입고">미입고</option>
 							<option value="입고완료">입고완료</option>
 						</select>

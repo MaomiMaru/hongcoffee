@@ -236,13 +236,13 @@ tr:hover {background-color: #F0F0F0;}
 				<ul>
 					<li><label class="name">부서</label>
 					<select class="choose">
-					<option value="">------</option>
+					<option value="">-----------------------------------------------</option>
 					<option value="인사">인사</option>
 					<option value="관리">관리</option></select></li>
 				
 					<li><label class="name">직급</label>
 					<select class="choose">
-					<option value="">------</option>
+					<option value="">-----------------------------------------------</option>
 					<option>사원</option>
 					<option>관리</option></select></li>
 				

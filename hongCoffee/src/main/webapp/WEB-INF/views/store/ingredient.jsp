@@ -233,7 +233,7 @@ tr:hover {background-color: #F0F0F0;}
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>유형</b></label>
 						<select class="choose">
-							<option value="">------</option>
+							<option value="">-----------------------------------------------</option>
 							<option value="식품">식품</option>
 							<option value="비식품">비식품</option>
 						</select></div></li>

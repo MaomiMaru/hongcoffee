@@ -246,7 +246,7 @@ tr:hover {background-color: #F0F0F0;}
 				
 					<li><div class="search_div"><label class="search_name"><b>상태</b></label>
 						<select class="choose">
-							<option value="">------</option>
+							<option value="">-----------------------------------------------</option>
 							<option value="정상영업">정상영업</option>
 							<option value="미영업">미영업</option></select>
 				
