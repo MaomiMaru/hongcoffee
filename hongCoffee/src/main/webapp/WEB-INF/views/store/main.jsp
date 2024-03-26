@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 
+
 <style>
 /* 항목 스타일 */
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
@@ -82,6 +83,12 @@ input[type=text]{
 }
 
 /* 항목 스타일 끝 */
+/* 차트 스타일 */
+#myChart{
+/* width: 80% !important; */
+/* height: 600px !important; */
+}
+
 
 </style>
 <head>
@@ -203,20 +210,108 @@ input[type=text]{
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-        <h1>메인페이지</h1>
+        <h2>대시보드</h2>
          <fieldset>
     
 	<script>
 	
 		</script>
-		<div class="card-body">
-                  <h4 class="card-title">Pie chart</h4>
-                  <canvas id="pieChart"></canvas>
-<!--                   <canvas id="pieChart" width="293" height="146" style="display: block; width: 293px; height: 146px;" class="chartjs-render-monitor"></canvas> -->
+
+
+		<div class="card">
+		<div class="card-body" >
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+		<h4 class="card-title">재고 현황</h4>
+	<canvas id="myChart"  ></canvas>
+<script>
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['원두', '컵', '컵홀더', '빨대', '캐리어', '기타'],
+        datasets: [{
+            label: '값',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 0.4
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+	
+
+		
                 </div>
+                </div>
+
+      
+              
+                
+   
+                
+         
          </fieldset>
-         <fieldset>
-         달력
+         <fieldset  style="padding-top: 3px;">
+           <div class="card" >
+		<div class="card-body" >
+                  <h4 class="card-title">일별 실적그래프</h4>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+					<canvas id="line-chart" width="300" height="250"></canvas>
+					<script>
+					new Chart(document.getElementById("line-chart"), {
+						  type: 'line',
+						  data: {
+						    labels: [17,18,19,20,21,22,23,24,25,26],
+						    datasets: [{ 
+						        data: [86,114,106,106,107,111,133,221,783,2478],
+						        label: "순이익",
+						        borderColor: "#3e95cd",
+						        fill: false
+						      }, { 
+						        data: [282,350,411,502,635,809,947,1402,3700,5267],
+						        label: "매출",
+						        borderColor: "#8e5ea2",
+						        fill: false
+						      }, { 
+						        data: [168,170,178,190,203,276,408,547,675,734],
+						        label: "지출",
+						        borderColor: "#3cba9f",
+						        fill: false
+						      }
+						    ]
+						  },
+						  options: {
+						    title: {
+						      display: true,
+						      text: '일별 기록'
+						    }
+						  }
+						});
+					</script>
+                </div>
+                </div>
          </fieldset>
 
         </div>
@@ -244,7 +339,7 @@ input[type=text]{
   <!-- endinject -->
   <!-- Plugin js for this page -->
 
-  <script src="${pageContext.request.contextPath}/resources/vendors/chart.js/Chart.min.js"></script>
+<%--   <script src="${pageContext.request.contextPath}/resources/vendors/chart.js/Chart.min.js"></script> --%>
   <script src="${pageContext.request.contextPath}/resources/vendors/datatables.net/jquery.dataTables.js"></script>
   <script src="${pageContext.request.contextPath}/resources/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/dataTables.select.min.js"></script>
@@ -258,7 +353,7 @@ input[type=text]{
   <script src="${pageContext.request.contextPath}/resources/js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-   <script src="${pageContext.request.contextPath}/resources/js/chart.js"></script>
+<%--    <script src="${pageContext.request.contextPath}/resources/js/chart.js"></script> --%>
   <script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->

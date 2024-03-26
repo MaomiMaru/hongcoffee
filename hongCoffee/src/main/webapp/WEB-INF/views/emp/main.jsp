@@ -3,7 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
+ <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+    <script>
 
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
 <style>
 /* 항목 스타일 */
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
@@ -208,12 +219,46 @@ input[type=text]{
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-        <h1>메인페이지</h1>
+   <h2>대시보드</h2>
          <fieldset>
-         실적이 높은 지점
+           <div class="card" >
+		<div class="card-body" >
+                  <h4 class="card-title">실적 높은 TOP5 지점</h4>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<canvas id="bar-chart-horizontal" width="600" height="250"></canvas>
+<script>
+new Chart(document.getElementById("bar-chart-horizontal"), {
+    type: 'horizontalBar',
+    data: {
+      labels: ["서면점", "홍대점", "이태원점", "서울역점", "부산역점"],
+      datasets: [
+        {
+          label: "실적량",
+          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+          data: [2478,5267,734,784,433]
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: '지점 실적'
+      }
+    }
+});
+</script>
+</div>
+</div>
          </fieldset>
-         <fieldset>
-         달력
+         <fieldset style="padding-top: 3px;">
+          <div class="card" >
+		<div class="card-body" >
+                  <h4 class="card-title">일정</h4>
+              <div id='calendar'></div>
+                  
+                  </div>
+                  </div>
          </fieldset>
 
         </div>
@@ -240,7 +285,7 @@ input[type=text]{
   <script src="${pageContext.request.contextPath}/resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="${pageContext.request.contextPath}/resources/vendors/chart.js/Chart.min.js"></script>
+<%--   <script src="${pageContext.request.contextPath}/resources/vendors/chart.js/Chart.min.js"></script> --%>
   <script src="${pageContext.request.contextPath}/resources/vendors/datatables.net/jquery.dataTables.js"></script>
   <script src="${pageContext.request.contextPath}/resources/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/dataTables.select.min.js"></script>

@@ -5,10 +5,10 @@ $(function() {
    */
   'use strict';
   var data = {
-    labels: ["2013", "2014", "2014", "2015", "2016", "2017"],
+    labels: ["원두", "컵", "컵홀더", "빨대", "캐리어"],
     datasets: [{
       label: '# of Votes',
-      data: [10, 19, 3, 5, 2, 3],
+      data: [10, 19, 3, 5, 2, 10],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -80,7 +80,7 @@ $(function() {
   };
   var doughnutPieData = {
     datasets: [{
-      data: [30, 40, 30],
+      data: [20, 20, 20, 20, 10, 10],
       backgroundColor: [
         'rgba(255, 99, 132, 0.5)',
         'rgba(54, 162, 235, 0.5)',
@@ -104,6 +104,9 @@ $(function() {
       'Pink',
       'Blue',
       'Yellow',
+      'Green',
+      'Purple',
+      'Orange',
     ]
   };
   var doughnutPieOptions = {
@@ -114,7 +117,7 @@ $(function() {
     }
   };
   var areaData = {
-    labels: ["2013", "2014", "2015", "2016", "2017"],
+    labels: ["원두", "컵", "컵홀더", "빨대", "캐리어"],
     datasets: [{
       label: '# of Votes',
       data: [12, 19, 3, 5, 2, 3],
