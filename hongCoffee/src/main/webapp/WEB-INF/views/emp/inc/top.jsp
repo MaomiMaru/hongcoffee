@@ -105,23 +105,19 @@ input[type=text]{
 
   <!-- partial:partials/_navbar.html -->
 <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-</div>
-<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-<span class="icon-menu"></span>
-</button>
-<ul class="navbar-nav navbar-nav-right">
-</ul>
-<div class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">
-		<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
-		<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
-		
-		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			<li><a class="dropdown-item" href="#">로그아웃</a></li>
-		</ul>
+	<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"></div>
+	<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+		<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+		<span class="icon-menu"></span>
+		</button>
+		<ul class="navbar-nav navbar-nav-right"></ul>
+		<div class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">
+			<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
+			<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
+			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<li><a class="dropdown-item" href="#">로그아웃</a></li>
+			</ul>
+		</div>
 	</div>
-
-</div>
 </nav>
