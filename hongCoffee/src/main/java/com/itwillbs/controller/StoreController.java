@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwillbs.domain.ItemDTO;
@@ -16,22 +18,45 @@ import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
+import com.itwillbs.domain.StoreDTO;
 import com.itwillbs.service.StoreService;
 
 @Controller
-//@RequestMapping("/store/*")
+@RequestMapping("/store/*")
 public class StoreController {
 	
 @Inject
 private StoreService storeService;
 
+	//0. 로그인 진행 과정
+	//로그인
+	@GetMapping("/login")
+	public String login() {
+		System.out.println("StoreController login()");
+		
+		return "store/login";
+	}
+	
+	@PostMapping("/loginPro")
+	public String loginPro(StoreDTO storeDTO, HttpSession session) {
+		System.out.println("StoreController loginPro()");
+		
+		StoreDTO storeDTO1 = storeService.userCheck(storeDTO);
+		if(storeDTO1 != null) {
+			session.setAttribute("num", storeDTO1.getNum());
+			session.setAttribute("boss", storeDTO1.getBoss());
+			session.setAttribute("state", storeDTO1.getState());
+			return "redirect:/store/main";
+		} else {
+			return "/store/msg";
+		}
+	}
 
-//로그인
-@GetMapping("/store/main")
-public String main() {
-	System.out.println();
-	return "store/main";
-}
+	@GetMapping("/store/main")
+	public String main() {
+		System.out.println();
+		return "store/main";
+	}
 
 	
 //재료 목록

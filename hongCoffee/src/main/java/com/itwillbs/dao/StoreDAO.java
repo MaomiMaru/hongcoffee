@@ -12,6 +12,7 @@ import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
+import com.itwillbs.domain.StoreDTO;
 
 
 @Repository
@@ -57,6 +58,11 @@ public class StoreDAO {
 		
 		return sqlSession.selectList(namespace + ".getResultList");
 	}//getResultList
+
+	public StoreDTO userCheck(StoreDTO storeDTO) {
+		System.out.println("StoreDAO userCheck()");
+		return sqlSession.selectOne(namespace+".userCheck", storeDTO);
+	}
 
 
 	

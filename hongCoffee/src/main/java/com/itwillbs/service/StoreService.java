@@ -12,6 +12,7 @@ import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
+import com.itwillbs.domain.StoreDTO;
 
 
 @Service
@@ -61,6 +62,13 @@ public class StoreService {
 		
 		return storeDAO.getResultList();
 	}//getResultList
+
+	
+	//로그인
+	public StoreDTO userCheck(StoreDTO storeDTO) {
+		System.out.println("StoreService userCheck()");
+		return storeDAO.userCheck(storeDTO);
+	}
 
 
 
