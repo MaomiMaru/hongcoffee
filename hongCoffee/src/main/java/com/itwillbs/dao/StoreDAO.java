@@ -24,10 +24,10 @@ public class StoreDAO {
 	private static final String namespace="com.itwillbs.mappers.StoreMapper";
 
 	//재료 목록
-	public List<ItemDTO> getIngredientList() {
-		System.out.println("StoreDAO getIngredientList()");
+	public List<ItemDTO> getItemList() {
+		System.out.println("StoreDAO getItemList()");
 		
-		return sqlSession.selectList(namespace + ".getIngredientList");
+		return sqlSession.selectList(namespace + ".getItemList");
 	}//getJeryoList()
 
 	//재고 목록
@@ -57,5 +57,7 @@ public class StoreDAO {
 		
 		return sqlSession.selectList(namespace + ".getResultList");
 	}//getResultList
+
+
 	
 }

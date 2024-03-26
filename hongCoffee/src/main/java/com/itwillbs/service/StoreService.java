@@ -21,12 +21,12 @@ public class StoreService {
 	private StoreDAO storeDAO;
 	
 	//재료 출력
-			public List<ItemDTO> getIngredientList(){
-				System.out.println("StoreService getIngredientList()");
-				
-				return storeDAO.getIngredientList();
-			}//getJeryoList
-	
+	public List<ItemDTO> getItemList(){
+		System.out.println("StoreService getItemList()");
+		
+		return storeDAO.getItemList();
+	}//getJeryoList
+
 	
 	//재고 출력
 	public List<StockDTO> getStockList(){
@@ -61,6 +61,9 @@ public class StoreService {
 		
 		return storeDAO.getResultList();
 	}//getResultList
+
+
+
 
 
 }

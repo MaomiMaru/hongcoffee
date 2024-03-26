@@ -191,7 +191,7 @@ tr:hover {background-color: #F0F0F0;}
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/item">재료 관리</a></li>
               </ul>
             </div>
           </li>
@@ -252,10 +252,7 @@ tr:hover {background-color: #F0F0F0;}
 		<hr>
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">재료 목록</h3></div>
-		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button>추가</button>
-		<button>수정</button>
-		<button>삭제</button></div>
+		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" ></div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
@@ -267,7 +264,7 @@ tr:hover {background-color: #F0F0F0;}
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">재료상태</th>
  		 </tr>
- 		 <c:forEach var="ItemDTO" items="${ingredientList}">
+ 		 <c:forEach var="ItemDTO" items="${itemList}">
   <tr>
     <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
