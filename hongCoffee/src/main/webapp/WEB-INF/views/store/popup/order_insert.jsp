@@ -19,6 +19,7 @@
  	text-align: left;
  } 
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 <div class="container">

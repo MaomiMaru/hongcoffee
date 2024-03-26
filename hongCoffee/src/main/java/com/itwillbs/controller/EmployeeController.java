@@ -145,7 +145,7 @@ private EmployeeService employeeService;
 		
 		employeeService.storeInsert(storeDTO);
 		
-		return "";
+		return "redirect:/emp/popup/close";
 	}
 	
 	//2-1-2. 지점 관리 - 수정 팝업
@@ -162,7 +162,7 @@ private EmployeeService employeeService;
 		
 		employeeService.storeUpdate(storeDTO);
 		
-		return "";
+		return "redirect:/emp/popup/close";
 	}
 	
 
@@ -195,7 +195,7 @@ private EmployeeService employeeService;
 		System.out.println("EmployeeController emp_insertPro()");
 		
 		employeeService.employeeInsert(employeeDTO);
-		return "";
+		return "redirect:/emp/popup/close";
 	}
 	
 	//4-1-2. 사원 관리 - 수정 팝업(관리자)
@@ -211,7 +211,7 @@ private EmployeeService employeeService;
 		System.out.println("EmployeeController emp_updatePro_admin()");
 		
 		employeeService.employeeUpdate1(employeeDTO);
-		return "";
+		return "redirect:/emp/popup/close";
 	}
 	
 	
@@ -228,11 +228,20 @@ private EmployeeService employeeService;
 		System.out.println("EmployeeCOntroller emp_update()");
 		
 		employeeService.employeeUpdate(employeeDTO);
-		return "";
+		return "redirect:/emp/popup/close";
 	}
 	
-	
-	
+	//창 닫기
+	@GetMapping("popup/close")
+	public String close() {
+		System.out.println("close()");
+		return "/emp/popup/close";
+	}
 	
 }
+
+	
+	
+	
+	
 

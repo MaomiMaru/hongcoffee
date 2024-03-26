@@ -7,39 +7,42 @@
 <title>홍커피</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/imgs/logo.png" />
 <style>
-.container{
-	height: 500px;
-	width: 350px;
-	border: 1px solid;
- 
+div{
+	display: inline-block; width: 100px
 }
-
-/* 텍스트 왼쪽 정렬 */
- th{
- 	text-align: left;
- } 
+select{
+	width: 177px;
+}
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-<div class="container">
 <form action="${pageContext.request.contextPath}/emp/popup/emp_updatePro" method="post" class="form">
-<h3 style="margin-left: 10px">사원 추가</h3>
-<fieldset style="margin-top : 70px; border:0px">
-<table>
-<tr><th>사원번호</th><td><input type="text" name="emp_num" readonly></tr> 
-<tr><th>비밀번호</th><td><input type="password" name="emp_pw"></tr> 
-<tr><th>사원명</th><td><input type="text" name="emp_name"></td>
-<tr><th>생년월일</th><td><input type="date" name="emp_birth" readonly><td>
-<tr><th>부서</th><td><input type="text" name="emp_dept" value="${sessionScope.emp_dept}" readonly>
-<tr><th>직급</th><td><input type="text" name="emp_rank" value="${sessionScope.emp_rank}" readonly>
-<tr><th>연락처</th><td><input type="tel" name="emp_phone"></tr>
-<tr><th>이메일</th><td><input type="email" name="emp_email"></tr>
-<tr><th>입사일</th><td><input type="date" name="hire_date" readonly></tr>
-</table>
+<h2 style="margin-left: 10px">사원 수정</h2>
+<fieldset style="border:0px">
+<!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
+<div class="check"></div><br>
+<div><b>사원번호</b></div><input type="text" name="emp_num" value="${sessionScope.emp_num}" readonly><br>
+<sub></sub>
+<div><b>비밀번호</b></div><input type="password" name="emp_pw"><br>
+<sub></sub>
+<div><b>사원명</b></div><input type="text" name="emp_name" value="${sessionScope.emp_name}"><br>
+<sub></sub>
+<div><b>생년월일</b></div><input type="text" name="emp_birth" value="${sessionScope.emp_birth}" readonly style="width: 177px"><br>
+<sub></sub>
+<div><b>부서</b></div><input type="text" name="emp_dept" value="${sessionScope.emp_dept}" readonly><br>
+<sub></sub>
+<div><b>직급</b></div><input type="text" name="emp_rank" value="${sessionScope.emp_rank}" readonly><br>
+<sub></sub>
+<div><b>연락처</b></div><input type="tel" name="emp_phone" value="${sessionScope.emp_phone}"><br>
+<sub></sub>
+<div><b>이메일</b></div><input type="email" name="emp_email" value="${sessionScope.emp_email }"><br>
+<sub></sub>
+<div><b>입사일</b></div><input type="text" name="hire_date" readonly value="${sessionScope.hire_date }"><br>
+<sub></sub>
 <br>
-<input type="submit" value="수정하기" style="float:right; margin-right: 75px; background-color: black; color: #EFBDBC;">
+<input type="submit" value="수정하기" style="float:right; margin-right: 50px; background-color: black; color: #EFBDBC;">
 </fieldset>
 </form>
-</div>
 </body>
 </html>

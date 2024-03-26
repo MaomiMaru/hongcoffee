@@ -9,48 +9,47 @@
 <title>홍커피</title>
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/imgs/logo.png" />
 <style>
-.container{
-	height: 500px;
-	width: 350px;
-	border: 1px solid;
- 
+div{
+	display: inline-block; width: 100px
 }
-
-/* 텍스트 왼쪽 정렬 */
- th{
- 	text-align: left;
- } 
+select{
+	width: 177px;
+}
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-<div class="container">
 <form action="${pageContext.request.contextPath}/emp/popup/store_insertPro" method="post" class="form">
-<h3 style="margin-left: 10px">지점 추가</h3>
-<!-- <fieldset style="margin-top : 100px; border:0px"> -->
+<h2 style="margin-left: 10px">지점 추가</h2>
 <fieldset style="border:0px">
-<table>
-<tr><th>지점명</th><td><input type="text" name="name" class="name" placeholder="한글만 입력. 2자이상 20자이하"><td>
-<tr><th>비밀번호</th><td><input type="password" name="pw" class="pw" placeholder="영대소문자, 숫자를 조합. 4자 이상 20자 이하"><td> 
-<tr><th>대표자명</th><td><input type="text" name="boss" class="boss"><td>
-<tr><th>연락처</th><td><input type="tel" name="phone" class="phone"><td>
-<tr><th>이메일</th><td><input type="text" name="email" class="email"><td>
-<tr><th>주소</th><td><input type="text" name="address" class="address"><td>
-<tr><th>상태</th><td>
+<!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
+<div class="check"></div><br>
+<div><b>지점명</b></div><input type="text" name="name" class="name"><br>
+<sub></sub>
+<div><b>비밀번호</b></div><input type="password" name="pw" class="pw"><br>
+<sub></sub>
+<div><b>대표자명</b></div><input type="text" name="boss" class="boss"><br>
+<sub></sub>
+<div><b>연락처</b></div><input type="tel" name="phone" class="phone"><br>
+<sub></sub>
+<div><b>이메일</b></div><input type="text" name="email" class="email"><br>
+<sub></sub>
+<div><b>주소</b></div><input type="text" name="address" class="address"><br>
+<sub></sub>
+<div><b>상태</b></div>
 <select class="state">
 <option>상태를 선택해주세요</option>
 <option value="0">정상영업</option>
 <option value="1">미영업</option>
 <option value="2">폐업</option>
-</select>
-<td>
-<tr><th>적요</th><td><input type="text" name="note"><td>
-</table>
+</select><br>
+<sub></sub>
+<div><b>적요</b></div><input type="text" name="note"><br>
+<sub></sub>
 <br>
 <input type="submit" value="추가하기" style="float:right; margin-right: 75px; background-color: black; color: #EFBDBC;">
 </fieldset>
 </form>
-</div>
 
 <script type="text/javascript">
 $(function(){
