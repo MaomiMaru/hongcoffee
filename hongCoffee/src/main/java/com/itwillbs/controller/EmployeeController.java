@@ -132,7 +132,7 @@ private EmployeeService employeeService;
 	}
 	
 	//팝업 주소 매핑
-	//2-1-1. 지점 관리 - 추가 팝업
+	//2-1-1. 지점 관리 - 추가
 	@GetMapping("/popup/store_insert")
 	public String store_insert() {
 		System.out.println("EmployeeController store_insert()");
@@ -149,7 +149,7 @@ private EmployeeService employeeService;
 		return "redirect:/emp/popup/close";
 	}
 	
-	//2-1-2. 지점 관리 - 수정 팝업
+	//2-1-2. 지점 관리 - 수정
 	@GetMapping("popup/store_update")
 	public String store_update() {
 		System.out.println("EmployeeController store_update()");
@@ -167,7 +167,7 @@ private EmployeeService employeeService;
 	}
 	
 
-	//2-2-1. 재료 관리 - 추가 팝업 
+	//2-2-1. 재료 관리 - 추가
 	@GetMapping("popup/item_insert")
 	public String item_insert() {
 		System.out.println("EmployeeController item_insert()");
@@ -175,7 +175,7 @@ private EmployeeService employeeService;
 		return "/emp/popup/item_insert";
 	}
 	
-	//2-2-2 재료 관리 - 수정 팝업
+	//2-2-2 재료 관리 - 수정
 	@GetMapping("popup/item_update")
 	public String item_update() {
 		System.out.println("EmployeeController item_update()");
@@ -183,7 +183,7 @@ private EmployeeService employeeService;
 		return "/emp/popup/item_update";
 	}
 	
-	//3-1-1 영업 관리 - 수정 팝업
+	//3-1-1 영업 관리 - 수정
 	@GetMapping("popup/order_update")
 	public String order_update() {
 		System.out.println("EmployeeController order_update()");
@@ -200,7 +200,7 @@ private EmployeeService employeeService;
 	}
 	
 	
-	//3-2-1 출하 관리 - 추가 팝업
+	//3-2-1 출하 관리 - 추가
 	@GetMapping("popup/shipment_insert")
 	public String shipment_insert() {
 		System.out.println("EmployeeController shipment_insert()");
@@ -219,7 +219,7 @@ private EmployeeService employeeService;
 	}
 	*/
 	
-	//3-2-2 출하 관리 - 수정 팝업
+	//3-2-2 출하 관리 - 수정
 	@GetMapping("popup/shipment_update")
 	public String shipment_shipment_update() {
 		System.out.println("EmployeeController shipment_shipment_update()");
@@ -239,7 +239,7 @@ private EmployeeService employeeService;
 	*/
 	
 	
-	//4-1-1. 사원 관리 - 추가 팝업
+	//4-1-1. 사원 관리 - 추가
 	@GetMapping("popup/emp_insert")
 	public String emp_insert() {
 		System.out.println("EmployeeController emp_insert()");
@@ -255,7 +255,7 @@ private EmployeeService employeeService;
 		return "redirect:/emp/popup/close";
 	}
 	
-	//4-1-2. 사원 관리 - 수정 팝업(관리자)
+	//4-1-2. 사원 관리 - 수정(관리자)
 	@GetMapping("popup/emp_update_admin")
 	public String emp_update_admin() {
 		System.out.println("EmployeeController emp_update_admin()");
@@ -272,7 +272,7 @@ private EmployeeService employeeService;
 	}
 	
 	
-	//4-1-3. 사원 관리 - 수정 팝업(일반)
+	//4-1-3. 사원 관리 - 수정(일반)
 	@GetMapping("popup/emp_update")
 	public String emp_update() {
 		System.out.println("EmployeeController emp_update()");
