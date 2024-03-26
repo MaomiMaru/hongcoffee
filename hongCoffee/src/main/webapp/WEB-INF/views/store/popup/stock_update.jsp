@@ -17,7 +17,7 @@ select{
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/emp/popup/order_insertPro" method="post" class="form">
+<form action="${pageContext.request.contextPath}/store/popup/stock_updatePro" method="post" class="form">
 <h2 style="margin-left: 10px">발주 추가</h2>
 <fieldset style="border:0px">
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->

@@ -26,8 +26,7 @@ public class EmployeeController {
 @Inject
 private EmployeeService employeeService;
 
-	//0. login 진행 과정
-	//로그인 과정
+	//0. 로그인 진행 과정
 	@PostMapping("/loginPro")
 	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
 		System.out.println("EmployeeService loginPro()");
@@ -58,7 +57,8 @@ private EmployeeService employeeService;
 		return "/emp/main";
 	}
 	
-	//2-1. 기준 정보 관리 - 지점 목록
+	//2. 기준 정보 관리
+	//2-1. 지점 관리
 	@GetMapping("/store")
 	public String store(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController store()");
@@ -68,9 +68,9 @@ private EmployeeService employeeService;
 			model.addAttribute("storeList",storeList);
 		
 			return "/emp/store";
-		}//jijumList
+	}//jijumList
 
-	//2-2. 기준 정보 관리 - 재료 목록
+	//2-2. 재료 관리
 	@GetMapping("/item")
 	public String item(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController item()");
@@ -80,10 +80,11 @@ private EmployeeService employeeService;
 			model.addAttribute("itemList",itemList);
 		
 			return "/emp/item";
-		}//jijumList
+	}//jijumList
 
 
-	//3-1. 영업 관리 - 수주 목록
+	//3. 영업 관리
+	//3-1. 수주 목록
 	@GetMapping("/order")
 	public String order(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController order()");
@@ -93,10 +94,10 @@ private EmployeeService employeeService;
 			model.addAttribute("orderList",orderList);
 		
 			return "/emp/order";
-		}//sujuList
+	}//sujuList
 
 
-	//3-2. 영업관리 - 출하 목록
+	//3-2. 출하 관리
 	@GetMapping("/shipment")
 	public String shipment(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController shipment()");
@@ -106,11 +107,11 @@ private EmployeeService employeeService;
 			model.addAttribute("shipmentList",shipmentList);
 		
 			return "/emp/shipment";
-		}//chulhaList
+	}//chulhaList
 
 
 
-	//4. 사원 관리 - 사원 목록
+	//4. 사원 관리
 	@GetMapping("/emp")
 	public String emp(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController emp()");
@@ -120,7 +121,7 @@ private EmployeeService employeeService;
 			model.addAttribute("empList",empList);
 		
 			return "/emp/emp";
-		}//sawonList
+	}//sawonList
 	
 	//5. 로그아웃
 	@GetMapping("/emp/logout")

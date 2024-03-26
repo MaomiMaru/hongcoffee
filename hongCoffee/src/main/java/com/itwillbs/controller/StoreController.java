@@ -52,76 +52,89 @@ private StoreService storeService;
 		}
 	}
 
+	//1. 대시보드
 	@GetMapping("/store/main")
 	public String main() {
 		System.out.println();
 		return "store/main";
 	}
 
-	
-//재료 목록
-@GetMapping("/store/item")
-public String itemList(HttpServletRequest request, Model model) {
-	System.out.println("ingredient");
-	
-		List<ItemDTO> itemList = storeService.getItemList();
-	
-		model.addAttribute("itemList",itemList);
-	
-		return "store/item";
+	//2. 기준 정보 관리 - 재료 관리
+	@GetMapping("/store/item")
+	public String itemList(HttpServletRequest request, Model model) {
+		System.out.println("ingredient");
+		
+			List<ItemDTO> itemList = storeService.getItemList();
+		
+			model.addAttribute("itemList",itemList);
+		
+			return "store/item";
 	}//jeryoList
 
 
-//재고 목록
-@GetMapping("/store/stock")
-public String stockList(HttpServletRequest request, Model model) {
-	System.out.println("stock");
-	
-		List<StockDTO> stockList = storeService.getStockList();
-	
-		model.addAttribute("stockList",stockList);
-	
-		return "store/stock";
+	//3. 물류 관리
+	//3-1. 재고 관리
+	@GetMapping("/store/stock")
+	public String stockList(HttpServletRequest request, Model model) {
+		System.out.println("stock");
+		
+			List<StockDTO> stockList = storeService.getStockList();
+		
+			model.addAttribute("stockList",stockList);
+		
+			return "store/stock";
 	}//stockList
 	
 
-//발주 목록
-@GetMapping("/store/order")
-public String orderList(HttpServletRequest request, Model model) {
-	System.out.println("order");
-	
-		List<OrderDTO> orderList = storeService.getOrderList();
-	
-		model.addAttribute("orderList",orderList);
-	
-		return "store/order";
+	//3-2. 발주 관리
+	@GetMapping("/store/order")
+	public String orderList(HttpServletRequest request, Model model) {
+		System.out.println("order");
+		
+			List<OrderDTO> orderList = storeService.getOrderList();
+		
+			model.addAttribute("orderList",orderList);
+		
+			return "store/order";
 	}//orderList
 
 
-//입고 목록
-@GetMapping("/store/receive")
-public String receiveList(HttpServletRequest request, Model model) {
-	System.out.println("receive");
-	
-		List<ReceiveDTO> receiveList = storeService.getReceiveList();
-	
-		model.addAttribute("receiveList",receiveList);
-	
-		return "store/receive";
+	//3-3. 입고 관리
+	@GetMapping("/store/receive")
+	public String receiveList(HttpServletRequest request, Model model) {
+		System.out.println("receive");
+		
+			List<ReceiveDTO> receiveList = storeService.getReceiveList();
+		
+			model.addAttribute("receiveList",receiveList);
+		
+			return "store/receive";
 	}//receiveList
 
 
 
-//실적
-@GetMapping("/store/result")
-public String resultList(HttpServletRequest request, Model model) {
-	System.out.println("result");
-	
-		List<ResultDTO> resultList = storeService.getResultList();
-	
-		model.addAttribute("resultList",resultList);
-	
-		return "store/result";
+	//4. 영업 관리 - 실적 관리
+	@GetMapping("/store/result")
+	public String resultList(HttpServletRequest request, Model model) {
+		System.out.println("result");
+		
+			List<ResultDTO> resultList = storeService.getResultList();
+		
+			model.addAttribute("resultList",resultList);
+		
+			return "store/result";
 	}//resultList
+
+
+	
+	
+	
+	//창 닫기
+	@GetMapping("popup/close")
+	public String close() {
+		System.out.println("close()");
+		return "/emp/popup/close";
+	}
+
 }
 
