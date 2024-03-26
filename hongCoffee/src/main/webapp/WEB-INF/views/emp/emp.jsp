@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -123,34 +124,10 @@ tr:hover {background-color: #F0F0F0;}
 <body onload="cola()">
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-</div>
-<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-<span class="icon-menu"></span>
-</button>
-<ul class="navbar-nav navbar-nav-right">
-</ul>
-
-
-
-<!-- 상단 로그인 표시 -->
-<div class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">
-					<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
-					<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
-			
-	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			<li><a class="dropdown-item" href="#">로그아웃</a></li>
-		</ul>
-	</div>
+    
+	<!--     include top -->
+	<jsp:include page="inc/top.jsp"/>
 	
-	
-	
-	
-</div>
-</nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
@@ -267,6 +244,7 @@ tr:hover {background-color: #F0F0F0;}
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
+    		<th style=" font-size:20px !important; color: black;">선택</th>
     		<th style=" font-size:20px !important; color: black;">사원번호</th>
     		<th style=" font-size:20px !important; color: black;">이름</th>
     		<th style=" font-size:20px !important; color: black;">생년월일</th>
@@ -280,16 +258,19 @@ tr:hover {background-color: #F0F0F0;}
  		 </tr>
  		 <c:forEach var="EmployeeDTO" items="${empList}">
   <tr>
+    <td style="text-align: center !important; font-size:20px !important;"><input type="checkbox" name="checkcheck"></td>
     <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_birth}</td>
+   	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${EmployeeDTO.emp_birth}" pattern="yyyy.MM.dd"/></td>
     <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_dept}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_rank}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_right}</td>
+   	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${EmployeeDTO.emp_right eq 1}">관리자</c:if>
+   		<c:if test="${EmployeeDTO.emp_right eq 0}">일반</c:if></td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_phone}</td>
- 	 <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>
- 	 <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.hire_date}</td>
- 	 <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_state}</td>
+ 	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>
+ 	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${EmployeeDTO.hire_date}" pattern="yyyy.MM.dd"/></td>
+ 	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${EmployeeDTO.emp_state eq 0}">재직</c:if>
+ 		<c:if test="${EmployeeDTO.emp_state eq 1}">휴직</c:if><c:if test="${EmployeeDTO.emp_state eq 2}">퇴직</c:if></td>
   </tr>
   		</c:forEach>
   
@@ -300,12 +281,10 @@ tr:hover {background-color: #F0F0F0;}
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">© Hong coffee, 2024 Hong coffee Corp. 
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Hand-crafted & made with 2Team <i class="ti-heart text-danger ml-1"></i></span>
-          </div>
-        </footer> 
+        
+        <!--     include bottom -->
+		<jsp:include page="inc/bottom.jsp"/>
+        
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
