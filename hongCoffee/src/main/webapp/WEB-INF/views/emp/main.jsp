@@ -109,27 +109,10 @@ input[type=text]{
 
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-</div>
-<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-<span class="icon-menu"></span>
-</button>
-<ul class="navbar-nav navbar-nav-right">
-</ul>
-<div class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">
-		<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
-		<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
-		
-		<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-			<li><a class="dropdown-item" href="#">로그아웃</a></li>
-		</ul>
-	</div>
+    
+	<!--     include top -->
+	<jsp:include page="inc/top.jsp"/>
 
-</div>
-</nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
@@ -154,57 +137,10 @@ input[type=text]{
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-        <ul class="logo-nav">
-			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
-		</ul>
-          <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/emp/main">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">대시 보드</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">기준 정보 관리</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
-              <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">영업 관리</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="form-elements">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/order">수주 관리</a></li>
-                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/emp/shipment">출하 관리</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">사원 관리</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/emp">사원 관리</a></li>
-              </ul>
-            </div>
-          </li>
- 
-      </nav>
+      
+	<!--     include left -->
+	<jsp:include page="inc/left.jsp"/>
+      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -219,15 +155,10 @@ input[type=text]{
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-          </div>
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
-          </div>
-        </footer> 
+        
+        <!--     include bottom -->
+		<jsp:include page="inc/bottom.jsp"/>
+		
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
