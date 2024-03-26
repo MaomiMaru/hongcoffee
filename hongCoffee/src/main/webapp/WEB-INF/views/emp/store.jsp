@@ -193,7 +193,7 @@ tr:hover {background-color: #F0F0F0;}
            <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/item">재료 관리</a></li>
               </ul>
             </div>
           </li>
@@ -260,9 +260,7 @@ tr:hover {background-color: #F0F0F0;}
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=370,height=520')"> 
-		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update','홍커피','width=370,height=520')">
-		<input type="button" value="삭제" style="background-color: black; color: #EFBDBC;"></div>
-		
+		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update','홍커피','width=370,height=520')"></div>
 		
 		
 <!-- 		목록 -->

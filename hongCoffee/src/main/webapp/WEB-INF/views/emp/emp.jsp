@@ -195,7 +195,7 @@ tr:hover {background-color: #F0F0F0;}
           <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/item">재료 관리</a></li>
               </ul>
             </div>
           </li>
@@ -267,7 +267,6 @@ tr:hover {background-color: #F0F0F0;}
 		<c:if test="${sessionScope.emp_right eq 0 }">
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update','홍커피','width=370,height=520')">수정</button>
 		</c:if>
-		<button style="background-color: black; color: #EFBDBC;">삭제</button>
 		</div>
 		
 		

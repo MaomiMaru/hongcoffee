@@ -29,10 +29,10 @@ public class EmployeeDAO {
 	}//getJijumList()
 	
 	//재료 목록
-	public List<ItemDTO> getIngredientList() {
-		System.out.println("EmployeesDAO getIngredientList()");
+	public List<ItemDTO> getItemList() {
+		System.out.println("EmployeesDAO getItemList()");
 		
-		return sqlSession.selectList(namespace + ".getIngredientList");
+		return sqlSession.selectList(namespace + ".getItemList");
 	}//getJeryoList()
 	
 	//수주 목록
@@ -89,6 +89,12 @@ public class EmployeeDAO {
 		sqlSession.update(namespace+".employeeUpdate", employeeDTO);
 		
 	}
+
+	public void orderUpdate(OrderDTO orderDTO) {
+		System.out.println("EmployeeDAO orderUpdate()");
+		sqlSession.update(namespace+".orderUpdate", orderDTO);
+	}
+
 
 
 	

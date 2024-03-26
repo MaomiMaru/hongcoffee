@@ -103,7 +103,7 @@ tr:hover {background-color: #F0F0F0;}
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>사원</title>
+  <title>홍커피</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendors/ti-icons/css/themify-icons.css">
@@ -193,7 +193,7 @@ tr:hover {background-color: #F0F0F0;}
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/item">재료 관리</a></li>
               </ul>
             </div>
           </li>
@@ -260,8 +260,8 @@ tr:hover {background-color: #F0F0F0;}
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">수주 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 <!-- 		<button>추가</button> -->
-		<button style="background-color: black; color: #EFBDBC;">수정</button>
-		<button style="background-color: black; color: #EFBDBC;">삭제</button></div>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/order_update','홍커피','width=370,height=520')">수정</button>
+		</div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">

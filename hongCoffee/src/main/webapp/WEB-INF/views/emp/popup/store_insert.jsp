@@ -37,7 +37,7 @@ select{
 <div><b>주소</b></div><input type="text" name="address" class="address"><br>
 <sub></sub>
 <div><b>상태</b></div>
-<select class="state">
+<select name="state">
 <option>상태를 선택해주세요</option>
 <option value="0">정상영업</option>
 <option value="1">미영업</option>
@@ -47,7 +47,7 @@ select{
 <div><b>적요</b></div><input type="text" name="note"><br>
 <sub></sub>
 <br>
-<input type="submit" value="추가하기" style="float:right; margin-right: 75px; background-color: black; color: #EFBDBC;">
+<input type="submit" value="추가하기" style="float:right; margin-right: 50px; background-color: black; color: #EFBDBC;">
 </fieldset>
 </form>
 

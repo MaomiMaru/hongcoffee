@@ -71,15 +71,15 @@ private EmployeeService employeeService;
 		}//jijumList
 
 	//2-2. 기준 정보 관리 - 재료 목록
-	@GetMapping("/ingredient")
-	public String ingredient(HttpServletRequest request, Model model) {
-		System.out.println("EmployeeController ingredient()");
+	@GetMapping("/item")
+	public String item(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController item()");
 		
-			List<ItemDTO> ingredientList = employeeService.getIngredientList();
+			List<ItemDTO> itemList = employeeService.getItemList();
 		
-			model.addAttribute("ingredientList",ingredientList);
+			model.addAttribute("itemList",itemList);
 		
-			return "/emp/ingredient";
+			return "/emp/item";
 		}//jijumList
 
 
@@ -181,6 +181,62 @@ private EmployeeService employeeService;
 		
 		return "/emp/popup/item_update";
 	}
+	
+	//3-1-1 영업 관리 - 수정 팝업
+	@GetMapping("popup/order_update")
+	public String order_update() {
+		System.out.println("EmployeeController order_update()");
+		
+		return "/emp/popup/order_update";
+	}
+	
+	@PostMapping("popup/order_updatePro")
+	public String order_updatePro(OrderDTO orderDTO) {
+		System.out.println("EmployeeController order_updatePro()");
+		employeeService.orderUpdate(orderDTO);
+		
+		return "redirect:/emp/popup/close";
+	}
+	
+	
+	//3-2-1 출하 관리 - 추가 팝업
+	@GetMapping("popup/shipment_insert")
+	public String shipment_insert() {
+		System.out.println("EmployeeController shipment_insert()");
+		
+		return "/emp/popup/shipment_insert";
+	}
+	
+	//테이블 나눠지면 진행할 예정
+	/*
+	@PostMapping("popup/shipment_insertPro")
+	public String shipment_insertPro() {
+		System.out.println("EmployeeController shipment_insertPro()");
+		employeeService.shipmentInsert();
+		
+		return "redirect:/emp/popup/close";
+	}
+	*/
+	
+	//3-2-2 출하 관리 - 수정 팝업
+	@GetMapping("popup/shipment_update")
+	public String shipment_shipment_update() {
+		System.out.println("EmployeeController shipment_shipment_update()");
+		
+		return "/emp/popup/shipment_update";
+	}
+	
+	//테이블 나눠지면 진행할 예정
+	/*
+	@PostMapping("popup/shipment_updatePro")
+	public String shipment_updatePro() {
+		System.out.println("EmployeeController shipment_updatePro()");
+		employeeService.shipmentUpdate();
+		
+		return "redirect:/emp/popup/close";
+	}
+	*/
+	
 	
 	//4-1-1. 사원 관리 - 추가 팝업
 	@GetMapping("popup/emp_insert")

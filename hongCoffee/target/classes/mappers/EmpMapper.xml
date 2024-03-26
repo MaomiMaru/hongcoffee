@@ -16,7 +16,7 @@
  		select * from store 
  	</select>
  	
- 	<select id="getIngredientList" resultType="com.itwillbs.domain.ItemDTO"> 
+ 	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select * from item 
  	</select>
  	
@@ -64,6 +64,15 @@
 		update employee
  		set emp_pw = #{emp_pw}, emp_name = #{emp_name}, emp_phone = #{emp_phone}, emp_email = #{emp_email}
  		where num = #{num} 	
+ 	</update>
+ 	
+ 	<update id="orderUpdate">
+		update order a join store b
+		on a.num = b.num
+		join item c
+		on a.item_num = c.item_num
+		set od_amount =#{od_amount}, received_not = #{received_not}
+		where od_num = #{od_num};
  	</update>
 
 </mapper>

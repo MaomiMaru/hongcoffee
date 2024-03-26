@@ -61,14 +61,6 @@ select{
 <sub></sub>
 <div><b>입사일</b></div><input type="date" name="hire_date" style="width: 177px"><br>
 <sub></sub>
-<div><b>상태</b></div>
-<select name="emp_state">
-<option value="">선택해주세요.</option>
-<option value="0">재직</option>
-<option value="1">휴직</option>
-<option value="2">퇴직</option>
-</select><br>
-<sub></sub>
 <div><b>적요</b></div><input type="text" name="emp_note"><br>
 <sub></sub>
 <br>
