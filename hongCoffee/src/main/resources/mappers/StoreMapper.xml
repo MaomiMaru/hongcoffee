@@ -9,8 +9,29 @@
 
 
 	<select id="getitemList" resultType="com.itwillbs.domain.ItemDTO"> 
- 		select * from item 
+ 		select item_num, item_name, item_type, item_price, item_state, item_note
+ 		from item 
  	</select>
+ 	
+ 	<select id="searchItemList" resultType="com.itwillbs.domain.ItemDTO">
+	select item_num, item_name, item_type, item_price, item_state, item_note from item
+		<where>
+		<if test="item_type != 100">
+		item_type = #{item_type}
+			<if test="item_name != null"> and item_name like concat('%', #{item_name}, '%')
+			</if>
+			<if test="item_price != 0"> and item_price = #{item_price}
+			</if>
+		</if>
+		<if test="item_type == 100">
+			<if test="item_name != null"> item_name like concat('%', #{item_name}, '%')
+			</if>
+			<if test="item_price != 0"> and item_price = #{item_price}
+			</if>
+		</if>
+		</where>
+		order by item_num desc
+	</select>
 
 	<select id="getStockList" resultType="com.itwillbs.domain.StockDTO"> 
  		select s.stock_num, t.item_type, t.item_name, t.item_price, s.amount, t.item_state
@@ -27,9 +48,16 @@
 		from receive r join item t on r.item_num = t.item_num
  	</select>
 
-	 <select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
+	<select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
 		select rs_num, rs_date, sales, consume
 		from result
+ 	</select>
+ 	
+ 	<select id="searchResultList" resultType="com.itwillbs.domain.ResultDTO">
+ 		select rs_num, rs_date, sales, consume
+ 		from result
+ 		where rs_date = #{rs_date}
+ 		order by rs_num desc
  	</select>
 
 </mapper>

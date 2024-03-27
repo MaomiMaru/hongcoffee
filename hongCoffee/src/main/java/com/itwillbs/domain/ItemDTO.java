@@ -4,7 +4,7 @@ public class ItemDTO {
 
 	private int item_num; //재료 번호 PK, AUTO_INCREMENT
 	private String item_name; //재료명
-	private String item_type; //유형
+	private int item_type; //유형
 	private int item_price; //단가
 	private int item_state; //재료 상태
 	private String item_note; //물품 적요
@@ -29,10 +29,10 @@ public class ItemDTO {
 	public void setItem_name(String item_name) {
 		this.item_name = item_name;
 	}
-	public String getItem_type() {
+	public int getItem_type() {
 		return item_type;
 	}
-	public void setItem_type(String item_type) {
+	public void setItem_type(int item_type) {
 		this.item_type = item_type;
 	}
 

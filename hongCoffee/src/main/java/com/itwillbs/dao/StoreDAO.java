@@ -24,11 +24,18 @@ public class StoreDAO {
 	private static final String namespace="com.itwillbs.mappers.StoreMapper";
 
 	//재료 목록
-	public List<ItemDTO> getitemList() {
-		System.out.println("StoreDAO getitemList()");
+	public List<ItemDTO> getItemList() {
+		System.out.println("StoreDAO getItemList()");
 		
-		return sqlSession.selectList(namespace + ".getitemList");
-	}//getitemList()
+		return sqlSession.selectList(namespace + ".getItemList");
+	}//getItemList
+	
+	//재료 필터링 목록
+	public List<ItemDTO> searchItemList(ItemDTO itemDTO) {
+		System.out.println("StoreDAO searchItemList()");
+			
+		return sqlSession.selectList(namespace + ".searchItemList", itemDTO);
+	}//searchItemList
 
 	//재고 목록
 	public List<StockDTO> getStockList() {
@@ -57,5 +64,12 @@ public class StoreDAO {
 		
 		return sqlSession.selectList(namespace + ".getResultList");
 	}//getResultList
+	
+	//실적 필터링 목록
+	public List<ResultDTO> searchResultList(ResultDTO resultDTO) {
+		System.out.println("StoreDAO searchResultList()");
+			
+		return sqlSession.selectList(namespace + ".searchResultList", resultDTO);
+	}//searchResultList
 	
 }

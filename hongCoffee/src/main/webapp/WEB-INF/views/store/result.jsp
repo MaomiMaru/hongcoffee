@@ -166,13 +166,13 @@ tr:hover {background-color: #F0F0F0;}
         <div class="content-wrapper">
 		<h2>실적 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/store/resultSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>등록일</b></label>
-						<input type="text">
+						<input type="date" name="rs_date" max="9999-12-31">
 						
-						<span class="button"><button type="button">조회</button></span></div></li>
+						<span class="button"><button type="submit">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>

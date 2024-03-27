@@ -21,12 +21,20 @@ public class StoreService {
 	private StoreDAO storeDAO;
 	
 	//재료 출력
-			public List<ItemDTO> getitemList(){
-				System.out.println("StoreService getitemList()");
+	public List<ItemDTO> getItemList(){
+		System.out.println("StoreService getItemList()");
 				
-				return storeDAO.getitemList();
-			}//getitemList
+		return storeDAO.getItemList();
+	}//getItemList
+			
 	
+	//재료 필터링 출력
+	public List<ItemDTO> searchItemList(ItemDTO itemDTO) {
+		System.out.println("StoreService searchItemList()");
+				
+		return storeDAO.searchItemList(itemDTO);
+	}//searchItemList
+			
 	
 	//재고 출력
 	public List<StockDTO> getStockList(){
@@ -36,7 +44,6 @@ public class StoreService {
 	}//getStockList
 	
 	
-	
 	//발주 출력
 	public List<OrderDTO> getOrderList(){
 		System.out.println("StoreService getOrderList()");
@@ -44,7 +51,6 @@ public class StoreService {
 		return storeDAO.getOrderList();
 	}//getOrderList
 	
-
 	
 	//입고 출력
 	public List<ReceiveDTO> getReceiveList(){
@@ -54,7 +60,6 @@ public class StoreService {
 	}//getReceiveList
 	
 	
-	
 	//실적 출력
 	public List<ResultDTO> getResultList(){
 		System.out.println("StoreService getEmpList()");
@@ -62,5 +67,12 @@ public class StoreService {
 		return storeDAO.getResultList();
 	}//getResultList
 
+	
+	//실적 필터링 출력
+	public List<ResultDTO> searchResultList(ResultDTO resultDTO) {
+		System.out.println("StoreService searchResultList()");
+			
+		return storeDAO.searchResultList(resultDTO);
+	}//searchResultList
 
 }
