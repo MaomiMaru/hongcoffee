@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -12,6 +12,7 @@
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
    background: #EFBDBC !important;
 }
+
 .sidebar .nav .nav-item.active > .nav-link
 {
     background: #EFBDBC !important;
@@ -43,13 +44,14 @@
   	background: #EFBDBC !important;
 }
 
+
 ul{
 	list-style:none;
 }
 
 #search {
 	height: 250px;
-	padding-top: 60px;
+	padding-top: 57px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -78,6 +80,7 @@ ul{
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
+
 }
 
 .button{
@@ -122,12 +125,10 @@ tr:hover {background-color: #F0F0F0;}
 </head>
 <body>
   <div class="container-scroller">
-   
-   
-   <!--     include top -->
+    <!-- partial:partials/_navbar.html -->
+
+		<!--     include top -->
 		<jsp:include page="inc/top.jsp"/>
-		
-		
 		
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
@@ -153,14 +154,15 @@ tr:hover {background-color: #F0F0F0;}
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-     
-           <!--     include left -->
+      
+		<!--     include left -->
 		<jsp:include page="inc/left.jsp"/>
-		
 		
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
+        
+        
 		<h2>재료 관리</h2>
 		
 		<form action="">
@@ -202,13 +204,14 @@ tr:hover {background-color: #F0F0F0;}
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">재료상태</th>
  		 </tr>
- 		 <c:forEach var="ItemDTO" items="${ingredientList}">
+ 		 <c:forEach var="ItemDTO" items="${itemList}">
   <tr>
     <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_type}</td>
     <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_price}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_state}</td>
+   	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${ItemDTO.item_state eq 0}">취급</c:if>
+		<c:if test="${ItemDTO.item_state eq 1}">미취급</c:if></td>
   </tr>
   		</c:forEach>
   
@@ -218,9 +221,11 @@ tr:hover {background-color: #F0F0F0;}
         
         </div>
         <!-- content-wrapper ends -->
-           <!--     include bottom -->
+        <!-- partial:partials/_footer.html -->
+        
+		<!--     include bottom -->
 		<jsp:include page="inc/bottom.jsp"/>
-
+		 
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -246,7 +251,7 @@ tr:hover {background-color: #F0F0F0;}
   <script src="${pageContext.request.contextPath}/resources/js/settings.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/todolist.js"></script>
   <!-- endinject -->
-  <!-- Custom js for this page-->
+  <!-- Custom js for this page -->
   <script src="${pageContext.request.contextPath}/resources/js/dashboard.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
@@ -256,3 +261,4 @@ tr:hover {background-color: #F0F0F0;}
 </body>
 
 </html>
+

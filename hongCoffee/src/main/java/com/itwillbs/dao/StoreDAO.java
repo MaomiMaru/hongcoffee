@@ -24,11 +24,11 @@ public class StoreDAO {
 	private static final String namespace="com.itwillbs.mappers.StoreMapper";
 
 	//재료 목록
-	public List<ItemDTO> getIngredientList() {
-		System.out.println("StoreDAO getIngredientList()");
+	public List<ItemDTO> getitemList() {
+		System.out.println("StoreDAO getitemList()");
 		
-		return sqlSession.selectList(namespace + ".getIngredientList");
-	}//getJeryoList()
+		return sqlSession.selectList(namespace + ".getitemList");
+	}//getitemList()
 
 	//재고 목록
 	public List<StockDTO> getStockList() {

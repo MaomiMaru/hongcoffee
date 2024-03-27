@@ -35,16 +35,16 @@ public String main() {
 
 	
 //재료 목록
-@GetMapping("/store/ingredient")
-public String jeryoList(HttpServletRequest request, Model model) {
-	System.out.println("ingredient");
+@GetMapping("/store/item")
+public String itemList(HttpServletRequest request, Model model) {
+	System.out.println("itemList");
 	
-		List<ItemDTO> ingredientList = storeService.getIngredientList();
+		List<ItemDTO> itemList = storeService.getitemList();
 	
-		model.addAttribute("ingredientList",ingredientList);
+		model.addAttribute("itemList",itemList);
 	
-		return "store/ingredient";
-	}//jeryoList
+		return "store/item";
+	}//itemList
 
 
 //재고 목록

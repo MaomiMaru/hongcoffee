@@ -35,11 +35,11 @@ public class EmployeeService {
 	}//getJijumList
 	
 	//재료 출력
-	public List<ItemDTO> getIngredientList(){
-		System.out.println("EmployeeService getIngredientList()");
+	public List<ItemDTO> getitemList(){
+		System.out.println("EmployeeService getitemList()");
 		
-		return employeeDAO.getIngredientList();
-	}//getJeryoList
+		return employeeDAO.getitemList();
+	}//getitemList
 	
 	
 	//수주 출력

@@ -66,15 +66,15 @@ private EmployeeService employeeService;
 	
 
 	//2-2. 기준 정보 관리 - 재료 목록
-	@GetMapping("/ingredient")
-	public String ingredient(HttpServletRequest request, Model model) {
-		System.out.println("EmployeeController ingredient()");
+	@GetMapping("/item")
+	public String item(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController item()");
 		
-			List<ItemDTO> ingredientList = employeeService.getIngredientList();
+			List<ItemDTO> itemList = employeeService.getitemList();
 		
-			model.addAttribute("ingredientList",ingredientList);
+			model.addAttribute("itemList",itemList);
 		
-			return "/emp/ingredient";
+			return "/emp/item";
 		}//jijumList
 
 

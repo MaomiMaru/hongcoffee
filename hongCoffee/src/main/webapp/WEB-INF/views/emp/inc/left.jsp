@@ -104,9 +104,11 @@ input[type=text]{
 
 	<nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+        
         <ul class="logo-nav">
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
 		</ul>
+		
           <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/emp/main">
               <i class="icon-grid menu-icon"></i>
@@ -122,7 +124,7 @@ input[type=text]{
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/item">재료 관리</a></li>
               </ul>
             </div>
           </li>

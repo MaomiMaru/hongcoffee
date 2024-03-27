@@ -8,7 +8,7 @@
 <mapper namespace="com.itwillbs.mappers.StoreMapper">
 
 
-	<select id="getIngredientList" resultType="com.itwillbs.domain.ItemDTO"> 
+	<select id="getitemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select * from item 
  	</select>
 

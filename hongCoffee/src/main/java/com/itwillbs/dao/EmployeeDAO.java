@@ -29,11 +29,11 @@ public class EmployeeDAO {
 	}//getJijumList()
 	
 	//재료 목록
-	public List<ItemDTO> getIngredientList() {
-		System.out.println("EmployeesDAO getIngredientList()");
+	public List<ItemDTO> getitemList() {
+		System.out.println("EmployeesDAO getitemList()");
 		
-		return sqlSession.selectList(namespace + ".getIngredientList");
-	}//getJeryoList()
+		return sqlSession.selectList(namespace + ".getitemList");
+	}//getitemList()
 	
 	//수주 목록
 	public List<OrderDTO> getOrderList() {

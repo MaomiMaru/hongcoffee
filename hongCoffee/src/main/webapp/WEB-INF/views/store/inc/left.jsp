@@ -103,10 +103,12 @@ input[type=text]{
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/imgs/logo.png" />
 
 	<nav class="sidebar sidebar-offcanvas" id="sidebar">
+	   <ul class="nav">
+	   
         <ul class="logo-nav">
 			<img src="${pageContext.request.contextPath}/resources/imgs/logo.png" style="max-width: 100%; height: auto;"/>
 		</ul>
-        <ul class="nav">
+       
           <li class="nav-item">
             <a class="nav-link" href="${pageContext.request.contextPath}/store/main">
               <i class="icon-grid menu-icon"></i>
@@ -121,7 +123,7 @@ input[type=text]{
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/item">재료 관리</a></li>
               </ul>
             </div>
           </li>
