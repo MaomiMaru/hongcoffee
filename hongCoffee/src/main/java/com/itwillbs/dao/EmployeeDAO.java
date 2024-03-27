@@ -29,11 +29,18 @@ public class EmployeeDAO {
 	}//getJijumList()
 	
 	//재료 목록
-	public List<ItemDTO> getitemList() {
-		System.out.println("EmployeesDAO getitemList()");
+	public List<ItemDTO> getItemList() {
+		System.out.println("EmployeesDAO getItemList()");
 		
-		return sqlSession.selectList(namespace + ".getitemList");
-	}//getitemList()
+		return sqlSession.selectList(namespace + ".getItemList");
+	}//getItemList()
+	
+	//재료 필터링 목록
+	public List<ItemDTO> searchItemList(ItemDTO itemDTO) {
+		System.out.println("EmployeesDAO searchItemList()");
+		
+		return sqlSession.selectList(namespace + ".searchItemList", itemDTO);
+	}//searchItemList()
 	
 	//수주 목록
 	public List<OrderDTO> getOrderList() {
@@ -62,6 +69,8 @@ public class EmployeeDAO {
 		System.out.println("EmployeeDAO userCheck()");
 		return sqlSession.selectOne(namespace + ".userCheck", employeeDTO);
 	}
+
+
 	
 	
 	

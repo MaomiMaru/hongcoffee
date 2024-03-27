@@ -16,9 +16,29 @@
  		select * from store 
  	</select>
  	
- 	<select id="getitemList" resultType="com.itwillbs.domain.ItemDTO"> 
+ 	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select * from item 
  	</select>
+ 	
+ 	<select id="searchItemList" resultType="com.itwillbs.domain.ItemDTO">
+	select item_num, item_name, item_type, item_price, item_state, item_note from item
+		<where>
+		<if test="item_type != 100">
+		item_type = #{item_type}
+			<if test="item_name != null"> and item_name like concat('%', #{item_name}, '%')
+			</if>
+			<if test="item_price != 0"> and item_price = #{item_price}
+			</if>
+		</if>
+		<if test="item_type == 100">
+			<if test="item_name != null"> item_name like concat('%', #{item_name}, '%')
+			</if>
+			<if test="item_price != 0"> and item_price = #{item_price}
+			</if>
+		</if>
+		</where>
+		order by item_num desc
+	</select>
  	
  	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
  		select o.od_num, s.name, i.item_name, o.od_amount, o.od_time, o.received_not  

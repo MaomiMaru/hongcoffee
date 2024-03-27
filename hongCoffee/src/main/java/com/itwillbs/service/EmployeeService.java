@@ -35,12 +35,18 @@ public class EmployeeService {
 	}//getJijumList
 	
 	//재료 출력
-	public List<ItemDTO> getitemList(){
-		System.out.println("EmployeeService getitemList()");
+	public List<ItemDTO> getItemList(){
+		System.out.println("EmployeeService getItemList()");
 		
-		return employeeDAO.getitemList();
-	}//getitemList
+		return employeeDAO.getItemList();
+	}//getItemList
 	
+	//재료 필터링 출력
+	public List<ItemDTO> searchItemList(ItemDTO itemDTO) {
+		System.out.println("EmployeeService searchItemList()");
+		
+		return employeeDAO.searchItemList(itemDTO);
+	}//searchItemList
 	
 	//수주 출력
 	public List<OrderDTO> getOrderList(){
@@ -66,5 +72,8 @@ public class EmployeeService {
 		
 		return employeeDAO.getEmpList();
 	}//getSawonList
+
+
+
 
 }

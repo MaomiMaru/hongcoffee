@@ -70,12 +70,61 @@ private EmployeeService employeeService;
 	public String item(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController item()");
 		
-			List<ItemDTO> itemList = employeeService.getitemList();
+			List<ItemDTO> itemList = employeeService.getItemList();
 		
 			model.addAttribute("itemList",itemList);
 		
 			return "/emp/item";
 		}//jijumList
+	
+	
+	//2-2. 기준 정보 관리 - 재료 필터링 목록
+	@PostMapping("/itemSearch")
+	public String itemSearch(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController itemSearch()");
+		
+		ItemDTO itemDTO = new ItemDTO();
+		
+		String item_sType = request.getParameter("item_type");
+		int item_type = 100;
+		
+		String item_sPrice = request.getParameter("item_price");
+		int item_price = 0;
+		
+		try {
+			if (item_sType != null || item_sType != "") {
+				item_type = Integer.parseInt(item_sType);
+			}
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (item_sPrice != null || item_sPrice != "") {
+				item_price = Integer.parseInt(item_sPrice);
+			}
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
+		itemDTO.setItem_type(item_type);
+		itemDTO.setItem_price(item_price);
+		System.out.println(item_type);
+		
+		String item_name = request.getParameter("item_name");
+		itemDTO.setItem_name(item_name);
+		
+		List<ItemDTO> itemList;
+		
+		if(item_type == 100 && item_name == null && item_price == 0) {
+			itemList = employeeService.getItemList();
+		}else {
+			itemList = employeeService.searchItemList(itemDTO);
+		}
+		
+		model.addAttribute("itemList", itemList);
+		
+		return "/emp/item";
+	}//itemSearch
 
 
 	//3-1. 영업 관리 - 수주 목록
