@@ -95,6 +95,11 @@ public class EmployeeDAO {
 		sqlSession.update(namespace+".orderUpdate", orderDTO);
 	}
 
+	public StoreDTO getStore(int num) {
+		System.out.println("EmployeeDAO getStore()");
+		return sqlSession.selectOne(namespace+".getStore", num);
+	}
+
 
 
 	

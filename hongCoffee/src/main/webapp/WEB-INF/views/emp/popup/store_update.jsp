@@ -9,7 +9,7 @@
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/imgs/logo.png" />
 <style>
 div{
-	display: inline-block; width: 100px
+	display: inline-block; width: 120px
 }
 </style>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
@@ -19,33 +19,142 @@ div{
 <h2 style="margin-left: 10px">지점 수정</h2>
 <fieldset style="border:0px">
 <div class="check"></div><br>
-<div><b>지점번호</b></div><input type="text" name="num" readonly><br>
+<div><b>지점번호</b></div><input type="text" name="num"  value="${storeDTO.num}" readonly><br>
 <sub></sub>
-<div><b>지점명</b></div><input type="text" name="name" class="name"><br>
+<div><b>지점명</b></div><input type="text" name="name" value="${storeDTO.name}" readonly><br>
 <sub></sub>
-<div><b>비밀번호</b></div><input type="password" name="pw" class="pw"><br>
+<div><b>비밀번호</b></div><input type="password" name="pw" value="${storeDTO.pw}" class="pw"><br>
+<sub>비밀번호를 변경을 원할 시 재작성해주세요.</sub><br>
+<div><b>대표자명</b></div><input type="text" name="boss" value="${storeDTO.boss}" class="boss"><br>
 <sub></sub>
-<div><b>대표자명</b></div><input type="text" name="boss" class="boss"><br>
+<div><b>연락처</b></div><input type="tel" name="phone" value="${storeDTO.phone}" class="phone"><br>
 <sub></sub>
-<div><b>연락처</b></div><input type="tel" name="phone" class="phone"><br>
+<div><b>지점 전화번호</b></div><input type="tel" name="tel" class="tel"><br>
 <sub></sub>
 <div><b>이메일</b></div><input type="text" name="email" class="email"><br>
 <sub></sub>
-<div><b>주소</b></div><input type="text" name="address" class="address"><br>
+<div><b>우편번호</b></div><input type="text" id="sample4_postcode" value="${storeDTO.postalcode}" name="postalcode" readonly><br>
 <sub></sub>
-<div><b>상태</b></div><input type="text" name="state"><br>
+<div><b>도로명주소</b></div><input type="text" id="sample4_roadAddress" value="${storeDTO.address}" name="address" readonly><br>
+<sub></sub>
+<div><b>상세주소</b></div><input type="text" id="sample4_detailAddress" value="${storeDTO.address_detail}" name="address_detail" readonly><br>
+<sub></sub>
+<div><b>상태</b></div>
+<select name="state" class="state">
+<option value="100">상태를 선택해주세요</option>
+<option value="0">정상영업</option>
+<option value="1">미영업</option>
+<option value="2">폐업</option>
+</select><br>
 <sub></sub>
 <div><b>적요</b></div><input type="text" name="note"><br>
 <sub></sub>
 <br>
-<input type="submit" value="수정하기" style="float:right; margin-right: 50px; background-color: black; color: #EFBDBC;">
+<span style="float:right; margin-right: 105px">
+<input type="submit" value="수정하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+</span>
 </fieldset>
 </form>
 
 <script type="text/javascript">
+$(function(){
+	$('.form').submit(function(){
+		
+		//비밀번호 : 영문 대소문자 + 숫자 + 특수문자 1개 이상씩 4자 이상 20자 이하
+		if($('.pw').val()=='' || $('.pw').val()==null||$('.pw').val()==undefined){
+			alert('비밀번호를 입력해주세요.');
+			$('.pw').focus();
+			return false;
+		}
+					
+		//이름 : 한글 2~20자
+		if($('.boss').val()=='' || $('.boss').val()==null||$('.boss').val()==undefined){
+			alert('대표자명을 입력해주세요.');
+			return false;
+		}
+		var bossCheck = RegExp(/^[가-힣]{2,6}$/);
+			if( ! bossCheck.test($('.boss').val()) ){
+				alert("한글 2자 이상 6자 이하만 입력가능합니다.");
+				$('.boss').focus();
+				return false;
+		}
+			
+		//연락처
+		if($('.phone').val()=='' || $('.phone').val()==null||$('.phone').val()==undefined){
+			alert('대표자명을 입력해주세요.');
+			return false;
+		}
+		var phoneCheck = RegExp(/^[0-9\-]{9,13}$/);
+		if( ! phoneCheck.test($('.phone').val()) ){
+			alert("숫자만 입력가능합니다.");
+			$('.phone').focus();
+			return false;
+	}
+		
+		
+		//이메일 => 아이디@주소
+		if($('.email').val()=='' || $('.email').val()==null||$('.email').val()==undefined){
+			alert('이메일을 입력해주세요.');
+			return false;
+		}
+		var emailCheck = RegExp(/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]/);
+			if( ! emailCheck.test($('.email').val()) ){
+				alert("이메일 형식이 아닙니다.");
+				$('.email').focus();
+				return false;
+		}
+			
+		//select 상자
+		if($('.state').val() == "100"){
+				alert("상태를 선택하세요.");
+				$('.state').focus();
+				return false;
+			}
 
+		
+	});
+	
+});
+	
+	$(".phone").on('keydown keyup',function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+
+        var str = this.value;
+        var tmp = '';
+        var bullet = '-';
+
+        if (str.length > 3 && str.length < 8) {
+            tmp += str.substr(0, 3);
+            tmp += bullet;
+            tmp += str.substr(3);
+            this.value = tmp;
+        } else if (str.length == 8) {
+            tmp += str.substr(0, 4);
+            tmp += bullet;
+            tmp += str.substr(4);
+            this.value = tmp;
+        } else if (str.length == 10) {
+            tmp += str.substr(0, 2);
+            tmp += bullet;
+            tmp += str.substr(2, 4);
+            tmp += bullet;
+            tmp += str.substr(6); // 10자리일때
+            this.value = tmp;
+        } else if (str.length > 8) {
+            tmp += str.substr(0, 3);
+            tmp += bullet;
+            tmp += str.substr(3, 4);
+            tmp += bullet;
+            tmp += str.substr(7, 4);
+            this.value = tmp;
+        } else {
+            this.value = str;
+        }
+    });
 
 </script>
+
+
 
 
 </body>

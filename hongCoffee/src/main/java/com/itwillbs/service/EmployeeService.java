@@ -105,6 +105,12 @@ public class EmployeeService {
 	}
 
 
+	public StoreDTO getStore(int num) {
+		System.out.println("EmployeeService getStore");
+		return employeeDAO.getStore(num);
+	}
+
+
 
 
 

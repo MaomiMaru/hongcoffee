@@ -151,8 +151,12 @@ private EmployeeService employeeService;
 	
 	//2-1-2. 지점 관리 - 수정
 	@GetMapping("popup/store_update")
-	public String store_update() {
+	public String store_update(HttpServletRequest request, HttpSession session, Model model) {
 		System.out.println("EmployeeController store_update()");
+		int num = Integer.parseInt(request.getParameter("num"));
+		StoreDTO storeDTO = new StoreDTO();
+		storeDTO = employeeService.getStore(num);
+		model.addAttribute("storeDTO", storeDTO);
 		
 		return "/emp/popup/store_update";
 	}

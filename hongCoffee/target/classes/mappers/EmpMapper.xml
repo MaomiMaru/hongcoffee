@@ -37,13 +37,13 @@
  	</select>
  	
  	<insert id="storeInsert">
- 		insert into store
- 		values(#{num}, #{pw}, #{name}, #{boss},#{phone},#{tel},#{email},#{address},#{postalcode},#{note},#{state})
+ 		insert into store(num, pw, name, boss, phone, tel, email, address, address_detail, postalcode, note, state)
+ 		values(#{num}, #{pw}, #{name}, #{boss}, #{phone}, #{tel}, #{email}, #{address}, #{address_detail}, #{postalcode},#{note}, #{state})
  	</insert>
  	
  	<update id="storeUpdate">
  		update store
- 		set pw = #{pw}, name = #{name}, #{boss}, phone = #{phone}, email = #{email}, address = #{address}, state = #{state}, note = #{note}
+ 		set pw = #{pw}, boss = #{boss}, phone = #{phone}, email = #{email}, state = #{state}, note = #{note}
  		where num = #{num}
  	</update>
  	
@@ -74,6 +74,12 @@
 		set od_amount =#{od_amount}, received_not = #{received_not}
 		where od_num = #{od_num};
  	</update>
+ 	
+ 	<select id="getStore" resultType="com.itwillbs.domain.StoreDTO">
+ 		select * from store
+ 		where num = #{num}
+ 	</select>
+ 	
 
 </mapper>
 

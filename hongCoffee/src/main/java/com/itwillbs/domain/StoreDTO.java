@@ -12,7 +12,15 @@ public class StoreDTO {
 	private String address; //주소
 	private int postalcode; //우편번호
 	private String note; //적요
-	private int state; //상태(정상영업=0, 미영업=1, 폐업=2)
+	private int state; //상태(정상영업=0, 미영업=1, 폐업=2 미설정=3)
+	private String address_detail; //상세주소
+	
+	public String getAddress_detail() {
+		return address_detail;
+	}
+	public void setAddress_detail(String address_detail) {
+		this.address_detail = address_detail;
+	}
 	
 	public int getNum() {
 		return num;
@@ -82,6 +90,7 @@ public class StoreDTO {
 	public void setState(int state) {
 		this.state = state;
 	}
+
 	
 	
 }
