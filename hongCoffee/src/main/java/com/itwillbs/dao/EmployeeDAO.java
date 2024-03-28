@@ -115,6 +115,11 @@ public class EmployeeDAO {
 		sqlSession.update(namespace+".itemUpdate", itemDTO);
 	}
 
+	public OrderDTO getOrder(int od_num) {
+		System.out.println("EmployeeDAO getOrder()");
+		return sqlSession.selectOne(namespace+".getOrder", od_num);
+	}
+
 
 
 	

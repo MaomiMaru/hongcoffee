@@ -95,6 +95,11 @@
  		set item_name = #{item_name}, item_type = #{item_type}, item_price = #{item_price}, item_state = #{item_state}, item_note = #{item_note}
  		where item_num = #{item_num}
  	</update>
+ 	
+ 	<select id="getOrder" resultType="com.itwillbs.domain.OrderDTO">
+ 		select * from `order`
+ 		where od_num = #{od_num}
+ 	</select>
 
 </mapper>
 

@@ -127,6 +127,11 @@ public class EmployeeService {
 		
 	}
 
+	public OrderDTO getOrder(int od_num) {
+		System.out.println("EmployeeService getOrder()");
+		return employeeDAO.getOrder(od_num);
+	}
+
 
 
 

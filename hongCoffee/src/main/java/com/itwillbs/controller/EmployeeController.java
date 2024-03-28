@@ -210,9 +210,12 @@ private EmployeeService employeeService;
 	
 	//3-1-1 영업 관리 - 수정
 	@GetMapping("popup/order_update")
-	public String order_update() {
+	public String order_update(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController order_update()");
-		
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		OrderDTO orderDTO = new OrderDTO();
+		orderDTO = employeeService.getOrder(od_num);
+		model.addAttribute("orderDTO",orderDTO);
 		return "/emp/popup/order_update";
 	}
 	
