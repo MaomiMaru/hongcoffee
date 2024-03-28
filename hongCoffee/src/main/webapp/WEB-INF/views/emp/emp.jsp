@@ -98,6 +98,33 @@ th, td {
 }
 
 tr:hover {background-color: #F0F0F0;}
+
+/* 라디오 스타일 */
+ input[type=radio]{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  outline:0;
+  box-shadow:none;
+  border:none;
+}
+label input[type=radio]:after{
+  content:'';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
+  border:1px solid #8b8b8b;
+  border-radius:100%;
+  vertical-align:middle;
+  cursor:pointer;
+}
+label input[type=radio]:checked:after{
+  background: url('https://lostinyou4.github.io/leesm/study/images/radio_check.png') 0 0 no-repeat;
+  background-size: contain;
+  border:1px #fff;
+}
+
 /* 목록 스타일 끝 */
 </style>
 <head>
@@ -267,7 +294,7 @@ tr:hover {background-color: #F0F0F0;}
  		 </tr>
  		 <c:forEach var="EmployeeDTO" items="${empList}">
   <tr>
-    <td style="text-align: center !important; font-size:20px !important;"><input type="checkbox" name="checkcheck"></td>
+    <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
     <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_name}</td>
    	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${EmployeeDTO.emp_birth}" pattern="yyyy.MM.dd"/></td>
@@ -288,7 +315,7 @@ tr:hover {background-color: #F0F0F0;}
  		</c:if>
  		
  		<c:if test="${EmployeeDTO.emp_state eq 2}">
- 		<td style="text-align: center !important; font-size:20px !important; color:red; ">휴직</td>
+ 		<td style="text-align: center !important; font-size:20px !important; color:red; ">퇴직</td>
  		</c:if>
 
   </tr>

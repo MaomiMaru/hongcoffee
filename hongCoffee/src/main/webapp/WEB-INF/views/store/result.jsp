@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -199,7 +200,7 @@ tr:hover {background-color: #F0F0F0;}
  		 <c:forEach var="ResultDTO" items="${resultList}">
   <tr>
     <td style="text-align: center !important; font-size:20px !important;">${ResultDTO.rs_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.rs_date}</td>
+   	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${ResultDTO.rs_date}" pattern="yyyy.MM.dd"/></td>
    	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.sales}</td>
     <td style="text-align: center !important; font-size:20px !important;">${ResultDTO.consume}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.sales -ResultDTO.consume}</td>
