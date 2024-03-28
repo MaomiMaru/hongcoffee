@@ -124,9 +124,11 @@ tr:hover {background-color: #F0F0F0;}
 <body onload="cola()">
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
-    
+
+
 	<!--     include top -->
 	<jsp:include page="inc/top.jsp"/>
+
 	
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
@@ -172,7 +174,7 @@ tr:hover {background-color: #F0F0F0;}
           <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/store">지점 관리</a></li>
-                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/ingredient">재료 관리</a></li>
+                <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/emp/item">재료 관리</a></li>
               </ul>
             </div>
           </li>
@@ -227,7 +229,7 @@ tr:hover {background-color: #F0F0F0;}
 					<input type="text"></li>
 				<li><label class="name">사원이름</label>
 					<input type="text">
-					<span class="button"><button type="button">조회</button></span></li>
+					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></li>
 				</ul>	
 			</div>
 		</form>
@@ -236,9 +238,16 @@ tr:hover {background-color: #F0F0F0;}
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">사원 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button>추가</button>
-		<button>수정</button>
-		<button>삭제</button></div>
+		
+		<c:if test="${sessionScope.emp_right eq 1 }">
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=370,height=520')">추가</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin','홍커피','width=370,height=520')">수정</button>
+		</c:if>
+		<c:if test="${sessionScope.emp_right eq 0 }">
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update','홍커피','width=370,height=520')">수정</button>
+		</c:if>
+		</div>
+		
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">

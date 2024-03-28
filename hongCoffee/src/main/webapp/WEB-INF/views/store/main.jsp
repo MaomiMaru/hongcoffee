@@ -143,12 +143,13 @@ input[type=text]{
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
+
       
       
       <!--     include left -->
 		<jsp:include page="inc/left.jsp"/>
       
-      
+    
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">

@@ -120,9 +120,11 @@ input[type=text]{
 
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
+
     
 	<!--     include top -->
 	<jsp:include page="inc/top.jsp"/>
+
 
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
@@ -148,10 +150,12 @@ input[type=text]{
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
+
       
 	<!--     include left -->
 	<jsp:include page="inc/left.jsp"/>
       
+
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -200,10 +204,12 @@ new Chart(document.getElementById("bar-chart-horizontal"), {
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
+
         
         <!--     include bottom -->
 		<jsp:include page="inc/bottom.jsp"/>
 		
+
         <!-- partial -->
       </div>
       <!-- main-panel ends -->

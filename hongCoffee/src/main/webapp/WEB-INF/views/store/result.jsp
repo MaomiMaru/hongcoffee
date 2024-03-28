@@ -154,13 +154,14 @@ tr:hover {background-color: #F0F0F0;}
 
             <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
+
      
      
      <!--     include left -->
 		<jsp:include page="inc/left.jsp"/>
       
       
-      
+     
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -172,7 +173,7 @@ tr:hover {background-color: #F0F0F0;}
 					<li><div class="search_div"><label class="search_name"><b>등록일</b></label>
 						<input type="text">
 						
-						<span class="button"><button type="button">조회</button></span></div></li>
+						<span class="button"><button type="button" style="background-color: black; color: #EFBDBC">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
@@ -181,9 +182,9 @@ tr:hover {background-color: #F0F0F0;}
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">실적 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button>추가</button>
-		<button>수정</button>
-		<button>삭제</button></div>
+		<button style="background-color: black; color: #EFBDBC">추가</button>
+		<button style="background-color: black; color: #EFBDBC">수정</button>
+		<button style="background-color: black; color: #EFBDBC">삭제</button></div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">

@@ -126,6 +126,7 @@ tr:hover {background-color: #F0F0F0;}
 		<!--     include top -->
 		<jsp:include page="inc/top.jsp"/>
 		
+
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
@@ -150,10 +151,12 @@ tr:hover {background-color: #F0F0F0;}
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
+
       
 		<!--     include left -->
 		<jsp:include page="inc/left.jsp"/>
 		
+
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -180,8 +183,9 @@ tr:hover {background-color: #F0F0F0;}
 							<option value="정상영업">정상영업</option>
 							<option value="미영업">미영업</option></select>
 				
-					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+				<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 				</ul>	
+
 			</div>
 		</form>
 
@@ -189,11 +193,8 @@ tr:hover {background-color: #F0F0F0;}
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=370,height=520')"> 
-		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update','홍커피','width=370,height=520')">
-		<input type="button" value="삭제" style="background-color: black; color: #EFBDBC;"></div>
-		
-		
+		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=450,height=520')"> 
+		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update?num=1','홍커피','width=450,height=520')"></div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">

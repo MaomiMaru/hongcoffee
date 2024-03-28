@@ -31,9 +31,10 @@ public class EmployeeDAO {
 	//재료 목록
 	public List<ItemDTO> getitemList() {
 		System.out.println("EmployeesDAO getitemList()");
-		
+
 		return sqlSession.selectList(namespace + ".getitemList");
 	}//getitemList()
+
 	
 	//수주 목록
 	public List<OrderDTO> getOrderList() {
@@ -62,6 +63,46 @@ public class EmployeeDAO {
 		System.out.println("EmployeeDAO userCheck()");
 		return sqlSession.selectOne(namespace + ".userCheck", employeeDTO);
 	}
+
+	public void storeInsert(StoreDTO storeDTO) {
+		System.out.println("EmployeeDAO storeInsert()");
+		sqlSession.insert(namespace+".storeInsert", storeDTO);
+		
+	}
+
+	public void storeUpdate(StoreDTO storeDTO) {
+		System.out.println("EmployeeDAO storeUpdate()");
+		sqlSession.update(namespace+".storeUpdate", storeDTO);
+	}
+
+	public void employeeInsert(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO employeeInsert()");
+		sqlSession.insert(namespace+".employeeInsert", employeeDTO);
+	}
+
+	public void employeeUpdate1(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO employeeUpdate_admin()");
+		sqlSession.update(namespace+".employeeUpdate1", employeeDTO);
+	}
+
+	public void employeeUpdate(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeDAO employeeUpdate()");
+		sqlSession.update(namespace+".employeeUpdate", employeeDTO);
+		
+	}
+
+	public void orderUpdate(OrderDTO orderDTO) {
+		System.out.println("EmployeeDAO orderUpdate()");
+		sqlSession.update(namespace+".orderUpdate", orderDTO);
+	}
+
+	public StoreDTO getStore(int num) {
+		System.out.println("EmployeeDAO getStore()");
+		return sqlSession.selectOne(namespace+".getStore", num);
+	}
+
+
+
 	
 	
 	

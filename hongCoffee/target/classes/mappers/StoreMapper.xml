@@ -7,8 +7,14 @@
 <!--        => boardMapper 파일 => xml 파일이름  -->
 <mapper namespace="com.itwillbs.mappers.StoreMapper">
 
+	<select id="userCheck" resultType="com.itwillbs.domain.StoreDTO">
+		select * from store
+		where num = #{num} and pw = #{pw}
+	</select>
+
 
 	<select id="getitemList" resultType="com.itwillbs.domain.ItemDTO"> 
+
  		select * from item 
  	</select>
 

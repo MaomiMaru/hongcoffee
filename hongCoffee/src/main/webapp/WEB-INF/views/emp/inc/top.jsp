@@ -116,7 +116,7 @@ input[type=text]{
 			<c:if test="${sessionScope.emp_right eq 1 }">관리자 님</c:if>
 			<c:if test="${sessionScope.emp_right eq 0 }">사원 님</c:if></a>
 			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<li><a class="dropdown-item" href="#">로그아웃</a></li>
+				<li><a class="dropdown-item" href="${pageContext.request.contextPath}/emp/logout">로그아웃</a></li>
 			</ul>
 		</div>
 	</div>

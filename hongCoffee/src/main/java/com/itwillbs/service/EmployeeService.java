@@ -22,7 +22,7 @@ public class EmployeeService {
 
 	//사원번호, 비밀번호 확인
 	public EmployeeDTO userCheck(EmployeeDTO employeeDTO) {
-		System.out.println("EMployeeService userCheck()");
+		System.out.println("EmployeeService userCheck()");
 		return employeeDAO.userCheck(employeeDTO);
 	}
 	
@@ -35,11 +35,14 @@ public class EmployeeService {
 	}//getJijumList
 	
 	//재료 출력
+
 	public List<ItemDTO> getitemList(){
 		System.out.println("EmployeeService getitemList()");
+
 		
 		return employeeDAO.getitemList();
 	}//getitemList
+
 	
 	
 	//수주 출력
@@ -66,5 +69,52 @@ public class EmployeeService {
 		
 		return employeeDAO.getEmpList();
 	}//getSawonList
+
+	//지점 추가
+	public void storeInsert(StoreDTO storeDTO) {
+		System.out.println("EmployeeService storeInsert()");
+		employeeDAO.storeInsert(storeDTO);
+	}
+
+	//지점 수정
+	public void storeUpdate(StoreDTO storeDTO) {
+		System.out.println("EmployeeService storeUpdate()");
+		employeeDAO.storeUpdate(storeDTO);
+	}
+
+	//사원 추가
+	public void employeeInsert(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService employeeInsert()");
+		employeeDAO.employeeInsert(employeeDTO);
+	}
+
+	//사원 수정(관리자)
+	public void employeeUpdate1(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService employeeUpdate_admin()");
+		employeeDAO.employeeUpdate1(employeeDTO);
+	}
+
+	//사원 수정(사원)
+	public void employeeUpdate(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService employeeUpdate()");
+		employeeDAO.employeeUpdate(employeeDTO);
+		
+	}
+
+	//수주 수정
+	public void orderUpdate(OrderDTO orderDTO) {
+		System.out.println("EmployeeService orderInsert()");
+		employeeDAO.orderUpdate(orderDTO);
+	}
+
+
+	public StoreDTO getStore(int num) {
+		System.out.println("EmployeeService getStore");
+		return employeeDAO.getStore(num);
+	}
+
+
+
+
 
 }
