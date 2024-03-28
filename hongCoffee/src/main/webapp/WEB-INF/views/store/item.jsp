@@ -206,9 +206,20 @@ tr:hover {background-color: #F0F0F0;}
   <tr>
     <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_type}</td>
+   		<c:if test="${ItemDTO.item_type eq 0}">
+   	  		<td style="text-align: center !important; font-size:20px !important;">식품</td>
+   	  	</c:if>
+   	  	 <c:if test="${ItemDTO.item_type eq 1}">
+   	  		<td style="text-align: center !important; font-size:20px !important;">비식품</td>
+   	  	</c:if>
     <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_price}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_state}</td>
+   <c:if test="${ItemDTO.item_state eq 0}">
+      <td style="text-align: center !important; font-size:20px !important; color:green; ">취급</td>
+  	</c:if>
+  	<c:if test="${ItemDTO.item_state eq 1}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">미취급</td>
+  	</c:if>
+ 
   </tr>
   		</c:forEach>
   

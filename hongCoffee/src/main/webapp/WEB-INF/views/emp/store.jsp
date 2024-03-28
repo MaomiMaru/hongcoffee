@@ -215,7 +215,15 @@ tr:hover {background-color: #F0F0F0;}
     <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.email}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.address}</td>
-      <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.state}</td>
+   	<c:if test="${StoreDTO.state eq 0}">
+      <td style="text-align: center !important; font-size:20px !important; color:green; ">정상영업</td>
+  	</c:if>
+  	  	<c:if test="${StoreDTO.state eq 1}">
+      <td style="text-align: center !important; font-size:20px !important; color:orange; ">미영업</td>
+  		</c:if>
+  	  	<c:if test="${StoreDTO.state eq 2}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">폐업</td>
+  	</c:if>
   </tr>
   		</c:forEach>
   

@@ -269,8 +269,19 @@ tr:hover {background-color: #F0F0F0;}
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_phone}</td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>
  	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${EmployeeDTO.hire_date}" pattern="yyyy.MM.dd"/></td>
- 	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${EmployeeDTO.emp_state eq 0}">재직</c:if>
- 		<c:if test="${EmployeeDTO.emp_state eq 1}">휴직</c:if><c:if test="${EmployeeDTO.emp_state eq 2}">퇴직</c:if></td>
+
+ 		<c:if test="${EmployeeDTO.emp_state eq 0}">
+ 		<td style="text-align: center !important; font-size:20px !important; color:green; ">재직</td>
+ 		</c:if>
+ 		
+ 		<c:if test="${EmployeeDTO.emp_state eq 1}">
+ 		<td style="text-align: center !important; font-size:20px !important; color:orange; ">휴직</td>
+ 		</c:if>
+ 		
+ 		<c:if test="${EmployeeDTO.emp_state eq 2}">
+ 		<td style="text-align: center !important; font-size:20px !important; color:red; ">휴직</td>
+ 		</c:if>
+
   </tr>
   		</c:forEach>
   

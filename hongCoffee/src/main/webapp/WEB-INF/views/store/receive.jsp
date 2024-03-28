@@ -202,7 +202,13 @@ tr:hover {background-color: #F0F0F0;}
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_amount}</td>
     <td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_price}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_time}</td>
- 	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.pay}</td>
+   	<c:if test="${ReceiveDTO.pay eq 0}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">미결제</td>
+  	</c:if>
+  	 <c:if test="${ReceiveDTO.pay eq 1}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">결제완료</td>
+  	</c:if>
+   	
  	</tr>
   		</c:forEach>
   

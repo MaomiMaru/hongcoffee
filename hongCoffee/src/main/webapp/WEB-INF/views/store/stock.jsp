@@ -207,7 +207,14 @@ tr:hover {background-color: #F0F0F0;}
    	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_name}</td>
     <td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_price}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.amount}</td>
-   	 <td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_state}</td>
+   	
+   	  <c:if test="${StockDTO.item_state eq 0}">
+      <td style="text-align: center !important; font-size:20px !important; color:green; ">취급</td>
+  	</c:if>
+  	<c:if test="${StockDTO.item_state eq 1}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">미취급</td>
+  	</c:if>
+  	
   </tr>
   		</c:forEach>
   

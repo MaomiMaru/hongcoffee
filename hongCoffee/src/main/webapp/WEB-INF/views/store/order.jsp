@@ -212,7 +212,12 @@ tr:hover {background-color: #F0F0F0;}
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
     <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_price}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_time}</td>
-	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.received_not}</td>
+	<c:if test="${OrderDTO.received_not eq 0}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">미입고</td>
+  	</c:if>
+  	<c:if test="${OrderDTO.received_not eq 1}">
+      <td style="text-align: center !important; font-size:20px !important; color:green; ">입고완료</td>
+  	</c:if>
   </tr>
   		</c:forEach>
   
