@@ -14,14 +14,14 @@ public class OrderDTO {
 	private String ob_note; //수주적요
 	private String name; //지점명
 	private String item_name; //재료명
-	private String item_price; //단가
+	private int item_price; //단가
 	
 	
 	
-	public String getItem_price() {
+	public int getItem_price() {
 		return item_price;
 	}
-	public void setItem_price(String item_price) {
+	public void setItem_price(int item_price) {
 		this.item_price = item_price;
 	}
 	public String getName() {

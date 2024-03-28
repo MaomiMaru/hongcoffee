@@ -111,7 +111,53 @@ public String stockList(HttpServletRequest request, Model model) {
 	
 		return "store/stock";
 	}//stockList
+
+//재고 필터링 목록
+@PostMapping("/store/stockSearch")
+public String stockSearchList(HttpServletRequest request, Model model) {
+	System.out.println("stockSearch");
 	
+	StockDTO stockDTO = new StockDTO();
+	
+	String item_sType = request.getParameter("item_type");
+	
+	try {
+		stockDTO.setItem_type(item_sType != null ? Integer.parseInt(item_sType) : 100);
+	} catch(NumberFormatException e) {
+		e.printStackTrace();
+	}
+	
+	String item_sPrice = request.getParameter("item_price");
+	int item_price = 0;
+
+	try {
+		if (item_sPrice != null || item_sPrice != "") {
+		item_price = Integer.parseInt(item_sPrice);
+		}
+	} catch(NumberFormatException e) {
+		e.printStackTrace();
+	}
+	
+	stockDTO.setItem_price(item_price);
+	
+	String item_name = request.getParameter("item_name");
+	stockDTO.setItem_name(item_name);
+
+	System.out.println(stockDTO);
+	
+	List<StockDTO> stockList;
+
+	if(item_sType == null && item_name == "" && item_price == 0) {
+		stockList = storeService.getStockList();
+	} else {
+		stockList = storeService.searchStockList(stockDTO);
+	}
+
+	model.addAttribute("stockList", stockList);
+
+	return "store/stock";
+}//stockSearchList
+
 
 //발주 목록
 @GetMapping("/store/order")
@@ -126,6 +172,60 @@ public String orderList(HttpServletRequest request, Model model) {
 	}//orderList
 
 
+//발주 필터링 목록
+@PostMapping("/store/orderSearch")
+public String orderSearchList(HttpServletRequest request, Model model) throws Exception {
+	System.out.println("orderSearchList");
+	
+	OrderDTO orderDTO = new OrderDTO();
+	
+	String item_name = request.getParameter("item_name");
+	orderDTO.setItem_name(item_name);
+	
+	String item_sPrice = request.getParameter("item_price");
+	int item_price = 0;
+	
+	try {
+		if (item_sPrice != "") {
+			item_price = Integer.parseInt(item_sPrice);
+		}
+	} catch(NumberFormatException e) {
+		e.printStackTrace();
+	}
+	
+	orderDTO.setItem_price(item_price);
+	
+	String od_time = request.getParameter("od_time");
+	
+	if(od_time != "") {
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	Date d1 = format.parse(od_time);
+	Timestamp date1 = new Timestamp(d1.getTime());
+	orderDTO.setOd_time(date1);
+	}
+	
+	String received_sNot = request.getParameter("received_not");
+	
+	try {
+		orderDTO.setReceived_not(received_sNot != null ? Integer.parseInt(received_sNot) : 100);
+	} catch(NumberFormatException e) {
+		e.printStackTrace();
+	}
+	
+	List<OrderDTO> orderList;
+	
+	if (item_name == "" && item_price == 0 && od_time == "" && received_sNot == null) {
+		orderList = storeService.getOrderList();
+	} else {
+		orderList = storeService.searchOrderList(orderDTO);
+	}
+	
+	model.addAttribute("orderList", orderList);
+	
+	return "store/order";
+}//orderSearchList
+
+
 //입고 목록
 @GetMapping("/store/receive")
 public String receiveList(HttpServletRequest request, Model model) {
@@ -137,6 +237,54 @@ public String receiveList(HttpServletRequest request, Model model) {
 	
 		return "store/receive";
 	}//receiveList
+
+
+//입고 필터링 목록
+@PostMapping("/store/receiveSearch")
+public String receiveSearchList(HttpServletRequest request, Model model) throws Exception {
+	System.out.println("receiveSearchList");
+	
+	ReceiveDTO receiveDTO = new ReceiveDTO();
+	
+	String item_name = request.getParameter("item_name");
+	receiveDTO.setItem_name(item_name);
+	
+	String item_sPrice = request.getParameter("item_price");
+	
+	int item_price = 0;
+	
+	try {
+		if (item_sPrice != "") {
+			item_price = Integer.parseInt(item_sPrice);
+		}
+	} catch(NumberFormatException e) {
+		e.printStackTrace();
+	}
+	
+	receiveDTO.setItem_price(item_price);
+	
+	String rc_time = request.getParameter("rc_time");
+	
+	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	Date d1 = format.parse(rc_time);
+	Timestamp date1 = new Timestamp(d1.getTime());
+	
+	if(rc_time != "") {
+		receiveDTO.setRc_time(date1);
+	}
+	
+	List<ReceiveDTO> receiveList;
+	
+	if (item_name == "" && item_price == 0 && rc_time == "") {
+		receiveList = storeService.getReceiveList();
+	} else {
+		receiveList = storeService.searchReceiveList(receiveDTO);
+	}
+	
+	model.addAttribute("receiveList", receiveList);
+	
+	return "store/receive";
+}//receiveSearchList
 
 
 //실적 목록

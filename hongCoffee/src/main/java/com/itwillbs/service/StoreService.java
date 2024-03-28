@@ -44,12 +44,28 @@ public class StoreService {
 	}//getStockList
 	
 	
+	//재고 필터링 출력
+	public List<StockDTO> searchStockList(StockDTO stockDTO) {
+		System.out.println("StoreService searchStockList(()");
+					
+		return storeDAO.searchStockList(stockDTO);
+	}//searchStockList
+
+	
 	//발주 출력
 	public List<OrderDTO> getOrderList(){
 		System.out.println("StoreService getOrderList()");
 		
 		return storeDAO.getOrderList();
 	}//getOrderList
+	
+	
+	//발주 필터링 출력
+	public List<OrderDTO> searchOrderList(OrderDTO orderDTO) {
+		System.out.println("StoreService searchOrderList()");
+		
+		return storeDAO.searchOrderList(orderDTO);
+	}//searchOrderList
 	
 	
 	//입고 출력
@@ -59,6 +75,14 @@ public class StoreService {
 		return storeDAO.getReceiveList();
 	}//getReceiveList
 	
+	
+	//입고 필터링 출력
+		public List<ReceiveDTO> searchReceiveList(ReceiveDTO receiveDTO) {
+			System.out.println("StoreService searchReceiveList()");
+			
+			return storeDAO.searchReceiveList(receiveDTO);
+	}//searchReceiveList
+		
 	
 	//실적 출력
 	public List<ResultDTO> getResultList(){
@@ -74,5 +98,8 @@ public class StoreService {
 			
 		return storeDAO.searchResultList(resultDTO);
 	}//searchResultList
+
+
+
 
 }

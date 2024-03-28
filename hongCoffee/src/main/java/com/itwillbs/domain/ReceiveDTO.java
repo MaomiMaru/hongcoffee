@@ -17,6 +17,13 @@ public class ReceiveDTO {
 	private String item_name; //재료명
 	
 	
+	
+	@Override
+	public String toString() {
+		return "ReceiveDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", rc_amount=" + rc_amount
+				+ ", rc_time=" + rc_time + ", rc_note=" + rc_note + ", sh_note=" + sh_note + ", pay=" + pay
+				+ ", item_price=" + item_price + ", name=" + name + ", item_name=" + item_name + "]";
+	}
 	public int getItem_price() {
 		return item_price;
 	}

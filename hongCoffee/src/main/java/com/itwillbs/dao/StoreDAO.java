@@ -44,6 +44,13 @@ public class StoreDAO {
 		return sqlSession.selectList(namespace + ".getStockList");
 	}//getStockList
 
+	//재고 필터링 목록
+	public List<StockDTO> searchStockList(StockDTO stockDTO) {
+		System.out.println("StoreDAO searchStockList()");
+		
+		return sqlSession.selectList(namespace + ".searchStockList", stockDTO);
+	}//searchStockList
+
 	//발주 목록
 	public List<OrderDTO> getOrderList() {
 		System.out.println("StoreDAO getOrderList()");
@@ -51,12 +58,27 @@ public class StoreDAO {
 		return sqlSession.selectList(namespace + ".getOrderList");
 	}//getOrderList
 
+	//발주 필터링 목록
+	public List<OrderDTO> searchOrderList(OrderDTO orderDTO) {
+		System.out.println("StoreDAO searchOrderList()");
+		
+		return sqlSession.selectList(namespace + ".searchOrderList", orderDTO);
+	}//searchOrderList
+	
 	//입고 목록
 	public List<ReceiveDTO> getReceiveList() {
 		System.out.println("StoreDAO getReceiveList()");
 		
 		return sqlSession.selectList(namespace + ".getReceiveList");
 	}//getReceiveList
+	
+	//입고 필터링 목록
+	public List<ReceiveDTO> searchReceiveList(ReceiveDTO receiveDTO) {
+		System.out.println("StoreDAO searchReceiveList()");
+		System.out.println("receiveDTO =" + receiveDTO);	
+		
+		return sqlSession.selectList(namespace + ".searchReceiveList", receiveDTO);
+	}//searchReceiveList
 
 	//실적 목록
 	public List<ResultDTO> getResultList() {
@@ -71,5 +93,7 @@ public class StoreDAO {
 			
 		return sqlSession.selectList(namespace + ".searchResultList", resultDTO);
 	}//searchResultList
+
+
 	
 }

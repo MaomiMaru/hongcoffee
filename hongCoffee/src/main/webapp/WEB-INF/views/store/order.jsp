@@ -162,26 +162,26 @@ tr:hover {background-color: #F0F0F0;}
         <div class="content-wrapper">
 		<h2>발주 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/store/orderSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="item_price"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>발주일시</b></label>
-						<input type="text"></div></li>
+						<input type="date" name="od_time" max="9999-12-31"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고여부</b></label>
-						<select class="choose">
-							<option value="">-----------------------------------------------</option>
-							<option value="미입고">미입고</option>
-							<option value="입고완료">입고완료</option>
+						<select class="choose" name="received_not">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">미입고</option>
+							<option value="1">입고완료</option>
 						</select>
 							
-					<span class="button"><button type="button">조회</button></span></div></li>
+					<span class="button"><button type="submit">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
