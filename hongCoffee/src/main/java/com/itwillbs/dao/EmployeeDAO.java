@@ -100,6 +100,21 @@ public class EmployeeDAO {
 		return sqlSession.selectOne(namespace+".getStore", num);
 	}
 
+	public void itemInsert(ItemDTO itemDTO) {
+		System.out.println("EmployeeDAO itemInsert()");
+		sqlSession.insert(namespace+".itemInsert", itemDTO);
+	}
+
+	public ItemDTO getItem(int item_num) {
+		System.out.println("EmployeeDAO getItem()");
+		return sqlSession.selectOne(namespace+".getItem", item_num);
+	}
+
+	public void itemUpdate(ItemDTO itemDTO) {
+		System.out.println("EmployeeDAO itemUpdate()");
+		sqlSession.update(namespace+".itemUpdate", itemDTO);
+	}
+
 
 
 	

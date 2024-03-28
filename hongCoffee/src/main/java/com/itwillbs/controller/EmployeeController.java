@@ -179,13 +179,34 @@ private EmployeeService employeeService;
 		return "/emp/popup/item_insert";
 	}
 	
+	@PostMapping("popup/item_insertPro")
+	public String item_insertPro(ItemDTO itemDTO) {
+		System.out.println("EmployeeController item_insertPro()");
+		employeeService.itemInsert(itemDTO);
+		
+		return "redirect:/emp/popup/close";
+	}
+	
 	//2-2-2 재료 관리 - 수정
 	@GetMapping("popup/item_update")
-	public String item_update() {
+	public String item_update(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController item_update()");
+		int item_num = Integer.parseInt(request.getParameter("item_num"));
+		ItemDTO itemDTO = new ItemDTO();
+		itemDTO = employeeService.getItem(item_num);
+		model.addAttribute("itemDTO", itemDTO);
 		
 		return "/emp/popup/item_update";
 	}
+	
+	@PostMapping("popup/item_updatePro")
+	public String item_updatePro(ItemDTO itemDTO) {
+		System.out.println("EmployeeController item_updatePro()");
+		employeeService.itemUpdate(itemDTO);
+
+		return "redirect:/emp/popup/close";
+	}
+	
 	
 	//3-1-1 영업 관리 - 수정
 	@GetMapping("popup/order_update")
