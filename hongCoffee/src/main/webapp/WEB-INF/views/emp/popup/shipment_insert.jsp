@@ -48,27 +48,9 @@ select{
 
 $('.form').submit(function(){
 	
-	if($('.name').val()=='' || $('.name').val()==null||$('.name').val()==undefined){
-		alert('지점명을 입력해주세요.');
-		$('.name').focus();
-		return false;
-	}
-	
-	if($('.item_name').val()=='' || $('.item_name').val()==null||$('.item_name').val()==undefined){
-		alert('재료명을 입력해주세요.');
-		$('.item_name').focus();
-		return false;
-	}
-	
 	if($('.sh_amount').val()=='' || $('.sh_amount').val()==null||$('.sh_amount').val()==undefined){
 		alert('출하량을 입력해주세요.');
 		$('.sh_amount').focus();
-		return false;
-	}
-	
-	if($('.item_price').val()=='' || $('.item_price').val()==null||$('.item_price').val()==undefined){
-		alert('단가를 입력해주세요.');
-		$('.item_price').focus();
 		return false;
 	}
 	

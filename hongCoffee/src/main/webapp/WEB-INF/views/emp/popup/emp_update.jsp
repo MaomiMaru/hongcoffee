@@ -41,7 +41,7 @@ select{
 <div><b>입사일</b></div><input type="text" name="hire_date" readonly value="${sessionScope.hire_date }"><br>
 <sub></sub>
 <br>
-<input type="submit" value="수정하기" style="float:right; margin-right: 50px; background-color: black; color: #EFBDBC;">
+<input type="submit" value="수정하기" style="float:right; margin-right: 50px; background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </fieldset>
 </form>
 </body>

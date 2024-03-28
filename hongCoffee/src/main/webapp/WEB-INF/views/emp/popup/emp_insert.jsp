@@ -64,7 +64,7 @@ select{
 <div><b>적요</b></div><input type="text" name="emp_note"><br>
 <sub></sub>
 <br>
-<input type="submit" value="등록하기" style="float:right; margin-right: 50px; background-color: black; color: #EFBDBC;">
+<input type="submit" value="등록하기" style="float:right; margin-right: 50px; background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </fieldset>
 </form>
 
