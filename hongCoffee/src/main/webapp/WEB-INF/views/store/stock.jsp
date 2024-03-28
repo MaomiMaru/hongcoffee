@@ -203,7 +203,8 @@ tr:hover {background-color: #F0F0F0;}
  		 <c:forEach var="StockDTO" items="${stockList}">
   <tr>
     <td style="text-align: center !important; font-size:20px !important;">${StockDTO.stock_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_type}</td>
+   	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${StockDTO.item_type eq 0}">식품</c:if>
+   		<c:if test="${StockDTO.item_type eq 1}">비식품</c:if></td>
    	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_name}</td>
     <td style="text-align: center !important; font-size:20px !important;">${StockDTO.item_price}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StockDTO.amount}</td>

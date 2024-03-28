@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -206,7 +206,8 @@ tr:hover {background-color: #F0F0F0;}
   <tr>
     <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_type}</td>
+   	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${ItemDTO.item_type eq 0}">식품</c:if>
+   		<c:if test="${ItemDTO.item_type eq 1}">비식품</c:if></td>
     <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_price}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_state}</td>
   </tr>

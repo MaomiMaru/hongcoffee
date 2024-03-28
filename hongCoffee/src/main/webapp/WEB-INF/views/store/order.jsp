@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -71,10 +72,15 @@ ul{
 
 #search li {
 	width: 600px;
-	height: 30px;
+	height: 20px;
 }
 
 input[type=text]{
+	width: 300px;
+	margin-bottom: 10px;
+}
+
+input[type=date]{
 	width: 300px;
 	margin-bottom: 10px;
 }
@@ -103,7 +109,7 @@ tr:hover {background-color: #F0F0F0;}
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>사원</title>
+  <title>홍커피</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendors/ti-icons/css/themify-icons.css">
@@ -211,8 +217,9 @@ tr:hover {background-color: #F0F0F0;}
 
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
     <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_price}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_time}</td>
-	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.received_not}</td>
+   	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${OrderDTO.od_time}" pattern="yyyy-MM-dd"/></td>
+	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${OrderDTO.received_not eq 0}">미입고</c:if>
+		<c:if test="${OrderDTO.received_not eq 1}">입고완료</c:if></td>
   </tr>
   		</c:forEach>
   

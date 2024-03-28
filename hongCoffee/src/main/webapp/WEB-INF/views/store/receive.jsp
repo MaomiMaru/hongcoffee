@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -75,6 +76,11 @@ ul{
 }
 
 input[type=text]{
+	width: 300px;
+	margin-bottom: 10px;
+}
+
+input[type=date]{
 	width: 300px;
 	margin-bottom: 10px;
 }
@@ -178,7 +184,7 @@ tr:hover {background-color: #F0F0F0;}
 
 		<hr>
    	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">재료 목록</h3></div>
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">입고 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button>추가</button>
 		<button>수정</button>
@@ -201,8 +207,9 @@ tr:hover {background-color: #F0F0F0;}
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_amount}</td>
     <td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_price}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_time}</td>
- 	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.pay}</td>
+   	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${ReceiveDTO.rc_time}" pattern="yyyy-MM-dd"/></td>
+ 	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${ReceiveDTO.pay eq 0}">미결제</c:if>
+ 		<c:if test="${ReceiveDTO.pay eq 1}">결제완료</c:if></td>
  	</tr>
   		</c:forEach>
   

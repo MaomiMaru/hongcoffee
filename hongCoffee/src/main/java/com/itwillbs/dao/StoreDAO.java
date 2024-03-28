@@ -13,11 +13,10 @@ import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
 
-
 @Repository
 public class StoreDAO {
 
-	// 마이바티스 객체생성 주입
+	//마이바티스 객체생성 주입
 	@Inject
 	private SqlSession sqlSession;
 	
@@ -75,7 +74,6 @@ public class StoreDAO {
 	//입고 필터링 목록
 	public List<ReceiveDTO> searchReceiveList(ReceiveDTO receiveDTO) {
 		System.out.println("StoreDAO searchReceiveList()");
-		System.out.println("receiveDTO =" + receiveDTO);	
 		
 		return sqlSession.selectList(namespace + ".searchReceiveList", receiveDTO);
 	}//searchReceiveList
@@ -94,6 +92,4 @@ public class StoreDAO {
 		return sqlSession.selectList(namespace + ".searchResultList", resultDTO);
 	}//searchResultList
 
-
-	
 }

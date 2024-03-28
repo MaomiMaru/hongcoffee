@@ -7,7 +7,6 @@
 <!--        => boardMapper 파일 => xml 파일이름  -->
 <mapper namespace="com.itwillbs.mappers.StoreMapper">
 
-
 	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select item_num, item_name, item_type, item_price, item_state, item_note
  		from item 
@@ -34,7 +33,6 @@
 				</if>
 			</if>
 		</where>
-		order by item_num desc
 	</select>
 
 	<select id="getStockList" resultType="com.itwillbs.domain.StockDTO"> 
@@ -69,16 +67,16 @@
  		from `order` o join item t on o.item_num = t.item_num
  		<where>
  			<if test="item_name != ''">
-     		t.item_name like concat('%', #{item_name}, '%')
+     			t.item_name like concat('%', #{item_name}, '%')
     		</if>
     		<if test="item_price != 0">
-      		and t.item_price = #{item_price}
+      			and t.item_price = #{item_price}
     		</if>
     		<if test="od_time != null">
-      		and date(o.od_time) = #{od_time}
+      			and date(o.od_time) = #{od_time}
     		</if>
     		<if test="received_not != 100">
-    		and o.received_not = #{received_not}
+    			and o.received_not = #{received_not}
     		</if>
  		</where>
  	</select>
@@ -93,13 +91,13 @@
   		from receive r join item t on r.item_num = t.item_num
   		<where>
     		<if test="item_name != ''">
-     		t.item_name like concat('%', #{item_name}, '%')
+     			t.item_name like concat('%', #{item_name}, '%')
     		</if>
     		<if test="item_price != 0">
-      		and t.item_price = #{item_price}
+      			and t.item_price = #{item_price}
     		</if>
     		<if test="rc_time != null">
-      		and date(r.rc_time) = #{rc_time}
+      			and date(r.rc_time) = #{rc_time}
     		</if>
   		</where>
 	</select>
@@ -112,10 +110,11 @@
  	<select id="searchResultList" resultType="com.itwillbs.domain.ResultDTO">
  		select rs_num, rs_date, sales, consume
  		from result
- 		where rs_date = #{rs_date}
- 		order by rs_num desc
+ 		<where>
+ 			<if test="rs_date != null">
+ 				rs_date = #{rs_date}
+ 			</if>
+ 		</where>
  	</select>
 
 </mapper>
-
-
