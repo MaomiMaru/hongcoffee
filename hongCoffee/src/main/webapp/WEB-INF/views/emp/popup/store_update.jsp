@@ -1,6 +1,6 @@
-<!-- 정규표현식 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -40,11 +40,10 @@ div{
 <div><b>상세주소</b></div><input type="text" id="sample4_detailAddress" value="${storeDTO.address_detail}" name="address_detail" readonly><br>
 <sub></sub>
 <div><b>상태</b></div>
-<select name="state" class="state">
-<option value="100">상태를 선택해주세요</option>
-<option value="0">정상영업</option>
-<option value="1">미영업</option>
-<option value="2">폐업</option>
+<select name="state" class="state" style="width: 177px">
+<option value="0" <c:if test="${storeDTO.state eq '0'}"> selected </c:if>>정상영업</option>
+<option value="1" <c:if test="${storeDTO.state eq '1'}"> selected </c:if>>미영업</option>
+<option value="2" <c:if test="${storeDTO.state eq '2'}"> selected </c:if>>폐업</option>
 </select><br>
 <sub></sub>
 <div><b>적요</b></div><input type="text" name="note"><br>

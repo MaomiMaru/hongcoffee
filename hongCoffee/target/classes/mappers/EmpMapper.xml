@@ -16,9 +16,7 @@
  		select * from store 
  	</select>
  	
-
- 	<select id="getitemList" resultType="com.itwillbs.domain.ItemDTO"> 
-
+ 	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select * from item 
  	</select>
  	
@@ -68,20 +66,50 @@
  		where num = #{num} 	
  	</update>
  	
- 	<update id="orderUpdate">
-		update order a join store b
-		on a.num = b.num
-		join item c
-		on a.item_num = c.item_num
-		set od_amount =#{od_amount}, received_not = #{received_not}
-		where od_num = #{od_num};
- 	</update>
  	
  	<select id="getStore" resultType="com.itwillbs.domain.StoreDTO">
  		select * from store
  		where num = #{num}
  	</select>
  	
+ 	<insert id="itemInsert">
+ 		insert into item(item_num, item_name, item_type, item_price, item_state, item_note)
+ 		values(#{item_num},#{item_name},#{item_type},#{item_price},#{item_state},#{item_note})
+ 	</insert>
+ 	
+ 	<select id="getItem" resultType="com.itwillbs.domain.ItemDTO">
+ 		select * from item
+ 		where item_num = #{item_num}
+ 	</select>
+ 	
+ 	<update id="itemUpdate">
+ 		update item
+ 		set item_name = #{item_name}, item_type = #{item_type}, item_price = #{item_price}, item_state = #{item_state}, item_note = #{item_note}
+ 		where item_num = #{item_num}
+ 	</update>
+ 	
+ 	<select id="getOrder" resultType="com.itwillbs.domain.OrderDTO">
+ 		select a.od_num, a.item_num, a.num, a.od_amount, a.received_not, a.od_note, a.od_time, a.item_num, b.name, c.item_name, c.item_price
+ 		from `order` a join store b
+ 		on a.num = b.num
+ 		join item c
+ 		on a.item_num = c.item_num
+ 		where od_num = #{od_num}
+ 	</select>
+ 	
+ 	<update id="orderUpdate">
+		update `order` a join store b
+		on a.num = b.num
+		join item c
+		on a.item_num = c.item_num
+		set name = #{name}, item_name = #{item_name}, od_amount =#{od_amount}, received_not = #{received_not}, od_time = #{od_time}, ob_note = #{ob_note}
+		where od_num = #{od_num}
+ 	</update>
+ 	
+ 	<insert id="shipmentInsert">
+ 		insert into shipment
+ 		values (#{od_num}, #{num}, #{item_num}, #{sh_amount}, #{sh_time}, #{sh_note})
+ 	</insert>
 
 </mapper>
 

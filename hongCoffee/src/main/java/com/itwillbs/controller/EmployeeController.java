@@ -1,5 +1,9 @@
 package com.itwillbs.controller;
 
+import java.util.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,6 +20,7 @@ import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 import com.itwillbs.service.EmployeeService;
 
@@ -70,22 +75,17 @@ private EmployeeService employeeService;
 			return "/emp/store";
 	}//jijumList
 
-	//2-2. 기준 정보 관리 - 재료 목록
 	//2-2. 재료 관리
 	@GetMapping("/item")
 	public String item(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController item()");
 		
-
-			List<ItemDTO> itemList = employeeService.getitemList();
-
+			List<ItemDTO> itemList = employeeService.getItemList();
 		
 			model.addAttribute("itemList",itemList);
 		
 			return "/emp/item";
-
-		}//jijumList
-
+	}//jijumList
 
 
 	//3. 영업 관리
@@ -184,19 +184,43 @@ private EmployeeService employeeService;
 		return "/emp/popup/item_insert";
 	}
 	
+	@PostMapping("popup/item_insertPro")
+	public String item_insertPro(ItemDTO itemDTO) {
+		System.out.println("EmployeeController item_insertPro()");
+		employeeService.itemInsert(itemDTO);
+		
+		return "redirect:/emp/popup/close";
+	}
+	
 	//2-2-2 재료 관리 - 수정
 	@GetMapping("popup/item_update")
-	public String item_update() {
+	public String item_update(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController item_update()");
+		int item_num = Integer.parseInt(request.getParameter("item_num"));
+		ItemDTO itemDTO = new ItemDTO();
+		itemDTO = employeeService.getItem(item_num);
+		model.addAttribute("itemDTO", itemDTO);
 		
 		return "/emp/popup/item_update";
 	}
 	
-	//3-1-1 영업 관리 - 수정
+	@PostMapping("popup/item_updatePro")
+	public String item_updatePro(ItemDTO itemDTO) {
+		System.out.println("EmployeeController item_updatePro()");
+		employeeService.itemUpdate(itemDTO);
+
+		return "redirect:/emp/popup/close";
+	}
+	
+	
+	//3-1-1 수주 관리 - 수정
 	@GetMapping("popup/order_update")
-	public String order_update() {
+	public String order_update(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController order_update()");
-		
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		OrderDTO orderDTO = new OrderDTO();
+		orderDTO = employeeService.getOrder(od_num);
+		model.addAttribute("orderDTO",orderDTO);
 		return "/emp/popup/order_update";
 	}
 	
@@ -209,24 +233,49 @@ private EmployeeService employeeService;
 	}
 	
 	
-	//3-2-1 출하 관리 - 추가
+	//3-1-2 수주 관리 - 출하 추가
 	@GetMapping("popup/shipment_insert")
-	public String shipment_insert() {
+	public String shipment_insert(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController shipment_insert()");
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		OrderDTO orderDTO = employeeService.getOrder(od_num);
 		
+		model.addAttribute("orderDTO", orderDTO);
+		System.out.println(orderDTO);
 		return "/emp/popup/shipment_insert";
 	}
 	
-	//테이블 나눠지면 진행할 예정
-	/*
+
 	@PostMapping("popup/shipment_insertPro")
-	public String shipment_insertPro() {
+	public String shipment_insertPro(HttpServletRequest request) {
 		System.out.println("EmployeeController shipment_insertPro()");
-		employeeService.shipmentInsert();
+		ShipmentDTO shipmentDTO = new ShipmentDTO();
+		shipmentDTO.setItem_name(request.getParameter("item_name"));
+		shipmentDTO.setItem_num(Integer.parseInt(request.getParameter("item_num")));
+		shipmentDTO.setItem_price(Integer.parseInt(request.getParameter("item_price")));
+		shipmentDTO.setName(request.getParameter("name"));
+		shipmentDTO.setNum(Integer.parseInt(request.getParameter("num")));
+		shipmentDTO.setOd_num(Integer.parseInt(request.getParameter("od_num")));
+		shipmentDTO.setSh_amount(Integer.parseInt(request.getParameter("sh_amount")));
+		shipmentDTO.setSh_note(request.getParameter("sh_note"));
+		
+		String sh_time = request.getParameter("sh_time");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date d;
+		try {
+			d = format.parse(sh_time);
+		} catch (ParseException e) {
+			d = new Date();
+		}
+		Timestamp date = new Timestamp(d.getTime());
+		if(sh_time != null && sh_time != "") shipmentDTO.setSh_time(date);
+		
+		System.out.println(shipmentDTO);
+		employeeService.shipmentInsert(shipmentDTO);
 		
 		return "redirect:/emp/popup/close";
 	}
-	*/
+	
 	
 	//3-2-2 출하 관리 - 수정
 	@GetMapping("popup/shipment_update")

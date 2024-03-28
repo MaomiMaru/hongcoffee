@@ -14,14 +14,14 @@ public class OrderDTO {
 	private String ob_note; //수주적요
 	private String name; //지점명
 	private String item_name; //재료명
-	private String item_price; //단가
+	private int item_price; //단가
 	
 	
 	
-	public String getItem_price() {
+	public int getItem_price() {
 		return item_price;
 	}
-	public void setItem_price(String item_price) {
+	public void setItem_price(int item_price) {
 		this.item_price = item_price;
 	}
 	public String getName() {
@@ -84,4 +84,13 @@ public class OrderDTO {
 	public void setOb_note(String ob_note) {
 		this.ob_note = ob_note;
 	}
+	
+	@Override
+	public String toString() {
+		return "OrderDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", od_amount=" + od_amount
+				+ ", od_time=" + od_time + ", received_not=" + received_not + ", od_note=" + od_note + ", ob_note="
+				+ ob_note + ", name=" + name + ", item_name=" + item_name + ", item_price=" + item_price + "]";
+	}
+	
+	
 }

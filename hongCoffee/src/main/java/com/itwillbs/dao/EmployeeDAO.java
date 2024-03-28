@@ -11,6 +11,7 @@ import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 @Repository
 public class EmployeeDAO {
@@ -29,12 +30,11 @@ public class EmployeeDAO {
 	}//getJijumList()
 	
 	//재료 목록
-	public List<ItemDTO> getitemList() {
-		System.out.println("EmployeesDAO getitemList()");
-
-		return sqlSession.selectList(namespace + ".getitemList");
-	}//getitemList()
-
+	public List<ItemDTO> getItemList() {
+		System.out.println("EmployeesDAO getItemList()");
+		
+		return sqlSession.selectList(namespace + ".getItemList");
+	}//getJeryoList()
 	
 	//수주 목록
 	public List<OrderDTO> getOrderList() {
@@ -99,6 +99,31 @@ public class EmployeeDAO {
 	public StoreDTO getStore(int num) {
 		System.out.println("EmployeeDAO getStore()");
 		return sqlSession.selectOne(namespace+".getStore", num);
+	}
+
+	public void itemInsert(ItemDTO itemDTO) {
+		System.out.println("EmployeeDAO itemInsert()");
+		sqlSession.insert(namespace+".itemInsert", itemDTO);
+	}
+
+	public ItemDTO getItem(int item_num) {
+		System.out.println("EmployeeDAO getItem()");
+		return sqlSession.selectOne(namespace+".getItem", item_num);
+	}
+
+	public void itemUpdate(ItemDTO itemDTO) {
+		System.out.println("EmployeeDAO itemUpdate()");
+		sqlSession.update(namespace+".itemUpdate", itemDTO);
+	}
+
+	public OrderDTO getOrder(int od_num) {
+		System.out.println("EmployeeDAO getOrder()");
+		return sqlSession.selectOne(namespace+".getOrder", od_num);
+	}
+
+	public void shipmentInsert(ShipmentDTO shipmentDTO) {
+		System.out.println("EmployeeDAO shipmentInsert()");
+		sqlSession.insert(namespace+".shipmentInsert", shipmentDTO);
 	}
 
 

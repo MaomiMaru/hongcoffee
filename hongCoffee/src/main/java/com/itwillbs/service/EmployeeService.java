@@ -11,6 +11,7 @@ import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 
 
@@ -35,14 +36,11 @@ public class EmployeeService {
 	}//getJijumList
 	
 	//재료 출력
-
-	public List<ItemDTO> getitemList(){
-		System.out.println("EmployeeService getitemList()");
-
+	public List<ItemDTO> getItemList(){
+		System.out.println("EmployeeService getItemList()");
 		
-		return employeeDAO.getitemList();
-	}//getitemList
-
+		return employeeDAO.getItemList();
+	}//getJeryoList
 	
 	
 	//수주 출력
@@ -70,10 +68,16 @@ public class EmployeeService {
 		return employeeDAO.getEmpList();
 	}//getSawonList
 
+	//팝업=========================================================
 	//지점 추가
 	public void storeInsert(StoreDTO storeDTO) {
 		System.out.println("EmployeeService storeInsert()");
 		employeeDAO.storeInsert(storeDTO);
+	}
+
+	public StoreDTO getStore(int num) {
+		System.out.println("EmployeeService getStore()");
+		return employeeDAO.getStore(num);
 	}
 
 	//지점 수정
@@ -82,23 +86,21 @@ public class EmployeeService {
 		employeeDAO.storeUpdate(storeDTO);
 	}
 
-	//사원 추가
-	public void employeeInsert(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeService employeeInsert()");
-		employeeDAO.employeeInsert(employeeDTO);
+	//재료 추가
+	public void itemInsert(ItemDTO itemDTO) {
+		System.out.println("EmployeeService itemInsert()");
+		employeeDAO.itemInsert(itemDTO);
 	}
 
-	//사원 수정(관리자)
-	public void employeeUpdate1(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeService employeeUpdate_admin()");
-		employeeDAO.employeeUpdate1(employeeDTO);
+	public ItemDTO getItem(int item_num) {
+		System.out.println("EmployeeService getItem()");
+		return employeeDAO.getItem(item_num);
 	}
-
-	//사원 수정(사원)
-	public void employeeUpdate(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeService employeeUpdate()");
-		employeeDAO.employeeUpdate(employeeDTO);
-		
+	
+	//재료 수정
+	public void itemUpdate(ItemDTO itemDTO) {
+		System.out.println("EmployeeService itemInsertPro()");
+		employeeDAO.itemUpdate(itemDTO);
 	}
 
 	//수주 수정
@@ -107,11 +109,37 @@ public class EmployeeService {
 		employeeDAO.orderUpdate(orderDTO);
 	}
 
-
-	public StoreDTO getStore(int num) {
-		System.out.println("EmployeeService getStore");
-		return employeeDAO.getStore(num);
+	//사원 추가
+	public void employeeInsert(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService employeeInsert()");
+		employeeDAO.employeeInsert(employeeDTO);
 	}
+	
+	//사원 수정(관리자)
+	public void employeeUpdate1(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService employeeUpdate_admin()");
+		employeeDAO.employeeUpdate1(employeeDTO);
+	}
+	
+	//사원 수정(사원)
+	public void employeeUpdate(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService employeeUpdate()");
+		employeeDAO.employeeUpdate(employeeDTO);
+		
+	}
+
+	public OrderDTO getOrder(int od_num) {
+		System.out.println("EmployeeService getOrder()");
+		return employeeDAO.getOrder(od_num);
+	}
+
+
+	public void shipmentInsert(ShipmentDTO shipmentDTO) {
+		System.out.println("EmployeeService shipmentInsert()");
+		employeeDAO.shipmentInsert(shipmentDTO);
+	}
+
+
 
 
 
