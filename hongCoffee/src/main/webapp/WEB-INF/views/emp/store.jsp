@@ -98,6 +98,33 @@ th, td {
 
 tr:hover {background-color: #F0F0F0;}
 /* 목록 스타일 끝 */
+
+
+/* 라디오 스타일 */
+ input[type=radio]{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  outline:0;
+  box-shadow:none;
+  border:none;
+}
+label input[type=radio]:after{
+  content:'';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
+  border:1px solid #8b8b8b;
+  border-radius:100%;
+  vertical-align:middle;
+  cursor:pointer;
+}
+label input[type=radio]:checked:after{
+  background: url('https://lostinyou4.github.io/leesm/study/images/radio_check.png') 0 0 no-repeat;
+  background-size: contain;
+  border:1px #fff;
+}
 </style>
 <head>
   <!-- Required meta tags -->
@@ -200,7 +227,7 @@ tr:hover {background-color: #F0F0F0;}
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">지점번호</th>
+    		<th style=" font-size:20px !important; color: black;">선택</th>
     		<th style=" font-size:20px !important; color: black;">지점명</th>
     		<th style=" font-size:20px !important; color: black;">대표자명</th>
     		<th style=" font-size:20px !important; color: black;">연락처</th>
@@ -210,7 +237,7 @@ tr:hover {background-color: #F0F0F0;}
  		 </tr>
  		 <c:forEach var="StoreDTO" items="${storeList}">
   <tr >
-    <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.num}</td>
+  <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.boss}</td>
     <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>

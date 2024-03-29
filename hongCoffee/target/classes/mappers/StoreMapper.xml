@@ -24,7 +24,7 @@
  	</select>
 
 	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
- 		select o.od_num, t.item_name, t.item_price, o.od_time, o.received_not
+ 		select t.item_name, o.od_amount, t.item_price, o.od_time, o.received_not
  		from `order` o join item t on o.item_num = t.item_num
  	</select>
  	
@@ -34,8 +34,27 @@
  	</select>
 
 	 <select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
-		select rs_num, rs_date, sales, consume
-		from result
+		select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (sum((r.sales*p.prod_price))-sum((r.consume*i.item_price))) "income"
+		from result r left join product p
+		on r.prod_num = p.prod_num
+		left join stock s on r.stock_num = s.stock_num
+		left join item i on s.item_num = i.item_num
+		where r.num = 1
+		group by r.rs_date;
+ 	</select>
+ 	
+ 	<select id="getSomoList" resultType="com.itwillbs.domain.ResultDTO"> 
+		select r.rs_date, i.item_name, r.consume, i.item_price
+		from result r join stock s on r.stock_num = s.stock_num
+		join item i on s.item_num = i.item_num
+		order by r.rs_date; 
+ 	</select>
+
+        
+    <select id="getPanmeList" resultType="com.itwillbs.domain.ResultDTO"> 
+	    select r.rs_date , p.prod_name, r.sales, p.prod_price
+        from result r join product p on r.prod_num = p.prod_num
+        order by r.rs_date; 
  	</select>
 
 </mapper>

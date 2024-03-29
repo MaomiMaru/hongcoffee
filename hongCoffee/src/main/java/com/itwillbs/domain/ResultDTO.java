@@ -11,7 +11,56 @@ public class ResultDTO {
 	private Timestamp rs_date; //영업일
 	private int sales;//판매량
 	private int consume;//판매량
+	private String item_name; //재료명
+	private int item_price; //단가
+	private int maechul; //판매량 * 판매가 = 매출
+	private int jichul; //소모량 * 단가 = 소모가
+	private int income; //매출 - 소모가 = 순수익
+	private String prod_name; //상품명
+	private int prod_price; //판매가
 	
+	public String getProd_name() {
+		return prod_name;
+	}
+	public void setProd_name(String prod_name) {
+		this.prod_name = prod_name;
+	}
+	public int getProd_price() {
+		return prod_price;
+	}
+	public void setProd_price(int prod_price) {
+		this.prod_price = prod_price;
+	}
+	public int getMaechul() {
+		return maechul;
+	}
+	public void setMaechul(int maechul) {
+		this.maechul = maechul;
+	}
+	public int getJichul() {
+		return jichul;
+	}
+	public void setJichul(int jichul) {
+		this.jichul = jichul;
+	}
+	public int getIncome() {
+		return income;
+	}
+	public void setIncome(int income) {
+		this.income = income;
+	}
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+	public int getItem_price() {
+		return item_price;
+	}
+	public void setItem_price(int item_price) {
+		this.item_price = item_price;
+	}
 	public int getSales() {
 		return sales;
 	}

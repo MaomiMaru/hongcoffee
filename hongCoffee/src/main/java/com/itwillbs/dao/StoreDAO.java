@@ -52,6 +52,22 @@ public class StoreDAO {
 		
 		return sqlSession.selectList(namespace + ".getReceiveList");
 	}//getReceiveList
+	
+	//소모 목록
+	public List<ResultDTO> getSomoList() {
+		System.out.println("StoreDAO getSomoList()");
+		
+		return sqlSession.selectList(namespace + ".getSomoList");
+	}//getSomoList
+	
+
+	
+	//판매 목록
+		public List<ResultDTO> getPanmeList() {
+			System.out.println("StoreDAO getPanmeList()");
+			
+			return sqlSession.selectList(namespace + ".getPanmeList");
+		}//getPanmeList
 
 	//실적 목록
 	public List<ResultDTO> getResultList() {

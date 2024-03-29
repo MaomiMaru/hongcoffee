@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -186,33 +187,34 @@ tr:hover {background-color: #F0F0F0;}
 
 		<hr>
    	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">재료 목록</h3></div>
-		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button style="background-color: black; color: #EFBDBC">추가</button>
-		<button style="background-color: black; color: #EFBDBC">수정</button>
-		<button style="background-color: black; color: #EFBDBC">삭제</button></div>
+<!-- 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">재료 목록</h3></div> -->
+<!-- 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" > -->
+<!-- 		<button style="background-color: black; color: #EFBDBC">추가</button> -->
+<!-- 		<button style="background-color: black; color: #EFBDBC">수정</button> -->
+<!-- 		<button style="background-color: black; color: #EFBDBC">삭제</button></div> -->
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">재료번호</th>
+  			<th style=" font-size:20px !important; color: black;">유형</th>
     		<th style=" font-size:20px !important; color: black;">재료명</th>
-    		<th style=" font-size:20px !important; color: black;">유형</th>
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">재료상태</th>
  		 </tr>
  		 <c:forEach var="ItemDTO" items="${itemList}">
   <tr>
-    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_num}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
-   		<c:if test="${ItemDTO.item_type eq 0}">
-   	  		<td style="text-align: center !important; font-size:20px !important;">식품</td>
+  <c:if test="${ItemDTO.item_type eq 0}">
+   	  		<td style="text-align: center !important; font-size:20px !important; color:#4E342E;">식품</td>
    	  	</c:if>
    	  	 <c:if test="${ItemDTO.item_type eq 1}">
-   	  		<td style="text-align: center !important; font-size:20px !important;">비식품</td>
+   	  		<td style="text-align: center !important; font-size:20px !important; color:#FF3D00;">비식품</td>
    	  	</c:if>
-    <td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_price}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
+   
+    <td style="text-align: center !important; font-size:20px !important;">
+    <fmt:formatNumber value="${ItemDTO.item_price}" pattern="#,###"></fmt:formatNumber>
+    </td>
    <c:if test="${ItemDTO.item_state eq 0}">
       <td style="text-align: center !important; font-size:20px !important; color:green; ">취급</td>
   	</c:if>

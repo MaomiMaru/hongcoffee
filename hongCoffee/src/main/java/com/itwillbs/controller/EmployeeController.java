@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
-import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 import com.itwillbs.service.EmployeeService;
 
@@ -107,7 +107,7 @@ private EmployeeService employeeService;
 	public String shipment(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController shipment()");
 		
-			List<ReceiveDTO> shipmentList = employeeService.getShipmentList();
+			List<ShipmentDTO> shipmentList = employeeService.getShipmentList();
 		
 			model.addAttribute("shipmentList",shipmentList);
 		

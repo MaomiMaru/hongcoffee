@@ -115,7 +115,33 @@ public String itemList(HttpServletRequest request, Model model) {
 	}//receiveList
 
 
+	
+	//4. 영업 관리 - 소모 관리
+	@GetMapping("/store/somo")
+	public String somoList(HttpServletRequest request, Model model) {
+			System.out.println("result");
+			
+			List<ResultDTO> somoList = storeService.getSomoList();
+			
+			model.addAttribute("somoList",somoList);
+			
+			return "store/somo";
+	}//somoList
+	
 
+	
+	//4. 영업 관리 - 소모 관리
+	@GetMapping("/store/panme")
+	public String panmeList(HttpServletRequest request, Model model) {
+			System.out.println("result");
+			
+			List<ResultDTO> panmeList = storeService.getPanmeList();
+			
+			model.addAttribute("panmeList",panmeList);
+			
+			return "store/panme";
+	}//panmeList
+	
 	//4. 영업 관리 - 실적 관리
 	@GetMapping("/store/result")
 	public String resultList(HttpServletRequest request, Model model) {

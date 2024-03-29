@@ -49,7 +49,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 60px;
+	padding-top: 110px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -151,8 +151,12 @@ label input[type=radio]:checked:after{
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
 
+
+
 		<!--     include top -->
 		<jsp:include page="inc/top.jsp"/>
+		
+		
 		
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
@@ -176,75 +180,65 @@ label input[type=radio]:checked:after{
         </div>
       </div>
 
-            <!-- partiala -->
+            <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
 
-      
-      <!--     include left -->
+     
+     
+     <!--     include left -->
 		<jsp:include page="inc/left.jsp"/>
-  
+      
+      
+     
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>입고 관리</h2>
+		<h2>소모 관리</h2>
 		
 		<form action="">
 			<div id="search">
 				<ul>
-					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text"></div></li>
-						
-					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text"></div></li>
-						
-					<li><div class="search_div"><label class="search_name"><b>입고일시</b></label>
+					<li><div class="search_div"><label class="search_name"><b>등록일</b></label>
 						<input type="text">
 						
-						<span class="button"><button type="button" style="background-color: black; color: #EFBDBC">조회</button></span></div>	</li>
+						<span class="button"><button type="button" style="background-color: black; color: #EFBDBC">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
 
 		<hr>
    	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">입고 목록</h3></div>
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">소모 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button style="background-color: black; color: #EFBDBC">추가</button>
 		<button style="background-color: black; color: #EFBDBC">수정</button>
-		<button style="background-color: black; color: #EFBDBC">삭제</button></div>
+<!-- 		<button style="background-color: black; color: #EFBDBC">삭제</button> -->
+		</div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
     		<th style=" font-size:20px !important; color: black;">선택</th>
+    		<th style=" font-size:20px !important; color: black;">등록일</th>
     		<th style=" font-size:20px !important; color: black;">재료명</th>
-    		<th style=" font-size:20px !important; color: black;">입고수량</th>
+    		<th style=" font-size:20px !important; color: black;">소모량</th>
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">총금액</th>
-    		<th style=" font-size:20px !important; color: black;">입고일시</th>
-    		<th style=" font-size:20px !important; color: black;">결제여부</th>
  		 </tr>
- 		 <c:forEach var="ReceiveDTO" items="${receiveList}">
+ 		 <c:forEach var="ResultDTO" items="${somoList}">
   <tr>
 <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_amount}</td>
-    <td style="text-align: center !important; font-size:20px !important;">
-    <fmt:formatNumber value="${ReceiveDTO.item_price}" pattern="#,###"></fmt:formatNumber>
-    </td>
+   	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${ResultDTO.rs_date}" pattern="yyyy.MM.dd"/></td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.item_name}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${ResultDTO.consume}</td>
    	<td style="text-align: center !important; font-size:20px !important;">
-   	<fmt:formatNumber value="${ReceiveDTO.item_price * ReceiveDTO.rc_amount}" pattern="#,###"></fmt:formatNumber>
+   	<fmt:formatNumber value="${ResultDTO.item_price}" pattern="#,###"></fmt:formatNumber>
    	</td>
-   	   	 <td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${ReceiveDTO.rc_time}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
-   	<c:if test="${ReceiveDTO.pay eq 0}">
-      <td style="text-align: center !important; font-size:20px !important; color:red; ">미결제</td>
-  	</c:if>
-  	 <c:if test="${ReceiveDTO.pay eq 1}">
-      <td style="text-align: center !important; font-size:20px !important; color:red; ">결제완료</td>
-  	</c:if>
-   	
- 	</tr>
+  	<td style="text-align: center !important; font-size:20px !important;">
+  	<fmt:formatNumber value="${ResultDTO.consume * ResultDTO.item_price}" pattern="#,###"></fmt:formatNumber>
+  	</td>
+  </tr>
   		</c:forEach>
   
  		 </table>
@@ -254,8 +248,7 @@ label input[type=radio]:checked:after{
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
-        
-        <!--     include bottom -->
+         <!--     include bottom -->
 		<jsp:include page="inc/bottom.jsp"/>
 
         <!-- partial -->

@@ -11,6 +11,7 @@ import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 @Repository
 public class EmployeeDAO {
@@ -44,7 +45,7 @@ public class EmployeeDAO {
 	}//getSujuList()
 	
 	//출하 목록
-	public List<ReceiveDTO> getShipmentList() {
+	public List<ShipmentDTO> getShipmentList() {
 		System.out.println("EmployeesDAO getShipmentList()");
 		
 		return sqlSession.selectList(namespace + ".getShipmentList");

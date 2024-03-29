@@ -10,7 +10,7 @@ import com.itwillbs.dao.EmployeeDAO;
 import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
-import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 
 
@@ -55,7 +55,7 @@ public class EmployeeService {
 	
 	
 	//출하 출력
-	public List<ReceiveDTO> getShipmentList(){
+	public List<ShipmentDTO> getShipmentList(){
 		System.out.println("EmployeeService getChulList()");
 		
 		return employeeDAO.getShipmentList();

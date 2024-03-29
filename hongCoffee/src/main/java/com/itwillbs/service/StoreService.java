@@ -47,7 +47,7 @@ public class StoreService {
 		return storeDAO.getOrderList();
 	}//getOrderList
 	
-
+	
 	
 	//입고 출력
 	public List<ReceiveDTO> getReceiveList(){
@@ -57,6 +57,20 @@ public class StoreService {
 	}//getReceiveList
 	
 	
+	//소모 출력
+	public List<ResultDTO> getSomoList(){
+		System.out.println("StoreService getSomoList()");
+		
+		return storeDAO.getSomoList();
+	}//getSomoList
+
+	//판매 출력
+	public List<ResultDTO> getPanmeList(){
+		System.out.println("StoreService getPanmeList()");
+		
+		return storeDAO.getPanmeList();
+	}//getPanmeList
+
 	
 	//실적 출력
 	public List<ResultDTO> getResultList(){

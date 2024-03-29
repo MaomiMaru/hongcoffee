@@ -149,6 +149,8 @@ input[type=text]{
             </a>
             <div class="collapse" id="charts">
               <ul class="nav flex-column sub-menu">
+              	<li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/somo">소모 관리</a></li>
+              	<li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/panme">판매 관리</a></li>
                 <li class="nav-item"> <a class="nav-link" href="${pageContext.request.contextPath}/store/result">실적 관리</a></li>
               </ul>
             </div>

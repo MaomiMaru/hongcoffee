@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -98,6 +99,32 @@ th, td {
 
 tr:hover {background-color: #F0F0F0;}
 /* 목록 스타일 끝 */
+
+/* 라디오 스타일 */
+ input[type=radio]{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  outline:0;
+  box-shadow:none;
+  border:none;
+}
+label input[type=radio]:after{
+  content:'';
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-left: 3px;
+  border:1px solid #8b8b8b;
+  border-radius:100%;
+  vertical-align:middle;
+  cursor:pointer;
+}
+label input[type=radio]:checked:after{
+  background: url('https://lostinyou4.github.io/leesm/study/images/radio_check.png') 0 0 no-repeat;
+  background-size: contain;
+  border:1px #fff;
+}
 </style>
 <head>
   <!-- Required meta tags -->
@@ -199,20 +226,28 @@ tr:hover {background-color: #F0F0F0;}
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">거래번호</th>
+    		<th style=" font-size:20px !important; color: black;">선택</th>
     	
     		<th style=" font-size:20px !important; color: black;">재료명</th>
+    		<th style=" font-size:20px !important; color: black;">발주량</th>
     		<th style=" font-size:20px !important; color: black;">단가</th>
+    		<th style=" font-size:20px !important; color: black;">총금액</th>
     		<th style=" font-size:20px !important; color: black;">발주일시</th>
     		<th style=" font-size:20px !important; color: black;">입고여부</th>
  		 </tr>
  		 <c:forEach var="OrderDTO" items="${orderList}">
   <tr>
-    <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_num}</td>
+  <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
 
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
-    <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_price}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_time}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_amount}</td>
+    <td style="text-align: center !important; font-size:20px !important;">
+    <fmt:formatNumber value="${OrderDTO.item_price}" pattern="#,###"></fmt:formatNumber>
+    </td>
+   	<td style="text-align: center !important; font-size:20px !important;">
+   	<fmt:formatNumber value="${OrderDTO.item_price * OrderDTO.od_amount}" pattern="#,###"></fmt:formatNumber>
+   	</td>
+   	 <td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${OrderDTO.od_time}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
 	<c:if test="${OrderDTO.received_not eq 0}">
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미입고</td>
   	</c:if>

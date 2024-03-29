@@ -43,10 +43,6 @@
   	background: #EFBDBC !important;
 }
 
-#search {
-	height: 300px;
-	margin: 0 auto;
-}
 
 ul{
 	list-style:none;
@@ -54,25 +50,31 @@ ul{
 
 #search {
 	height: 250px;
+	padding-top: 32px;
 	width: 100%;
 	border: 1px solid black;
 }
 
-.name {
+.search_name {
 	width: 100px;
-	margin: 35px 0 20px 50px;
 	text-align: left;
 	font-size: 15px;
+	font-weight: bold;
+}
+
+.search_div {
+ 	margin: 0 0 0 50px;
 }
 
 .choose {
 	width: 300px;
-		font-size: 15px;
+	height: 29.63px;
+	font-size: 15px;
 }
 
 #search li {
 	width: 600px;
-	height: 50px;
+	height: 30px;
 }
 
 input[type=text]{
@@ -125,7 +127,7 @@ label input[type=radio]:checked:after{
   border:1px #fff;
 }
 
-/* 목록 스타일 끝 */
+
 </style>
 <head>
   <!-- Required meta tags -->
@@ -240,23 +242,23 @@ label input[type=radio]:checked:after{
 		<form action="">
 			<div id="search">
 				<ul>
-					<li><label class="name">부서</label>
+					<li><div class="search_div"><label class="search_name">부서</label>
 					<select class="choose">
 					<option value="">-----------------------------------------------</option>
 					<option value="인사">인사</option>
-					<option value="관리">관리</option></select></li>
+					<option value="관리">관리</option></select></div></li>
 				
-					<li><label class="name">직급</label>
+					<li><div class="search_div"><label class="search_name">직급</label>
 					<select class="choose">
 					<option value="">-----------------------------------------------</option>
 					<option>사원</option>
-					<option>관리</option></select></li>
+					<option>관리</option></select></div></li>
 				
-				<li><label class="name">사원번호</label>
-					<input type="text"></li>
-				<li><label class="name">사원이름</label>
-					<input type="text">
-					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></li>
+				<li><div class="search_div"><label class="search_name">사원번호</label>
+					<input type="text" style="color: black !important;"></div></li>
+				<li><div class="search_div"><label class="search_name">사원이름</label>
+					<input type="text" style="color: black !important;">
+					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
@@ -280,7 +282,10 @@ label input[type=radio]:checked:after{
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-    		<th style=" font-size:20px !important; color: black;">선택</th>
+  				<c:if test="${sessionScope.emp_right eq 1 }">
+ 		<th style=" font-size:20px !important; color: black;">선택</th>
+ 				</c:if>
+    
     		<th style=" font-size:20px !important; color: black;">사원번호</th>
     		<th style=" font-size:20px !important; color: black;">이름</th>
     		<th style=" font-size:20px !important; color: black;">생년월일</th>
@@ -294,12 +299,44 @@ label input[type=radio]:checked:after{
  		 </tr>
  		 <c:forEach var="EmployeeDTO" items="${empList}">
   <tr>
+  		<c:if test="${sessionScope.emp_right eq 1 }">
     <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+ 		</c:if>
+ 				<c:if test="${sessionScope.emp_right eq 0 }">
+ 		
+ 				</c:if>
     <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_name}</td>
    	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${EmployeeDTO.emp_birth}" pattern="yyyy.MM.dd"/></td>
-    <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_dept}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_rank}</td>
+    <c:if test="${EmployeeDTO.emp_dept eq 0}">
+    <td style="text-align: center !important; font-size:20px !important;">소속없음</td>
+    </c:if>
+        <c:if test="${EmployeeDTO.emp_dept eq 1}">
+    <td style="text-align: center !important; font-size:20px !important;">인사팀</td>
+    </c:if>
+        <c:if test="${EmployeeDTO.emp_dept eq 2}">
+    <td style="text-align: center !important; font-size:20px !important;">영업팀</td>
+    </c:if>
+        <c:if test="${EmployeeDTO.emp_dept eq 3}">
+    <td style="text-align: center !important; font-size:20px !important;">재무팀</td>
+    </c:if>
+    
+         <c:if test="${EmployeeDTO.emp_rank eq 0}">
+    <td style="text-align: center !important; font-size:20px !important;">직급없음</td>
+    </c:if>
+        <c:if test="${EmployeeDTO.emp_rank eq 1}">
+    <td style="text-align: center !important; font-size:20px !important;">대표</td>
+    </c:if>
+        <c:if test="${EmployeeDTO.emp_rank eq 2}">
+    <td style="text-align: center !important; font-size:20px !important;">팀장</td>
+    </c:if>
+        <c:if test="${EmployeeDTO.emp_rank eq 3}">
+    <td style="text-align: center !important; font-size:20px !important;">대리</td>
+    </c:if>
+        <c:if test="${EmployeeDTO.emp_rank eq 4}">
+    <td style="text-align: center !important; font-size:20px !important;">사원</td>
+    </c:if>
+   	
    	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${EmployeeDTO.emp_right eq 1}">관리자</c:if>
    		<c:if test="${EmployeeDTO.emp_right eq 0}">일반</c:if></td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_phone}</td>
