@@ -23,12 +23,21 @@ public class StoreService {
 	
 	//재료 출력
 
-			public List<ItemDTO> getitemList(){
-				System.out.println("StoreService getitemList()");
+	public List<ItemDTO> getItemList(){
+		System.out.println("StoreService getItemList()");
+
 				
-				return storeDAO.getitemList();
-			}//getitemList
+		return storeDAO.getItemList();
+	}//getItemList
 	
+
+
+	//재료 필터링 출력
+	public List<ItemDTO> searchItemList(ItemDTO itemDTO) {
+		System.out.println("StoreService searchItemList()");
+				
+		return storeDAO.searchItemList(itemDTO);
+	}//searchItemList	
 
 	
 	//재고 출력
@@ -38,7 +47,12 @@ public class StoreService {
 		return storeDAO.getStockList();
 	}//getStockList
 	
-	
+	//재고 필터링 출력
+	public List<StockDTO> searchStockList(StockDTO stockDTO) {
+		System.out.println("StoreService searchStockList(()");
+					
+		return storeDAO.searchStockList(stockDTO);
+	}//searchStockList
 	
 	//발주 출력
 	public List<OrderDTO> getOrderList(){
@@ -47,7 +61,14 @@ public class StoreService {
 		return storeDAO.getOrderList();
 	}//getOrderList
 	
-	
+
+	//발주 필터링 출력
+	public List<OrderDTO> searchOrderList(OrderDTO orderDTO) {
+		System.out.println("StoreService searchOrderList()");
+		
+		return storeDAO.searchOrderList(orderDTO);
+	}//searchOrderList
+
 	
 	//입고 출력
 	public List<ReceiveDTO> getReceiveList(){
@@ -56,6 +77,7 @@ public class StoreService {
 		return storeDAO.getReceiveList();
 	}//getReceiveList
 	
+
 	
 	//소모 출력
 	public List<ResultDTO> getSomoList(){
@@ -71,6 +93,14 @@ public class StoreService {
 		return storeDAO.getPanmeList();
 	}//getPanmeList
 
+
+	//입고 필터링 출력
+	public List<ReceiveDTO> searchReceiveList(ReceiveDTO receiveDTO) {
+		System.out.println("StoreService searchReceiveList()");
+			
+		return storeDAO.searchReceiveList(receiveDTO);
+	}//searchReceiveList	
+
 	
 	//실적 출력
 	public List<ResultDTO> getResultList(){
@@ -78,6 +108,7 @@ public class StoreService {
 		
 		return storeDAO.getResultList();
 	}//getResultList
+
 
 	
 	//로그인
@@ -88,6 +119,15 @@ public class StoreService {
 
 
 
+
+
+	
+	//실적 필터링 출력
+	public List<ResultDTO> searchResultList(ResultDTO resultDTO) {
+		System.out.println("StoreService searchResultList()");
+			
+		return storeDAO.searchResultList(resultDTO);
+	}//searchResultList
 
 
 }

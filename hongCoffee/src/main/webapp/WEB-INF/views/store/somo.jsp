@@ -78,6 +78,7 @@ ul{
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
+	    color: black !important;
 }
 
 .button{

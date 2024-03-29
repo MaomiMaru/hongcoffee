@@ -7,12 +7,19 @@ public class StockDTO {
 	private int stock_num; //물품번호 PK,FK(item테이블 참조)
 	private int num; //지점 번호(
 	private String item_name; //물품명
-	private String item_type; //유형
+	private int item_type; //유형
 	private int amount; //보유량
 	private int item_price; //단가
 	private String stock_note; //재고 적요
 	private int item_state; //재료상태
 
+	@Override
+	public String toString() {
+		return "StockDTO [stock_num=" + stock_num + ", num=" + num + ", item_name=" + item_name + ", item_type="
+				+ item_type + ", amount=" + amount + ", item_price=" + item_price + ", stock_note=" + stock_note
+				+ ", item_state=" + item_state + "]";
+	}
+	
 	public int getItem_price() {
 		return item_price;
 	}
@@ -43,10 +50,10 @@ public class StockDTO {
 	public void setItem_name(String item_name) {
 		this.item_name = item_name;
 	}
-	public String getItem_type() {
+	public int getItem_type() {
 		return item_type;
 	}
-	public void setItem_type(String item_type) {
+	public void setItem_type(int item_type) {
 		this.item_type = item_type;
 	}
 	public int getAmount() {

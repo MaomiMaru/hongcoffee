@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
      <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -78,6 +80,13 @@ ul{
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
+	    color: black !important;
+}
+
+input[type=date]{
+	width: 300px;
+	margin-bottom: 10px;
+	
 }
 
 .button{
@@ -188,19 +197,21 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>입고 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/store/receiveSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="item_price"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고일시</b></label>
-						<input type="text">
+						<input type="date" name="rc_time" max="9999-12-31">
 						
-						<span class="button"><button type="button" style="background-color: black; color: #EFBDBC">조회</button></span></div>	</li>
+
+						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div>	</li>
+
 				</ul>	
 			</div>
 		</form>
@@ -230,6 +241,7 @@ label input[type=radio]:checked:after{
 <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_amount}</td>
+
     <td style="text-align: center !important; font-size:20px !important;">
     <fmt:formatNumber value="${ReceiveDTO.item_price}" pattern="#,###"></fmt:formatNumber>
     </td>
@@ -244,6 +256,7 @@ label input[type=radio]:checked:after{
       <td style="text-align: center !important; font-size:20px !important; color:red; ">결제완료</td>
   	</c:if>
    	
+
  	</tr>
   		</c:forEach>
   

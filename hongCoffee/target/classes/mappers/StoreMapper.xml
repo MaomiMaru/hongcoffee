@@ -7,31 +7,113 @@
 <!--        => boardMapper 파일 => xml 파일이름  -->
 <mapper namespace="com.itwillbs.mappers.StoreMapper">
 
+
 	<select id="userCheck" resultType="com.itwillbs.domain.StoreDTO">
 		select * from store
 		where num = #{num} and pw = #{pw}
 	</select>
 
 
-	<select id="getitemList" resultType="com.itwillbs.domain.ItemDTO"> 
+	<select id="getitemList" resultType="com.itwillbs.domain.ItemDTO">
 
  		select * from item 
+</select> 
+	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
+ 		select item_num, item_name, item_type, item_price, item_state, item_note
+ 		from item 
+
  	</select>
+ 	
+ 	<select id="searchItemList" resultType="com.itwillbs.domain.ItemDTO">
+		select item_num, item_name, item_type, item_price, item_state, item_note from item
+		<where>
+			<if test="item_type != 100">
+				item_type = #{item_type}
+				<if test="item_name != null">
+					and item_name like concat('%', #{item_name}, '%')
+				</if>
+				<if test="item_price != 0">
+					and item_price = #{item_price}
+				</if>
+			</if>
+			<if test="item_type == 100">
+				<if test="item_name != null">
+					item_name like concat('%', #{item_name}, '%')
+				</if>
+				<if test="item_price != 0">
+					and item_price = #{item_price}
+				</if>
+			</if>
+		</where>
+	</select>
 
 	<select id="getStockList" resultType="com.itwillbs.domain.StockDTO"> 
  		select s.stock_num, t.item_type, t.item_name, t.item_price, s.amount, t.item_state
  		from stock s join item t on s.item_num = t.item_num
  	</select>
+ 	
+ 	<select id="searchStockList" resultType="com.itwillbs.domain.StockDTO">
+		select s.stock_num, t.item_type, t.item_name, t.item_price, s.amount, t.item_state
+ 		from stock s join item t on s.item_num = t.item_num
+
+		<where>
+			<if test="item_type != 100">
+				t.item_type = #{item_type}
+			</if>	
+			<if test="item_price != 0">
+				and t.item_price = #{item_price}
+			</if>
+			<if test="item_name != null">
+				and t.item_name like concat('%', #{item_name}, '%')
+			</if>
+		</where>
+	</select>
 
 	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
  		select t.item_name, o.od_amount, t.item_price, o.od_time, o.received_not
  		from `order` o join item t on o.item_num = t.item_num
  	</select>
  	
+ 	<select id="searchOrderList" resultType="com.itwillbs.domain.OrderDTO">
+ 		select o.od_num, t.item_name, t.item_price, o.od_time, o.received_not
+ 		from `order` o join item t on o.item_num = t.item_num
+ 		<where>
+ 			<if test="item_name != ''">
+     			t.item_name like concat('%', #{item_name}, '%')
+    		</if>
+    		<if test="item_price != 0">
+      			and t.item_price = #{item_price}
+    		</if>
+    		<if test="od_time != null">
+      			and date(o.od_time) = #{od_time}
+    		</if>
+    		<if test="received_not != 100">
+    			and o.received_not = #{received_not}
+    		</if>
+ 		</where>
+ 	</select>
+ 	
  	<select id="getReceiveList" resultType="com.itwillbs.domain.ReceiveDTO"> 
 		select r.od_num, t.item_name, r.rc_amount, t.item_price, r.rc_time, r.pay
 		from receive r join item t on r.item_num = t.item_num
  	</select>
+ 	
+ 	<select id="searchReceiveList" resultType="com.itwillbs.domain.ReceiveDTO">
+  		select r.od_num, t.item_name, r.rc_amount, t.item_price, r.rc_time, r.pay
+  		from receive r join item t on r.item_num = t.item_num
+  		<where>
+    		<if test="item_name != ''">
+     			t.item_name like concat('%', #{item_name}, '%')
+    		</if>
+    		<if test="item_price != 0">
+      			and t.item_price = #{item_price}
+    		</if>
+    		<if test="rc_time != null">
+      			and date(r.rc_time) = #{rc_time}
+    		</if>
+  		</where>
+	</select>
+
 
 	 <select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
 		select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (sum((r.sales*p.prod_price))-sum((r.consume*i.item_price))) "income"
@@ -55,8 +137,17 @@
 	    select r.rs_date , p.prod_name, r.sales, p.prod_price
         from result r join product p on r.prod_num = p.prod_num
         order by r.rs_date; 
+</select>
+
+ 	
+ 	<select id="searchResultList" resultType="com.itwillbs.domain.ResultDTO">
+ 		select rs_num, rs_date, sales, consume
+ 		from result
+ 		<where>
+ 			<if test="rs_date != null">
+ 				rs_date = #{rs_date}
+ 			</if>
+ 		</where>
  	</select>
 
 </mapper>
-
-

@@ -65,7 +65,10 @@ ul{
 .search_div {
  	margin: 0 0 0 50px;
 }
+input[type=text] {
 
+    color: black !important;
+}
 .choose {
 	width: 300px;
 	height: 29.63px;
@@ -78,6 +81,11 @@ ul{
 }
 
 input[type=text]{
+	width: 300px;
+	margin-bottom: 10px;
+}
+
+input[type=date]{
 	width: 300px;
 	margin-bottom: 10px;
 }
@@ -193,19 +201,21 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>출하 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/emp/shipmentSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>출하일시</b></label>
-						<input type="text">
+						<input type="date" name="rc_time" max="9999-12-31">
 						
-						<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+
+						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+
 				</ul>	
 			</div>
 		</form>

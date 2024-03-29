@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
      <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -79,6 +80,8 @@ ul{
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
+	    color: black !important;
+	
 }
 
 .button{
@@ -164,23 +167,25 @@ tr:hover {background-color: #F0F0F0;}
         <div class="content-wrapper">
 		<h2>재료 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/store/itemSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>유형</b></label>
-						<select class="choose">
-							<option value="">-----------------------------------------------</option>
-							<option value="식품">식품</option>
-							<option value="비식품">비식품</option>
+						<select class="choose" name="item_type">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">식품</option>
+							<option value="1">비식품</option>
 						</select></div></li>
 				
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text">
+						<input type="text" name="item_price">
 						
-						<span class="button"><button type="button" style="background-color: black; color: #EFBDBC">조회</button></span></div></li>
+
+						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+
 				</ul>	
 			</div>
 		</form>
@@ -211,6 +216,7 @@ tr:hover {background-color: #F0F0F0;}
    	  		<td style="text-align: center !important; font-size:20px !important; color:#FF3D00;">비식품</td>
    	  	</c:if>
    	<td style="text-align: center !important; font-size:20px !important;">${ItemDTO.item_name}</td>
+
    
     <td style="text-align: center !important; font-size:20px !important;">
     <fmt:formatNumber value="${ItemDTO.item_price}" pattern="#,###"></fmt:formatNumber>
@@ -222,6 +228,7 @@ tr:hover {background-color: #F0F0F0;}
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미취급</td>
   	</c:if>
  
+
   </tr>
   		</c:forEach>
   

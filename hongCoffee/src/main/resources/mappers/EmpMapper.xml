@@ -16,14 +16,79 @@
  		select * from store 
  	</select>
  	
+
+ 	<select id="searchStoreList" resultType="com.itwillbs.domain.StoreDTO">
+ 		select * from store 
+ 		<where>
+ 		<if test="name != ''">
+ 			name like concat ('%', #{name}, '%')
+ 		</if>
+ 		<if test="boss != ''">
+ 			and boss like concat ('%', #{boss}, '%')
+ 		</if>
+ 		<if test="address != ''">
+			and address like concat ('%', #{address}, '%')
+ 		</if>
+ 		<if test="phone != ''">
+ 			and phone like concat ('%', #{phone}, '%')
+ 		</if>
+ 		<if test="state != 100">
+ 			and state = #{state}
+ 		</if>
+ 		</where>
+ 	</select>
+ 	
+
  	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select * from item 
  	</select>
  	
+ 	<select id="searchItemList" resultType="com.itwillbs.domain.ItemDTO">
+	select item_num, item_name, item_type, item_price, item_state, item_note from item
+		<where>
+		<if test="item_type != 100">
+				item_type = #{item_type}
+			<if test="item_name != null"> and item_name like concat('%', #{item_name}, '%')
+			</if>
+			<if test="item_price != 0"> and item_price = #{item_price}
+			</if>
+		</if>
+		<if test="item_type == 100">
+			<if test="item_name != null"> item_name like concat('%', #{item_name}, '%')
+			</if>
+			<if test="item_price != 0"> and item_price = #{item_price}
+			</if>
+		</if>
+		</where>
+	</select>
+ 	
  	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
  		select s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.received_not  
  		from `order` o join store s on o.num = s.num 
- 		join item i on o.item_num = i.item_num;
+ 		join item i on o.item_num = i.item_num
+ 	</select>
+ 	
+ 	<select id="searchOrderList" resultType="com.itwillbs.domain.OrderDTO">
+ 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.received_not 
+ 		from `order` o join store s on o.num = s.num 
+ 		join item i on o.item_num = i.item_num
+ 		<where>
+ 			<if test="name != ''">
+     			s.name like concat('%', #{name}, '%')
+    		</if>
+    		<if test="item_name != ''">
+      			and i.item_name like concat('%', #{item_name}, '%')
+    		</if>
+    		<if test="item_price != ''">
+      			and i.item_price = #{item_price}
+    		</if>
+    		<if test="od_time != null">
+      			and date(o.od_time) = #{od_time}
+    		</if>
+    		<if test="received_not != 100">
+    			and o.received_not = #{received_not}
+    		</if>
+ 		</where>
  	</select>
  	
  	<select id="getShipmentList" resultType="com.itwillbs.domain.ShipmentDTO"> 
@@ -33,10 +98,28 @@
  		join receive r on h.od_num = r.od_num
  	</select>
  	
+ 	<select id="searchShipmentList" resultType="com.itwillbs.domain.ReceiveDTO">
+ 		select r.od_num, s.name, i.item_name, r.rc_amount, i.item_price, r.rc_time
+ 		from receive r join store s on r.num = s.num
+ 		join item i on r.item_num = i.item_num
+ 		<where>
+ 			<if test="name != ''">
+     			s.name like concat('%', #{name}, '%')
+    		</if>
+    		<if test="item_name != ''">
+      			and i.item_name like concat('%', #{item_name}, '%')
+    		</if>
+    		<if test="rc_time != null">
+      			and date(r.rc_time) = #{rc_time}
+    		</if>
+ 		</where>
+ 	</select>
+ 	
  	<select id="getEmpList" resultType="com.itwillbs.domain.EmployeeDTO"> 
  		select * from employee 
  	</select>
  	
+
  	<insert id="storeInsert">
  		insert into store(num, pw, name, boss, phone, tel, email, address, address_detail, postalcode, note, state)
  		values(#{num}, #{pw}, #{name}, #{boss}, #{phone}, #{tel}, #{email}, #{address}, #{address_detail}, #{postalcode},#{note}, #{state})
@@ -133,6 +216,24 @@
  	<select id="getEmployee" resultType="com.itwillbs.domain.EmployeeDTO">
  		select * from employee
  		where emp_num = #{emp_num}
+</select>
+ 	<select id="searchEmpList" resultType="com.itwillbs.domain.EmployeeDTO"> 
+ 		select * from employee 
+ 		<where>
+ 			<if test="emp_dept != 100">
+     			emp_dept = #{emp_dept}
+    		</if>
+    		<if test="emp_rank != 100">
+      			and emp_rank = #{emp_rank}
+    		</if>
+    		<if test="emp_num != 0">
+      			and emp_num = #{emp_num}
+    		</if>
+    		<if test="emp_name != ''">
+    			and emp_name like concat('%', #{emp_name}, '%')
+    		</if>
+ 		</where>
+
  	</select>
 
 </mapper>

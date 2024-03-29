@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -46,10 +48,13 @@
 ul{
 	list-style:none;
 }
+input[type=text] {
 
+    color: black !important;
+}
 #search {
 	height: 250px;
-	padding-top: 32px;
+	padding-top: 10px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -72,10 +77,15 @@ ul{
 
 #search li {
 	width: 600px;
-	height: 30px;
+	height: 20px;
 }
 
 input[type=text]{
+	width: 300px;
+	margin-bottom: 10px;
+}
+
+input[type=date]{
 	width: 300px;
 	margin-bottom: 10px;
 }
@@ -190,26 +200,31 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>수주 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/emp/orderSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="item_name"></div></li>
+						
+					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
+						<input type="text" name="item_price"></div></li>	
 						
 					<li><div class="search_div"><label class="search_name"><b>수주일시</b></label>
-						<input type="text"></div></li>
+						<input type="date" name="od_time" max="9999-12-31"></div></li>
 						
-					<li><div class="search_div"><label class="search_name"><b>처리여부</b></label>
-						<select class="choose">
-							<option value="">-----------------------------------------------</option>
-							<option value="미입고">미입고</option>
-							<option value="입고완료">입고완료</option>
+					<li><div class="search_div"><label class="search_name"><b>입고여부</b></label>
+						<select class="choose" name="received_not">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">미입고</option>
+							<option value="1">입고완료</option>
 						</select>
 						
-					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+
+					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+
 				</ul>	
 			</div>
 		</form>
@@ -230,6 +245,7 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">선택</th>
     		<th style=" font-size:20px !important; color: black;">지점명</th>
     		<th style=" font-size:20px !important; color: black;">재료명</th>
+    		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">수주량</th>
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">총금액</th>
@@ -242,7 +258,9 @@ label input[type=radio]:checked:after{
 
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_price}</td>
     <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_amount}</td>
+
     
      <td style="text-align: center !important; font-size:20px !important;">
    		 <fmt:formatNumber value="${OrderDTO.item_price}" pattern="#,###"></fmt:formatNumber>
@@ -259,6 +277,7 @@ label input[type=radio]:checked:after{
 	<c:if test="${OrderDTO.received_not eq 1}">
 		<td style="text-align: center !important; font-size:20px !important; color:green; ">입고완료</td>
 	</c:if>
+
 
   </tr>
   		</c:forEach>

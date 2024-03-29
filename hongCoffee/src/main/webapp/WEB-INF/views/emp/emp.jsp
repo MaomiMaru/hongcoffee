@@ -50,7 +50,9 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 32px;
+
+	padding-top: 35px;
+
 	width: 100%;
 	border: 1px solid black;
 }
@@ -66,6 +68,10 @@ ul{
  	margin: 0 0 0 50px;
 }
 
+.search_div {
+ 	margin: 0 0 0 50px;
+}
+
 .choose {
 	width: 300px;
 	height: 29.63px;
@@ -74,9 +80,16 @@ ul{
 
 #search li {
 	width: 600px;
-	height: 30px;
-}
 
+	height: 30px;
+
+
+
+}
+input[type=text] {
+
+    color: black !important;
+}
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
@@ -239,26 +252,39 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>사원 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/emp/empSearch" method="post">
 			<div id="search">
 				<ul>
-					<li><div class="search_div"><label class="search_name">부서</label>
-					<select class="choose">
-					<option value="">-----------------------------------------------</option>
-					<option value="인사">인사</option>
-					<option value="관리">관리</option></select></div></li>
+
+					<li><div class="search_div"><label class="search_name"><b>부서</b></label>
+					<select class="choose" name="emp_dept">
+					<option value="100">-----------------------------------------------</option>
+					<option value="1">인사부</option>
+					<option value="2">영업부</option>
+					<option value="3">재무부</option>
+					<option value="0">무소속</option></select></div></li>
+
 				
-					<li><div class="search_div"><label class="search_name">직급</label>
-					<select class="choose">
-					<option value="">-----------------------------------------------</option>
-					<option>사원</option>
-					<option>관리</option></select></div></li>
+
+					<li><div class="search_div"><label class="search_name"><b>직급</b></label>
+					<select class="choose" name="emp_rank">
+					<option value="100">-----------------------------------------------</option>
+					<option value="1">대표</option>
+					<option value="2">팀장</option>
+					<option value="3">대리</option>
+					<option value="4">사원</option>
+					<option value="0">무보직</option></select></div></li>
+
 				
-				<li><div class="search_div"><label class="search_name">사원번호</label>
-					<input type="text" style="color: black !important;"></div></li>
-				<li><div class="search_div"><label class="search_name">사원이름</label>
-					<input type="text" style="color: black !important;">
-					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+
+				<li><div class="search_div"><label class="search_name"><b>사원번호</b></label>
+					<input type="text" name="emp_num"></div></li>
+					
+				<li><div class="search_div"><label class="search_name"><b>사원이름</b></label>
+					<input type="text" name="emp_name">
+					
+					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+
 				</ul>	
 			</div>
 		</form>

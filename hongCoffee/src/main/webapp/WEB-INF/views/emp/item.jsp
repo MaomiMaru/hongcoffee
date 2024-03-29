@@ -66,7 +66,10 @@ ul{
 .search_div {
  	margin: 0 0 0 50px;
 }
+input[type=text] {
 
+    color: black !important;
+}
 .choose {
 	width: 300px;
 	height: 29.63px;
@@ -193,23 +196,25 @@ label input[type=radio]:checked:after{
         
 		<h2>재료 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/emp/itemSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>유형</b></label>
-						<select class="choose">
-							<option value="">-----------------------------------------------</option>
-							<option value="식품">식품</option>
-							<option value="비식품">비식품</option>
+						<select class="choose" name="item_type">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">식품</option>
+							<option value="1">비식품</option>
 						</select></div></li>
 				
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text">
+						<input type="text" name="item_price">
 						
-					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+
+						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+
 				</ul>	
 			</div>
 		</form>
