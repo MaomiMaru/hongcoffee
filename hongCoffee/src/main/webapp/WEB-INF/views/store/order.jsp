@@ -49,7 +49,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 30px;
+	padding-top: 35px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -187,7 +187,7 @@ tr:hover {background-color: #F0F0F0;}
 							<option value="1">입고완료</option>
 						</select>
 							
-					<span class="button"><button type="submit">조회</button></span></div></li>
+					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>

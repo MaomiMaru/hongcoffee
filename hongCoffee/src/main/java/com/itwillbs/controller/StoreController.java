@@ -32,7 +32,7 @@ public class StoreController {
 	@GetMapping("/main")
 	public String main() {
 		System.out.println("StoreController main()");
-		
+
 		return "/store/main";
 	}
 
@@ -67,12 +67,12 @@ public class StoreController {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-		
+
 		itemDTO.setItem_type(item_type);
-		
+
 		String item_sPrice = request.getParameter("item_price");
 		int item_price = 0;
-		
+
 		try {
 			if (item_sPrice != null || item_sPrice != "") {
 				item_price = Integer.parseInt(item_sPrice);
@@ -296,7 +296,7 @@ public class StoreController {
 
 		return "/store/result";
 	}//resultList
-
+	
 	
 	//4-2. 영업 관리 - 실적 필터링 목록
 	@PostMapping("resultSearch")

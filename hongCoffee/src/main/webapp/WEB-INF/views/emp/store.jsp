@@ -159,28 +159,28 @@ tr:hover {background-color: #F0F0F0;}
         <div class="content-wrapper">
 		<h2>지점 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/emp/storeSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
-						<input type="text"></div></li>
+						<input type="text" name="name"></div></li>
 					
 					<li><div class="search_div"><label class="search_name"><b>대표자명</b></label>
-						<input type="text"></div></li>	
+						<input type="text" name="boss"></div></li>	
 				
 					<li><div class="search_div"><label class="search_name"><b>지역</b></label>
-						<input type="text"></div></li>	
+						<input type="text" name="address"></div></li>	
 						
 					<li><div class="search_div"><label class="search_name"><b>연락처</b></label>
-						<input type="text"></div>
+						<input type="text" name="phone"></div>
 				
 					<li><div class="search_div"><label class="search_name"><b>상태</b></label>
-						<select class="choose">
-							<option value="">-----------------------------------------------</option>
-							<option value="정상영업">정상영업</option>
-							<option value="미영업">미영업</option></select>
+						<select class="choose" name="state">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">정상영업</option>
+							<option value="1">미영업</option></select>
 				
-					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>

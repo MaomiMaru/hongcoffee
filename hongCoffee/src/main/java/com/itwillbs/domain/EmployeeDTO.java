@@ -11,8 +11,8 @@ public class EmployeeDTO {
 	private String emp_email; //이메일
 	private Timestamp emp_birth; //생년월일
 	private int emp_state; //상태(재직=0,휴직=1,퇴직=2)
-	private String emp_dept; //부서(인사부, 영업부, 재무부)
-	private String emp_rank; //직급(대표, 팀장, 대리, 사원)
+	private int emp_dept; //부서(인사부, 영업부, 재무부)
+	private int emp_rank; //직급(대표, 팀장, 대리, 사원)
 	private int emp_right; //권한(일반=0, 관리자=1)
 	private Timestamp hire_date; //입사일
 	private Timestamp quit_date; //퇴사일
@@ -66,16 +66,16 @@ public class EmployeeDTO {
 	public void setEmp_state(int emp_state) {
 		this.emp_state = emp_state;
 	}
-	public String getEmp_dept() {
+	public int getEmp_dept() {
 		return emp_dept;
 	}
-	public void setEmp_dept(String emp_dept) {
+	public void setEmp_dept(int emp_dept) {
 		this.emp_dept = emp_dept;
 	}
-	public String getEmp_rank() {
+	public int getEmp_rank() {
 		return emp_rank;
 	}
-	public void setEmp_rank(String emp_rank) {
+	public void setEmp_rank(int emp_rank) {
 		this.emp_rank = emp_rank;
 	}
 	public int getEmp_right() {

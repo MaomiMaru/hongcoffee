@@ -26,13 +26,19 @@ public class EmployeeService {
 		return employeeDAO.userCheck(employeeDTO);
 	}
 	
-	
 	//지점 출력
 	public List<StoreDTO> getStoreList(){
 		System.out.println("EmployeeService getStoreList()");
 		
 		return employeeDAO.getStoreList();
 	}//getJijumList
+	
+	//지점 필터링 출력
+	public List<StoreDTO> searchStoreList(StoreDTO storeDTO) {
+		System.out.println("EmployeeService searchStoreList()");
+		
+		return employeeDAO.searchStoreList(storeDTO);
+	}//searchStoreList
 	
 	//재료 출력
 	public List<ItemDTO> getItemList(){
@@ -55,7 +61,12 @@ public class EmployeeService {
 		return employeeDAO.getOrderList();
 	}//getSujuList
 	
-	
+	//수주 필터링 출력
+	public List<OrderDTO> searchOrderList(OrderDTO orderDTO) {
+		System.out.println("EmployeeService searchOrderList()");
+		
+		return employeeDAO.searchOrderList(orderDTO);
+	}//searchOrderList
 	
 	//출하 출력
 	public List<ReceiveDTO> getShipmentList(){
@@ -64,7 +75,12 @@ public class EmployeeService {
 		return employeeDAO.getShipmentList();
 	}//getChulhaList
 	
-
+	//출하 필터링 출력
+	public List<ReceiveDTO> searchShipmentList(ReceiveDTO receiveDTO) {
+		System.out.println("EmployeeService searchShipmentList()");
+		
+		return employeeDAO.searchShipmentList(receiveDTO);
+	}//searchShipmentList
 	
 	//사원 출력
 	public List<EmployeeDTO> getEmpList(){
@@ -73,7 +89,11 @@ public class EmployeeService {
 		return employeeDAO.getEmpList();
 	}//getSawonList
 
-
-
+	//사원 필터링 출력
+	public List<EmployeeDTO> searchEmpList(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeService searchEmpList()");
+		
+		return employeeDAO.searchEmpList(employeeDTO);
+	}//searchEmpList
 
 }

@@ -179,7 +179,7 @@ tr:hover {background-color: #F0F0F0;}
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
 						<input type="text" name="item_price">
 						
-						<span class="button"><button type="submit">조회</button></span></div></li>
+						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
