@@ -298,14 +298,14 @@ label input[type=radio]:checked:after{
     <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
     <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${EmployeeDTO.emp_birth}" pattern="yyyy.MM.dd"/></td>
+   	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_birth}</td>
     <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_dept}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_rank}</td>
    	<td style="text-align: center !important; font-size:20px !important;"><c:if test="${EmployeeDTO.emp_right eq 1}">관리자</c:if>
    		<c:if test="${EmployeeDTO.emp_right eq 0}">일반</c:if></td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_phone}</td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>
- 	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${EmployeeDTO.hire_date}" pattern="yyyy.MM.dd"/></td>
+ 	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.hire_date}</td>
 
  		<c:if test="${EmployeeDTO.emp_state eq 0}">
  		<td style="text-align: center !important; font-size:20px !important; color:green; ">재직</td>

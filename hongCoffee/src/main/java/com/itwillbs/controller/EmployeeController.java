@@ -1,10 +1,9 @@
 package com.itwillbs.controller;
 
-import java.util.Date;
-import java.net.http.HttpRequest;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -286,8 +285,43 @@ private EmployeeService employeeService;
 	}
 	
 	@PostMapping("popup/emp_insertPro")
-	public String emp_insertPro(EmployeeDTO employeeDTO) {
+	public String emp_insertPro(EmployeeDTO employeeDTO, HttpServletRequest request) {
 		System.out.println("EmployeeController emp_insertPro()");
+		
+//		employeeDTO.setEmp_dept(request.getParameter("emp_dept"));
+//		employeeDTO.setEmp_email(request.getParameter("emp_email"));
+//		employeeDTO.setEmp_name(request.getParameter("emp_name"));
+//		employeeDTO.setEmp_note(request.getParameter("emp_note"));
+//		employeeDTO.setEmp_num(Integer.parseInt(request.getParameter("emp_num")));
+//		employeeDTO.setEmp_phone(request.getParameter("emp_phone"));
+//		employeeDTO.setEmp_pw(request.getParameter("emp_pw"));
+//		employeeDTO.setEmp_rank(request.getParameter("emp_rank"));
+//		employeeDTO.setEmp_right(Integer.parseInt(request.getParameter("emp_right")));
+//		employeeDTO.setEmp_state(Integer.parseInt(request.getParameter("emp_state")));
+		
+//		String hire_date = request.getParameter("hire_date");
+//		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+//		Date d1;
+//		try {
+//			d1 = format1.parse(hire_date);
+//		} catch (ParseException e) {
+//			d1 = new Date();
+//			e.printStackTrace();
+//		}
+//		Timestamp jdate1 = new Timestamp(d1.getTime());
+//		employeeDTO.setHire_date(jdate1);
+//		
+//		String emp_birth = request.getParameter("emp_birth");
+//		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+//		Date d2;
+//		try {
+//			d2 = format2.parse(emp_birth);
+//		} catch (ParseException e) {
+//			d2 = new Date();
+//			e.printStackTrace();
+//		}
+//		Timestamp jdate2 = new Timestamp(d2.getTime());
+//		employeeDTO.setEmp_birth(jdate2);
 		
 		employeeService.employeeInsert(employeeDTO);
 		return "redirect:/emp/popup/close";
@@ -316,8 +350,12 @@ private EmployeeService employeeService;
 	
 	//4-1-3. 사원 관리 - 수정(일반)
 	@GetMapping("popup/emp_update")
-	public String emp_update() {
+	public String emp_update(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController emp_update()");
+		int emp_num = Integer.parseInt(request.getParameter("emp_num"));
+		EmployeeDTO employeeDTO = employeeService.getEmployee(emp_num);		
+		
+		model.addAttribute("employeeDTO", employeeDTO);
 		
 		return "/emp/popup/emp_update";
 	}

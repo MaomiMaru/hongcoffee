@@ -105,25 +105,26 @@ $(function(){
 			return false;
 		}
 		
-		var nameCheck = RegExp(/^[가-핳]{2,20}$/);
-		if( ! nameCheck.test($('.emp_name').val()) ){
-				alert("한글 2자이상 20자이하만 입력 가능합니다.");
-				$('.emp_name').focus();
-				return false;
-		}
+// 		var nameCheck = RegExp(/^[가-핳]{2,20}$/);
+// 		if( ! nameCheck.test($('.emp_name').val()) ){
+// 				alert("한글 2자이상 20자이하만 입력 가능합니다.");
+// 				$('.emp_name').focus();
+// 				return false;
+// 		}
 		
 		if($('.emp_phone').val()=='' || $('.emp_phone').val()==null||$('.emp_phone').val()==undefined){
 			alert('연락처를 입력해주세요.');
 			$('.emp_phone').focus();
 			return false;
 		}
-		var phoneCheck = RegExp(/^[0-9\-]{11,14}$/);
-		if( ! nameCheck.test($('.emp_num').val()) ){
-				alert("숫자와 -만 입력 가능합니다.");
-				$('.emp_num').focus();
-				return false;
-		}
-
+// 		var phoneCheck = RegExp(/^[0-9\-]{11,14}$/);
+// 		if( ! nameCheck.test($('.emp_num').val()) ){
+// 				alert("숫자와 -만 입력 가능합니다.");
+// 				$('.emp_num').focus();
+// 				return false;
+// 		}
+	
+		
 		if($('.emp_birth').val()=='' || $('.emp_birth').val()==null||$('.emp_birth').val()==undefined){
 			alert('생년월일를 선택해주세요.');
 			$('.emp_birth').focus();

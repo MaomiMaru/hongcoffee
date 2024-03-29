@@ -63,8 +63,8 @@ select{
 <div><b>상태</b></div>
 <select name="emp_state">
 <option value="0" <c:if test="${employeeDTO.emp_state eq '0'}"> selected </c:if>>재직</option>
-<option value="1" <c:if test="${employeeDTO.emp_state eq '0'}"> selected </c:if>>휴직</option>
-<option value="2" <c:if test="${employeeDTO.emp_state eq '0'}"> selected </c:if>>퇴직</option>
+<option value="1" <c:if test="${employeeDTO.emp_state eq '1'}"> selected </c:if>>휴직</option>
+<option value="2" <c:if test="${employeeDTO.emp_state eq '2'}"> selected </c:if>>퇴직</option>
 </select><br>
 <sub></sub>
 <b>적요</b><textarea rows="30" cols="37" name="emp_note"></textarea><br>
@@ -77,11 +77,83 @@ select{
 </form>
 
 <script type="text/javascript">
+<script type="text/javascript">
+$(function(){
+	$('.form').submit(function(){
+		
+		//비밀번호
+		if($('.emp_pw').val()=='' || $('.emp_pw').val()==null||$('.emp_pw').val()==undefined){
+			alert('비밀번호를 입력해주세요.');
+			$('.emp_pw').focus();
+			return false;
+		}
+			
+		//사원명
+		if($('.emp_name').val()=='' || $('.emp_name').val()==null||$('.emp_name').val()==undefined){
+			alert('사원명을 입력해주세요.');
+			$('.emp_name').focus();
+			return false;
+		}
+// 		var phoneCheck = RegExp(/^[0-9\-]{9,13}$/);
+// 		if( ! phoneCheck.test($('.emp_name').val()) ){
+// 			alert("숫자만 입력가능합니다.");
+// 			$('.emp_name').focus();
+// 			return false;
+// 		}
+		
+		//이메일 => 아이디@주소
+		if($('.emp_email').val()=='' || $('.emp_email').val()==null||$('.emp_email').val()==undefined){
+			alert('이메일을 입력해주세요.');
+			return false;
+		}
+		var emailCheck = RegExp(/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]/);
+			if( ! emailCheck.test($('.emp_email').val()) ){
+				alert("이메일 형식이 아닙니다.");
+				$('.emp_email').focus();
+				return false;
+		}
+		
+	});
+	
+});
+	
+	$(".emp_phone").on('keydown keyup',function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
 
+        var str = this.value;
+        var tmp = '';
+        var bullet = '-';
 
+        if (str.length > 3 && str.length < 8) {
+            tmp += str.substr(0, 3);
+            tmp += bullet;
+            tmp += str.substr(3);
+            this.value = tmp;
+        } else if (str.length == 8) {
+            tmp += str.substr(0, 4);
+            tmp += bullet;
+            tmp += str.substr(4);
+            this.value = tmp;
+        } else if (str.length == 10) {
+            tmp += str.substr(0, 2);
+            tmp += bullet;
+            tmp += str.substr(2, 4);
+            tmp += bullet;
+            tmp += str.substr(6); // 10자리일때
+            this.value = tmp;
+        } else if (str.length > 8) {
+            tmp += str.substr(0, 3);
+            tmp += bullet;
+            tmp += str.substr(3, 4);
+            tmp += bullet;
+            tmp += str.substr(7, 4);
+            this.value = tmp;
+        } else {
+            this.value = str;
+        }
+    });
 
 </script>
-
 
 </body>
 </html>
