@@ -126,6 +126,21 @@ public class EmployeeDAO {
 		sqlSession.insert(namespace+".shipmentInsert", shipmentDTO);
 	}
 
+	public void shipmentUpdate(ShipmentDTO shipmentDTO) {
+		System.out.println("EmployeeDAO shipmentUpdate()");
+		sqlSession.update(namespace+".shipmentUpdate", shipmentDTO);
+	}
+
+	public ShipmentDTO getShipment(int od_num) {
+		System.out.println("EmployeeDAO getShipment()");
+		return sqlSession.selectOne(namespace+".getShipment", od_num);
+	}
+
+//	public EmployeeDTO getEmployeeA(int emp_num) {
+//		System.out.println("EmployeeDAO getEmployeeA()");
+//		return sqlSession.selectOne(namespace+".getEmployeeA",emp_num);
+//	}
+
 
 
 	

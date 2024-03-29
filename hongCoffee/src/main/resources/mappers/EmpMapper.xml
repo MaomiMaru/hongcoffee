@@ -110,6 +110,26 @@
  		insert into shipment
  		values (#{od_num}, #{num}, #{item_num}, #{sh_amount}, #{sh_time}, #{sh_note})
  	</insert>
+ 	
+ 	<update id="shipmentUpdate">
+ 		update shipment
+ 		set sh_amount = #{sh_amount}, sh_time = #{sh_time}, sh_note = #{sh_note}
+ 		where od_num = #{od_num}
+ 	</update>
+ 	
+ 	<select id="getShipment" resultType="com.itwillbs.domain.ShipmentDTO">
+ 		select a.od_num, a.num, a.item_num, a.sh_amount, a.sh_time, a.sh_note, b.name, c.item_name, c.item_price
+ 		from shipment a join store b
+ 		on a.num = b.num
+ 		join item c
+ 		on a.item_num = c.item_num
+ 		where od_num = #{od_num}
+ 	</select>
+ 	
+<!--  	<select id="getEmployeeA" resultType="com.itwillbs.domain.EmployeeDTO"> -->
+ 	
+ 	
+<!--  	</select> -->
 
 </mapper>
 

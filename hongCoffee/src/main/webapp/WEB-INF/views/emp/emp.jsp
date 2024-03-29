@@ -267,8 +267,8 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		
 		<c:if test="${sessionScope.emp_right eq 1 }">
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=370,height=520')">추가</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin','홍커피','width=370,height=520')">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=350,height=900')">추가</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num=5','홍커피','width=350,height=900')">수정</button>
 		</c:if>
 		<c:if test="${sessionScope.emp_right eq 0 }">
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update','홍커피','width=370,height=520')">수정</button>

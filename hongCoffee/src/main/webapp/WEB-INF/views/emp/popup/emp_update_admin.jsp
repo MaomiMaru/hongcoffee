@@ -17,7 +17,7 @@ select{
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/emp/popup/emp_updatePro1" method="post" class="form">
+<form action="${pageContext.request.contextPath}/emp/popup/emp_updateProAdmin" method="post" class="form">
 <h2 style="margin-left: 10px">사원 수정</h2>
 <fieldset style="border:0px">
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
@@ -68,10 +68,12 @@ select{
 <option value="2">퇴직</option>
 </select><br>
 <sub></sub>
-<div><b>적요</b></b></div><input type="text" name="emp_note"><br>
+<b>적요</b><textarea rows="30" cols="37" name="emp_note"></textarea><br>
 <sub></sub>
 <br>
-<input type="submit" value="등록하기" style="float:right; margin-right: 50px; background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+<span style="float:right; margin-right: 50px">
+<input type="submit" value="등록하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+</span>
 </fieldset>
 </form>
 

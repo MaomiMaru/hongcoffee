@@ -139,6 +139,26 @@ public class EmployeeService {
 		employeeDAO.shipmentInsert(shipmentDTO);
 	}
 
+	public ShipmentDTO getShipment(int od_num) {
+		System.out.println("EmployeeService getShipment()");
+		return employeeDAO.getShipment(od_num);
+	}
+
+	public void shipmentUpdate(ShipmentDTO shipmentDTO) {
+		System.out.println("EmployeeService shipmentUpdate()");
+		employeeDAO.shipmentUpdate(shipmentDTO);
+		
+	}
+
+
+//	public EmployeeDTO getEmployee(int emp_num) {
+//		System.out.println("EmployeeDTO getEmployee()");
+//		return employeeDAO.getEmployeeA(emp_num);
+//	}
+
+
+
+
 
 
 

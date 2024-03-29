@@ -24,23 +24,25 @@ select{
 <fieldset style="border:0px">
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 <div class="check"></div><br>
-<input type="hidden" name="od_num" value="${orderDTO.od_num }">
-<input type="hidden" name="num" value="${orderDTO.num }">
-<input type="hidden" name="item_num" value="${orderDTO.item_num }">
-<div><b>지점명</b></div><input type="text" name="name" value="${orderDTO.name }" class="name" readonly><br>
+<input type="hidden" name="od_num" value="${shipmentDTO.od_num}">
+<input type="hidden" name="num" value="${shipmentDTO.num}">
+<input type="hidden" name="item_num" value="${shipmentDTO.item_num}">
+<div><b>지점명</b></div><input type="text" name="name" value="${shipmentDTO.name }" class="name" readonly><br>
 <sub></sub>
-<div><b>재료명</b></div><input type="text" name="item_name" value="${orderDTO.item_name }" class="item_name" readonly><br>
+<div><b>재료명</b></div><input type="text" name="item_name" value="${shipmentDTO.item_name }" class="item_name" readonly><br>
 <sub></sub>
-<div><b>출하량</b></div><input type="text" name="sh_amount" value="${orderDTO.sh_amount }" class="sh_amount"><br>
+<div><b>출하량</b></div><input type="text" name="sh_amount" value="${shipmentDTO.sh_amount }" class="sh_amount"><br>
 <sub></sub>
-<div><b>단가</b></div><input type="text" name="item_price" value="${orderDTO.item_price }" class="item_price" readonly><br>
+<div><b>단가</b></div><input type="text" name="item_price" value="${shipmentDTO.item_price }" class="item_price" readonly><br>
 <sub></sub>
-<div><b>출하일시</b></div><input type="date" name="sh_time" class="sh_time" style="width: 177px"><br>
+<div><b>출하일시</b></div><input type="datetime-local" name="sh_time" class="sh_time" style="width: 177px"><br>
 <sub></sub>
-<div><b>적요</b></div><input type="text" name="ob_note" class="ob_note"><br>
+<div><b>적요</b></div><input type="text" name="sh_note" class="sh_note"><br>
 <sub></sub>
 <br>
-<input type="submit" value="수정하기" style="float:right; margin-right: 50px; background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+<span style="float:right; margin-right: 50px">
+<input type="submit" value="수정하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+</span>
 </fieldset>
 </form>
 
