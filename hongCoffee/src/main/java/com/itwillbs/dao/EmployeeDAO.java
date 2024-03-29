@@ -136,10 +136,10 @@ public class EmployeeDAO {
 		return sqlSession.selectOne(namespace+".getShipment", od_num);
 	}
 
-//	public EmployeeDTO getEmployeeA(int emp_num) {
-//		System.out.println("EmployeeDAO getEmployeeA()");
-//		return sqlSession.selectOne(namespace+".getEmployeeA",emp_num);
-//	}
+	public EmployeeDTO getEmployee(int emp_num) {
+		System.out.println("EmployeeDAO getEmployeeA()");
+		return sqlSession.selectOne(namespace+".getEmployee",emp_num);
+	}
 
 
 

@@ -112,8 +112,11 @@
  	</insert>
  	
  	<update id="shipmentUpdate">
- 		update shipment
- 		set sh_amount = #{sh_amount}, sh_time = #{sh_time}, sh_note = #{sh_note}
+ 		update shipment a join store b
+ 		on a.num = b.num
+ 		join item c
+ 		on a.item_num = c.item_num
+ 		set name = #{name}, item_num = #{item_num}, item_name = #{item_name}, sh_amount = #{sh_amount}, sh_time = #{sh_time}, sh_note = #{sh_note}, sh_note = #{sh_note}
  		where od_num = #{od_num}
  	</update>
  	
@@ -126,10 +129,10 @@
  		where od_num = #{od_num}
  	</select>
  	
-<!--  	<select id="getEmployeeA" resultType="com.itwillbs.domain.EmployeeDTO"> -->
- 	
- 	
-<!--  	</select> -->
+ 	<select id="getEmployee" resultType="com.itwillbs.domain.EmployeeDTO">
+ 		select * from employee
+ 		where emp_num = #{emp_num}
+ 	</select>
 
 </mapper>
 

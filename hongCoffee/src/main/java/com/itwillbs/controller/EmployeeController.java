@@ -280,7 +280,7 @@ private EmployeeService employeeService;
 	//3-2-2 출하 관리 - 수정
 	@GetMapping("popup/shipment_update")
 	public String shipment_update(HttpServletRequest request, Model model) {
-		System.out.println("EmployeeController shipment_shipment_update()");
+		System.out.println("EmployeeController shipment_update()");
 		int od_num = Integer.parseInt(request.getParameter("od_num"));
 		ShipmentDTO shipmentDTO = employeeService.getShipment(od_num);
 		model.addAttribute("shipmentDTO", shipmentDTO);
@@ -291,6 +291,15 @@ private EmployeeService employeeService;
 	@PostMapping("popup/shipment_updatePro")
 	public String shipment_updatePro(HttpServletRequest request, ShipmentDTO shipmentDTO) {
 		System.out.println("EmployeeController shipment_updatePro()");
+		shipmentDTO.setItem_name(request.getParameter("item_name"));
+		shipmentDTO.setItem_num(Integer.parseInt(request.getParameter("item_num")));
+		shipmentDTO.setItem_price(Integer.parseInt(request.getParameter("item_price")));
+		shipmentDTO.setName(request.getParameter("name"));
+		shipmentDTO.setNum(Integer.parseInt(request.getParameter("num")));
+		shipmentDTO.setOd_num(Integer.parseInt(request.getParameter("od_num")));
+		shipmentDTO.setSh_amount(Integer.parseInt(request.getParameter("sh_amount")));
+		shipmentDTO.setSh_note(request.getParameter("sh_note"));
+		
 		
 		String sh_time = request.getParameter("sh_time");
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -301,7 +310,9 @@ private EmployeeService employeeService;
 			d = new Date();
 		}
 		Timestamp date = new Timestamp(d.getTime());
-		if(sh_time != null && sh_time != "") shipmentDTO.setSh_time(date);
+		if(sh_time != null && sh_time != "") { 
+			shipmentDTO.setSh_time(date);
+			}
 		
 		employeeService.shipmentUpdate(shipmentDTO);
 		
@@ -327,17 +338,18 @@ private EmployeeService employeeService;
 	
 	//4-1-2. 사원 관리 - 수정(관리자)
 	@GetMapping("popup/emp_update_admin")
-//	public String emp_update_admin(HttpServletRequest request, Model model) {
-//		System.out.println("EmployeeController emp_update_admin()");
-//		int emp_num = Integer.parseInt(request.getParameter("emp_num"));
-//		EmployeeDTO employeeDTO = employeeService.getEmployeeA(emp_num);		
-//				
-//				
-//		return "/emp/popup/emp_update_admin";
-//	}
+	public String emp_update_admin(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController emp_update_admin()");
+		int emp_num = Integer.parseInt(request.getParameter("emp_num"));
+		EmployeeDTO employeeDTO = employeeService.getEmployee(emp_num);		
+		model.addAttribute("employeeDTO", employeeDTO);
+		
+				
+		return "/emp/popup/emp_update_admin";
+	}
 	
 	@PostMapping("popup/emp_updateProAdmin")
-	public String emp_updatePro1(EmployeeDTO employeeDTO) {
+	public String emp_updateProAdmin(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeController emp_updatePro_admin()");
 		
 		employeeService.employeeUpdate1(employeeDTO);

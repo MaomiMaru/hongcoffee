@@ -150,11 +150,10 @@ public class EmployeeService {
 		
 	}
 
-
-//	public EmployeeDTO getEmployee(int emp_num) {
-//		System.out.println("EmployeeDTO getEmployee()");
-//		return employeeDAO.getEmployeeA(emp_num);
-//	}
+	public EmployeeDTO getEmployee(int emp_num) {
+		System.out.println("EmployeeDTO getEmployee()");
+		return employeeDAO.getEmployee(emp_num);
+	}
 
 
 
