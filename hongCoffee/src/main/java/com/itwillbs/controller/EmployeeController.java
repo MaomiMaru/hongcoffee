@@ -247,30 +247,9 @@ private EmployeeService employeeService;
 	
 
 	@PostMapping("popup/shipment_insertPro")
-	public String shipment_insertPro(HttpServletRequest request) {
+	public String shipment_insertPro(HttpServletRequest request, ShipmentDTO shipmentDTO) {
 		System.out.println("EmployeeController shipment_insertPro()");
-		ShipmentDTO shipmentDTO = new ShipmentDTO();
-		shipmentDTO.setItem_name(request.getParameter("item_name"));
-		shipmentDTO.setItem_num(Integer.parseInt(request.getParameter("item_num")));
-		shipmentDTO.setItem_price(Integer.parseInt(request.getParameter("item_price")));
-		shipmentDTO.setName(request.getParameter("name"));
-		shipmentDTO.setNum(Integer.parseInt(request.getParameter("num")));
-		shipmentDTO.setOd_num(Integer.parseInt(request.getParameter("od_num")));
-		shipmentDTO.setSh_amount(Integer.parseInt(request.getParameter("sh_amount")));
-		shipmentDTO.setSh_note(request.getParameter("sh_note"));
 		
-		String sh_time = request.getParameter("sh_time");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date d;
-		try {
-			d = format.parse(sh_time);
-		} catch (ParseException e) {
-			d = new Date();
-		}
-		Timestamp date = new Timestamp(d.getTime());
-		if(sh_time != null && sh_time != "") shipmentDTO.setSh_time(date);
-		
-		System.out.println(shipmentDTO);
 		employeeService.shipmentInsert(shipmentDTO);
 		
 		return "redirect:/emp/popup/close";
@@ -288,32 +267,10 @@ private EmployeeService employeeService;
 		return "/emp/popup/shipment_update";
 	}
 	
-	@PostMapping("popup/shipment_updatePro")
+	@GetMapping("popup/shipment_updatePro")
 	public String shipment_updatePro(HttpServletRequest request, ShipmentDTO shipmentDTO) {
 		System.out.println("EmployeeController shipment_updatePro()");
-		shipmentDTO.setItem_name(request.getParameter("item_name"));
-		shipmentDTO.setItem_num(Integer.parseInt(request.getParameter("item_num")));
-		shipmentDTO.setItem_price(Integer.parseInt(request.getParameter("item_price")));
-		shipmentDTO.setName(request.getParameter("name"));
-		shipmentDTO.setNum(Integer.parseInt(request.getParameter("num")));
-		shipmentDTO.setOd_num(Integer.parseInt(request.getParameter("od_num")));
-		shipmentDTO.setSh_amount(Integer.parseInt(request.getParameter("sh_amount")));
-		shipmentDTO.setSh_note(request.getParameter("sh_note"));
-		
-		
-		String sh_time = request.getParameter("sh_time");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date d;
-		try {
-			d = format.parse(sh_time);
-		} catch (ParseException e) {
-			d = new Date();
-		}
-		Timestamp date = new Timestamp(d.getTime());
-		if(sh_time != null && sh_time != "") { 
-			shipmentDTO.setSh_time(date);
-			}
-		
+			
 		employeeService.shipmentUpdate(shipmentDTO);
 		
 		return "redirect:/emp/popup/close";

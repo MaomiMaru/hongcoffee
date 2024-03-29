@@ -12,7 +12,7 @@ public class ShipmentDTO {
 	private int num;
 	private int item_num;
 	private int sh_amount;
-	private Timestamp sh_time;
+	private String sh_time;
 	
 	public int getItem_num() {
 		return item_num;
@@ -47,11 +47,11 @@ public class ShipmentDTO {
 		this.sh_amount = sh_amount;
 	}
 	
-	public Timestamp getSh_time() {
+	public String getSh_time() {
 		return sh_time;
 	}
 	
-	public void setSh_time(Timestamp sh_time) {
+	public void setSh_time(String sh_time) {
 		this.sh_time = sh_time;
 	}
 	
