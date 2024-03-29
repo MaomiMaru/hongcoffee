@@ -30,12 +30,11 @@ public class EmployeeDAO {
 	}//getJijumList()
 	
 	//재료 목록
-	public List<ItemDTO> getitemList() {
-		System.out.println("EmployeesDAO getitemList()");
-
-		return sqlSession.selectList(namespace + ".getitemList");
-	}//getitemList()
-
+	public List<ItemDTO> getItemList() {
+		System.out.println("EmployeesDAO getItemList()");
+		
+		return sqlSession.selectList(namespace + ".getItemList");
+	}//getJeryoList()
 	
 	//수주 목록
 	public List<OrderDTO> getOrderList() {
@@ -100,6 +99,46 @@ public class EmployeeDAO {
 	public StoreDTO getStore(int num) {
 		System.out.println("EmployeeDAO getStore()");
 		return sqlSession.selectOne(namespace+".getStore", num);
+	}
+
+	public void itemInsert(ItemDTO itemDTO) {
+		System.out.println("EmployeeDAO itemInsert()");
+		sqlSession.insert(namespace+".itemInsert", itemDTO);
+	}
+
+	public ItemDTO getItem(int item_num) {
+		System.out.println("EmployeeDAO getItem()");
+		return sqlSession.selectOne(namespace+".getItem", item_num);
+	}
+
+	public void itemUpdate(ItemDTO itemDTO) {
+		System.out.println("EmployeeDAO itemUpdate()");
+		sqlSession.update(namespace+".itemUpdate", itemDTO);
+	}
+
+	public OrderDTO getOrder(int od_num) {
+		System.out.println("EmployeeDAO getOrder()");
+		return sqlSession.selectOne(namespace+".getOrder", od_num);
+	}
+
+	public void shipmentInsert(ShipmentDTO shipmentDTO) {
+		System.out.println("EmployeeDAO shipmentInsert()");
+		sqlSession.insert(namespace+".shipmentInsert", shipmentDTO);
+	}
+
+	public void shipmentUpdate(ShipmentDTO shipmentDTO) {
+		System.out.println("EmployeeDAO shipmentUpdate()");
+		sqlSession.update(namespace+".shipmentUpdate", shipmentDTO);
+	}
+
+	public ShipmentDTO getShipment(int od_num) {
+		System.out.println("EmployeeDAO getShipment()");
+		return sqlSession.selectOne(namespace+".getShipment", od_num);
+	}
+
+	public EmployeeDTO getEmployee(int emp_num) {
+		System.out.println("EmployeeDAO getEmployeeA()");
+		return sqlSession.selectOne(namespace+".getEmployee",emp_num);
 	}
 
 

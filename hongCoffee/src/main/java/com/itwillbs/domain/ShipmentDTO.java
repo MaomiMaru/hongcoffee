@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 
 public class ShipmentDTO {
 
+
 	private int od_num; //거래번호
 	private int num; //지점번호
 	private int item_num; //물품번호
@@ -78,6 +79,13 @@ public class ShipmentDTO {
 	}
 	public void setSh_note(String sh_note) {
 		this.sh_note = sh_note;
+	}
+	
+	@Override
+	public String toString() {
+		return "ShipmentDTO [name=" + name + ", item_name=" + item_name + ", item_price=" + item_price + ", sh_note="
+				+ sh_note + ", od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", sh_amount="
+				+ sh_amount + ", sh_time=" + sh_time + "]";
 	}
 
 	

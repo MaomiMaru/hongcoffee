@@ -23,7 +23,7 @@ div{
 <div>재료명</div><input type="text" name="item_name" class="item_name"><br>
 <sub></sub>
 <div>유형</div>
-<select name="item_type" class="item_type">
+<select name="item_type" class="item_type" style="width: 177px">
 <option value="100">유형를 선택해주세요</option>
 <option value="0">식품</option>
 <option value="1">비식품</option>
@@ -31,7 +31,7 @@ div{
 <sub></sub>
 <div>단가</div><input type="text" name="item_price" class="item_price"><br>
 <sub></sub>
-<div>적요</div><input type="text" name="od_note" class="od_note"><br>
+<div>적요</div><input type="text" name="od_note" class="item_note"><br>
 <sub></sub>
 <br>
 <span style="float:right; margin-right: 50px">
@@ -62,33 +62,6 @@ $('.form').submit(function(){
 	}
 	
 });
-
-//화폐단위 ','
-const input = document.querySelector('.item_price');
-input.addEventListener('keyup', function(e) {
-  let value = e.target.value;
-  value = Number(value.replaceAll(',', ''));
-  if(isNaN(value)) {
-    input.value = 0;
-  }else {
-    const formatValue = value.toLocaleString('ko-KR');
-    input.value = formatValue;
-  }
-})
-
-// const input = document.querySelector('id 또는 class');
-// input.addEventListener('keyup', function(e) {
-//   let value = e.target.value;
-//   value = Number(value.replaceAll(',', ''));
-//   if(isNaN(value)) {
-//     input.value = 0;
-//   }else {
-//     const formatValue = value.toLocaleString('ko-KR');
-//     input.value = formatValue;
-//   }
-// })
-
-
 
 </script>
 
