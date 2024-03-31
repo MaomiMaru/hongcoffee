@@ -77,7 +77,14 @@ public class StoreService {
 		return storeDAO.getReceiveList();
 	}//getReceiveList
 	
-
+	
+	//입고 필터링 출력
+	public List<ReceiveDTO> searchReceiveList(ReceiveDTO receiveDTO) {
+		System.out.println("StoreService searchReceiveList()");
+			
+		return storeDAO.searchReceiveList(receiveDTO);
+	}//searchReceiveList
+	
 	
 	//소모 출력
 	public List<ResultDTO> getSomoList(){
@@ -92,14 +99,6 @@ public class StoreService {
 		
 		return storeDAO.getPanmeList();
 	}//getPanmeList
-
-
-	//입고 필터링 출력
-	public List<ReceiveDTO> searchReceiveList(ReceiveDTO receiveDTO) {
-		System.out.println("StoreService searchReceiveList()");
-			
-		return storeDAO.searchReceiveList(receiveDTO);
-	}//searchReceiveList	
 
 	
 	//실적 출력

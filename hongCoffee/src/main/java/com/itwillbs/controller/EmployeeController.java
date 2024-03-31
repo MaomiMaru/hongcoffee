@@ -156,9 +156,6 @@ public class EmployeeController {
 		String item_sType = request.getParameter("item_type");
 		int item_type = 100;
 
-		String item_sPrice = request.getParameter("item_price");
-		int item_price = 0;
-
 		try {
 			if (item_sType != null || item_sType != "") {
 				item_type = Integer.parseInt(item_sType);
@@ -166,24 +163,39 @@ public class EmployeeController {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
+		
+		itemDTO.setItem_type(item_type);
+		
+		String item_name = request.getParameter("item_name");
+		itemDTO.setItem_name(item_name);
+		
+		String item_sminPrice = request.getParameter("item_minPrice");
+		int item_minPrice = 0;
+		
+		String item_smaxPrice = request.getParameter("item_maxPrice");
+		int item_maxPrice = 0;
+		
 		try {
-			if (item_sPrice != null || item_sPrice != "") {
-				item_price = Integer.parseInt(item_sPrice);
+			if (item_sminPrice != null || item_sminPrice != "") {
+				item_minPrice = Integer.parseInt(item_sminPrice);
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (item_smaxPrice != null || item_smaxPrice != "") {
+				item_maxPrice = Integer.parseInt(item_smaxPrice);
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 
-		itemDTO.setItem_type(item_type);
-		itemDTO.setItem_price(item_price);
-		System.out.println(item_type);
-
-		String item_name = request.getParameter("item_name");
-		itemDTO.setItem_name(item_name);
+		itemDTO.setItem_minPrice(item_minPrice);
+		itemDTO.setItem_maxPrice(item_maxPrice);		
 
 		List<ItemDTO> itemList;
 
-		if (item_type == 100 && item_name == null && item_price == 0) {
+		if (item_type == 100 && item_name == null && item_minPrice == 0 && item_maxPrice == 0) {
 			itemList = employeeService.getItemList();
 		} else {
 			itemList = employeeService.searchItemList(itemDTO);
@@ -225,18 +237,20 @@ public class EmployeeController {
 		String item_name = request.getParameter("item_name");
 		orderDTO.setItem_name(item_name);
 
-		String item_sPrice = request.getParameter("item_price");
-		int item_price = 0;
+		String item_sminPrice = request.getParameter("item_minPrice");
+		
+		String item_smaxPrice = request.getParameter("item_maxPrice");
 
 		try {
-			if (item_sPrice != "") {
-				item_price = Integer.parseInt(item_sPrice);
-			}
+			orderDTO.setItem_minPrice(item_sminPrice != null ? Integer.parseInt(item_sminPrice) : 0);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-
-		orderDTO.setItem_price(item_price);
+		try {
+			orderDTO.setItem_maxPrice(item_smaxPrice != null ? Integer.parseInt(item_smaxPrice) : 0);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 
 		String od_time = request.getParameter("od_time");
 
@@ -257,7 +271,7 @@ public class EmployeeController {
 
 		List<OrderDTO> orderList;
 
-		if (name == "" && item_name == "" && od_time == "" && received_sNot == null) {
+		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_time == "" && received_sNot == null) {
 			orderList = employeeService.getOrderList();
 		} else {
 			orderList = employeeService.searchOrderList(orderDTO);
@@ -285,40 +299,55 @@ public class EmployeeController {
 
 
 	
-//	//3-4. 영업관리 - 출하 필터링 목록
-//	@PostMapping("/shipmentSearch")
-//	public String shipmentSearch(HttpServletRequest request, Model model) throws Exception {
-//		System.out.println("EmployeeController shipmentSearch()");
-//
-//		ReceiveDTO receiveDTO = new ReceiveDTO();
-//
-//		String name = request.getParameter("name");
-//		receiveDTO.setName(name);
-//
-//		String item_name = request.getParameter("item_name");
-//		receiveDTO.setItem_name(item_name);
-//
-//		String rc_time = request.getParameter("rc_time");
-//
-//		if (rc_time != "") {
-//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//			Date d1 = format.parse(rc_time);
-//			Timestamp date1 = new Timestamp(d1.getTime());
-//			receiveDTO.setRc_time(date1);
-//		}
-//
-//		List<ShipmentDTO> shipmentList;
-//
-//		if (name == "" && item_name == "" && rc_time == "") {
-//			shipmentList = employeeService.getShipmentList();
-//		} else {
-//			shipmentList = employeeService.searchShipmentList(shipmentDTO);
-//		}
-//
-//		model.addAttribute("shipmentList", shipmentList);
-//
-//		return "/emp/shipment";
-//	}//shipmentSearch
+	//3-4. 영업관리 - 출하 필터링 목록
+	@PostMapping("/shipmentSearch")
+	public String shipmentSearch(HttpServletRequest request, Model model) throws Exception {
+		System.out.println("EmployeeController shipmentSearch()");
+
+		ShipmentDTO shipmentDTO = new ShipmentDTO();
+
+		String name = request.getParameter("name");
+		shipmentDTO.setName(name);
+
+		String item_name = request.getParameter("item_name");
+		shipmentDTO.setItem_name(item_name);
+		
+		String item_sminPrice = request.getParameter("item_minPrice");
+		
+		String item_smaxPrice = request.getParameter("item_maxPrice");
+
+		try {
+			shipmentDTO.setItem_minPrice(item_sminPrice != null ? Integer.parseInt(item_sminPrice) : 0);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		try {
+			shipmentDTO.setItem_maxPrice(item_smaxPrice != null ? Integer.parseInt(item_smaxPrice) : 0);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		String sh_time = request.getParameter("sh_time");
+
+		if (sh_time != "") {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date d1 = format.parse(sh_time);
+			Timestamp date1 = new Timestamp(d1.getTime());
+			shipmentDTO.setSh_time(date1);
+		}
+
+		List<ShipmentDTO> shipmentList;
+
+		if (name == "" && item_name == "" && sh_time == "") {
+			shipmentList = employeeService.getShipmentList();
+		} else {
+			shipmentList = employeeService.searchShipmentList(shipmentDTO);
+		}
+
+		model.addAttribute("shipmentList", shipmentList);
+
+		return "/emp/shipment";
+	}//shipmentSearch
 
 	
 	//4-1. 사원 관리 - 사원 목록

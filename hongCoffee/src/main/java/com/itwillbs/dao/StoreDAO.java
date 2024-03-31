@@ -74,7 +74,13 @@ public class StoreDAO {
 		return sqlSession.selectList(namespace + ".getReceiveList");
 	}//getReceiveList
 	
-
+	//입고 필터링 목록
+	public List<ReceiveDTO> searchReceiveList(ReceiveDTO receiveDTO) {
+		System.out.println("StoreDAO searchReceiveList()");
+		
+		return sqlSession.selectList(namespace + ".searchReceiveList", receiveDTO);
+	}//searchReceiveList
+	
 	//소모 목록
 	public List<ResultDTO> getSomoList() {
 		System.out.println("StoreDAO getSomoList()");
@@ -90,13 +96,6 @@ public class StoreDAO {
 			
 			return sqlSession.selectList(namespace + ".getPanmeList");
 		}//getPanmeList
-
-	//입고 필터링 목록
-	public List<ReceiveDTO> searchReceiveList(ReceiveDTO receiveDTO) {
-		System.out.println("StoreDAO searchReceiveList()");
-		
-		return sqlSession.selectList(namespace + ".searchReceiveList", receiveDTO);
-	}//searchReceiveList
 
 
 	//실적 목록

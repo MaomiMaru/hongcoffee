@@ -32,16 +32,22 @@
 				<if test="item_name != null">
 					and item_name like concat('%', #{item_name}, '%')
 				</if>
-				<if test="item_price != 0">
-					and item_price = #{item_price}
+				<if test="item_maxPrice != 0">
+					and item_price between #{item_minPrice} and #{item_maxPrice}
+				</if>
+				<if test="item_minPrice != 0 and item_maxPrice == 0">
+					and item_price >= #{item_minPrice}
 				</if>
 			</if>
 			<if test="item_type == 100">
 				<if test="item_name != null">
 					item_name like concat('%', #{item_name}, '%')
 				</if>
-				<if test="item_price != 0">
-					and item_price = #{item_price}
+				<if test="item_maxPrice != 0">
+					and item_price between #{item_minPrice} and #{item_maxPrice}
+				</if>
+				<if test="item_minPrice != 0 and item_maxPrice == 0">
+					and item_price >= #{item_minPrice}
 				</if>
 			</if>
 		</where>
@@ -60,8 +66,11 @@
 			<if test="item_type != 100">
 				t.item_type = #{item_type}
 			</if>	
-			<if test="item_price != 0">
-				and t.item_price = #{item_price}
+			<if test="item_maxPrice != 0">
+    			and t.item_price between #{item_minPrice} and #{item_maxPrice}
+    		</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and t.item_price >= #{item_minPrice}
 			</if>
 			<if test="item_name != null">
 				and t.item_name like concat('%', #{item_name}, '%')
@@ -81,9 +90,12 @@
  			<if test="item_name != ''">
      			t.item_name like concat('%', #{item_name}, '%')
     		</if>
-    		<if test="item_price != 0">
-      			and t.item_price = #{item_price}
+    		<if test="item_maxPrice != 0">
+    			and t.item_price between #{item_minPrice} and #{item_maxPrice}
     		</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and t.item_price >= #{item_minPrice}
+			</if>
     		<if test="od_time != null">
       			and date(o.od_time) = #{od_time}
     		</if>
@@ -105,9 +117,12 @@
     		<if test="item_name != ''">
      			t.item_name like concat('%', #{item_name}, '%')
     		</if>
-    		<if test="item_price != 0">
-      			and t.item_price = #{item_price}
+    		<if test="item_maxPrice != 0">
+    			and t.item_price between #{item_minPrice} and #{item_maxPrice}
     		</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and t.item_price >= #{item_minPrice}
+			</if>
     		<if test="rc_time != null">
       			and date(r.rc_time) = #{rc_time}
     		</if>
