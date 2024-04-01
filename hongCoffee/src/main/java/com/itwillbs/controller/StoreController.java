@@ -55,23 +55,23 @@ private StoreService storeService;
 	//1. 대시보드
 	@GetMapping("/store/main")
 	public String main() {
-		System.out.println();
+		System.out.println("StoreController main()");
 		return "store/main";
 	}
 
 
 	
-//2. 기준 정보 관리 - 재료 관리
-@GetMapping("/store/item")
-public String itemList(HttpServletRequest request, Model model) {
-	System.out.println("itemList");
-	
-		List<ItemDTO> itemList = storeService.getitemList();
-	
-		model.addAttribute("itemList",itemList);
-	
-		return "store/item";
-	}//itemList
+	//2. 기준 정보 관리 - 재료 관리
+	@GetMapping("/store/item")
+	public String itemList(HttpServletRequest request, Model model) {
+		System.out.println("StoreController itemList()");
+		
+			List<ItemDTO> itemList = storeService.getitemList();
+		
+			model.addAttribute("itemList",itemList);
+		
+			return "store/item";
+		}//itemList
 
 
 
@@ -79,7 +79,7 @@ public String itemList(HttpServletRequest request, Model model) {
 	//3-1. 재고 관리
 	@GetMapping("/store/stock")
 	public String stockList(HttpServletRequest request, Model model) {
-		System.out.println("stock");
+		System.out.println("StoreController stock()");
 		
 			List<StockDTO> stockList = storeService.getStockList();
 		
@@ -87,6 +87,14 @@ public String itemList(HttpServletRequest request, Model model) {
 		
 			return "store/stock";
 	}//stockList
+	
+	//3-1-1 재고 관리 - 추가
+	@GetMapping("/popup/stock_insert")
+	public String stock_insert() {
+		System.out.println("StoreController stock_insert()");
+		
+		return "/store/popup/stock_insert";
+	}
 	
 
 	//3-2. 발주 관리

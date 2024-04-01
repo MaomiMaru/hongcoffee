@@ -130,6 +130,11 @@
  		select * from employee
  		where emp_num = #{emp_num}
  	</select>
+ 	
+ 	<delete id="shipmentDelete">
+ 		delete from shipment
+ 		where od_num = #{od_num}
+ 	</delete>
 
 </mapper>
 

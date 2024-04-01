@@ -67,7 +67,7 @@ select{
 <option value="2" <c:if test="${employeeDTO.emp_state eq '2'}"> selected </c:if>>퇴직</option>
 </select><br>
 <sub></sub>
-<b>적요</b><textarea rows="30" cols="37" name="emp_note"></textarea><br>
+<b>적요</b><textarea rows="30" cols="37" name="emp_note">${employeeDTO.emp_note }</textarea><br>
 <sub></sub>
 <br>
 <span style="float:right; margin-right: 50px">

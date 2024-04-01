@@ -36,7 +36,7 @@ div{
 <option value="1" <c:if test="${storeDTO.received_not eq '1'}"> selected </c:if>>입고완료</option>
 </select><br>
 <sub></sub>
-<div><b>적요</b></div><input type="text" name="ob_note" value="${orderDTO.ob_note}">
+<b>적요</b><textarea rows="30" cols="37" name="ob_note">${orderDTO.ob_note}</textarea><br>
 <sub></sub>
 <br>
 <span style="float:right; margin-right: 50px">

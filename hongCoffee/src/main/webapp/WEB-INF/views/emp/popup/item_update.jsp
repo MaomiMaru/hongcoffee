@@ -37,7 +37,7 @@ div{
 <option value="1" <c:if test="${itemDTO.item_state eq '1'}"> selected </c:if>>미취급</option>
 </select><br>
 <sub></sub>
-<div><b>적요</b></div><input type="text" name="item_note" value="${itemDTO.item_note}"><br>
+<b>적요</b><textarea rows="30" cols="37" name="item_note" >${itemDTO.item_note}</textarea><br>
 <sub></sub>
 <br>
 <span style="float:right; margin-right: 50px">

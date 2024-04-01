@@ -275,6 +275,16 @@ private EmployeeService employeeService;
 		return "redirect:/emp/popup/close";
 	}
 	
+	//3-2-3 출하 - 삭제
+	@GetMapping("shipment_delete")
+	public String shipment_delete(ShipmentDTO shipmentDTO) {
+		System.out.println("EmployeeController shipment_delete()");
+		
+		employeeService.shipmentDelete(shipmentDTO);
+		
+		return "redirect:/emp/shipment";
+	}
+	
 	
 	//4-1-1. 사원 관리 - 추가
 	@GetMapping("popup/emp_insert")
@@ -334,7 +344,6 @@ private EmployeeService employeeService;
 		int emp_num = Integer.parseInt(request.getParameter("emp_num"));
 		EmployeeDTO employeeDTO = employeeService.getEmployee(emp_num);		
 		model.addAttribute("employeeDTO", employeeDTO);
-		
 				
 		return "/emp/popup/emp_update_admin";
 	}
@@ -360,9 +369,10 @@ private EmployeeService employeeService;
 		return "/emp/popup/emp_update";
 	}
 	
-	@PostMapping("popup/emp_update")
+	@PostMapping("popup/emp_updatePro")
 	public String emp_update(EmployeeDTO employeeDTO) {
-		System.out.println("EmployeeCOntroller emp_update()");
+		System.out.println("EmployeeController emp_updatePro()");
+		
 		
 		employeeService.employeeUpdate(employeeDTO);
 		return "redirect:/emp/popup/close";

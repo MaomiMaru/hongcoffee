@@ -141,6 +141,11 @@ public class EmployeeDAO {
 		return sqlSession.selectOne(namespace+".getEmployee",emp_num);
 	}
 
+	public void shipmentDelete(ShipmentDTO shipmentDTO) {
+		System.out.println("EMployeeDAO shipmentDelete()");
+		sqlSession.delete(namespace+".shipmentDelete", shipmentDTO);
+	}
+
 
 
 	
