@@ -52,6 +52,7 @@ public class EmployeeController {
 		}
 	}
 
+	
 	@GetMapping("/login")
 	public String login() {
 		System.out.println("EmployeeService login()");
@@ -60,7 +61,6 @@ public class EmployeeController {
 	}
 
 	
-
 	//1. 대시 보드
 	@GetMapping("/main")
 	public String main() {
@@ -76,8 +76,6 @@ public class EmployeeController {
 	public String store(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController store()");
 
-		
-	
 		List<StoreDTO> storeList = employeeService.getStoreList();
 
 		model.addAttribute("storeList", storeList);
@@ -86,7 +84,7 @@ public class EmployeeController {
 	}//jijumList
 	
 	
-	//2-2. 기준 정보 관리 - 지점 필터링 목록
+	//2-1-1. 지점 필터링
 	@PostMapping("/storeSearch")
 	public String storeSearch(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController storeSearch()");
@@ -127,26 +125,20 @@ public class EmployeeController {
 	}//storeSearch
 
 	
-	//2-2. 기준 정보 관리 - 재료 목록
-		//2-2. 재료 관리
-		@GetMapping("/item")
-		public String item(HttpServletRequest request, Model model) {
-			System.out.println("EmployeeController item()");
-			
+	//2-2. 재료 관리
+	@GetMapping("/item")
+	public String item(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController item()");
 
-				List<ItemDTO> itemList = employeeService.getItemList();
+		List<ItemDTO> itemList = employeeService.getItemList();
 
+		model.addAttribute("itemList",itemList);
 			
-				model.addAttribute("itemList",itemList);
-			
-				return "/emp/item";
-
-			}//jeryoList
+		return "/emp/item";
+	}//jeryoList
 		
 		
-
-	
-	//2-4. 기준 정보 관리 - 재료 필터링 목록
+	//2-2-1. 재료 필터링
 	@PostMapping("/itemSearch")
 	public String itemSearch(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController itemSearch()");
@@ -205,11 +197,10 @@ public class EmployeeController {
 
 		return "/emp/item";
 	}//itemSearch
-
 	
 
 	//3. 영업 관리
-	//3-1. 수주 목록
+	//3-1. 수주 관리
 	@GetMapping("/order")
 	public String order(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController order()");
@@ -222,9 +213,7 @@ public class EmployeeController {
 	}//sujuList
 
 	
-
-	
-	//3-2. 영업 관리 - 수주 필터링 목록
+	//3-1-1. 수주 필터링
 	@PostMapping("/orderSearch")
 	public String orderSearch(HttpServletRequest request, Model model) throws Exception {
 		System.out.println("EmployeeController orderSearch()");
@@ -284,22 +273,19 @@ public class EmployeeController {
 
 	
 	//3-2. 출하 관리
-			@GetMapping("/shipment")
-			public String shipment(HttpServletRequest request, Model model) {
-				System.out.println("EmployeeController shipment()");
+	@GetMapping("/shipment")
+	public String shipment(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController shipment()");
 				
-					List<ShipmentDTO> shipmentList = employeeService.getShipmentList();
+		List<ShipmentDTO> shipmentList = employeeService.getShipmentList();
 				
-					model.addAttribute("shipmentList",shipmentList);
+		model.addAttribute("shipmentList",shipmentList);
 				
-					return "/emp/shipment";
-			}//chulhaList
+		return "/emp/shipment";
+	}//chulhaList
 
 		
-
-
-	
-	//3-4. 영업관리 - 출하 필터링 목록
+	//3-2-1. 출하 필터링
 	@PostMapping("/shipmentSearch")
 	public String shipmentSearch(HttpServletRequest request, Model model) throws Exception {
 		System.out.println("EmployeeController shipmentSearch()");
@@ -338,7 +324,7 @@ public class EmployeeController {
 
 		List<ShipmentDTO> shipmentList;
 
-		if (name == "" && item_name == "" && sh_time == "") {
+		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && sh_time == "") {
 			shipmentList = employeeService.getShipmentList();
 		} else {
 			shipmentList = employeeService.searchShipmentList(shipmentDTO);
@@ -350,7 +336,8 @@ public class EmployeeController {
 	}//shipmentSearch
 
 	
-	//4-1. 사원 관리 - 사원 목록
+	//4. 사원 관리
+	//4-1. 사원 관리
 	@GetMapping("/emp")
 	public String emp(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController emp()");
@@ -363,7 +350,7 @@ public class EmployeeController {
 	}//sawonList
 
 	
-	//4-2. 사원 관리 - 사원 필터링 목록
+	//4-1-1. 사원 필터링
 	@PostMapping("/empSearch")
 	public String empSearch(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController empSearch()");
@@ -371,7 +358,6 @@ public class EmployeeController {
 		EmployeeDTO employeeDTO = new EmployeeDTO();
 		
 		String emp_sDept = request.getParameter("emp_dept");
-		
 
 		try {
 			employeeDTO.setEmp_dept(emp_sDept != null ? Integer.parseInt(emp_sDept) : 100);
@@ -419,6 +405,7 @@ public class EmployeeController {
 		session.invalidate();
 		return "redirect:/emp/login";
 	}
+	
 	
 	//팝업 주소 매핑
 	//2-1-1. 지점 관리 - 추가
@@ -670,10 +657,3 @@ public class EmployeeController {
 	}
 	
 }
-
-	
-	
-	
-	
-
-

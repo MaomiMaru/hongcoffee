@@ -51,7 +51,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 60px;
+	padding-top: 35px;
 	width: 100%;
 	border: 1px solid black;
 }

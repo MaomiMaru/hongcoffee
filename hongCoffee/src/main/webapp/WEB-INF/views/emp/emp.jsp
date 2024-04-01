@@ -68,10 +68,6 @@ ul{
  	margin: 0 0 0 50px;
 }
 
-.search_div {
- 	margin: 0 0 0 50px;
-}
-
 .choose {
 	width: 300px;
 	height: 29.63px;

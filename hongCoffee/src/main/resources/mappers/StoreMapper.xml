@@ -12,17 +12,18 @@
 		select * from store
 		where num = #{num} and pw = #{pw}
 	</select>
-
+	
 
 	<select id="getitemList" resultType="com.itwillbs.domain.ItemDTO">
-
  		select * from item 
-</select> 
+	</select> 
+	
+	
 	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select item_num, item_name, item_type, item_price, item_state, item_note
  		from item 
-
  	</select>
+ 	
  	
  	<select id="searchItemList" resultType="com.itwillbs.domain.ItemDTO">
 		select item_num, item_name, item_type, item_price, item_state, item_note from item
@@ -53,15 +54,16 @@
 		</where>
 	</select>
 
+
 	<select id="getStockList" resultType="com.itwillbs.domain.StockDTO"> 
  		select s.stock_num, t.item_type, t.item_name, t.item_price, s.amount, t.item_state
  		from stock s join item t on s.item_num = t.item_num
  	</select>
  	
+ 	
  	<select id="searchStockList" resultType="com.itwillbs.domain.StockDTO">
 		select s.stock_num, t.item_type, t.item_name, t.item_price, s.amount, t.item_state
  		from stock s join item t on s.item_num = t.item_num
-
 		<where>
 			<if test="item_type != 100">
 				t.item_type = #{item_type}
@@ -78,10 +80,12 @@
 		</where>
 	</select>
 
+
 	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
  		select t.item_name, o.od_amount, t.item_price, o.od_time, o.received_not
  		from `order` o join item t on o.item_num = t.item_num
  	</select>
+ 	
  	
  	<select id="searchOrderList" resultType="com.itwillbs.domain.OrderDTO">
  		select o.od_num, t.item_name, t.item_price, o.od_time, o.received_not
@@ -105,10 +109,12 @@
  		</where>
  	</select>
  	
+ 	
  	<select id="getReceiveList" resultType="com.itwillbs.domain.ReceiveDTO"> 
 		select r.od_num, t.item_name, r.rc_amount, t.item_price, r.rc_time, r.pay
 		from receive r join item t on r.item_num = t.item_num
  	</select>
+ 	
  	
  	<select id="searchReceiveList" resultType="com.itwillbs.domain.ReceiveDTO">
   		select r.od_num, t.item_name, r.rc_amount, t.item_price, r.rc_time, r.pay
@@ -130,7 +136,7 @@
 	</select>
 
 
-	 <select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
+	<select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
 		select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (sum((r.sales*p.prod_price))-sum((r.consume*i.item_price))) "income"
 		from result r left join product p
 		on r.prod_num = p.prod_num
@@ -139,6 +145,7 @@
 		where r.num = 1
 		group by r.rs_date;
  	</select>
+ 	
  	
  	<select id="getSomoList" resultType="com.itwillbs.domain.ResultDTO"> 
 		select r.rs_date, i.item_name, r.consume, i.item_price
@@ -152,7 +159,7 @@
 	    select r.rs_date , p.prod_name, r.sales, p.prod_price
         from result r join product p on r.prod_num = p.prod_num
         order by r.rs_date; 
-</select>
+	</select>
 
  	
  	<select id="searchResultList" resultType="com.itwillbs.domain.ResultDTO">
@@ -164,5 +171,31 @@
  			</if>
  		</where>
  	</select>
+ 	
+ 	
+ 	<select id="searchSomoList" resultType="com.itwillbs.domain.ResultDTO">
+ 		select r.rs_date, i.item_name, r.consume, i.item_price
+		from result r join stock s on r.stock_num = s.stock_num
+		join item i on s.item_num = i.item_num
+		<where>
+ 			<if test="rs_date != null">
+ 				r.rs_date = #{rs_date}
+ 			</if>
+ 		</where>
+		order by r.rs_date;
+ 	</select>
+ 	
+ 	
+ 	<select id="searchPanmeList" resultType="com.itwillbs.domain.ResultDTO">
+ 		select r.rs_date , p.prod_name, r.sales, p.prod_price
+        from result r join product p on r.prod_num = p.prod_num
+        <where>
+ 			<if test="rs_date != null">
+ 				r.rs_date = #{rs_date}
+ 			</if>
+ 		</where>
+        order by r.rs_date; 
+ 	</select>
+
 
 </mapper>

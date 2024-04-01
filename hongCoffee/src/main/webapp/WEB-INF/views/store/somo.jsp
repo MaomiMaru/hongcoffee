@@ -81,6 +81,11 @@ input[type=text]{
 	    color: black !important;
 }
 
+input[type=date]{
+	width: 300px;
+	margin-bottom: 10px;
+}
+
 .button{
 	margin-left: 10px;
 }
@@ -196,13 +201,13 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>소모 관리</h2>
 		
-		<form action="">
+		<form action="${pageContext.request.contextPath}/store/somoSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>등록일</b></label>
-						<input type="text">
+						<input type="date" name="rs_date" max="9999-12-31">
 						
-						<span class="button"><button type="button" style="background-color: black; color: #EFBDBC">조회</button></span></div></li>
+						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
