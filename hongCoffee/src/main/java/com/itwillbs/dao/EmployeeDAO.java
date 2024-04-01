@@ -76,10 +76,10 @@ public class EmployeeDAO {
 	}//getChulhaList()
 	
 	//출하 필터링 목록
-	public List<ReceiveDTO> searchShipmentList(ReceiveDTO receiveDTO) {
+	public List<ShipmentDTO> searchShipmentList(ShipmentDTO shipmentDTO) {
 		System.out.println("EmployeesDAO searchShipmentList()");
 		
-		return sqlSession.selectList(namespace + ".searchShipmentList", receiveDTO);
+		return sqlSession.selectList(namespace + ".searchShipmentList", shipmentDTO);
 	}//searchShipmentList()
 		
 	//사원 목록

@@ -15,27 +15,18 @@ public class OrderDTO {
 	private String name; //지점명
 	private String item_name; //재료명
 	private int item_price; //단가
+	private int item_minPrice; //최소 단가
+	private int item_maxPrice; //최대 단가
 	
 	
+	@Override
+	public String toString() {
+		return "OrderDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", od_amount=" + od_amount
+				+ ", od_time=" + od_time + ", received_not=" + received_not + ", od_note=" + od_note + ", ob_note="
+				+ ob_note + ", name=" + name + ", item_name=" + item_name + ", item_price=" + item_price
+				+ ", item_minPrice=" + item_minPrice + ", item_maxPrice=" + item_maxPrice + "]";
+	}
 	
-	public int getItem_price() {
-		return item_price;
-	}
-	public void setItem_price(int item_price) {
-		this.item_price = item_price;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getItem_name() {
-		return item_name;
-	}
-	public void setItem_name(String item_name) {
-		this.item_name = item_name;
-	}
 	public int getOd_num() {
 		return od_num;
 	}
@@ -84,13 +75,37 @@ public class OrderDTO {
 	public void setOb_note(String ob_note) {
 		this.ob_note = ob_note;
 	}
-	
-	@Override
-	public String toString() {
-		return "OrderDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", od_amount=" + od_amount
-				+ ", od_time=" + od_time + ", received_not=" + received_not + ", od_note=" + od_note + ", ob_note="
-				+ ob_note + ", name=" + name + ", item_name=" + item_name + ", item_price=" + item_price + "]";
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+	public int getItem_price() {
+		return item_price;
+	}
+	public void setItem_price(int item_price) {
+		this.item_price = item_price;
+	}
+	public int getItem_minPrice() {
+		return item_minPrice;
+	}
+	public void setItem_minPrice(int item_minPrice) {
+		this.item_minPrice = item_minPrice;
+	}
+	public int getItem_maxPrice() {
+		return item_maxPrice;
+	}
+	public void setItem_maxPrice(int item_maxPrice) {
+		this.item_maxPrice = item_maxPrice;
 	}
 	
+
 	
 }

@@ -51,7 +51,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 60px;
+	padding-top: 57px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -80,8 +80,7 @@ ul{
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
-	    color: black !important;
-	
+	color: black !important;
 }
 
 .button{
@@ -181,8 +180,8 @@ tr:hover {background-color: #F0F0F0;}
 						<input type="text" name="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text" name="item_price">
-						
+						<input type="text" name="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
+						<input type="text" name="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;">
 
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 

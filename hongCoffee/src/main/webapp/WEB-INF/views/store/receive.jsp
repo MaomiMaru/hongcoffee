@@ -51,7 +51,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 60px;
+	padding-top: 57px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -80,13 +80,12 @@ ul{
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
-	    color: black !important;
+	color: black !important;
 }
 
 input[type=date]{
 	width: 300px;
 	margin-bottom: 10px;
-	
 }
 
 .button{
@@ -204,7 +203,8 @@ label input[type=radio]:checked:after{
 						<input type="text" name="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text" name="item_price"></div></li>
+						<input type="text" name="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
+						<input type="text" name="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고일시</b></label>
 						<input type="date" name="rc_time" max="9999-12-31">

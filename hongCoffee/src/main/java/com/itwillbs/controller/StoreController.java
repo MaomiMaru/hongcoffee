@@ -55,7 +55,6 @@ public class StoreController {
 	}
 
 
-
 	//1. 대시 보드
 	@GetMapping("/main")
 	public String main() {
@@ -64,41 +63,22 @@ public class StoreController {
 		return "/store/main";
 	}
 
-
 	
-
-//2. 기준 정보 관리 - 재료 관리
-@GetMapping("/store/item")
-public String itemList(HttpServletRequest request, Model model) {
-	System.out.println("itemList");
+	//2. 기준 정보 관리
+	//2-1. 재료 관리
+	@GetMapping("/store/item")
+	public String item(HttpServletRequest request, Model model) {
+		System.out.println("StoreController item()");
 	
 		List<ItemDTO> itemList = storeService.getItemList();
 	
 		model.addAttribute("itemList",itemList);
 	
 		return "store/item";
-
 	}//itemList
 
 
-
-
-	//3. 물류 관리
-	//3-1. 재고 관리
-	@GetMapping("/store/stock")
-	public String stockList(HttpServletRequest request, Model model) {
-		System.out.println("stock");
-		
-			List<StockDTO> stockList = storeService.getStockList();
-		
-			model.addAttribute("stockList",stockList);
-		
-			return "store/stock";
-	}//stockList
-	
-
-	
-	//2-2. 기준 정보 관리 - 재료 필터링 목록
+	//2-1-1. 재료 필터링
 	@PostMapping("/itemSearch")
 	public String itemSearch(HttpServletRequest request, Model model) {
 		System.out.println("StoreController itemSearch()");
@@ -117,26 +97,37 @@ public String itemList(HttpServletRequest request, Model model) {
 		}
 
 		itemDTO.setItem_type(item_type);
+	
+		String item_name = request.getParameter("item_name");
+		itemDTO.setItem_name(item_name);
 
-		String item_sPrice = request.getParameter("item_price");
-		int item_price = 0;
-
+		String item_sminPrice = request.getParameter("item_minPrice");
+		int item_minPrice = 0;
+	
+		String item_smaxPrice = request.getParameter("item_maxPrice");
+		int item_maxPrice = 0;
+	
 		try {
-			if (item_sPrice != null || item_sPrice != "") {
-				item_price = Integer.parseInt(item_sPrice);
+			if (item_sminPrice != null || item_sminPrice != "") {
+				item_minPrice = Integer.parseInt(item_sminPrice);
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (item_smaxPrice != null || item_smaxPrice != "") {
+				item_maxPrice = Integer.parseInt(item_smaxPrice);
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 
-		itemDTO.setItem_price(item_price);
-
-		String item_name = request.getParameter("item_name");
-		itemDTO.setItem_name(item_name);
+		itemDTO.setItem_minPrice(item_minPrice);
+		itemDTO.setItem_maxPrice(item_maxPrice);
 
 		List<ItemDTO> itemList;
 
-		if (item_type == 100 && item_name == null && item_price == 0) {
+		if (item_type == 100 && item_name == null && item_minPrice == 0 && item_maxPrice == 0) {
 			itemList = storeService.getItemList();
 		} else {
 			itemList = storeService.searchItemList(itemDTO);
@@ -147,22 +138,22 @@ public String itemList(HttpServletRequest request, Model model) {
 		return "/store/item";
 	}//itemSearchList
 
+
+	//3. 물류 관리
+	//3-1. 재고 관리
+	@GetMapping("/stock")
+	public String stock(HttpServletRequest request, Model model) {
+		System.out.println("StoreController stock()");
+		
+		List<StockDTO> stockList = storeService.getStockList();
+		
+		model.addAttribute("stockList",stockList);
+		
+		return "store/stock";
+	}//stockList
 	
 
-	//3-2. 발주 관리
-		@GetMapping("/store/order")
-		public String orderList(HttpServletRequest request, Model model) {
-			System.out.println("order");
-			
-				List<OrderDTO> orderList = storeService.getOrderList();
-			
-				model.addAttribute("orderList",orderList);
-			
-				return "store/order";
-		}//orderList
-
-	
-	//3-2. 물류 관리 - 재고 필터링 목록
+	//3-1-1. 재고 필터링
 	@PostMapping("/stockSearch")
 	public String stockSearch(HttpServletRequest request, Model model) {
 		System.out.println("StoreController stockSearch()");
@@ -177,25 +168,27 @@ public String itemList(HttpServletRequest request, Model model) {
 			e.printStackTrace();
 		}
 
-		String item_sPrice = request.getParameter("item_price");
-		int item_price = 0;
+		String item_sminPrice = request.getParameter("item_minPrice");
+		
+		String item_smaxPrice = request.getParameter("item_maxPrice");
 
 		try {
-			if (item_sPrice != null || item_sPrice != "") {
-				item_price = Integer.parseInt(item_sPrice);
-			}
+			stockDTO.setItem_minPrice(item_sminPrice != null ? Integer.parseInt(item_sminPrice) : 0);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-
-		stockDTO.setItem_price(item_price);
+		try {
+			stockDTO.setItem_maxPrice(item_smaxPrice != null ? Integer.parseInt(item_smaxPrice) : 0);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 
 		String item_name = request.getParameter("item_name");
 		stockDTO.setItem_name(item_name);
 
 		List<StockDTO> stockList;
 
-		if (item_sType == null && item_name == "" && item_price == 0) {
+		if (item_sType == null && item_name == "" && item_sminPrice == null && item_smaxPrice == null) {
 			stockList = storeService.getStockList();
 		} else {
 			stockList = storeService.searchStockList(stockDTO);
@@ -205,12 +198,22 @@ public String itemList(HttpServletRequest request, Model model) {
 
 		return "/store/stock";
 	}//stockSearchList
+	
+	
+	//3-2. 발주 관리
+	@GetMapping("/order")
+	public String order(HttpServletRequest request, Model model) {
+		System.out.println("StoreController order()");
+			
+		List<OrderDTO> orderList = storeService.getOrderList();
+			
+		model.addAttribute("orderList",orderList);
+			
+		return "store/order";
+	}//orderList
 
 	
-	
-
-	
-	//3-4. 물류 관리 - 발주 필터링 목록
+	//3-2-1. 발주 필터링
 	@PostMapping("/orderSearch")
 	public String orderSearch(HttpServletRequest request, Model model) throws Exception {
 		System.out.println("StoreController orderSearch()");
@@ -220,18 +223,20 @@ public String itemList(HttpServletRequest request, Model model) {
 		String item_name = request.getParameter("item_name");
 		orderDTO.setItem_name(item_name);
 
-		String item_sPrice = request.getParameter("item_price");
-		int item_price = 0;
+		String item_sminPrice = request.getParameter("item_minPrice");
+		
+		String item_smaxPrice = request.getParameter("item_maxPrice");
 
 		try {
-			if (item_sPrice != "") {
-				item_price = Integer.parseInt(item_sPrice);
-			}
+			orderDTO.setItem_minPrice(item_sminPrice != null ? Integer.parseInt(item_sminPrice) : 0);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-
-		orderDTO.setItem_price(item_price);
+		try {
+			orderDTO.setItem_maxPrice(item_smaxPrice != null ? Integer.parseInt(item_smaxPrice) : 0);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 
 		String od_time = request.getParameter("od_time");
 
@@ -252,7 +257,7 @@ public String itemList(HttpServletRequest request, Model model) {
 
 		List<OrderDTO> orderList;
 
-		if (item_name == "" && item_price == 0 && od_time == "" && received_sNot == null) {
+		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_time == "" && received_sNot == null) {
 			orderList = storeService.getOrderList();
 		} else {
 			orderList = storeService.searchOrderList(orderDTO);
@@ -265,46 +270,43 @@ public String itemList(HttpServletRequest request, Model model) {
 
 	
 	//3-3. 입고 관리
-		@GetMapping("/store/receive")
-		public String receiveList(HttpServletRequest request, Model model) {
-			System.out.println("receive");
+	@GetMapping("/receive")
+	public String receive(HttpServletRequest request, Model model) {
+		System.out.println("StoreController receive()");
 			
-				List<ReceiveDTO> receiveList = storeService.getReceiveList();
+		List<ReceiveDTO> receiveList = storeService.getReceiveList();
 			
-				model.addAttribute("receiveList",receiveList);
+		model.addAttribute("receiveList",receiveList);
 			
-				return "store/receive";
-		}//receiveList
-
-
+		return "store/receive";
+	}//receiveList
 
 	
-	
-
-	//3-6. 물류 관리 - 입고 필터링 목록
+	//3-3-1. 입고 필터링
 	@PostMapping("/receiveSearch")
 	public String receiveSearch(HttpServletRequest request, Model model) throws Exception {
-		System.out.println("StoreController receiveSearch");
+		System.out.println("StoreController receiveSearch()");
 
 		ReceiveDTO receiveDTO = new ReceiveDTO();
 
 		String item_name = request.getParameter("item_name");
 		receiveDTO.setItem_name(item_name);
 
-		String item_sPrice = request.getParameter("item_price");
-
-		int item_price = 0;
+		String item_sminPrice = request.getParameter("item_minPrice");
+		
+		String item_smaxPrice = request.getParameter("item_maxPrice");
 
 		try {
-			if (item_sPrice != "") {
-				item_price = Integer.parseInt(item_sPrice);
-			}
+			receiveDTO.setItem_minPrice(item_sminPrice != null ? Integer.parseInt(item_sminPrice) : 0);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-
-		receiveDTO.setItem_price(item_price);
-
+		try {
+			receiveDTO.setItem_maxPrice(item_smaxPrice != null ? Integer.parseInt(item_smaxPrice) : 0);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
 		String rc_time = request.getParameter("rc_time");
 
 		if (rc_time != "") {
@@ -316,7 +318,7 @@ public String itemList(HttpServletRequest request, Model model) {
 
 		List<ReceiveDTO> receiveList;
 
-		if (item_name == "" && item_price == 0 && rc_time == "") {
+		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && rc_time == "") {
 			receiveList = storeService.getReceiveList();
 		} else {
 			receiveList = storeService.searchReceiveList(receiveDTO);
@@ -328,11 +330,22 @@ public String itemList(HttpServletRequest request, Model model) {
 	}//receiveSearchList
 
 	
-
+	//4. 영업 관리
+	//4-1. 실적 관리
+	@GetMapping("/result")
+	public String result(HttpServletRequest request, Model model) {
+		System.out.println("StoreController result()");
+		
+		List<ResultDTO> resultList = storeService.getResultList();
+		
+		model.addAttribute("resultList",resultList);
+		
+		return "store/result";
+	}//resultList
 	
 	
-	//4-2. 영업 관리 - 실적 필터링 목록
-	@PostMapping("resultSearch")
+	//4-1-1. 실적 필터링
+	@PostMapping("/resultSearch")
 	public String resultSearch(HttpServletRequest request, Model model) throws Exception {
 		System.out.println("StoreController resultSearch()");
 
@@ -357,58 +370,100 @@ public String itemList(HttpServletRequest request, Model model) {
 		model.addAttribute("resultList", resultList);
 
 		return "/store/result";
-	}//resultSearchList
+	}//resultSearch
 	
-	//4. 영업 관리 - 소모 관리
-		@GetMapping("/store/somo")
-		public String somoList(HttpServletRequest request, Model model) {
-				System.out.println("result");
+	
+	//4-2. 소모 관리
+	@GetMapping("/store/somo")
+	public String somo(HttpServletRequest request, Model model) {
+		System.out.println("StoreController somo()");
 				
-				List<ResultDTO> somoList = storeService.getSomoList();
+		List<ResultDTO> somoList = storeService.getSomoList();
 				
-				model.addAttribute("somoList",somoList);
+		model.addAttribute("somoList",somoList);
 				
-				return "store/somo";
-		}//somoList
+		return "store/somo";
+	}//somoList
 		
+	
+	//4-2-1. 소모 필터링
+	@PostMapping("/somoSearch")
+	public String somoSearch(HttpServletRequest request, Model model) throws Exception {
+		System.out.println("StoreController somoSearch()");
 
+		ResultDTO resultDTO = new ResultDTO();
 
-		
+		String rs_date = request.getParameter("rs_date");
 
-		//4. 영업 관리 - 판매 관리
-		@GetMapping("/store/panme")
-		public String panmeList(HttpServletRequest request, Model model) {
-				System.out.println("result");
-				
-				List<ResultDTO> panmeList = storeService.getPanmeList();
-				
-				model.addAttribute("panmeList",panmeList);
-				
-				return "store/panme";
-		}//panmeList
-		
-		//4. 영업 관리 - 실적 관리
-		@GetMapping("/store/result")
-		public String resultList(HttpServletRequest request, Model model) {
-			System.out.println("result");
-			
-				List<ResultDTO> resultList = storeService.getResultList();
-			
-				model.addAttribute("resultList",resultList);
-			
-				return "store/result";
-		}//resultList
-
-
-		
-		
-		
-		//창 닫기
-		@GetMapping("popup/close")
-		public String close() {
-			System.out.println("close()");
-			return "/emp/popup/close";
+		if (rs_date != "") {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date d2 = format.parse(rs_date);
+			Timestamp date2 = new Timestamp(d2.getTime());
+			resultDTO.setRs_date(date2);
 		}
+			
+		List<ResultDTO> somoList;
+
+		if (rs_date == "") {
+			somoList = storeService.getSomoList();
+		} else {
+			somoList = storeService.searchSomoList(resultDTO);
+		}
+
+		model.addAttribute("somoList", somoList);
+
+		return "/store/somo";
+	}//somoSearch
+
+		
+	//4-3. 판매 관리
+	@GetMapping("/panme")
+	public String panme(HttpServletRequest request, Model model) {
+		System.out.println("StoreController panme()");
+				
+		List<ResultDTO> panmeList = storeService.getPanmeList();
+				
+		model.addAttribute("panmeList",panmeList);
+				
+		return "store/panme";
+	}//panmeList
+		
+	
+	//4-3-.1 판매 필터링
+	@PostMapping("/panmeSearch")
+	public String panmeSearch(HttpServletRequest request, Model model) throws Exception {
+		System.out.println("StoreController panmeSearch()");
+
+		ResultDTO resultDTO = new ResultDTO();
+
+		String rs_date = request.getParameter("rs_date");
+
+		if (rs_date != "") {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date d3 = format.parse(rs_date);
+			Timestamp date3 = new Timestamp(d3.getTime());
+			resultDTO.setRs_date(date3);
+		}
+		List<ResultDTO> panmeList;
+
+		if (rs_date == "") {
+			panmeList = storeService.getPanmeList();
+		} else {
+			panmeList = storeService.searchPanmeList(resultDTO);
+		}
+
+		model.addAttribute("panmeList", panmeList);
+
+		return "/store/panme";
+	}//panmeSearch
+
+
+	//창 닫기
+	@GetMapping("popup/close")
+	public String close() {
+		System.out.println("close()");
+		return "/emp/popup/close";
+	}
 
 
 }

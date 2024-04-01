@@ -82,10 +82,10 @@ public class EmployeeService {
 	}//getChulhaList
 	
 	//출하 필터링 출력
-	public List<ReceiveDTO> searchShipmentList(ReceiveDTO receiveDTO) {
+	public List<ShipmentDTO> searchShipmentList(ShipmentDTO shipmentDTO) {
 		System.out.println("EmployeeService searchShipmentList()");
 		
-		return employeeDAO.searchShipmentList(receiveDTO);
+		return employeeDAO.searchShipmentList(shipmentDTO);
 	}//searchShipmentList
 	
 	//사원 출력
