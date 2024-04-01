@@ -25,12 +25,13 @@ select{
 <body>
 <form action="${pageContext.request.contextPath}/store/popup/stock_insertPro" method="post" class="form">
 <h2 style="margin-left: 10px">재고 추가</h2>
+<sub>반드시 유형을 먼저 선택해주셔야합니다.</sub>
 <fieldset style="border:0px">
 <div class="check"></div><br>
 <div class="box-body">
 <div><b>유형</b></div>
 <div class="input-group">
-<select class="form-control" style="width: 177px" name="item_type">
+<select class="form-control" style="width: 177px" name="item_type" class="item_type">
 <option value="100">선택해주세요</option>
 <option value="0">식품</option>
 <option value="1">비식품</option>
@@ -46,7 +47,7 @@ select{
 </div>
 <br>
 <div><b>단가</b></div><input type="text" name="item_price" id="item_price" readonly><br>
-<div><b>발주량</b></div><input type="text" name="od_amount"><br>
+<div><b>발주량</b></div><input type="text" name="od_amount" class="od_amount"><br>
 <div><b>적요</b></div><input type="text" name="od_note"><br>
 <br>
 <input type="submit" value="추가하기">
@@ -54,6 +55,29 @@ select{
 </form>
 
 <script type="text/javascript">
+$(function(){
+	$('.form').submit(function(){
+		
+		if($('.item_type').val()=="100"){
+			alert("유형을 선택해주세요");
+			$('.item_type').focus();
+			return false;
+		}
+		
+		if($('.item_name').val()=="100"){
+			alert("재료명을 선택해주세요");
+			$('.item_name').focus();
+			return false;
+		}
+		
+		if($('.od_amount').val()==""||$('.od_amount').val()==null||$('.od_amount').val()==undefined){
+			alert("발주량을 입력해주세요");
+			$('.od_amount').focus();
+			return false;
+		}
+	});
+});
+
 $(function(){
     $('select[name="item_type"] ').on('change', function()  {
         let arrType = getAgreeType();
@@ -86,10 +110,12 @@ $(function(){
 function getAgreeType() {    
     var obj = {
         "식품" : {
+        	'100' : '선택해주세요',
             '에티오피아' : '에티오피아',
             '콜롬비아' : '콜롬비아',
         },
         "비식품" : {
+        	'100' : '선택해주세요',
             '유리컵M' : '유리컵M',
             '유리컵L' : '유리컵L',
             '종이컵M' : '종이컵M',
@@ -108,25 +134,6 @@ function getAgreeType() {
     return obj;
     
 }
-
-// function showPrice(){
-	
-// 	  var material = document.getElementById("item_name").value;
-// 	  var priceInput = document.getElementById("item_price");
-	
-// 	var price = 0;
-// 	if(material=="에티오피아"||material=="콜롬비아"){
-// 		price = 3500;
-// 	} else{
-// 		price = 10;
-// 	}
-// 	$('item_price').val(price);
-// }
-
-
-
-
-
 
 
 </script>
