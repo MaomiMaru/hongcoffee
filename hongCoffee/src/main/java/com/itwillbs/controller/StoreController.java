@@ -67,8 +67,8 @@ public class StoreController {
 	//2. 기준 정보 관리
 	//2-1. 재료 관리
 	@GetMapping("/store/item")
-	public String itemList(HttpServletRequest request, Model model) {
-		System.out.println("itemList");
+	public String item(HttpServletRequest request, Model model) {
+		System.out.println("StoreController item()");
 	
 		List<ItemDTO> itemList = storeService.getItemList();
 	
@@ -142,8 +142,8 @@ public class StoreController {
 	//3. 물류 관리
 	//3-1. 재고 관리
 	@GetMapping("/stock")
-	public String stockList(HttpServletRequest request, Model model) {
-		System.out.println("stock");
+	public String stock(HttpServletRequest request, Model model) {
+		System.out.println("StoreController stock()");
 		
 		List<StockDTO> stockList = storeService.getStockList();
 		
@@ -202,8 +202,8 @@ public class StoreController {
 	
 	//3-2. 발주 관리
 	@GetMapping("/order")
-	public String orderList(HttpServletRequest request, Model model) {
-		System.out.println("order");
+	public String order(HttpServletRequest request, Model model) {
+		System.out.println("StoreController order()");
 			
 		List<OrderDTO> orderList = storeService.getOrderList();
 			
@@ -271,8 +271,8 @@ public class StoreController {
 	
 	//3-3. 입고 관리
 	@GetMapping("/receive")
-	public String receiveList(HttpServletRequest request, Model model) {
-		System.out.println("receive");
+	public String receive(HttpServletRequest request, Model model) {
+		System.out.println("StoreController receive()");
 			
 		List<ReceiveDTO> receiveList = storeService.getReceiveList();
 			
@@ -285,7 +285,7 @@ public class StoreController {
 	//3-3-1. 입고 필터링
 	@PostMapping("/receiveSearch")
 	public String receiveSearch(HttpServletRequest request, Model model) throws Exception {
-		System.out.println("StoreController receiveSearch");
+		System.out.println("StoreController receiveSearch()");
 
 		ReceiveDTO receiveDTO = new ReceiveDTO();
 
@@ -333,8 +333,8 @@ public class StoreController {
 	//4. 영업 관리
 	//4-1. 실적 관리
 	@GetMapping("/result")
-	public String resultList(HttpServletRequest request, Model model) {
-		System.out.println("result");
+	public String result(HttpServletRequest request, Model model) {
+		System.out.println("StoreController result()");
 		
 		List<ResultDTO> resultList = storeService.getResultList();
 		
@@ -375,8 +375,8 @@ public class StoreController {
 	
 	//4-2. 소모 관리
 	@GetMapping("/store/somo")
-	public String somoList(HttpServletRequest request, Model model) {
-		System.out.println("result");
+	public String somo(HttpServletRequest request, Model model) {
+		System.out.println("StoreController somo()");
 				
 		List<ResultDTO> somoList = storeService.getSomoList();
 				
@@ -418,8 +418,8 @@ public class StoreController {
 		
 	//4-3. 판매 관리
 	@GetMapping("/panme")
-	public String panmeList(HttpServletRequest request, Model model) {
-		System.out.println("result");
+	public String panme(HttpServletRequest request, Model model) {
+		System.out.println("StoreController panme()");
 				
 		List<ResultDTO> panmeList = storeService.getPanmeList();
 				

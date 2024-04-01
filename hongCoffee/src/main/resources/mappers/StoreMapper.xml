@@ -13,11 +13,6 @@
 		where num = #{num} and pw = #{pw}
 	</select>
 	
-
-	<select id="getitemList" resultType="com.itwillbs.domain.ItemDTO">
- 		select * from item 
-	</select> 
-	
 	
 	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select item_num, item_name, item_type, item_price, item_state, item_note
@@ -136,17 +131,6 @@
 	</select>
 
 
-	<select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
-		select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (sum((r.sales*p.prod_price))-sum((r.consume*i.item_price))) "income"
-		from result r left join product p
-		on r.prod_num = p.prod_num
-		left join stock s on r.stock_num = s.stock_num
-		left join item i on s.item_num = i.item_num
-		where r.num = 1
-		group by r.rs_date;
- 	</select>
- 	
- 	
  	<select id="getSomoList" resultType="com.itwillbs.domain.ResultDTO"> 
 		select r.rs_date, i.item_name, r.consume, i.item_price
 		from result r join stock s on r.stock_num = s.stock_num
@@ -154,26 +138,8 @@
 		order by r.rs_date; 
  	</select>
 
-        
-    <select id="getPanmeList" resultType="com.itwillbs.domain.ResultDTO"> 
-	    select r.rs_date , p.prod_name, r.sales, p.prod_price
-        from result r join product p on r.prod_num = p.prod_num
-        order by r.rs_date; 
-	</select>
 
- 	
- 	<select id="searchResultList" resultType="com.itwillbs.domain.ResultDTO">
- 		select rs_num, rs_date, sales, consume
- 		from result
- 		<where>
- 			<if test="rs_date != null">
- 				rs_date = #{rs_date}
- 			</if>
- 		</where>
- 	</select>
- 	
- 	
- 	<select id="searchSomoList" resultType="com.itwillbs.domain.ResultDTO">
+	<select id="searchSomoList" resultType="com.itwillbs.domain.ResultDTO">
  		select r.rs_date, i.item_name, r.consume, i.item_price
 		from result r join stock s on r.stock_num = s.stock_num
 		join item i on s.item_num = i.item_num
@@ -184,7 +150,14 @@
  		</where>
 		order by r.rs_date;
  	</select>
- 	
+
+
+    <select id="getPanmeList" resultType="com.itwillbs.domain.ResultDTO"> 
+	    select r.rs_date , p.prod_name, r.sales, p.prod_price
+        from result r join product p on r.prod_num = p.prod_num
+        order by r.rs_date; 
+	</select>
+
  	
  	<select id="searchPanmeList" resultType="com.itwillbs.domain.ResultDTO">
  		select r.rs_date , p.prod_name, r.sales, p.prod_price
@@ -195,6 +168,28 @@
  			</if>
  		</where>
         order by r.rs_date; 
+ 	</select>
+ 	
+ 	
+ 	<select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
+		select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (sum((r.sales*p.prod_price))-sum((r.consume*i.item_price))) "income"
+		from result r left join product p
+		on r.prod_num = p.prod_num
+		left join stock s on r.stock_num = s.stock_num
+		left join item i on s.item_num = i.item_num
+		where r.num = 1
+		group by r.rs_date;
+ 	</select>
+ 	
+ 	
+ 	<select id="searchResultList" resultType="com.itwillbs.domain.ResultDTO">
+ 		select rs_num, rs_date, sales, consume
+ 		from result
+ 		<where>
+ 			<if test="rs_date != null">
+ 				rs_date = #{rs_date}
+ 			</if>
+ 		</where>
  	</select>
 
 
