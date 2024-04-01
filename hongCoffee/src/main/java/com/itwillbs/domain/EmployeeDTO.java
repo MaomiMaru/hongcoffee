@@ -9,12 +9,12 @@ public class EmployeeDTO {
 	private String emp_name; //이름
 	private String emp_phone; //연락처
 	private String emp_email; //이메일
-	private Timestamp emp_birth; //생년월일
+	private String emp_birth; //생년월일
 	private int emp_state; //상태(재직=0,휴직=1,퇴직=2)
 	private int emp_dept; //부서(인사부, 영업부, 재무부)
 	private int emp_rank; //직급(대표, 팀장, 대리, 사원)
 	private int emp_right; //권한(일반=0, 관리자=1)
-	private Timestamp hire_date; //입사일
+	private String hire_date; //입사일
 	private Timestamp quit_date; //퇴사일
 	private String emp_note; //사원 적요
 	
@@ -54,10 +54,10 @@ public class EmployeeDTO {
 	public void setEmp_email(String emp_email) {
 		this.emp_email = emp_email;
 	}
-	public Timestamp getEmp_birth() {
+	public String getEmp_birth() {
 		return emp_birth;
 	}
-	public void setEmp_birth(Timestamp emp_birth) {
+	public void setEmp_birth(String emp_birth) {
 		this.emp_birth = emp_birth;
 	}
 	public int getEmp_state() {
@@ -85,10 +85,10 @@ public class EmployeeDTO {
 	public void setEmp_right(int emp_right) {
 		this.emp_right = emp_right;
 	}
-	public Timestamp getHire_date() {
+	public String getHire_date() {
 		return hire_date;
 	}
-	public void setHire_date(Timestamp hire_date) {
+	public void setHire_date(String hire_date) {
 		this.hire_date = hire_date;
 	}
 	public Timestamp getQuit_date() {

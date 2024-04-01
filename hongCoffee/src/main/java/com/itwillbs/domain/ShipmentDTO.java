@@ -1,15 +1,14 @@
 package com.itwillbs.domain;
 
-import java.sql.Timestamp;
+
 
 public class ShipmentDTO {
-
 
 	private int od_num; //거래번호
 	private int num; //지점번호
 	private int item_num; //물품번호
 	private int sh_amount; //입고수량
-	private Timestamp sh_time; //입고일
+	private String sh_time; //입고일
 	private String sh_note; //출하적
 	private int item_price; //단가
 	private int item_minPrice; //최소 단가
@@ -51,10 +50,14 @@ public class ShipmentDTO {
 	public void setSh_amount(int sh_amount) {
 		this.sh_amount = sh_amount;
 	}
-	public Timestamp getSh_time() {
+
+	public String getSh_time() {
+
 		return sh_time;
 	}
-	public void setSh_time(Timestamp sh_time) {
+	
+	public void setSh_time(String sh_time) {
+
 		this.sh_time = sh_time;
 	}
 	public String getSh_note() {

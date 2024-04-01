@@ -3,9 +3,12 @@ package com.itwillbs.controller;
 
 import java.util.Date;
 import java.net.http.HttpRequest;
+
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import java.util.Date;
 
 import java.util.List;
 
@@ -69,6 +72,8 @@ public class EmployeeController {
 		return "/emp/main";
 	}
 
+
+	
 	
 	//2. 기준 정보 관리
 	//2-1. 지점 관리
@@ -316,10 +321,10 @@ public class EmployeeController {
 		String sh_time = request.getParameter("sh_time");
 
 		if (sh_time != "") {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			Date d1 = format.parse(sh_time);
-			Timestamp date1 = new Timestamp(d1.getTime());
-			shipmentDTO.setSh_time(date1);
+//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//			Date d1 = format.parse(sh_time);
+//			Timestamp date1 = new Timestamp(d1.getTime());
+			shipmentDTO.setSh_time(sh_time);
 		}
 
 		List<ShipmentDTO> shipmentList;
@@ -523,30 +528,9 @@ public class EmployeeController {
 	
 
 	@PostMapping("popup/shipment_insertPro")
-	public String shipment_insertPro(HttpServletRequest request) {
+	public String shipment_insertPro(HttpServletRequest request, ShipmentDTO shipmentDTO) {
 		System.out.println("EmployeeController shipment_insertPro()");
-		ShipmentDTO shipmentDTO = new ShipmentDTO();
-		shipmentDTO.setItem_name(request.getParameter("item_name"));
-		shipmentDTO.setItem_num(Integer.parseInt(request.getParameter("item_num")));
-		shipmentDTO.setItem_price(Integer.parseInt(request.getParameter("item_price")));
-		shipmentDTO.setName(request.getParameter("name"));
-		shipmentDTO.setNum(Integer.parseInt(request.getParameter("num")));
-		shipmentDTO.setOd_num(Integer.parseInt(request.getParameter("od_num")));
-		shipmentDTO.setSh_amount(Integer.parseInt(request.getParameter("sh_amount")));
-		shipmentDTO.setSh_note(request.getParameter("sh_note"));
 		
-		String sh_time = request.getParameter("sh_time");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date d;
-		try {
-			d = format.parse(sh_time);
-		} catch (ParseException e) {
-			d = new Date();
-		}
-		Timestamp date = new Timestamp(d.getTime());
-		if(sh_time != null && sh_time != "") shipmentDTO.setSh_time(date);
-		
-		System.out.println(shipmentDTO);
 		employeeService.shipmentInsert(shipmentDTO);
 		
 		return "redirect:/emp/popup/close";
@@ -564,32 +548,10 @@ public class EmployeeController {
 		return "/emp/popup/shipment_update";
 	}
 	
-	@PostMapping("popup/shipment_updatePro")
+	@GetMapping("popup/shipment_updatePro")
 	public String shipment_updatePro(HttpServletRequest request, ShipmentDTO shipmentDTO) {
 		System.out.println("EmployeeController shipment_updatePro()");
-		shipmentDTO.setItem_name(request.getParameter("item_name"));
-		shipmentDTO.setItem_num(Integer.parseInt(request.getParameter("item_num")));
-		shipmentDTO.setItem_price(Integer.parseInt(request.getParameter("item_price")));
-		shipmentDTO.setName(request.getParameter("name"));
-		shipmentDTO.setNum(Integer.parseInt(request.getParameter("num")));
-		shipmentDTO.setOd_num(Integer.parseInt(request.getParameter("od_num")));
-		shipmentDTO.setSh_amount(Integer.parseInt(request.getParameter("sh_amount")));
-		shipmentDTO.setSh_note(request.getParameter("sh_note"));
-		
-		
-		String sh_time = request.getParameter("sh_time");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date d;
-		try {
-			d = format.parse(sh_time);
-		} catch (ParseException e) {
-			d = new Date();
-		}
-		Timestamp date = new Timestamp(d.getTime());
-		if(sh_time != null && sh_time != "") { 
-			shipmentDTO.setSh_time(date);
-			}
-		
+			
 		employeeService.shipmentUpdate(shipmentDTO);
 		
 		return "redirect:/emp/popup/close";
@@ -605,8 +567,43 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("popup/emp_insertPro")
-	public String emp_insertPro(EmployeeDTO employeeDTO) {
+	public String emp_insertPro(EmployeeDTO employeeDTO, HttpServletRequest request) {
 		System.out.println("EmployeeController emp_insertPro()");
+		
+//		employeeDTO.setEmp_dept(request.getParameter("emp_dept"));
+//		employeeDTO.setEmp_email(request.getParameter("emp_email"));
+//		employeeDTO.setEmp_name(request.getParameter("emp_name"));
+//		employeeDTO.setEmp_note(request.getParameter("emp_note"));
+//		employeeDTO.setEmp_num(Integer.parseInt(request.getParameter("emp_num")));
+//		employeeDTO.setEmp_phone(request.getParameter("emp_phone"));
+//		employeeDTO.setEmp_pw(request.getParameter("emp_pw"));
+//		employeeDTO.setEmp_rank(request.getParameter("emp_rank"));
+//		employeeDTO.setEmp_right(Integer.parseInt(request.getParameter("emp_right")));
+//		employeeDTO.setEmp_state(Integer.parseInt(request.getParameter("emp_state")));
+		
+//		String hire_date = request.getParameter("hire_date");
+//		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+//		Date d1;
+//		try {
+//			d1 = format1.parse(hire_date);
+//		} catch (ParseException e) {
+//			d1 = new Date();
+//			e.printStackTrace();
+//		}
+//		Timestamp jdate1 = new Timestamp(d1.getTime());
+//		employeeDTO.setHire_date(jdate1);
+//		
+//		String emp_birth = request.getParameter("emp_birth");
+//		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+//		Date d2;
+//		try {
+//			d2 = format2.parse(emp_birth);
+//		} catch (ParseException e) {
+//			d2 = new Date();
+//			e.printStackTrace();
+//		}
+//		Timestamp jdate2 = new Timestamp(d2.getTime());
+//		employeeDTO.setEmp_birth(jdate2);
 		
 		employeeService.employeeInsert(employeeDTO);
 		return "redirect:/emp/popup/close";
@@ -635,8 +632,12 @@ public class EmployeeController {
 	
 	//4-1-3. 사원 관리 - 수정(일반)
 	@GetMapping("popup/emp_update")
-	public String emp_update() {
+	public String emp_update(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController emp_update()");
+		int emp_num = Integer.parseInt(request.getParameter("emp_num"));
+		EmployeeDTO employeeDTO = employeeService.getEmployee(emp_num);		
+		
+		model.addAttribute("employeeDTO", employeeDTO);
 		
 		return "/emp/popup/emp_update";
 	}

@@ -257,7 +257,7 @@ label input[type=radio]:checked:after{
  	<td style="text-align: center !important; font-size:20px !important;">
  	<fmt:formatNumber value="${ShipmentDTO.item_price * ShipmentDTO.sh_amount}" pattern="#,###"></fmt:formatNumber>
  	</td>
- 	 <td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${ShipmentDTO.sh_time}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
+ 	 <td style="text-align: center !important; font-size:20px !important;"><%-- <fmt:formatDate value="${ShipmentDTO.sh_time}" pattern="yyyy.MM.dd HH:mm:ss"/> --%>${ShipmentDTO.sh_time}</td>
 
   	<c:if test="${ShipmentDTO.pay eq 0}">
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미결제</td>
