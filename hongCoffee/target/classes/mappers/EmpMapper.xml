@@ -44,19 +44,29 @@
  	</select>
  	
  	<select id="searchItemList" resultType="com.itwillbs.domain.ItemDTO">
-	select item_num, item_name, item_type, item_price, item_state, item_note from item
+		select item_num, item_name, item_type, item_price, item_state, item_note from item
 		<where>
 		<if test="item_type != 100">
-				item_type = #{item_type}
-			<if test="item_name != null"> and item_name like concat('%', #{item_name}, '%')
+			item_type = #{item_type}
+			<if test="item_name != null">
+				and item_name like concat('%', #{item_name}, '%')
 			</if>
-			<if test="item_price != 0"> and item_price = #{item_price}
+			<if test="item_maxPrice != 0">
+				and item_price between #{item_minPrice} and #{item_maxPrice}
+			</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and item_price >= #{item_minPrice}
 			</if>
 		</if>
 		<if test="item_type == 100">
-			<if test="item_name != null"> item_name like concat('%', #{item_name}, '%')
+			<if test="item_name != null">
+				item_name like concat('%', #{item_name}, '%')
 			</if>
-			<if test="item_price != 0"> and item_price = #{item_price}
+			<if test="item_maxPrice != 0">
+				and item_price between #{item_minPrice} and #{item_maxPrice}
+			</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and item_price >= #{item_minPrice}
 			</if>
 		</if>
 		</where>
@@ -79,9 +89,12 @@
     		<if test="item_name != ''">
       			and i.item_name like concat('%', #{item_name}, '%')
     		</if>
-    		<if test="item_price != ''">
-      			and i.item_price = #{item_price}
+    		<if test="item_maxPrice != 0">
+    			and i.item_price between #{item_minPrice} and #{item_maxPrice}
     		</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and i.item_price >= #{item_minPrice}
+			</if>
     		<if test="od_time != null">
       			and date(o.od_time) = #{od_time}
     		</if>
@@ -98,10 +111,11 @@
  		join receive r on h.od_num = r.od_num
  	</select>
  	
- 	<select id="searchShipmentList" resultType="com.itwillbs.domain.ReceiveDTO">
- 		select r.od_num, s.name, i.item_name, r.rc_amount, i.item_price, r.rc_time
- 		from receive r join store s on r.num = s.num
- 		join item i on r.item_num = i.item_num
+ 	<select id="searchShipmentList" resultType="com.itwillbs.domain.ShipmentDTO">
+ 		select  s.name, i.item_name, h.sh_amount, i.item_price, h.sh_time, r.pay 
+ 		from shipment h join store s on h.num = s.num
+ 		join item i on h.item_num = i.item_num
+ 		join receive r on h.od_num = r.od_num
  		<where>
  			<if test="name != ''">
      			s.name like concat('%', #{name}, '%')
@@ -109,8 +123,14 @@
     		<if test="item_name != ''">
       			and i.item_name like concat('%', #{item_name}, '%')
     		</if>
-    		<if test="rc_time != null">
-      			and date(r.rc_time) = #{rc_time}
+    		<if test="item_maxPrice != 0">
+    			and i.item_price between #{item_minPrice} and #{item_maxPrice}
+    		</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and i.item_price >= #{item_minPrice}
+			</if>
+    		<if test="sh_time != null">
+      			and date(h.sh_time) = #{sh_time}
     		</if>
  		</where>
  	</select>
