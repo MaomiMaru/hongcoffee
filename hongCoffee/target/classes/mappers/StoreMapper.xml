@@ -37,6 +37,60 @@
 		select rs_num, rs_date, sales, consume
 		from result
  	</select>
+ 	
+ 	<insert id="stockInsert">
+ 		insert into stock(num, item_num, amount, stock_note)
+ 		values(#{num}, #{item_num}, #{amount}, #{stock_note})
+ 	</insert>
+ 	
+ 	<select id="getItemNum" resultType="java.lang.Integer">
+ 		select item_num
+ 		from item
+ 		where item_name like concat('%', #{item_name}, '%')
+ 	</select>
+ 	
+ 	<select id="getStock" resultType="com.itwillbs.domain.StockDTO">
+ 		select a.stock_num, a.item_num, a.amount, a.stock_note, a.item_num, b.item_name, b.item_price, b.item_type
+ 		from stock a join item b
+ 		on a.item_num = b.item_num
+ 		where stock_num = #{stock_num}
+ 	</select>
+ 	
+ 	<select id="getOrder" resultType="com.itwillbs.domain.OrderDTO">
+ 		select o.od_num, o.num, o.od_amount, o.od_note, i.item_type, i.item_name, i.item_price
+ 		from `order` o join item i
+ 		on o.item_num = i.item_num
+ 		where o.od_num = #{od_num}
+ 	</select>
+ 	
+ 	<insert id="receiveInsert">
+ 		insert into receive(od_num, num, item_num, rc_amount, rc_note)
+ 		values(#{od_num}, #{num}, #{item_num}, #{rc_amount}, #{rc_note})
+ 	</insert>
+ 	
+ 	<insert id="orderInsert">
+ 		insert into `order`(num, item_num, od_amount, od_note)
+ 		values(#{num}, #{item_num}, #{od_amount}, #{od_note}) 
+ 	</insert>
+ 	
+ 	<update id="orderUpdate">
+ 		update `order`
+ 		set od_amount = #{od_amount}, od_note = #{od_note}
+ 		where od_num = #{od_num}
+ 	</update>
+ 	
+ 	<update id="receiveUpdate">
+ 		update receive
+ 		set rc_amount = #{rc_amount}, rc_note = #{rc_note}
+ 		where od_num = #{od_num}
+ 	</update>
+ 	
+ 	<select id="getReceive" resultType="com.itwillbs.domain.ReceiveDTO">
+ 		select a.od_num, a.num, a.item_num, a.rc_amount, a.rc_note, b.item_type, b.item_price, b.item_name
+ 		from receive a join item b
+ 		on a.item_num = b.item_num
+ 		where od_num = #{od_num}
+ 	</select>
 
 </mapper>
 

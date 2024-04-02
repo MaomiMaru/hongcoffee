@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
@@ -28,7 +30,6 @@ public class StoreController {
 @Inject
 private StoreService storeService;
 
-	//0. 로그인 진행 과정
 	//로그인
 	@GetMapping("/login")
 	public String login() {
@@ -37,6 +38,7 @@ private StoreService storeService;
 		return "store/login";
 	}
 	
+	//로그인 Process
 	@PostMapping("/loginPro")
 	public String loginPro(StoreDTO storeDTO, HttpSession session) {
 		System.out.println("StoreController loginPro()");
@@ -51,18 +53,24 @@ private StoreService storeService;
 			return "/store/msg";
 		}
 	}
+	
+	//로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		System.out.println("StoreController logout()");
+		session.invalidate();
+		return "redirect:/store/login";
+	}
 
-	//1. 대시보드
-	@GetMapping("/store/main")
+	//대시보드
+	@GetMapping("/main")
 	public String main() {
 		System.out.println("StoreController main()");
 		return "store/main";
 	}
 
-
-	
-	//2. 기준 정보 관리 - 재료 관리
-	@GetMapping("/store/item")
+	//기준 정보 관리 - 재료 관리
+	@GetMapping("/item")
 	public String itemList(HttpServletRequest request, Model model) {
 		System.out.println("StoreController itemList()");
 		
@@ -74,10 +82,9 @@ private StoreService storeService;
 		}//itemList
 
 
-
 	//3. 물류 관리
 	//3-1. 재고 관리
-	@GetMapping("/store/stock")
+	@GetMapping("/stock")
 	public String stockList(HttpServletRequest request, Model model) {
 		System.out.println("StoreController stock()");
 		
@@ -96,9 +103,33 @@ private StoreService storeService;
 		return "/store/popup/stock_insert";
 	}
 	
-
+	
+	@PostMapping("/popup/stock_insertPro")
+	public String stock_insertPro(StockDTO stockDTO) {
+		System.out.println("StoreController stock_insertPro()");
+		
+		int item_num = storeService.getItemNum(stockDTO.getItem_name());
+		stockDTO.setItem_num(item_num);
+		storeService.stockInsert(stockDTO);
+		
+		return "/store/popup/close";
+	}
+	
+	//3-1-2 재고 관리 - 수정
+	@GetMapping("/popup/stock_update")
+	public String stock_update(HttpServletRequest request, Model model) {
+		System.out.println("StoreController stock_update()");
+		
+		int stock_num = Integer.parseInt(request.getParameter("stock_num"));
+		StockDTO stockDTO = new StockDTO();
+		stockDTO = storeService.getStock(stock_num);
+		model.addAttribute("stockDTO", stockDTO);
+		
+		return "/store/popup/stock_update";
+	}
+	
 	//3-2. 발주 관리
-	@GetMapping("/store/order")
+	@GetMapping("/order")
 	public String orderList(HttpServletRequest request, Model model) {
 		System.out.println("order");
 		
@@ -111,7 +142,7 @@ private StoreService storeService;
 
 
 	//3-3. 입고 관리
-	@GetMapping("/store/receive")
+	@GetMapping("/receive")
 	public String receiveList(HttpServletRequest request, Model model) {
 		System.out.println("receive");
 		
@@ -121,11 +152,91 @@ private StoreService storeService;
 		
 			return "store/receive";
 	}//receiveList
+	
+	//3-3-1. 물류 관리 -  입고 추가
+	@GetMapping("/popup/receive_insert")
+	public String receive_insert(HttpServletRequest request, Model model) {
+		System.out.println("StoreController  receive_insert");
 
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		model.addAttribute("receiveDTO", storeService.getReceive(od_num));
+		
+		return "store/popup/receive_insert";
+	}//receive_insert
+	
+	
+	@PostMapping("/popup/receive_insertPro")
+	public String receive_insertPro(ReceiveDTO receiveDTO) {
+		System.out.println("StoreController receive_insertPro");
+		
+		receiveDTO.setItem_num(storeService.getItemNum(receiveDTO.getItem_name()));
+		storeService.receiveInsert(receiveDTO);
+		
+		return "store/popup/close";
+	}//receive_insertPro
 
+	//3-3-1. 물류 관리 -  발주 추가
+	@GetMapping("/popup/order_insert")
+	public String order_insert() {
+		System.out.println("StoreController order_insert()");
+		
+		return "store/popup/order_insert";
+	}
+	
+	@PostMapping("/popup/order_insertPro")
+	public String order_insertPro(OrderDTO orderDTO) {
+		System.out.println("StoreController order_insertPro()");
+		
+		int item_num = storeService.getItemNum(orderDTO.getItem_name());
+		orderDTO.setItem_num(item_num);
+		storeService.orderInsert(orderDTO);
+		
+		
+		return "store/popup/close";
+	}
+	
+	//3-3-2. 물류 관리 - 발주 수정
+	@GetMapping("/popup/order_update")
+	public String order_update(HttpServletRequest request, Model model) {
+		System.out.println("StoreController order_update()");
+		
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		model.addAttribute("orderDTO", storeService.getOrder(od_num));
+		
+		return "store/popup/order_update";
+	}
+	
+	@PostMapping("/popup/order_updatePro")
+	public String order_updatePro(OrderDTO orderDTO) {
+		System.out.println("StoreController order_updatePro()");
+		
+		storeService.orderUpdate(orderDTO);
+		
+		return "store/popup/close";
+	}
+	
+	//3-3-1 입고 관리 - 수정
+	@GetMapping("/popup/receive_update")
+	public String receive_update(HttpServletRequest request, Model model) {
+		System.out.println("StoreController receive_update()");
+		
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		model.addAttribute("receiveDTO", storeService.getReceive(od_num));
+		
+		return "store/popup/receive_update";
+	}
+	
+	@PostMapping("/popup/receive_updatePro")
+	public String receive_updatePro(ReceiveDTO receiveDTO) {
+		System.out.println("StoreController receive_updatePro()");
+		
+		storeService.receiveUpdate(receiveDTO);
+		
+		return "store/popup/close";
+	}
 
 	//4. 영업 관리 - 실적 관리
-	@GetMapping("/store/result")
+	@GetMapping("/result")
 	public String resultList(HttpServletRequest request, Model model) {
 		System.out.println("result");
 		

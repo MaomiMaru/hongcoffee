@@ -73,6 +73,61 @@ public class StoreService {
 	}
 
 
+	public void stockInsert(StockDTO stockDTO) {
+		System.out.println("StoreService stockInsert()");
+		storeDAO.stockInsert(stockDTO);
+	}
+
+	public StockDTO getStock(int num) {
+		System.out.println("StoreService getStock()");
+		return storeDAO.getStock(num);
+	}
+
+
+
+	public int getItemNum(String item_name) {
+		System.out.println("StoreService getItemNum()");
+		return storeDAO.getItemNum(item_name);
+	}
+
+
+
+	public OrderDTO getOrder(int od_num) {
+		System.out.println("StoreService getOrder()");
+		return storeDAO.getOrder(od_num);
+	}
+
+
+	public void receiveInsert(ReceiveDTO receiveDTO) {
+		System.out.println("StoreService receiveInsert()");
+		storeDAO.receiveInsert(receiveDTO);
+	}
+
+	public void orderInsert(OrderDTO orderDTO) {
+		System.out.println("StoreService orderInsert()");
+		storeDAO.orderInsert(orderDTO);
+	}
+
+	public void orderUpdate(OrderDTO orderDTO) {
+		System.out.println("StoreService orderUpdate()");
+		storeDAO.orderUpdate(orderDTO);
+	}
+
+	public void receiveUpdate(ReceiveDTO receiveDTO) {
+		System.out.println("StoreService receiveUpdate()");
+		storeDAO.receiveUpdate(receiveDTO);
+	}
+
+
+
+	public ReceiveDTO getReceive(int od_num) {
+		System.out.println("StoreService getReceive()");
+		return storeDAO.getReceive(od_num);
+	}
+
+
+
+
 
 
 

@@ -103,7 +103,7 @@ tr:hover {background-color: #F0F0F0;}
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>사원</title>
+  <title>홍커피</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/vendors/ti-icons/css/themify-icons.css">
@@ -191,8 +191,9 @@ tr:hover {background-color: #F0F0F0;}
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">발주 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button style="background-color: black; color: #EFBDBC">추가</button>
-		<button style="background-color: black; color: #EFBDBC">수정</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=4','홍커피','width=350,height=900')">입고 추가</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/order_insert','홍커피','width=350,height=900')">발주 추가</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/order_update?od_num=22','홍커피','width=350,height=900')">발주 수정</button>
 		<button style="background-color: black; color: #EFBDBC">삭제</button></div>
 		
 <!-- 		목록 -->

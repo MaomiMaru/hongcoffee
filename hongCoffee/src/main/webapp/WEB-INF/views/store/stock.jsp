@@ -187,7 +187,7 @@ tr:hover {background-color: #F0F0F0;}
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">재료 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/store/popup/stock_insert','홍커피','width=370,height=520')">추가</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/store/popup/stock_update','홍커피','width=370,height=520')">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=1','홍커피','width=370,height=520')">수정</button>
 		</div>
 		
 <!-- 		목록 -->
