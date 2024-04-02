@@ -64,9 +64,6 @@ select {
 	$(function() {
 		$('.form').submit(
 				function() {
-
-
-
 					if ($('.od_amount').val() == ""
 							|| $('.od_amount').val() == null
 							|| $('.od_amount').val() == undefined) {
