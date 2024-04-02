@@ -50,7 +50,21 @@ select{
 </form>
 
 <script type="text/javascript">
+$(function() {
+	$('.form').submit(
+			function() {
 
+
+
+				if ($('.amount').val() == ""
+						|| $('.amount').val() == null
+						|| $('.amount').val() == undefined) {
+					alert("보유량을 입력해주세요");
+					$('.amount').focus();
+					return false;
+				}
+			});
+});
 </script>
 </body>
 </html>

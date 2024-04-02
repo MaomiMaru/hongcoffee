@@ -27,7 +27,7 @@ select{
 <div><b>유형</b></div><input type="text" name="item_type" value="${receiveDTO.item_type }" readonly><br>
 <div><b>재료명</b></div><input type="text" name="item_name" value="${receiveDTO.item_name}" readonly><br>
 <div><b>단가</b></div><input type="text" name="item_price" value="${receiveDTO.item_price}" readonly><br>
-<div><b>입고량</b></div><input type="text" name="rc_amount" value="${receiveDTO.rc_amount}"><br>
+<div><b>입고량</b></div><input type="text" name="rc_amount" class="rc_amount" value="${receiveDTO.rc_amount}"><br>
 <div><b>적요</b></div><input type="text" name="rc_note" value="${receiveDTO.rc_note}"><br>
 <br> 
 <input type="submit" value="수정하기" style="background-color: black; color: #EFBDBC;"> |
@@ -36,7 +36,18 @@ select{
 </form>
 
 <script type="text/javascript">
-
+$(function() {
+	$('.form').submit(
+			function() {
+				if ($('.rc_amount').val() == ""
+						|| $('.rc_amount').val() == null
+						|| $('.rc_amount').val() == undefined) {
+					alert("입고량을 입력해주세요");
+					$('.rc_amount').focus();
+					return false;
+				}
+			});
+});
 </script>
 </body>
 </html>

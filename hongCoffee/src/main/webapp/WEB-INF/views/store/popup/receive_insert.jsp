@@ -42,7 +42,18 @@ select{
 </form>
 
 <script type="text/javascript">
-
+$(function() {
+	$('.form').submit(
+			function() {
+				if ($('.rc_amount').val() == ""
+						|| $('.rc_amount').val() == null
+						|| $('.rc_amount').val() == undefined) {
+					alert("입고량을 입력해주세요");
+					$('.rc_amount').focus();
+					return false;
+				}
+			});
+});
 </script>
 </body>
 </html>

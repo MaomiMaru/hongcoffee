@@ -45,7 +45,7 @@ select {
 			<div>
 				<b>발주량</b>
 			</div>
-			<input type="text" name="od_amount" value="${orderDTO.od_amount }"><br> <sub></sub>
+			<input type="text" name="od_amount" class="od_amount" value="${orderDTO.od_amount }"><br> <sub></sub>
 			<div>
 				<b>적요</b>
 			</div>
@@ -60,6 +60,22 @@ select {
 	</form>
 
 	<script type="text/javascript">
+	
+	$(function() {
+		$('.form').submit(
+				function() {
+
+
+
+					if ($('.od_amount').val() == ""
+							|| $('.od_amount').val() == null
+							|| $('.od_amount').val() == undefined) {
+						alert("발주량을 입력해주세요");
+						$('.od_amount').focus();
+						return false;
+					}
+				});
+	});
 
 	</script>
 </body>
