@@ -242,8 +242,8 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">상태</th>
  		 </tr>
  		 <c:forEach var="StoreDTO" items="${storeList}">
-  <tr >
-  <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+  <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_store?num=${StoreDTO.num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
+  <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.boss}</td>
     <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>
@@ -260,8 +260,24 @@ label input[type=radio]:checked:after{
   	</c:if>
   </tr>
   		</c:forEach>
-  
  		 </table>
+ 		 
+ 		 
+ 		 <div id="page_control">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/emp/store?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+		</c:if>
+
+		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/emp/store?pageNum=${i}">${i}</a>
+		</c:forEach>
+
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/emp/store?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		</c:if>
+
+		</div>
+ 		 
 		</div>
         
         

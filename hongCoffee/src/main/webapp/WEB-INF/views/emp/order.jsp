@@ -245,7 +245,7 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">선택</th>
     		<th style=" font-size:20px !important; color: black;">지점명</th>
     		<th style=" font-size:20px !important; color: black;">재료명</th>
-    		<th style=" font-size:20px !important; color: black;">단가</th>
+<!--     		<th style=" font-size:20px !important; color: black;">단가</th> -->
     		<th style=" font-size:20px !important; color: black;">수주량</th>
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">총금액</th>
@@ -253,18 +253,20 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">입고여부</th>
  		 </tr>
  		 <c:forEach var="OrderDTO" items="${orderList}">
-  <tr>
-   <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+  <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_order?od_num=${OrderDTO.od_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
+   <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
 
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
-   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_price}</td>
+<%--    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_price}</td> --%>
     <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_amount}</td>
 
     
-     <td style="text-align: center !important; font-size:20px !important;">
+    
+   		 <td style="text-align: center !important; font-size:20px !important;">
    		 <fmt:formatNumber value="${OrderDTO.item_price}" pattern="#,###"></fmt:formatNumber>
     </td>
+
      <td style="text-align: center !important; font-size:20px !important;">
        <fmt:formatNumber value="${OrderDTO.item_price * OrderDTO.od_amount}" pattern="#,###"></fmt:formatNumber>
      </td>
@@ -283,6 +285,22 @@ label input[type=radio]:checked:after{
   		</c:forEach>
   
  		 </table>
+ 		 
+ 		 <div id="page_control">
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/emp/order?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+</c:if>
+
+<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+	<a href="${pageContext.request.contextPath}/emp/order?pageNum=${i}">${i}</a>
+</c:forEach>
+
+<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+	<a href="${pageContext.request.contextPath}/emp/order?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+</c:if>
+
+</div>
+
 		</div>
         
         

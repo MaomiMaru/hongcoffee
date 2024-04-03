@@ -314,16 +314,18 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">생년월일</th>
     		<th style=" font-size:20px !important; color: black;">부서</th>
     		<th style=" font-size:20px !important; color: black;">직급</th>
+    		<c:if test="${sessionScope.emp_right eq 1 }">
     		<th style=" font-size:20px !important; color: black;">권한</th>
+    		</c:if>
     		<th style=" font-size:20px !important; color: black;">연락처</th>
     		<th style=" font-size:20px !important; color: black;">이메일</th>
     		<th style=" font-size:20px !important; color: black;">입사일</th>
     		<th style=" font-size:20px !important; color: black;">상태</th>
  		 </tr>
  		 <c:forEach var="EmployeeDTO" items="${empList}">
-  <tr>
+  <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_emp?emp_num=${EmployeeDTO.emp_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
   		<c:if test="${sessionScope.emp_right eq 1 }">
-    <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+    <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
  		</c:if>
  				<c:if test="${sessionScope.emp_right eq 0 }">
  		
@@ -361,12 +363,12 @@ label input[type=radio]:checked:after{
     <td style="text-align: center !important; font-size:20px !important;">사원</td>
     </c:if>
    	
-
+<c:if test="${sessionScope.emp_right eq 1 }">
    	<td style="text-align: center !important; font-size:20px !important;">
    		<c:if test="${EmployeeDTO.emp_right eq 1}">관리자</c:if>
    		<c:if test="${EmployeeDTO.emp_right eq 0}">일반</c:if>
    	</td>
-   	
+   	</c:if>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_phone}</td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.hire_date}</td>
@@ -387,9 +389,17 @@ label input[type=radio]:checked:after{
   		</c:forEach>
   
  		 </table>
+ 		 
+ 		  <div id="page_control">
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/emp/emp?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+</c:if>
+
+ 		 
 		</div>
         
         
+        </div>
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->

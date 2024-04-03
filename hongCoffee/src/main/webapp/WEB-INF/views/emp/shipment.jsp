@@ -246,8 +246,8 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">결제여부</th>
  		 </tr>
  		 <c:forEach var="ShipmentDTO" items="${shipmentList}">
-  <tr>
-    <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+  <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_shipment?od_num=${ShipmentDTO.od_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
+    <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
    	<td style="text-align: center !important; font-size:20px !important;">${ShipmentDTO.name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ShipmentDTO.item_name}</td>
     <td style="text-align: center !important; font-size:20px !important;">${ShipmentDTO.sh_amount}</td>
@@ -269,6 +269,13 @@ label input[type=radio]:checked:after{
   		</c:forEach>
   
  		 </table>
+ 		 
+ 		 <div id="page_control">
+<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+	<a href="${pageContext.request.contextPath}/emp/shipment?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+</c:if>
+
+</div>
 		</div>
         
         

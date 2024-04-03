@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
-
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ReceiveDTO;
 
 import com.itwillbs.domain.ShipmentDTO;
@@ -80,24 +80,100 @@ public class EmployeeController {
 	//2. 기준 정보 관리
 	//2-1. 지점 관리
 	@GetMapping("/store")
-	public String store(HttpServletRequest request, Model model) {
+	public String store(HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("EmployeeController store()");
+		StoreDTO storeDTO = new StoreDTO() ;
 
-		List<StoreDTO> storeList = employeeService.getStoreList();
-
-		model.addAttribute("storeList", storeList);
-
+		
+		//===========페이징
+		int pageSize = 10;
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		
+		// 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(pageDTO) 검색어 포함
+		int count = employeeService.getStoreCount(storeDTO);
+		// 한 화면에 보여줄 페이지 개수 설정
+		int pageBlock = 10;
+		// 한 화면에 보여줄 시작페이지 구하기
+		// 1~10 => 1, 11~20 => 11,..
+		int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+		// 한 화면에 보여줄 끝페이지 구하기
+		int endPage = startPage + pageBlock - 1;
+		// 전체 페이지개수 구하기
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		// pageDTO 저장
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		System.out.println(pageDTO);
+		
+		List<StoreDTO> storeList = employeeService.getStoreList(pageDTO);
+	    model.addAttribute("storeList",storeList);
+		model.addAttribute("pageDTO",pageDTO);
+		
 		return "/emp/store";
 	}//jijumList
 	
 	
 	//2-1-1. 지점 필터링
 	@PostMapping("/storeSearch")
-	public String storeSearch(HttpServletRequest request, Model model) {
+	public String storeSearch(HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("EmployeeController storeSearch()");
-
+		
 		StoreDTO storeDTO = new StoreDTO();
 		
+		//===========페이징
+		int pageSize = 10;
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+				pageNum = "1";
+			}
+		int currentPage = Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		// 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(pageDTO) 검색어 포함
+		int count = employeeService.getStoreCount(storeDTO);
+		// 한 화면에 보여줄 페이지 개수 설정
+		int pageBlock = 10;
+		// 한 화면에 보여줄 시작페이지 구하기
+		// 1~10 => 1, 11~20 => 11,..
+		int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+		// 한 화면에 보여줄 끝페이지 구하기
+		int endPage = startPage + pageBlock - 1;
+		// 전체 페이지개수 구하기
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		// pageDTO 저장
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		//필터 작업
 		String name = request.getParameter("name");
 		storeDTO.setName(name);
 		
@@ -118,10 +194,27 @@ public class EmployeeController {
 			e.printStackTrace();
 		}
 		
+		
+		
+		
+		
+		//필터 페이징 storeDTO 저장
+		count = employeeService.getStoreCount(storeDTO);
+		storeDTO.setPageSize(pageSize);
+		storeDTO.setPageNum(pageNum);
+		storeDTO.setCurrentPage(currentPage);
+		storeDTO.setCount(count);
+		storeDTO.setPageBlock(pageBlock);
+		storeDTO.setStartPage(startPage);
+		storeDTO.setEndPage(endPage);
+		storeDTO.setPageCount(pageCount);
+		
+		
+		//===========리스트
 		List<StoreDTO> storeList;
 		
 		if (name == "" && boss == "" && address == "" && phone == "" && sState == null) {
-			storeList = employeeService.getStoreList();
+			storeList = employeeService.getStoreList(pageDTO);
 		} else {
 			storeList = employeeService.searchStoreList(storeDTO);
 		}
@@ -134,12 +227,48 @@ public class EmployeeController {
 	
 	//2-2. 재료 관리
 	@GetMapping("/item")
-	public String item(HttpServletRequest request, Model model) {
+	public String item(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("EmployeeController item()");
-
-		List<ItemDTO> itemList = employeeService.getItemList();
-
-		model.addAttribute("itemList",itemList);
+		ItemDTO itemDTO = new ItemDTO();
+		
+		int pageSize = 10;
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		// 페이징 작업
+				// 전체 글개수 구하기  int 리턴할형 count = getIngredientCount(pageDTO) 검색어 포함
+				int count = employeeService.getItemCount(itemDTO);
+				// 한 화면에 보여줄 페이지 개수 설정
+				int pageBlock = 10;
+				// 한 화면에 보여줄 시작페이지 구하기
+				// 1~10 => 1, 11~20 => 11,..
+				int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+				// 한 화면에 보여줄 끝페이지 구하기
+				int endPage = startPage + pageBlock - 1;
+				// 전체 페이지개수 구하기
+				int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+				// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
+				
+				// pageDTO 저장
+				pageDTO.setCount(count);
+				pageDTO.setPageBlock(pageBlock);
+				pageDTO.setStartPage(startPage);
+				pageDTO.setEndPage(endPage);
+				pageDTO.setPageCount(pageCount);
+		
+			List<ItemDTO> ingredientList = employeeService.getItemList(pageDTO);
+		
+			model.addAttribute("ingredientList",ingredientList);
+			model.addAttribute("pageDTO",pageDTO);
 			
 		return "/emp/item";
 	}//jeryoList
@@ -147,11 +276,48 @@ public class EmployeeController {
 		
 	//2-2-1. 재료 필터링
 	@PostMapping("/itemSearch")
-	public String itemSearch(HttpServletRequest request, Model model) {
+	public String itemSearch(HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("EmployeeController itemSearch()");
 
 		ItemDTO itemDTO = new ItemDTO();
-
+		
+		//===========페이징
+				int pageSize = 10;
+				String pageNum = request.getParameter("pageNum");
+				if(pageNum == null) {
+						pageNum = "1";
+					}
+				int currentPage = Integer.parseInt(pageNum);
+				pageDTO.setPageSize(pageSize);
+				pageDTO.setPageNum(pageNum);
+				pageDTO.setCurrentPage(currentPage);
+				
+				// 페이징 작업
+				// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(pageDTO) 검색어 포함
+				int count = employeeService.getItemCount(itemDTO);
+				// 한 화면에 보여줄 페이지 개수 설정
+				int pageBlock = 10;
+				// 한 화면에 보여줄 시작페이지 구하기
+				// 1~10 => 1, 11~20 => 11,..
+				int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+				// 한 화면에 보여줄 끝페이지 구하기
+				int endPage = startPage + pageBlock - 1;
+				// 전체 페이지개수 구하기
+				int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+				// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
+				
+				// pageDTO 저장
+				pageDTO.setCount(count);
+				pageDTO.setPageBlock(pageBlock);
+				pageDTO.setStartPage(startPage);
+				pageDTO.setEndPage(endPage);
+				pageDTO.setPageCount(pageCount);
+				
+				
+		//필터 작업
 		String item_sType = request.getParameter("item_type");
 		int item_type = 100;
 
@@ -191,11 +357,24 @@ public class EmployeeController {
 
 		itemDTO.setItem_minPrice(item_minPrice);
 		itemDTO.setItem_maxPrice(item_maxPrice);		
+		
+		
+		//필터 페이징 itemDTO 저장
+		count = employeeService.getItemCount(itemDTO);
+		itemDTO.setPageSize(pageSize);
+		itemDTO.setPageNum(pageNum);
+		itemDTO.setCurrentPage(currentPage);
+		itemDTO.setCount(count);
+		itemDTO.setPageBlock(pageBlock);
+		itemDTO.setStartPage(startPage);
+		itemDTO.setEndPage(endPage);
+		itemDTO.setPageCount(pageCount);
+		
 
 		List<ItemDTO> itemList;
 
 		if (item_type == 100 && item_name == null && item_minPrice == 0 && item_maxPrice == 0) {
-			itemList = employeeService.getItemList();
+			itemList = employeeService.getItemList(pageDTO);
 		} else {
 			itemList = employeeService.searchItemList(itemDTO);
 		}
@@ -209,12 +388,50 @@ public class EmployeeController {
 	//3. 영업 관리
 	//3-1. 수주 관리
 	@GetMapping("/order")
-	public String order(HttpServletRequest request, Model model) {
+	public String order(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("EmployeeController order()");
+		OrderDTO orderDTO = new OrderDTO();
 		
-			List<OrderDTO> orderList = employeeService.getOrderList();
+		
+		int pageSize = 10;
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		// 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(pageDTO) 검색어 포함
+		int count = employeeService.getOrderCount(orderDTO);
+		// 한 화면에 보여줄 페이지 개수 설정
+		int pageBlock = 10;
+		// 한 화면에 보여줄 시작페이지 구하기
+		// 1~10 => 1, 11~20 => 11,..
+		int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+		// 한 화면에 보여줄 끝페이지 구하기
+		int endPage = startPage + pageBlock - 1;
+		// 전체 페이지개수 구하기
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+				endPage = pageCount;
+			}
+		
+		 // pageDTO 저장
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+
+		
+			List<OrderDTO> orderList = employeeService.getOrderList(pageDTO);
 		
 			model.addAttribute("orderList",orderList);
+			model.addAttribute("pageDTO",pageDTO);
 		
 			return "/emp/order";
 	}//sujuList
@@ -222,11 +439,49 @@ public class EmployeeController {
 	
 	//3-1-1. 수주 필터링
 	@PostMapping("/orderSearch")
-	public String orderSearch(HttpServletRequest request, Model model) throws Exception {
+	public String orderSearch(HttpServletRequest request, Model model, PageDTO pageDTO) throws Exception {
 		System.out.println("EmployeeController orderSearch()");
 
 		OrderDTO orderDTO = new OrderDTO();
+		
+		//===========페이징
+		int pageSize = 10;
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+				pageNum = "1";
+			}
+		int currentPage = Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		// 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(pageDTO) 검색어 포함
+		int count = employeeService.getOrderCount(orderDTO);
+		// 한 화면에 보여줄 페이지 개수 설정
+		int pageBlock = 10;
+		// 한 화면에 보여줄 시작페이지 구하기
+		// 1~10 => 1, 11~20 => 11,..
+		int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+		// 한 화면에 보여줄 끝페이지 구하기
+		int endPage = startPage + pageBlock - 1;
+		// 전체 페이지개수 구하기
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		// pageDTO 저장
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		
 
+		//필터 작업
 		String name = request.getParameter("name");
 		orderDTO.setName(name);
 
@@ -265,10 +520,22 @@ public class EmployeeController {
 			e.printStackTrace();
 		}
 
+		//필터 페이징 orderDTO 저장
+				count = employeeService.getOrderCount(orderDTO);
+				orderDTO.setPageSize(pageSize);
+				orderDTO.setPageNum(pageNum);
+				orderDTO.setCurrentPage(currentPage);
+				orderDTO.setCount(count);
+				orderDTO.setPageBlock(pageBlock);
+				orderDTO.setStartPage(startPage);
+				orderDTO.setEndPage(endPage);
+				orderDTO.setPageCount(pageCount);
+		
+		//리스트
 		List<OrderDTO> orderList;
 
 		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_time == "" && received_sNot == null) {
-			orderList = employeeService.getOrderList();
+			orderList = employeeService.getOrderList(pageDTO);
 		} else {
 			orderList = employeeService.searchOrderList(orderDTO);
 		}
@@ -281,12 +548,51 @@ public class EmployeeController {
 	
 	//3-2. 출하 관리
 	@GetMapping("/shipment")
-	public String shipment(HttpServletRequest request, Model model) {
+	public String shipment(HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("EmployeeController shipment()");
-				
-		List<ShipmentDTO> shipmentList = employeeService.getShipmentList();
-				
-		model.addAttribute("shipmentList",shipmentList);
+		ShipmentDTO shipmentDTO = new ShipmentDTO();		
+		
+		int pageSize = 10;
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		
+		
+		// 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getShipmentCount(pageDTO) 검색어 포함
+		int count = employeeService.getShipmentCount(shipmentDTO);
+		// 한 화면에 보여줄 페이지 개수 설정
+		int pageBlock = 10;
+		// 한 화면에 보여줄 시작페이지 구하기
+		// 1~10 => 1, 11~20 => 11,..
+		int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+		// 한 화면에 보여줄 끝페이지 구하기
+		int endPage = startPage + pageBlock - 1;
+		// 전체 페이지개수 구하기
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		// pageDTO 저장
+				pageDTO.setCount(count);
+				pageDTO.setPageBlock(pageBlock);
+				pageDTO.setStartPage(startPage);
+				pageDTO.setEndPage(endPage);
+				pageDTO.setPageCount(pageCount);
+		
+			List<ShipmentDTO> shipmentList = employeeService.getShipmentList(pageDTO);
+		
+			model.addAttribute("shipmentList",shipmentList);
+			model.addAttribute("pageDTO",pageDTO);
+			
 				
 		return "/emp/shipment";
 	}//chulhaList
@@ -294,11 +600,49 @@ public class EmployeeController {
 		
 	//3-2-1. 출하 필터링
 	@PostMapping("/shipmentSearch")
-	public String shipmentSearch(HttpServletRequest request, Model model) throws Exception {
+	public String shipmentSearch(HttpServletRequest request, Model model, PageDTO pageDTO) throws Exception {
 		System.out.println("EmployeeController shipmentSearch()");
 
 		ShipmentDTO shipmentDTO = new ShipmentDTO();
 
+		//===========페이징
+				int pageSize = 10;
+				String pageNum = request.getParameter("pageNum");
+				if(pageNum == null) {
+						pageNum = "1";
+					}
+				int currentPage = Integer.parseInt(pageNum);
+				pageDTO.setPageSize(pageSize);
+				pageDTO.setPageNum(pageNum);
+				pageDTO.setCurrentPage(currentPage);
+				
+				// 페이징 작업
+				// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(pageDTO) 검색어 포함
+				int count = employeeService.getShipmentCount(shipmentDTO);
+				// 한 화면에 보여줄 페이지 개수 설정
+				int pageBlock = 10;
+				// 한 화면에 보여줄 시작페이지 구하기
+				// 1~10 => 1, 11~20 => 11,..
+				int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+				// 한 화면에 보여줄 끝페이지 구하기
+				int endPage = startPage + pageBlock - 1;
+				// 전체 페이지개수 구하기
+				int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+				// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
+				
+				// pageDTO 저장
+				pageDTO.setCount(count);
+				pageDTO.setPageBlock(pageBlock);
+				pageDTO.setStartPage(startPage);
+				pageDTO.setEndPage(endPage);
+				pageDTO.setPageCount(pageCount);
+				
+				
+
+				//필터 작업
 		String name = request.getParameter("name");
 		shipmentDTO.setName(name);
 
@@ -329,10 +673,22 @@ public class EmployeeController {
 			shipmentDTO.setSh_time(sh_time);
 		}
 
+		//필터 페이징 shipmentDTO 저장
+		count = employeeService.getShipmentCount(shipmentDTO);
+		shipmentDTO.setPageSize(pageSize);
+		shipmentDTO.setPageNum(pageNum);
+		shipmentDTO.setCurrentPage(currentPage);
+		shipmentDTO.setCount(count);
+		shipmentDTO.setPageBlock(pageBlock);
+		shipmentDTO.setStartPage(startPage);
+		shipmentDTO.setEndPage(endPage);
+		shipmentDTO.setPageCount(pageCount);
+		
+		
 		List<ShipmentDTO> shipmentList;
 
 		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && sh_time == "") {
-			shipmentList = employeeService.getShipmentList();
+			shipmentList = employeeService.getShipmentList(pageDTO);
 		} else {
 			shipmentList = employeeService.searchShipmentList(shipmentDTO);
 		}
@@ -346,12 +702,49 @@ public class EmployeeController {
 	//4. 사원 관리
 	//4-1. 사원 관리
 	@GetMapping("/emp")
-	public String emp(HttpServletRequest request, Model model) {
+	public String emp(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("EmployeeController emp()");
-
-		List<EmployeeDTO> empList = employeeService.getEmpList();
-
-		model.addAttribute("empList", empList);
+		EmployeeDTO employeeDTO = new EmployeeDTO();
+		
+		int pageSize = 10;
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+			pageNum = "1";
+		}
+		int currentPage = Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		// 페이징 작업
+				// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(pageDTO) 검색어 포함
+				int count = employeeService.getEmployeeCount(employeeDTO);
+				// 한 화면에 보여줄 페이지 개수 설정
+				int pageBlock = 10;
+				// 한 화면에 보여줄 시작페이지 구하기
+				// 1~10 => 1, 11~20 => 11,..
+				int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+				// 한 화면에 보여줄 끝페이지 구하기
+				int endPage = startPage + pageBlock - 1;
+				// 전체 페이지개수 구하기
+				int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+				// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
+		
+				// pageDTO 저장
+				pageDTO.setCount(count);
+				pageDTO.setPageBlock(pageBlock);
+				pageDTO.setStartPage(startPage);
+				pageDTO.setEndPage(endPage);
+				pageDTO.setPageCount(pageCount);
+		
+		
+			List<EmployeeDTO> empList = employeeService.getEmpList(pageDTO);
+		
+			model.addAttribute("empList",empList);
+			model.addAttribute("pageDTO",pageDTO);
 
 		return "/emp/emp";
 	}//sawonList
@@ -359,11 +752,48 @@ public class EmployeeController {
 	
 	//4-1-1. 사원 필터링
 	@PostMapping("/empSearch")
-	public String empSearch(HttpServletRequest request, Model model) {
+	public String empSearch(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("EmployeeController empSearch()");
 		
 		EmployeeDTO employeeDTO = new EmployeeDTO();
 		
+		
+		//===========페이징
+		int pageSize = 10;
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null) {
+				pageNum = "1";
+			}
+		int currentPage = Integer.parseInt(pageNum);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setPageNum(pageNum);
+		pageDTO.setCurrentPage(currentPage);
+		
+		// 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(pageDTO) 검색어 포함
+		int count = employeeService.getEmployeeCount(employeeDTO);
+		// 한 화면에 보여줄 페이지 개수 설정
+		int pageBlock = 10;
+		// 한 화면에 보여줄 시작페이지 구하기
+		// 1~10 => 1, 11~20 => 11,..
+		int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+		// 한 화면에 보여줄 끝페이지 구하기
+		int endPage = startPage + pageBlock - 1;
+		// 전체 페이지개수 구하기
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		// pageDTO 저장
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		//필터 작업
 		String emp_sDept = request.getParameter("emp_dept");
 
 		try {
@@ -391,10 +821,21 @@ public class EmployeeController {
 		String emp_name = request.getParameter("emp_name");
 		employeeDTO.setEmp_name(emp_name);
 		
+		//필터 페이징 employeeDTO 저장
+				count = employeeService.getEmployeeCount(employeeDTO);
+				employeeDTO.setPageSize(pageSize);
+				employeeDTO.setPageNum(pageNum);
+				employeeDTO.setCurrentPage(currentPage);
+				employeeDTO.setCount(count);
+				employeeDTO.setPageBlock(pageBlock);
+				employeeDTO.setStartPage(startPage);
+				employeeDTO.setEndPage(endPage);
+				employeeDTO.setPageCount(pageCount);
+		
 		List<EmployeeDTO> empList;
 		
 		if (emp_sDept == null && emp_sRank == null && emp_sNum == "" && emp_name == "") {
-			empList = employeeService.getEmpList();
+			empList = employeeService.getEmpList(pageDTO);
 		} else {
 			empList = employeeService.searchEmpList(employeeDTO);
 		}
@@ -669,6 +1110,8 @@ public class EmployeeController {
 		return "/emp/popup/close";
 	}
 	
+	//===============상세
+	//재료 상세
 	@GetMapping("detail/d_item")
 	public String d_item(HttpServletRequest request, Model model) {
 		System.out.println("EmployeeController d_item");
@@ -678,5 +1121,44 @@ public class EmployeeController {
 		return "emp/detail/d_item";
 	}
 	
+	//지점 상세
+	@GetMapping("detail/d_store")
+	public String d_store(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController d_store");
+		int num = Integer.parseInt(request.getParameter("num"));
+		StoreDTO storeDTO = employeeService.getStore(num);
+		model.addAttribute("storeDTO", storeDTO);
+		return "emp/detail/d_store";
+	}
 	
+	//수주 상세
+	@GetMapping("detail/d_order")
+	public String d_order(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController d_order");
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		OrderDTO orderDTO = employeeService.getOrder(od_num);
+		model.addAttribute("orderDTO", orderDTO);
+		return "emp/detail/d_order";
+	}
+	
+		//출하 상세
+		@GetMapping("detail/d_shipment")
+		public String d_shipment(HttpServletRequest request, Model model) {
+			System.out.println("EmployeeController d_shipment");
+			int od_num = Integer.parseInt(request.getParameter("od_num"));
+			ShipmentDTO shipmentDTO = employeeService.getShipment(od_num);
+			model.addAttribute("shipmentDTO", shipmentDTO);
+			return "emp/detail/d_shipment";
+		}
+	
+		//사원 상세
+		@GetMapping("detail/d_emp")
+		public String d_emp(HttpServletRequest request, Model model) {
+			System.out.println("EmployeeController d_emp");
+			int emp_num = Integer.parseInt(request.getParameter("emp_num"));
+			EmployeeDTO employeeDTO = employeeService.getEmployee(emp_num);
+			model.addAttribute("employeeDTO", employeeDTO);
+			return "emp/detail/d_emp";
+		}
+		
 }

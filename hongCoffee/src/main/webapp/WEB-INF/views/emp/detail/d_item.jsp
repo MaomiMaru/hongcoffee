@@ -36,7 +36,7 @@ font-size: 16px;
 </head>
 <body>
 <div class="detail1">
-<h4>재료 상세</h4>
+<h3>재료 상세</h3>
 <div class="detail2">
 <table border="1">
 <tr>
@@ -44,10 +44,10 @@ font-size: 16px;
 </tr>
 <tr>
 	<th>유형</th><c:if test="${itemDTO.item_type eq 0}">
-   	  			<td >식품</td>
+   	  			<td style=" color:#4E342E;">식품</td>
    	  	</c:if>
    	  	 <c:if test="${itemDTO.item_type eq 1}">
-   	  		<td >비식품</td>
+   	  		<td style="color:#FF3D00;" >비식품</td>
    	  	</c:if>
    	  	 <th>단가</th>
    	  	 <td>${itemDTO.item_price}</td>

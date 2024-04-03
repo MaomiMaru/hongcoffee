@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
@@ -24,10 +25,10 @@ public class EmployeeDAO {
 	private static final String namespace="com.itwillbs.mappers.EmpMapper";
 	
 	//지점 목록
-	public List<StoreDTO> getStoreList() {
+	public List<StoreDTO> getStoreList(PageDTO pageDTO) {
 		System.out.println("EmployeesDAO getStoreList()");
 		
-		return sqlSession.selectList(namespace + ".getStoreList");
+		return sqlSession.selectList(namespace + ".getStoreList", pageDTO);
 	}//getJijumList()
 	
 
@@ -40,10 +41,10 @@ public class EmployeeDAO {
 	}//searchStoreList()
 	
 	//재료 목록
-	public List<ItemDTO> getItemList() {
+	public List<ItemDTO> getItemList(PageDTO pageDTO) {
 		System.out.println("EmployeesDAO getItemList()");
 		
-		return sqlSession.selectList(namespace + ".getItemList");
+		return sqlSession.selectList(namespace + ".getItemList", pageDTO);
 	}//getItemList()
 	
 	//재료 필터링 목록
@@ -55,10 +56,10 @@ public class EmployeeDAO {
 
 	
 	//수주 목록
-	public List<OrderDTO> getOrderList() {
+	public List<OrderDTO> getOrderList(PageDTO pageDTO) {
 		System.out.println("EmployeesDAO getOrderList()");
 		
-		return sqlSession.selectList(namespace + ".getOrderList");
+		return sqlSession.selectList(namespace + ".getOrderList", pageDTO);
 	}//getSujuList()
 	
 	//수주 필터링 목록
@@ -69,10 +70,10 @@ public class EmployeeDAO {
 	}//searchOrderList()
 	
 	//출하 목록
-	public List<ShipmentDTO> getShipmentList() {
+	public List<ShipmentDTO> getShipmentList(PageDTO pageDTO) {
 		System.out.println("EmployeesDAO getShipmentList()");
 		
-		return sqlSession.selectList(namespace + ".getShipmentList");
+		return sqlSession.selectList(namespace + ".getShipmentList", pageDTO);
 	}//getChulhaList()
 	
 	//출하 필터링 목록
@@ -83,10 +84,10 @@ public class EmployeeDAO {
 	}//searchShipmentList()
 		
 	//사원 목록
-	public List<EmployeeDTO> getEmpList() {
+	public List<EmployeeDTO> getEmpList(PageDTO pageDTO) {
 		System.out.println("EmployeesDAO getEmpList()");
 		
-		return sqlSession.selectList(namespace + ".getEmpList");
+		return sqlSession.selectList(namespace + ".getEmpList", pageDTO);
 	}//getSawonList()
 
 	//사원 필터링 목록
@@ -185,7 +186,31 @@ public class EmployeeDAO {
 		sqlSession.delete(namespace+".shipmentDelete", shipmentDTO);
 	}
 
+			//페이지 처리
+			public int getStoreCount(StoreDTO storeDTO) {
+				System.out.println("getStoreCount");
+				return sqlSession.selectOne(namespace + ".getStoreCount", storeDTO);
+			}
+		
+			public int getItemCount(ItemDTO itemDTO) {
+				System.out.println("getIngredientCount");
+				return sqlSession.selectOne(namespace + ".getItemCount", itemDTO);
+			}
 
+			public int getOrderCount(OrderDTO orderDTO) {
+				System.out.println("getOrderCount");
+				return sqlSession.selectOne(namespace + ".getOrderCount", orderDTO);
+			}
+
+			public int getShipmentCount(ShipmentDTO shipmentDTO) {
+				System.out.println("getShipmentCount");
+				return sqlSession.selectOne(namespace + ".getShipmentCount", shipmentDTO);
+			}
+			
+			public int getEmployeeCount(EmployeeDTO employeeDTO) {
+				System.out.println("getEmployeeCount");
+				return sqlSession.selectOne(namespace + ".getEmployeeCount", employeeDTO);
+			}
 
 	
 	
