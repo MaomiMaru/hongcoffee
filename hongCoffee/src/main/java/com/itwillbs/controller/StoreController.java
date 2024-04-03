@@ -513,22 +513,22 @@ public class StoreController {
 	
 	
 	//4-2. 소모 관리
-	@GetMapping("/store/somo")
-	public String somo(HttpServletRequest request, Model model) {
-		System.out.println("StoreController somo()");
+	@GetMapping("/store/consume")
+	public String consume(HttpServletRequest request, Model model) {
+		System.out.println("StoreController consume()");
 				
-		List<ResultDTO> somoList = storeService.getSomoList();
+		List<ResultDTO> consumeList = storeService.getConsumeList();
 				
-		model.addAttribute("somoList",somoList);
+		model.addAttribute("consumeList",consumeList);
 				
-		return "store/somo";
+		return "store/consume";
 	}//somoList
 		
 	
 	//4-2-1. 소모 필터링
-	@PostMapping("/somoSearch")
-	public String somoSearch(HttpServletRequest request, Model model) throws Exception {
-		System.out.println("StoreController somoSearch()");
+	@PostMapping("/consumeSearch")
+	public String consumeSearch(HttpServletRequest request, Model model) throws Exception {
+		System.out.println("StoreController consumeSearch()");
 
 		ResultDTO resultDTO = new ResultDTO();
 
@@ -541,37 +541,37 @@ public class StoreController {
 			resultDTO.setRs_date(date2);
 		}
 			
-		List<ResultDTO> somoList;
+		List<ResultDTO> consumeList;
 
 		if (rs_date == "") {
-			somoList = storeService.getSomoList();
+			consumeList = storeService.getConsumeList();
 		} else {
-			somoList = storeService.searchSomoList(resultDTO);
+			consumeList = storeService.searchConsumeList(resultDTO);
 		}
 
-		model.addAttribute("somoList", somoList);
+		model.addAttribute("consumeList", consumeList);
 
-		return "/store/somo";
+		return "/store/consume";
 	}//somoSearch
 
 		
 	//4-3. 판매 관리
-	@GetMapping("/panme")
-	public String panme(HttpServletRequest request, Model model) {
-		System.out.println("StoreController panme()");
+	@GetMapping("/sell")
+	public String sell(HttpServletRequest request, Model model) {
+		System.out.println("StoreController sell()");
 				
-		List<ResultDTO> panmeList = storeService.getPanmeList();
+		List<ResultDTO> sellList = storeService.getSellList();
 				
-		model.addAttribute("panmeList",panmeList);
+		model.addAttribute("sellList",sellList);
 				
-		return "store/panme";
+		return "store/sell";
 	}//panmeList
 		
 	
 	//4-3-.1 판매 필터링
-	@PostMapping("/panmeSearch")
-	public String panmeSearch(HttpServletRequest request, Model model) throws Exception {
-		System.out.println("StoreController panmeSearch()");
+	@PostMapping("/sellSearch")
+	public String sellSearch(HttpServletRequest request, Model model) throws Exception {
+		System.out.println("StoreController sellSearch()");
 
 		ResultDTO resultDTO = new ResultDTO();
 
@@ -583,17 +583,17 @@ public class StoreController {
 			Timestamp date3 = new Timestamp(d3.getTime());
 			resultDTO.setRs_date(date3);
 		}
-		List<ResultDTO> panmeList;
+		List<ResultDTO> sellList;
 
 		if (rs_date == "") {
-			panmeList = storeService.getPanmeList();
+			sellList = storeService.getSellList();
 		} else {
-			panmeList = storeService.searchPanmeList(resultDTO);
+			sellList = storeService.searchSellList(resultDTO);
 		}
 
-		model.addAttribute("panmeList", panmeList);
+		model.addAttribute("sellList", sellList);
 
-		return "/store/panme";
+		return "/store/sell";
 	}//panmeSearch
 
 

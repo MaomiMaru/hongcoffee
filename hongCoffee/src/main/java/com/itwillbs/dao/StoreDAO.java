@@ -88,34 +88,34 @@ public class StoreDAO {
 	
 	
 	//소모 목록
-	public List<ResultDTO> getSomoList() {
-		System.out.println("StoreDAO getSomoList()");
+	public List<ResultDTO> getConsumeList() {
+		System.out.println("StoreDAO getConsumeList()");
 		
-		return sqlSession.selectList(namespace + ".getSomoList");
+		return sqlSession.selectList(namespace + ".getConsumeList");
 	}//getSomoList
 	
 	
 	//소모 필터링 목록
-	public List<ResultDTO> searchSomoList(ResultDTO resultDTO) {
-		System.out.println("StoreDAO searchSomoList()");
+	public List<ResultDTO> searchConsumeList(ResultDTO resultDTO) {
+		System.out.println("StoreDAO searchConsumeList()");
 			
-		return sqlSession.selectList(namespace + ".searchSomoList", resultDTO);
+		return sqlSession.selectList(namespace + ".searchConsumeList", resultDTO);
 	}//searchSomoList
 		
 
 	//판매 목록
-	public List<ResultDTO> getPanmeList() {
-		System.out.println("StoreDAO getPanmeList()");
+	public List<ResultDTO> getSellList() {
+		System.out.println("StoreDAO getSellList()");
 			
-		return sqlSession.selectList(namespace + ".getPanmeList");
+		return sqlSession.selectList(namespace + ".getSellList");
 	}//getPanmeList
 
 		
 	//판매 필터링 출력
-	public List<ResultDTO> searchPanmeList(ResultDTO resultDTO) {
-		System.out.println("StoreDAO searchPanmeList()");
+	public List<ResultDTO> searchSellList(ResultDTO resultDTO) {
+		System.out.println("StoreDAO searchSellList()");
 			
-		return sqlSession.selectList(namespace + ".searchPanmeList", resultDTO);
+		return sqlSession.selectList(namespace + ".searchSellList", resultDTO);
 	}//searchPanmeList
 		
 

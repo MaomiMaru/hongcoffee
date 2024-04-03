@@ -86,34 +86,34 @@ public class StoreService {
 	
 	
 	//소모 출력
-	public List<ResultDTO> getSomoList(){
-		System.out.println("StoreService getSomoList()");
+	public List<ResultDTO> getConsumeList(){
+		System.out.println("StoreService getConsumeList()");
 		
-		return storeDAO.getSomoList();
+		return storeDAO.getConsumeList();
 	}//getSomoList
 
 	
 	//소모 필터링 출력
-	public List<ResultDTO> searchSomoList(ResultDTO resultDTO) {
-		System.out.println("StoreService searchSomoList()");
+	public List<ResultDTO> searchConsumeList(ResultDTO resultDTO) {
+		System.out.println("StoreService searchConsumeList()");
 		
-		return storeDAO.searchSomoList(resultDTO);
+		return storeDAO.searchConsumeList(resultDTO);
 	}//searchSomoList
 	
 	
 	//판매 출력
-	public List<ResultDTO> getPanmeList(){
-		System.out.println("StoreService getPanmeList()");
+	public List<ResultDTO> getSellList(){
+		System.out.println("StoreService getSellList()");
 		
-		return storeDAO.getPanmeList();
+		return storeDAO.getSellList();
 	}//getPanmeList
 
 	
 	//판매 필터링 출력
-	public List<ResultDTO> searchPanmeList(ResultDTO resultDTO) {
-		System.out.println("StoreService searchPanmeList()");
+	public List<ResultDTO> searchSellList(ResultDTO resultDTO) {
+		System.out.println("StoreService searchSellList()");
 		
-		return storeDAO.searchPanmeList(resultDTO);
+		return storeDAO.searchSellList(resultDTO);
 	}//searchPanmeList
 	
 	
@@ -192,6 +192,9 @@ public class StoreService {
 		System.out.println("StoreService getReceive()");
 		return storeDAO.getReceive(od_num);
 	}
+
+
+
 
 
 

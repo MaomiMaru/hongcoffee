@@ -131,7 +131,7 @@
 	</select>
 
 
- 	<select id="getSomoList" resultType="com.itwillbs.domain.ResultDTO"> 
+ 	<select id="getConsumeList" resultType="com.itwillbs.domain.ResultDTO"> 
 		select r.rs_date, i.item_name, r.consume, i.item_price
 		from result r join stock s on r.stock_num = s.stock_num
 		join item i on s.item_num = i.item_num
@@ -193,7 +193,7 @@
  	</select>
 
 
-	<select id="searchSomoList" resultType="com.itwillbs.domain.ResultDTO">
+	<select id="searchConsumeList" resultType="com.itwillbs.domain.ResultDTO">
  		select r.rs_date, i.item_name, r.consume, i.item_price
 		from result r join stock s on r.stock_num = s.stock_num
 		join item i on s.item_num = i.item_num
@@ -206,14 +206,14 @@
  	</select>
 
 
-    <select id="getPanmeList" resultType="com.itwillbs.domain.ResultDTO"> 
+    <select id="getSellList" resultType="com.itwillbs.domain.ResultDTO"> 
 	    select r.rs_date , p.prod_name, r.sales, p.prod_price
         from result r join product p on r.prod_num = p.prod_num
         order by r.rs_date; 
 	</select>
 
  	
- 	<select id="searchPanmeList" resultType="com.itwillbs.domain.ResultDTO">
+ 	<select id="searchSellList" resultType="com.itwillbs.domain.ResultDTO">
  		select r.rs_date , p.prod_name, r.sales, p.prod_price
         from result r join product p on r.prod_num = p.prod_num
         <where>

@@ -35,11 +35,13 @@ select{
 <sub></sub>
 <div><b>출하일시</b></div><input type="datetime-local" name="sh_time" class="sh_time" style="width: 177px"><br>
 <sub></sub>
-<b>적요</b><textarea rows="30" cols="37" name="sh_note">${storeDTO.sh_note}</textarea><br>
+<b>적요</b><br><textarea rows="30" cols="37" name="sh_note">${storeDTO.sh_note}</textarea><br>
 <sub></sub>
 <br>
-<span style="float:right; margin-right: 50px">
-<input type="submit" value="수정하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+
+<br>
+<span style="float:right">
+<input type="submit" value="수정하기" style="background-color: black; color: #EFBDBC;">  <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
 </fieldset>
 </form>

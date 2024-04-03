@@ -35,7 +35,7 @@ select{
 <sub></sub>
 <div><b>출하일시</b></div><input type="datetime-local" name="sh_time" class="sh_time" style="width: 177px"><br>
 <sub></sub>
-<b>적요</b><textarea rows="30" cols="37" name="sh_note"></textarea><br>
+<b>적요</b><br><textarea rows="30" cols="37" name="sh_note"></textarea><br>
 <sub></sub>
 <br>
 <span style="float:right; margin-right: 50px">
