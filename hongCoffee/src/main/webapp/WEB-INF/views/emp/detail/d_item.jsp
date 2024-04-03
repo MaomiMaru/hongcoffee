@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <style>
@@ -16,7 +17,18 @@ table {
     border-collapse: collapse;
     margin: 20px, 20px;
 }
+th{
+	background-color: #EFBDBC;
+     color: #fff; 
+	text-align: -webkit-match-parent;
 
+}
+
+th, td{
+width: 300px;
+height: 45px;
+font-size: 16px;
+}
 </style>
 <head>
 <meta charset="UTF-8">
@@ -28,16 +40,30 @@ table {
 <div class="detail2">
 <table border="1">
 <tr>
-	<th>재료 번호</th><td> </td> <th>재료명</th><td></td>
+	<th>재료 번호</th><td>${itemDTO.item_num} </td> <th>재료명</th><td>${itemDTO.item_name}</td>
 </tr>
 <tr>
-	<th>유형</th><td></td> <th>단가</th><td></td>
+	<th>유형</th><c:if test="${itemDTO.item_type eq 0}">
+   	  			<td >식품</td>
+   	  	</c:if>
+   	  	 <c:if test="${itemDTO.item_type eq 1}">
+   	  		<td >비식품</td>
+   	  	</c:if>
+   	  	 <th>단가</th>
+   	  	 <td>${itemDTO.item_price}</td>
 </tr>
 <tr>
-	<th>상태</th><td></td>
+	<th>상태</th>	
+	<c:if test="${itemDTO.item_state eq 0}">
+      <td >취급</td>
+  	</c:if>
+  	<c:if test="${itemDTO.item_state eq 1}">
+      <td >미취급</td>
+  	</c:if>
+ 
 </tr>
 <tr>
-	<th>적요</th><td colspan="3"></td>
+	<th>적요</th><td colspan="3">${itemDTO.item_note }</td>
 </tr>
 </table>
 </div>

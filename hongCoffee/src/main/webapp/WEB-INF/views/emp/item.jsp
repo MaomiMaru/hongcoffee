@@ -236,10 +236,11 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">재료상태</th>
  		 </tr>
  		 <c:forEach var="ItemDTO" items="${itemList}">
-  <tr>
-  <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+  <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_item?item_num=${ItemDTO.item_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
+  <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+  
     	<c:if test="${ItemDTO.item_type eq 0}">
-   	  			<td style="text-align: center !important; font-size:20px !important; color:#4E342E;">식품</td>
+   	  			<td style="text-align: center !important; font-size:20px !important; color:#4E342E;" >식품</td>
    	  	</c:if>
    	  	 <c:if test="${ItemDTO.item_type eq 1}">
    	  		<td style="text-align: center !important; font-size:20px !important; color:#FF3D00;">비식품</td>

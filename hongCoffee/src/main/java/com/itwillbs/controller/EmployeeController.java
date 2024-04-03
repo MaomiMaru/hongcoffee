@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
@@ -72,7 +73,8 @@ public class EmployeeController {
 		return "/emp/main";
 	}
 
-
+	
+	
 	
 	
 	//2. 기준 정보 관리
@@ -666,5 +668,15 @@ public class EmployeeController {
 		System.out.println("close()");
 		return "/emp/popup/close";
 	}
+	
+	@GetMapping("detail/d_item")
+	public String d_item(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController d_item");
+		int item_num = Integer.parseInt(request.getParameter("item_num"));
+		ItemDTO itemDTO = employeeService.getItem(item_num);
+		model.addAttribute("itemDTO", itemDTO);
+		return "emp/detail/d_item";
+	}
+	
 	
 }
