@@ -215,6 +215,12 @@
  		values (#{od_num}, #{num}, #{item_num}, #{sh_amount}, #{sh_time}, #{sh_note})
  	</insert>
  	
+ 	<update id="shipmentState">
+ 		update `order`
+ 		set shipment_not = 1
+ 		where od_num = #{od_num}
+ 	</update>
+ 	
  	<update id="shipmentUpdate">
  		update shipment
  		set sh_amount = #{sh_amount}, sh_time = #{sh_time}, sh_note = #{sh_note}

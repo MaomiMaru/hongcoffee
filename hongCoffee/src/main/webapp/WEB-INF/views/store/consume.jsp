@@ -216,8 +216,8 @@ label input[type=radio]:checked:after{
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">소모 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button style="background-color: black; color: #EFBDBC">추가</button>
-		<button style="background-color: black; color: #EFBDBC">수정</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/consume_insert','홍커피','width=370,height=520,top=100,left=200')">추가</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/consume_update?rs_num=6','홍커피','width=370,height=520,top=100,left=200')">수정</button>
 <!-- 		<button style="background-color: black; color: #EFBDBC">삭제</button> -->
 		</div>
 		
@@ -226,7 +226,7 @@ label input[type=radio]:checked:after{
 		<table class="table">
   			<tr style="background-color: transparent !important;">
     		<th style=" font-size:20px !important; color: black;">선택</th>
-    		<th style=" font-size:20px !important; color: black;">등록일</th>
+    		<th style=" font-size:20px !important; color: black;">영업일</th>
     		<th style=" font-size:20px !important; color: black;">재료명</th>
     		<th style=" font-size:20px !important; color: black;">소모량</th>
     		<th style=" font-size:20px !important; color: black;">단가</th>

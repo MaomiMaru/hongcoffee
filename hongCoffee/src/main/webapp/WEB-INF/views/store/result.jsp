@@ -220,8 +220,7 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">실적 목록</h3></div>
 
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button style="background-color: black; color: #EFBDBC">추가</button>
-		<button style="background-color: black; color: #EFBDBC">수정</button></div>
+		</div>
 
 		
 <!-- 		목록 -->

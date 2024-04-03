@@ -117,9 +117,9 @@ input[type=text]{
 <!-- 상단 로그인 표시 -->
 <div class="nav-item dropdown">
 	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color:black">
-			${sessionScope.boss} 님</a>
+			<b>${sessionScope.sname} ${sessionScope.boss}</b> 점주님</a>
 	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-		<li><a class="dropdown-item" href="#">로그아웃</a></li>
+		<li><a class="dropdown-item" href="${pageContext.request.contextPath }/store/logout">로그아웃</a></li>
 	</ul>
 </div>
 	

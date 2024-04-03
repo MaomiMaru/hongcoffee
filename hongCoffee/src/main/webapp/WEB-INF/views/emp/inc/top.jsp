@@ -113,8 +113,8 @@ input[type=text]{
 		<ul class="navbar-nav navbar-nav-right"></ul>
 		<div class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">
-			<c:if test="${sessionScope.emp_right eq 1 }">${sessionScope.emp_name } 관리자 님</c:if>
-			<c:if test="${sessionScope.emp_right eq 0 }">${sessionScope.emp_name } 사원 님</c:if></a>
+			<c:if test="${sessionScope.emp_right eq 1 }"><b>${sessionScope.emp_name }</b> 관리자 님</c:if>
+			<c:if test="${sessionScope.emp_right eq 0 }"><b>${sessionScope.emp_name }</b> 사원 님</c:if></a>
 			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<li><a class="dropdown-item" href="${pageContext.request.contextPath}/emp/logout">로그아웃</a></li>
 			</ul>

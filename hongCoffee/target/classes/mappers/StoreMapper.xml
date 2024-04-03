@@ -245,6 +245,51 @@
  			</if>
  		</where>
  	</select>
+ 	
+ 	<select id="getStockNum" resultType="java.lang.Integer">
+		select b.stock_num  	
+ 		from item a join stock b
+ 		on a.item_num = b.item_num
+ 		where a.item_name like concat('%', #{item_name}, '%')
+ 	</select>
+ 	
+	<insert id="consumeInsert">
+		insert into result(num, stock_num, rs_date, consume, rs_note)
+		values(#{num}, #{stock_num}, #{rs_date}, #{consume}, #{rs_note})
+	</insert>
+	
+	<update id="stockDecrease">
+		update stock
+		set amount = amount-#{consume}
+		where stock_num = #{stock_num}
+	</update>
+	
+	<update id="receiveState">
+		update `order`
+		set receive_not = 1
+		where od_num = #{od_num}
+	</update>
+	
+	<select id="getConsume" resultType="com.itwillbs.domain.ResultDTO">
+		select a.rs_num, a.stock_num, a.rs_date, a.consume, a.rs_note, c.item_name, c.item_type, c.item_price
+		from result a join stock b
+		on a.stock_num = b.stock_num
+        join item c
+        on b.item_num = c.item_num
+        where rs_num = #{rs_num};
+	</select>
+
+	<update id="consumeUpdate">
+		update result
+		set consume = #{consume}, rs_note = #{rs_note}
+		where rs_num = #{rs_num};
+	</update>
+
+	<update id="stockReset">
+		update stock
+		set amount = amount+#{consumeBefore}
+		where stock_num = #{stock_num}
+	</update>
 
 
 </mapper>

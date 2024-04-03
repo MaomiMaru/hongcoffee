@@ -194,6 +194,30 @@ public class StoreService {
 	}
 
 
+	public void consumeInsert(ResultDTO resultDTO) {
+		System.out.println("StoreService consumeInsert()");
+		storeDAO.consumeInsert(resultDTO);
+	}
+
+
+	public int getStockNum(String item_name) {
+		System.out.println("StoreService getStockNum()");
+		return storeDAO.getStockNum(item_name);
+	}
+
+
+	public Object getConsume(int rs_num) {
+		System.out.println("StoreService getConsume");
+		return storeDAO.getConsume(rs_num);
+	}
+
+
+	public void consumeUpdate(ResultDTO resultDTO) {
+		System.out.println("StoreService consumeUpdate()");
+		storeDAO.consumUpdate(resultDTO);
+	}
+
+
 
 
 

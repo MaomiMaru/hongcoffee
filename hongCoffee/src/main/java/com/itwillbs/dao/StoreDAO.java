@@ -168,6 +168,7 @@ public class StoreDAO {
 	public void receiveInsert(ReceiveDTO receiveDTO) {
 		System.out.println("StoreDAO receiveInsert()");
 		sqlSession.insert(namespace+".receiveInsert", receiveDTO);
+		sqlSession.update(namespace+".receiveState",receiveDTO);
 	}
 
 	public void orderInsert(OrderDTO orderDTO) {
@@ -191,6 +192,33 @@ public class StoreDAO {
 	public ReceiveDTO getReceive(int od_num) {
 		System.out.println("StoreDAO getReceive()");
 		return sqlSession.selectOne(namespace+".getReceive", od_num);
+	}
+
+
+	public void consumeInsert(ResultDTO resultDTO) {
+		System.out.println("StoreDAO consumeInsert()");
+		sqlSession.insert(namespace+".consumeInsert", resultDTO);
+		sqlSession.update(namespace+".stockDecrease", resultDTO);
+	}
+
+
+	public int getStockNum(String item_name) {
+		System.out.println("StoreDAO getStockNum()");
+		return sqlSession.selectOne(namespace+".getStockNum", item_name);
+	}
+
+
+	public Object getConsume(int rs_num) {
+		System.out.println("StoreDAO getConsume()");
+		return sqlSession.selectOne(namespace+".getConsume", rs_num);
+	}
+
+
+	public void consumUpdate(ResultDTO resultDTO) {
+		System.out.println("StoreDAO consumeUpdate()");
+		sqlSession.update(namespace+".consumeUpdate", resultDTO);
+		sqlSession.update(namespace+".stockReset", resultDTO);
+		sqlSession.update(namespace+".stockDecrease", resultDTO);
 	}
 
 
