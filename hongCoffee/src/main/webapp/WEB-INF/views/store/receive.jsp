@@ -219,10 +219,9 @@ label input[type=radio]:checked:after{
 		<hr>
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">입고 목록</h3></div>
-		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button style="background-color: black; color: #EFBDBC">추가</button>
-		<button style="background-color: black; color: #EFBDBC">수정</button>
-		<button style="background-color: black; color: #EFBDBC">삭제</button></div>
+		<div style="width: 50%; height: 50px; float: left; text-align: right !important; padding-top: 15px;">
+			<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/receive_update?od_num=4','홍커피','width=350,height=900')">수정</button>
+		</div> 
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
@@ -306,4 +305,3 @@ label input[type=radio]:checked:after{
 </body>
 
 </html>
-

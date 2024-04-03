@@ -252,6 +252,11 @@
  		</where>
 
  	</select>
+ 	
+ 	<delete id="shipmentDelete">
+ 		delete from shipment
+ 		where od_num = #{od_num}
+ 	</delete>
 
 </mapper>
 

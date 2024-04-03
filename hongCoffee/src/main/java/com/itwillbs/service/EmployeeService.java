@@ -75,8 +75,10 @@ public class EmployeeService {
 	}//searchOrderList
 	
 	//출하 출력
+
 	public List<ShipmentDTO> getShipmentList(){
 		System.out.println("EmployeeService getChulList()");
+
 		
 		return employeeDAO.getShipmentList();
 	}//getChulhaList
@@ -181,6 +183,12 @@ public class EmployeeService {
 	public EmployeeDTO getEmployee(int emp_num) {
 		System.out.println("EmployeeDTO getEmployee()");
 		return employeeDAO.getEmployee(emp_num);
+	}
+
+
+	public void shipmentDelete(ShipmentDTO shipmentDTO) {
+		System.out.println("EmployeeDTO shipmentDelete()");
+		employeeDAO.shipmentDelete(shipmentDTO);
 	}
 
 

@@ -1,7 +1,5 @@
 package com.itwillbs.domain;
 
-
-
 public class ShipmentDTO {
 
 	private int od_num; //거래번호

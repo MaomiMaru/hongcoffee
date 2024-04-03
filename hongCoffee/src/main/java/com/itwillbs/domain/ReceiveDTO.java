@@ -17,14 +17,25 @@ public class ReceiveDTO {
 	private int item_maxPrice; //최대 단가
 	private String name; //지졈명
 	private String item_name; //재료명
+	private int item_type; //재료유형
 	
 	
+
+	public int getItem_type() {
+		return item_type;
+	}
+
+	public void setItem_type(int item_type) {
+		this.item_type = item_type;
+	}
+
 	@Override
 	public String toString() {
 		return "ReceiveDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", rc_amount=" + rc_amount
 				+ ", rc_time=" + rc_time + ", rc_note=" + rc_note + ", sh_note=" + sh_note + ", pay=" + pay
 				+ ", item_price=" + item_price + ", item_minPrice=" + item_minPrice + ", item_maxPrice=" + item_maxPrice
 				+ ", name=" + name + ", item_name=" + item_name + "]";
+
 	}
 	
 	public int getOd_num() {

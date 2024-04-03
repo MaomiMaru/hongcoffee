@@ -48,7 +48,7 @@ select{
 <option value="2">폐업</option>
 </select><br>
 <sub></sub>
-<div><b>적요</b></div><input type="text" name="note"><br>
+<b>적요</b><textarea rows="30" cols="37" name="note"></textarea><br>
 <sub></sub>
 <br>
 <span style="float:right; margin-right: 105px">

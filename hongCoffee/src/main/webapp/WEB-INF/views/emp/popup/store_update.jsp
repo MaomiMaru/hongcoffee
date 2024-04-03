@@ -46,7 +46,7 @@ div{
 <option value="2" <c:if test="${storeDTO.state eq '2'}"> selected </c:if>>폐업</option>
 </select><br>
 <sub></sub>
-<div><b>적요</b></div><input type="text" name="note"><br>
+<b>적요</b><textarea rows="30" cols="37" name="note">${storeDTO.note }</textarea><br>
 <sub></sub>
 <br>
 <span style="float:right; margin-right: 105px">

@@ -22,23 +22,23 @@ select{
 <fieldset style="border:0px">
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 <div class="check"></div><br>
-<div><b>사원번호</b></div><input type="text" name="emp_num" value="${sessionScope.emp_num}" readonly><br>
+<div><b>사원번호</b></div><input type="text" name="emp_num" value="${employeeDTO.emp_num}" readonly><br>
 <sub></sub>
-<div><b>비밀번호</b></div><input type="password" name="emp_pw"><br>
+<div><b>비밀번호</b></div><input type="password" name="emp_pw" value="${employeeDTO.emp_pw }"><br>
 <sub></sub>
-<div><b>사원명</b></div><input type="text" name="emp_name" value="${sessionScope.emp_name}"><br>
+<div><b>사원명</b></div><input type="text" name="emp_name" value="${employeeDTO.emp_name}"><br>
 <sub></sub>
-<div><b>생년월일</b></div><input type="text" name="emp_birth" value="${sessionScope.emp_birth}" readonly style="width: 177px"><br>
+<div><b>생년월일</b></div><input type="text" name="emp_birth" value="${employeeDTO.emp_birth}" readonly style="width: 177px"><br>
 <sub></sub>
-<div><b>부서</b></div><input type="text" name="emp_dept" value="${sessionScope.emp_dept}" readonly><br>
+<div><b>부서</b></div><input type="text" name="emp_dept" value="${employeeDTO.emp_dept}" readonly><br>
 <sub></sub>
-<div><b>직급</b></div><input type="text" name="emp_rank" value="${sessionScope.emp_rank}" readonly><br>
+<div><b>직급</b></div><input type="text" name="emp_rank" value="${employeeDTO.emp_rank}" readonly><br>
 <sub></sub>
-<div><b>연락처</b></div><input type="tel" name="emp_phone" value="${sessionScope.emp_phone}"><br>
+<div><b>연락처</b></div><input type="tel" name="emp_phone" value="${employeeDTO.emp_phone}"><br>
 <sub></sub>
-<div><b>이메일</b></div><input type="email" name="emp_email" value="${sessionScope.emp_email }"><br>
+<div><b>이메일</b></div><input type="email" name="emp_email" value="${employeeDTO.emp_email }"><br>
 <sub></sub>
-<div><b>입사일</b></div><input type="text" name="hire_date" readonly value="${sessionScope.hire_date }"><br>
+<div><b>입사일</b></div><input type="text" name="hire_date" value="${employeeDTO.hire_date }" readonly ><br>
 <sub></sub>
 <br>
 <span style="float:right; margin-right: 50px">

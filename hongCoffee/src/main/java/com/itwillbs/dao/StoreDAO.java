@@ -141,4 +141,60 @@ public class StoreDAO {
 	}
 
 
+
+	public void stockInsert(StockDTO stockDTO) {
+		System.out.println("StoreDAO stockInsert()");
+		sqlSession.insert(namespace+".stockInsert", stockDTO);
+	}
+
+	public StockDTO getStock(int num) {
+		System.out.println("StoreDAO getStock()");
+		return sqlSession.selectOne(namespace+".getStock", num);
+	}
+
+
+	public int getItemNum(String item_name) {
+		System.out.println("StoreDAO getItemNum()");
+		return sqlSession.selectOne(namespace+".getItemNum", item_name);
+	}
+
+
+	public OrderDTO getOrder(int od_num) {
+		System.out.println("StoreDAO getOrder()");
+		return sqlSession.selectOne(namespace+".getOrder", od_num);
+	}
+
+
+	public void receiveInsert(ReceiveDTO receiveDTO) {
+		System.out.println("StoreDAO receiveInsert()");
+		sqlSession.insert(namespace+".receiveInsert", receiveDTO);
+	}
+
+	public void orderInsert(OrderDTO orderDTO) {
+		System.out.println("StoreDAO orderInsert()");
+		sqlSession.insert(namespace+".orderInsert", orderDTO);
+	}
+
+
+	public void orderUpdate(OrderDTO orderDTO) {
+		System.out.println("StoreDAO orderUpdate()");
+		sqlSession.update(namespace+".orderUpdate", orderDTO);
+	}
+
+	public void receiveUpdate(ReceiveDTO receiveDTO) {
+		System.out.println("StoreDAO receiveUpdate()");
+		sqlSession.update(namespace+".receiveUpdate", receiveDTO);
+		
+	}
+
+
+	public ReceiveDTO getReceive(int od_num) {
+		System.out.println("StoreDAO getReceive()");
+		return sqlSession.selectOne(namespace+".getReceive", od_num);
+	}
+
+
+
+
+
 }

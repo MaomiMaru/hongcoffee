@@ -15,8 +15,12 @@ public class OrderDTO {
 	private String name; //지점명
 	private String item_name; //재료명
 	private int item_price; //단가
+
 	private int item_minPrice; //최소 단가
 	private int item_maxPrice; //최대 단가
+
+	private int item_type; //재료유형
+
 	
 	
 	@Override
@@ -27,6 +31,16 @@ public class OrderDTO {
 				+ ", item_minPrice=" + item_minPrice + ", item_maxPrice=" + item_maxPrice + "]";
 	}
 	
+
+	
+	public int getItem_type() {
+		return item_type;
+	}
+	public void setItem_type(int item_type) {
+		this.item_type = item_type;
+	}
+	
+
 	public int getOd_num() {
 		return od_num;
 	}

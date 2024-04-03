@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
@@ -27,6 +29,7 @@ import com.itwillbs.service.StoreService;
 @RequestMapping("/store/*")
 public class StoreController {
 
+
 	@Inject
 	private StoreService storeService;
 	
@@ -39,6 +42,7 @@ public class StoreController {
 		return "store/login";
 	}
 	
+	//로그인 Process
 	@PostMapping("/loginPro")
 	public String loginPro(StoreDTO storeDTO, HttpSession session) {
 		System.out.println("StoreController loginPro()");
@@ -53,6 +57,15 @@ public class StoreController {
 			return "/store/msg";
 		}
 	}
+	
+	//로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		System.out.println("StoreController logout()");
+		session.invalidate();
+		return "redirect:/store/login";
+	}
+
 
 
 	//1. 대시 보드
@@ -60,8 +73,10 @@ public class StoreController {
 	public String main() {
 		System.out.println("StoreController main()");
 
-		return "/store/main";
+		return "store/main";
+
 	}
+
 
 	
 	//2. 기준 정보 관리
@@ -76,6 +91,7 @@ public class StoreController {
 	
 		return "store/item";
 	}//itemList
+
 
 
 	//2-1-1. 재료 필터링
@@ -142,7 +158,9 @@ public class StoreController {
 	//3. 물류 관리
 	//3-1. 재고 관리
 	@GetMapping("/stock")
+
 	public String stock(HttpServletRequest request, Model model) {
+
 		System.out.println("StoreController stock()");
 		
 		List<StockDTO> stockList = storeService.getStockList();
@@ -152,6 +170,7 @@ public class StoreController {
 		return "store/stock";
 	}//stockList
 	
+
 
 	//3-1-1. 재고 필터링
 	@PostMapping("/stockSearch")
@@ -199,6 +218,40 @@ public class StoreController {
 		return "/store/stock";
 	}//stockSearchList
 	
+
+	//3-1-1 재고 관리 - 추가
+	@GetMapping("/popup/stock_insert")
+	public String stock_insert() {
+		System.out.println("StoreController stock_insert()");
+		
+		return "/store/popup/stock_insert";
+	}
+	
+	
+	@PostMapping("/popup/stock_insertPro")
+	public String stock_insertPro(StockDTO stockDTO) {
+		System.out.println("StoreController stock_insertPro()");
+		
+		int item_num = storeService.getItemNum(stockDTO.getItem_name());
+		stockDTO.setItem_num(item_num);
+		storeService.stockInsert(stockDTO);
+		
+		return "/store/popup/close";
+	}
+	
+	//3-1-2 재고 관리 - 수정
+	@GetMapping("/popup/stock_update")
+	public String stock_update(HttpServletRequest request, Model model) {
+		System.out.println("StoreController stock_update()");
+		
+		int stock_num = Integer.parseInt(request.getParameter("stock_num"));
+		StockDTO stockDTO = new StockDTO();
+		stockDTO = storeService.getStock(stock_num);
+		model.addAttribute("stockDTO", stockDTO);
+		
+		return "/store/popup/stock_update";
+	}
+
 	
 	//3-2. 발주 관리
 	@GetMapping("/order")
@@ -210,6 +263,7 @@ public class StoreController {
 		model.addAttribute("orderList",orderList);
 			
 		return "store/order";
+
 	}//orderList
 
 	
@@ -279,55 +333,140 @@ public class StoreController {
 		model.addAttribute("receiveList",receiveList);
 			
 		return "store/receive";
-	}//receiveList
 
+	}//receiveList
 	
 	//3-3-1. 입고 필터링
-	@PostMapping("/receiveSearch")
-	public String receiveSearch(HttpServletRequest request, Model model) throws Exception {
-		System.out.println("StoreController receiveSearch()");
+		@PostMapping("/receiveSearch")
+		public String receiveSearch(HttpServletRequest request, Model model) throws Exception {
+			System.out.println("StoreController receiveSearch()");
 
-		ReceiveDTO receiveDTO = new ReceiveDTO();
+			ReceiveDTO receiveDTO = new ReceiveDTO();
 
-		String item_name = request.getParameter("item_name");
-		receiveDTO.setItem_name(item_name);
+			String item_name = request.getParameter("item_name");
+			receiveDTO.setItem_name(item_name);
 
-		String item_sminPrice = request.getParameter("item_minPrice");
+			String item_sminPrice = request.getParameter("item_minPrice");
+			
+			String item_smaxPrice = request.getParameter("item_maxPrice");
+
+			try {
+				receiveDTO.setItem_minPrice(item_sminPrice != null ? Integer.parseInt(item_sminPrice) : 0);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+			try {
+				receiveDTO.setItem_maxPrice(item_smaxPrice != null ? Integer.parseInt(item_smaxPrice) : 0);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+			
+			String rc_time = request.getParameter("rc_time");
+
+			if (rc_time != "") {
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+				Date d1 = format.parse(rc_time);
+				Timestamp date1 = new Timestamp(d1.getTime());
+				receiveDTO.setRc_time(date1);
+			}
+
+			List<ReceiveDTO> receiveList;
+
+			if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && rc_time == "") {
+				receiveList = storeService.getReceiveList();
+			} else {
+				receiveList = storeService.searchReceiveList(receiveDTO);
+			}
+
+			model.addAttribute("receiveList", receiveList);
+
+			return "/store/receive";
+		}//receiveSearchList
+	
+	
+	//3-3-1. 물류 관리 -  입고 추가
+	@GetMapping("/popup/receive_insert")
+	public String receive_insert(HttpServletRequest request, Model model) {
+		System.out.println("StoreController  receive_insert");
+
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		model.addAttribute("receiveDTO", storeService.getReceive(od_num));
 		
-		String item_smaxPrice = request.getParameter("item_maxPrice");
-
-		try {
-			receiveDTO.setItem_minPrice(item_sminPrice != null ? Integer.parseInt(item_sminPrice) : 0);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-		try {
-			receiveDTO.setItem_maxPrice(item_smaxPrice != null ? Integer.parseInt(item_smaxPrice) : 0);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
+		return "store/popup/receive_insert";
+	}//receive_insert
+	
+	
+	@PostMapping("/popup/receive_insertPro")
+	public String receive_insertPro(ReceiveDTO receiveDTO) {
+		System.out.println("StoreController receive_insertPro");
 		
-		String rc_time = request.getParameter("rc_time");
+		receiveDTO.setItem_num(storeService.getItemNum(receiveDTO.getItem_name()));
+		storeService.receiveInsert(receiveDTO);
+		
+		return "store/popup/close";
+	}//receive_insertPro
 
-		if (rc_time != "") {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			Date d1 = format.parse(rc_time);
-			Timestamp date1 = new Timestamp(d1.getTime());
-			receiveDTO.setRc_time(date1);
-		}
 
-		List<ReceiveDTO> receiveList;
+	//3-3-1. 물류 관리 -  발주 추가
+	@GetMapping("/popup/order_insert")
+	public String order_insert() {
+		System.out.println("StoreController order_insert()");
+		
+		return "store/popup/order_insert";
+	}
+	
+	@PostMapping("/popup/order_insertPro")
+	public String order_insertPro(OrderDTO orderDTO) {
+		System.out.println("StoreController order_insertPro()");
+		
+		int item_num = storeService.getItemNum(orderDTO.getItem_name());
+		orderDTO.setItem_num(item_num);
+		storeService.orderInsert(orderDTO);
+		
+		
+		return "store/popup/close";
+	}
+	
+	//3-3-2. 물류 관리 - 발주 수정
+	@GetMapping("/popup/order_update")
+	public String order_update(HttpServletRequest request, Model model) {
+		System.out.println("StoreController order_update()");
+		
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		model.addAttribute("orderDTO", storeService.getOrder(od_num));
+		
+		return "store/popup/order_update";
+	}
+	
+	@PostMapping("/popup/order_updatePro")
+	public String order_updatePro(OrderDTO orderDTO) {
+		System.out.println("StoreController order_updatePro()");
+		
+		storeService.orderUpdate(orderDTO);
+		
+		return "store/popup/close";
+	}
+	
+	//3-3-1 입고 관리 - 수정
+	@GetMapping("/popup/receive_update")
+	public String receive_update(HttpServletRequest request, Model model) {
+		System.out.println("StoreController receive_update()");
+		
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		model.addAttribute("receiveDTO", storeService.getReceive(od_num));
+		
+		return "store/popup/receive_update";
+	}
+	
+	@PostMapping("/popup/receive_updatePro")
+	public String receive_updatePro(ReceiveDTO receiveDTO) {
+		System.out.println("StoreController receive_updatePro()");
+		
+		storeService.receiveUpdate(receiveDTO);
+		
+		return "store/popup/close";
+	}
 
-		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && rc_time == "") {
-			receiveList = storeService.getReceiveList();
-		} else {
-			receiveList = storeService.searchReceiveList(receiveDTO);
-		}
-
-		model.addAttribute("receiveList", receiveList);
-
-		return "/store/receive";
-	}//receiveSearchList
 
 	
 	//4. 영업 관리

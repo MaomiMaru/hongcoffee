@@ -34,7 +34,7 @@ background-color: #EEEEEE;
 <input type="password" name="emp_pw" class="emp_pw"><br>
 <input type="submit" value="로그인" class="submit" style="margin-left: 70px; width: 177px; background-color: #C9DAF8">
 <hr width="315">
-<input type="checkbox">사원번호 기억하기
+<input type="checkbox" class="rememberCheck">사원번호 기억하기
 </div>
 </form>
 </div>
