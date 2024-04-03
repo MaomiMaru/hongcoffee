@@ -74,12 +74,18 @@ ul{
 	width: 600px;
 	height: 50px;
 }
+input[type=text] {
 
+    color: black !important;
+}
 input[type=text]{
 	width: 300px;
 	margin-bottom: 10px;
 }
-
+input {
+    border: none;
+    outline: none;
+}
 .button{
 	margin-left: 10px;
 }
@@ -124,7 +130,6 @@ label input[type=radio]:checked:after{
   background-size: contain;
   border:1px #fff;
 }
-
 /* 목록 스타일 끝 */
 </style>
 <head>

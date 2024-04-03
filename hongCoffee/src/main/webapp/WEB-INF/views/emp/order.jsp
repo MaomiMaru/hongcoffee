@@ -93,7 +93,10 @@ input[type=date]{
 .button{
 	margin-left: 10px;
 }
-
+input {
+    border: none;
+    outline: none;
+}
 /* 항목 스타일 끝 */
 /* 목록 스타일 */
 table {
