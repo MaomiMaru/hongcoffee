@@ -193,7 +193,7 @@
  	</update>
  	
  	<select id="getOrder" resultType="com.itwillbs.domain.OrderDTO">
- 		select a.od_num, a.item_num, a.num, a.od_amount, a.received_not, a.od_note, a.od_time, a.item_num, b.name, c.item_name, c.item_price
+ 		select a.od_num, a.item_num, a.num, a.od_amount, a.received_not, a.od_note, a.ob_note, a.od_time, a.item_num, b.name, c.item_name, c.item_price
  		from `order` a join store b
  		on a.num = b.num
  		join item c

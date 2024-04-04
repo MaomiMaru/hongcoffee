@@ -19,6 +19,7 @@ select{
 <body>
 <form action="${pageContext.request.contextPath}/store/popup/stock_updatePro" method="post" class="form">
 <h2 style="margin-left: 10px">재고 수정</h2>
+<input type="hidden" name="stock_num" value="${stockDTO.stock_num }">
 <fieldset style="border:0px">
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 

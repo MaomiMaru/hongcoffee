@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.dao.StoreDAO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
@@ -215,6 +216,30 @@ public class StoreService {
 	public void consumeUpdate(ResultDTO resultDTO) {
 		System.out.println("StoreService consumeUpdate()");
 		storeDAO.consumUpdate(resultDTO);
+	}
+
+
+	public void sellInsert(ResultDTO resultDTO) {
+		System.out.println("StoreService sellInsert()");
+		storeDAO.sellInsert(resultDTO);
+	}
+
+
+	public void stockUpdate(StockDTO stockDTO) {
+		System.out.println("StoreService stockUpdate()");
+		storeDAO.stockUpdate(stockDTO);
+	}
+
+
+	public ResultDTO getSales(int rs_num) {
+		System.out.println("StoreService getSales()");
+		return storeDAO.getSales(rs_num);
+	}
+
+
+	public void salesUpdate(ResultDTO resultDTO) {
+		System.out.println("StoreService salesUpdate()");
+		storeDAO.salesUpdate(resultDTO);
 	}
 
 

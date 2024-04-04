@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
@@ -239,6 +240,15 @@ public class StoreController {
 
 		return "/store/popup/stock_update";
 	}
+	
+	@PostMapping("/popup/stock_updatePro")
+	public String stock_updatePro(StockDTO stockDTO){
+		System.out.println("StoreController stock_updatePro");
+		
+		storeService.stockUpdate(stockDTO);
+		
+		return "/store/popup/close";
+	}
 
 	// 3-2. 발주 관리
 	@GetMapping("/order")
@@ -375,7 +385,7 @@ public class StoreController {
 		System.out.println("StoreController  receive_insert");
 
 		int od_num = Integer.parseInt(request.getParameter("od_num"));
-		model.addAttribute("receiveDTO", storeService.getReceive(od_num));
+		model.addAttribute("orderDTO", storeService.getOrder(od_num));
 
 		return "store/popup/receive_insert";
 	}// receive_insert
@@ -480,10 +490,10 @@ public class StoreController {
 		String rs_date = request.getParameter("rs_date");
 
 		if (rs_date != "") {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			Date d1 = format.parse(rs_date);
-			Timestamp date1 = new Timestamp(d1.getTime());
-			resultDTO.setRs_date(date1);
+//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//			Date d1 = format.parse(rs_date);
+//			Timestamp date1 = new Timestamp(d1.getTime());
+			resultDTO.setRs_date(rs_date);
 		}
 		List<ResultDTO> resultList;
 
@@ -523,17 +533,17 @@ public class StoreController {
 		int stock_num = storeService.getStockNum(request.getParameter("item_name")); 
 		
 		String rs_date = request.getParameter("rs_date");
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date d1;
-		try {
-			d1 = format.parse(rs_date);
-		} catch (ParseException e) {
-			d1 = new Date();
-		}
-		Timestamp rdate = new Timestamp(d1.getTime());
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		Date d1;
+//		try {
+//			d1 = format.parse(rs_date);
+//		} catch (ParseException e) {
+//			d1 = new Date();
+//		}
+//		Timestamp rdate = new Timestamp(d1.getTime());
 		
 		
-		resultDTO.setRs_date(rdate);
+		resultDTO.setRs_date(rs_date);
 		resultDTO.setNum(Integer.parseInt(request.getParameter("num")));
 		resultDTO.setConsume(Integer.parseInt(request.getParameter("consume")));
 		resultDTO.setRs_note(request.getParameter("rs_note"));
@@ -573,10 +583,10 @@ public class StoreController {
 		String rs_date = request.getParameter("rs_date");
 
 		if (rs_date != "") {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			Date d2 = format.parse(rs_date);
-			Timestamp date2 = new Timestamp(d2.getTime());
-			resultDTO.setRs_date(date2);
+//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//			Date d2 = format.parse(rs_date);
+//			Timestamp date2 = new Timestamp(d2.getTime());
+			resultDTO.setRs_date(rs_date);
 		}
 
 		List<ResultDTO> consumeList;
@@ -614,10 +624,10 @@ public class StoreController {
 		String rs_date = request.getParameter("rs_date");
 
 		if (rs_date != "") {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			Date d3 = format.parse(rs_date);
-			Timestamp date3 = new Timestamp(d3.getTime());
-			resultDTO.setRs_date(date3);
+//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//			Date d3 = format.parse(rs_date);
+//			Timestamp date3 = new Timestamp(d3.getTime());
+			resultDTO.setRs_date(rs_date);
 		}
 		List<ResultDTO> sellList;
 
@@ -631,6 +641,48 @@ public class StoreController {
 
 		return "/store/sell";
 	}// panmeSearch
+	
+	@GetMapping("popup/sell_insert")
+	public String sell_insert() {
+		System.out.println("StoreController sell_insert()");
+		
+		return "/store/popup/sell_insert";
+	}
+	
+	@PostMapping("popup/sell_insertPro")
+	public String sell_insertPro(HttpServletRequest request, ResultDTO resultDTO) {
+		System.out.println("StoreController sell_insertPro()");
+		
+		resultDTO.setRs_date(request.getParameter("rs_date"));
+		resultDTO.setProd_name(request.getParameter("prod_name"));
+		resultDTO.setSales(Integer.parseInt(request.getParameter("sales")));
+//		resultDTO.setProd_price(Integer.parseInt(request.getParameter("prod_price")));
+		
+		storeService.sellInsert(resultDTO);
+		
+		return "/store/popup/close";
+	}
+	
+	@GetMapping("/popup/sell_update")
+	public String sell_update(HttpServletRequest request, Model model) {
+		System.out.println("StoreController sell_update()");
+		
+		int rs_num = Integer.parseInt(request.getParameter("rs_num"));
+		model.addAttribute("resultDTO", storeService.getSales(rs_num));
+		
+		
+		return "/store/popup/sell_update";
+	}
+	
+	@PostMapping("/popup/sell_updatePro")
+	public String sell_updatePro(ResultDTO resultDTO) {
+		System.out.println("StoreController sell_updatePro()");
+		
+		storeService.salesUpdate(resultDTO);
+		
+		return "store/popup/close";
+	}
+	
 
 	// 창 닫기
 	@GetMapping("popup/close")

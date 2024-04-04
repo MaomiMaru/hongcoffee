@@ -216,8 +216,8 @@ label input[type=radio]:checked:after{
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">판매 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button style="background-color: black; color: #EFBDBC">추가</button>
-		<button style="background-color: black; color: #EFBDBC">수정</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/sell_insert','홍커피','width=370,height=520')">추가</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/sell_update?rs_num=13','홍커피','width=370,height=520')">수정</button>
 <!-- 		<button style="background-color: black; color: #EFBDBC">삭제</button> -->
 		</div>
 		
@@ -235,7 +235,7 @@ label input[type=radio]:checked:after{
  		 <c:forEach var="ResultDTO" items="${sellList}">
   <tr>
 <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
-   	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${ResultDTO.rs_date}" pattern="yyyy.MM.dd"/></td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.rs_date}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.prod_name}</td>
     <td style="text-align: center !important; font-size:20px !important;">${ResultDTO.sales}</td>
    	<td style="text-align: center !important; font-size:20px !important;">

@@ -58,9 +58,9 @@ public class EmployeeController {
 
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpSession session) {
 		System.out.println("EmployeeService login()");
-		
+	
 		return "/emp/login";
 	}
 

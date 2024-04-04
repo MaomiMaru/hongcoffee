@@ -21,6 +21,7 @@ public class ReceiveDTO {
 	
 	
 
+
 	public int getItem_type() {
 		return item_type;
 	}

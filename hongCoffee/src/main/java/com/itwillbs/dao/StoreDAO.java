@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
@@ -169,6 +170,14 @@ public class StoreDAO {
 		System.out.println("StoreDAO receiveInsert()");
 		sqlSession.insert(namespace+".receiveInsert", receiveDTO);
 		sqlSession.update(namespace+".receiveState",receiveDTO);
+		
+		String stock_num = sqlSession.selectOne(namespace+".getStockEx",receiveDTO);
+		
+		if(stock_num != null) {
+			sqlSession.update(namespace+".stockIncrease", receiveDTO);
+		}else {
+			sqlSession.insert(namespace+".stockInsert2", receiveDTO);
+		}
 	}
 
 	public void orderInsert(OrderDTO orderDTO) {
@@ -219,6 +228,32 @@ public class StoreDAO {
 		sqlSession.update(namespace+".consumeUpdate", resultDTO);
 		sqlSession.update(namespace+".stockReset", resultDTO);
 		sqlSession.update(namespace+".stockDecrease", resultDTO);
+	}
+
+
+	public void sellInsert(ResultDTO resultDTO) {
+		System.out.println("StoreDAO sellInsert()");
+		int prod_num = sqlSession.selectOne(namespace+".getProdNum", resultDTO);
+		resultDTO.setProd_num(prod_num);
+		sqlSession.insert(namespace+".sellInsert", resultDTO);
+	}
+
+
+	public void stockUpdate(StockDTO stockDTO) {
+		System.out.println("StoreDAO stockUpdate()");
+		sqlSession.update(namespace+".stockUpdate", stockDTO);
+	}
+
+
+	public ResultDTO getSales(int rs_num) {
+		System.out.println("StoreDAO getSales()");
+		return sqlSession.selectOne(namespace+".getSales", rs_num);
+	}
+
+
+	public void salesUpdate(ResultDTO resultDTO) {
+		System.out.println("StoreDAO salesUpdate()");
+		sqlSession.update(namespace+".salesUpdate", resultDTO);
 	}
 
 

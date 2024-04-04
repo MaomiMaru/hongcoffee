@@ -9,7 +9,7 @@ public class ResultDTO {
 	private int prod_num;// 상품번호
 	private int item_num;// 재료번호
 	private int stock_num;// 재고번호
-	private Timestamp rs_date; // 영업일
+	private String rs_date; // 영업일
 	private int sales;// 판매량
 	private int consume;// 소모량
 	private int consumeBefore;// 소모량
@@ -22,6 +22,17 @@ public class ResultDTO {
 	private String prod_name; // 상품명
 	private int prod_price; // 판매가
 	private String rs_note; // 적요
+	private int prod_type; //상품 유형
+	
+	
+
+	public int getProd_type() {
+		return prod_type;
+	}
+
+	public void setProd_type(int prod_type) {
+		this.prod_type = prod_type;
+	}
 
 	public int getConsumeBefore() {
 		return consumeBefore;
@@ -159,11 +170,11 @@ public class ResultDTO {
 		this.rs_note = rs_note;
 	}
 
-	public Timestamp getRs_date() {
+	public String getRs_date() {
 		return rs_date;
 	}
 
-	public void setRs_date(Timestamp rs_date) {
+	public void setRs_date(String rs_date) {
 		this.rs_date = rs_date;
 	}
 

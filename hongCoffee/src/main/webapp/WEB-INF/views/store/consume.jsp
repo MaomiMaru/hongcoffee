@@ -235,7 +235,7 @@ label input[type=radio]:checked:after{
  		 <c:forEach var="ResultDTO" items="${consumeList}">
   <tr>
 <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
-   	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${ResultDTO.rs_date}" pattern="yyyy.MM.dd"/></td>
+   	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.rs_date}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.item_name}</td>
     <td style="text-align: center !important; font-size:20px !important;">${ResultDTO.consume}</td>
    	<td style="text-align: center !important; font-size:20px !important;">

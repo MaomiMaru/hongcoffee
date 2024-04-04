@@ -142,6 +142,17 @@
  		insert into stock(num, item_num, amount, stock_note)
  		values(#{num}, #{item_num}, #{amount}, #{stock_note})
  	</insert>
+
+ 	<insert id="stockInsert2">
+ 		insert into stock(num, item_num, amount)
+ 		values(#{num}, #{item_num}, #{rc_amount})
+ 	</insert>
+ 	
+ 	<update id="stockUpdate">
+ 		update stock
+ 		set amount = #{amount}, stock_note = #{stock_note}
+ 		where stock_num = #{stock_num}
+ 	</update>
  	
  	<select id="getItemNum" resultType="java.lang.Integer">
  		select item_num
@@ -150,7 +161,7 @@
  	</select>
  	
  	<select id="getStock" resultType="com.itwillbs.domain.StockDTO">
- 		select a.stock_num, a.item_num, a.amount, a.stock_note, a.item_num, b.item_name, b.item_price, b.item_type
+ 		select a.stock_num, a.item_num, a.amount, a.stock_note, b.item_name, b.item_price, b.item_type
  		from stock a join item b
  		on a.item_num = b.item_num
  		where stock_num = #{stock_num}
@@ -254,8 +265,8 @@
  	</select>
  	
 	<insert id="consumeInsert">
-		insert into result(num, stock_num, rs_date, consume, rs_note)
-		values(#{num}, #{stock_num}, #{rs_date}, #{consume}, #{rs_note})
+		insert into result(num, stock_num, rs_date, consume)
+		values(#{num}, #{stock_num}, #{rs_date}, #{consume}
 	</insert>
 	
 	<update id="stockDecrease">
@@ -266,7 +277,7 @@
 	
 	<update id="receiveState">
 		update `order`
-		set receive_not = 1
+		set received_not = 1
 		where od_num = #{od_num}
 	</update>
 	
@@ -281,7 +292,7 @@
 
 	<update id="consumeUpdate">
 		update result
-		set consume = #{consume}, rs_note = #{rs_note}
+		set consume = #{consume}
 		where rs_num = #{rs_num};
 	</update>
 
@@ -291,5 +302,40 @@
 		where stock_num = #{stock_num}
 	</update>
 
+	<insert id="sellInsert">
+		insert into result(num, prod_num, rs_date, sales, rs_note)
+		values(#{num}, #{prod_num}, #{rs_date}, #{sales}, #{rs_note})
+	</insert>
+	
+	<update id="stockIncrease">
+		update stock
+		set amount = amount + #{rc_amount}
+		where num = #{num} and item_num = #{item_num}
+	</update>
+
+ 	<select id="getStockEx" resultType="java.lang.String">
+ 		select stock_num
+ 		from stock
+ 		where num = #{num} and item_num = #{item_num}
+ 	</select>
+ 	
+ 	<select id="getProdNum" resultType="java.lang.Integer">
+ 		select prod_num
+ 		from product
+ 		where prod_name like concat('%', #{prod_name}, '%')
+ 	</select>
+
+	<select id="getSales" resultType="com.itwillbs.domain.ResultDTO">
+		select a.rs_num, a.rs_date, a.sales, a.rs_note, b.prod_name, b.prod_type, b.prod_price
+		from result a join product b
+		on a.prod_num = b.prod_num
+        where rs_num = #{rs_num}
+	</select>
+	
+	<update id="salesUpdate">
+		update result
+		set sales = #{sales}
+		where rs_num = #{rs_num}
+	</update>
 
 </mapper>
