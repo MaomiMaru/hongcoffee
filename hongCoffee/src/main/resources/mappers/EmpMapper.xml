@@ -73,7 +73,7 @@
 	</select>
  	
  	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
- 		select s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.received_not  
+ 		select s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.received_not, o.od_num, o.shipment_not, o.od_note, o.ob_note  
  		from `order` o join store s on o.num = s.num 
  		join item i on o.item_num = i.item_num
  	</select>
@@ -105,10 +105,11 @@
  	</select>
  	
  	<select id="getShipmentList" resultType="com.itwillbs.domain.ShipmentDTO"> 
- 		select  s.name, i.item_name, h.sh_amount, i.item_price, h.sh_time, r.pay 
+ 		select  s.name, i.item_name, h.sh_amount, i.item_price, h.sh_time, r.pay, r.od_num, h.sh_note, o.received_not
  		from shipment h join store s on h.num = s.num
  		join item i on h.item_num = i.item_num
  		join receive r on h.od_num = r.od_num
+ 		join `order` o on h.od_num = o.od_num
  	</select>
  	
  	<select id="searchShipmentList" resultType="com.itwillbs.domain.ShipmentDTO">

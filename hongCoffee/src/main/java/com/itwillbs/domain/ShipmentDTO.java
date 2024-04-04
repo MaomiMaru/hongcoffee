@@ -9,21 +9,22 @@ public class ShipmentDTO {
 	private int item_num; //물품번호
 	private int sh_amount; //입고수량
 	private String sh_time; //입고일
-	private String sh_note; //출하적
+	private String sh_note; //출하적요
 	private int item_price; //단가
 	private int item_minPrice; //최소 단가
 	private int item_maxPrice; //최대 단가
 	private String name; //지졈명
 	private String item_name; //재료명
 	private int pay; //결제여부
+	private int received_not; //입고여부
 	
-	
+
 	@Override
 	public String toString() {
 		return "ShipmentDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", sh_amount=" + sh_amount
 				+ ", sh_time=" + sh_time + ", sh_note=" + sh_note + ", item_price=" + item_price + ", item_minPrice="
 				+ item_minPrice + ", item_maxPrice=" + item_maxPrice + ", name=" + name + ", item_name=" + item_name
-				+ ", pay=" + pay + "]";
+				+ ", pay=" + pay + ", received_not=" + received_not + "]";
 	}
 	
 	public int getOd_num() {
@@ -50,14 +51,10 @@ public class ShipmentDTO {
 	public void setSh_amount(int sh_amount) {
 		this.sh_amount = sh_amount;
 	}
-
 	public String getSh_time() {
-
 		return sh_time;
 	}
-	
 	public void setSh_time(String sh_time) {
-
 		this.sh_time = sh_time;
 	}
 	public String getSh_note() {
@@ -102,5 +99,12 @@ public class ShipmentDTO {
 	public void setPay(int pay) {
 		this.pay = pay;
 	}
+	public int getReceived_not() {
+		return received_not;
+	}
+	public void setReceived_not(int received_not) {
+		this.received_not = received_not;
+	}
+	
 	
 }
