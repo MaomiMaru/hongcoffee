@@ -54,8 +54,7 @@ ul{
 }
 
 input[type=text] {
-
-    color: black !important;
+	color: black !important; 
 }
 .search_name {
 	width: 100px;
@@ -100,6 +99,8 @@ th, td {
   border-bottom: 1px solid #ddd;
 }
 
+
+
 tr:hover {background-color: #F0F0F0;}
 /* 목록 스타일 끝 */
 
@@ -129,6 +130,7 @@ label input[type=radio]:checked:after{
   background-size: contain;
   border:1px #fff;
 }
+
 </style>
 <head>
   <!-- Required meta tags -->
