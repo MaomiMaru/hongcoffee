@@ -8,6 +8,7 @@ public class OrderDTO {
 	private int num; //지점 번호
 	private int item_num; //재료 번호
 	private int od_amount; //발주량/수주량
+
 	private Timestamp od_time; //발주일시
 	private int shipment_not; //출하여부
 	public int getShipment_not() {
@@ -20,7 +21,9 @@ public class OrderDTO {
 		this.shipment_not = shipment_not;
 	}
 
+
 	private int received_not; //입고여부
+
 	private String od_note; //발주적요
 	private String ob_note; //수주적요
 	private String name; //지점명
@@ -37,9 +40,10 @@ public class OrderDTO {
 	@Override
 	public String toString() {
 		return "OrderDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", od_amount=" + od_amount
-				+ ", od_time=" + od_time + ", received_not=" + received_not + ", od_note=" + od_note + ", ob_note="
-				+ ob_note + ", name=" + name + ", item_name=" + item_name + ", item_price=" + item_price
-				+ ", item_minPrice=" + item_minPrice + ", item_maxPrice=" + item_maxPrice + "]";
+				+ ", od_time=" + od_time + ", received_not=" + received_not + ", shipment_not=" + shipment_not
+				+ ", od_note=" + od_note + ", ob_note=" + ob_note + ", name=" + name + ", item_name=" + item_name
+				+ ", item_price=" + item_price + ", item_minPrice=" + item_minPrice + ", item_maxPrice=" + item_maxPrice
+				+ "]";
 	}
 	
 
@@ -88,6 +92,7 @@ public class OrderDTO {
 	public void setReceived_not(int received_not) {
 		this.received_not = received_not;
 	}
+
 	public String getOd_note() {
 		return od_note;
 	}
@@ -131,6 +136,7 @@ public class OrderDTO {
 		this.item_maxPrice = item_maxPrice;
 	}
 	
+
 	//==페이징
 	
 	private int pageSize;
@@ -208,6 +214,7 @@ public class OrderDTO {
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
+
 
 	
 }

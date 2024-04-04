@@ -1,6 +1,6 @@
 package com.itwillbs.domain;
 
-public class ProduckDTO {
+public class ProductDTO {
 
 	private int prod_num;
 	private String prod_name;

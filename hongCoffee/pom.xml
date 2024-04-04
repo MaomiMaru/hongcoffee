@@ -91,6 +91,27 @@
 		    <version>2.15.2</version>
 		</dependency>
 		<!-- 데이터를 json형태로 변경하는 프로그램 jackson-databind 끝 -->
+		
+		
+		<!-- Excel Read/Write 를 위한 Dependency 추가 -->
+  		<dependency>
+    		<groupId>org.apache.poi</groupId>
+    		<artifactId>poi</artifactId>
+    		<version>5.2.3</version>
+  		</dependency>
+  		<dependency>
+    		<groupId>org.apache.poi</groupId>
+    		<artifactId>poi-ooxml</artifactId>
+    		<version>5.2.3</version>
+  		</dependency>
+  		<!-- Excel Read/Write 를 위한 Dependency 추가 끝 -->
+		
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+    		<groupId>commons-io</groupId>
+    		<artifactId>commons-io</artifactId>
+    		<version>2.11.0</version>
+		</dependency>
 				
 		<!-- AspectJ -->
 		<dependency>
