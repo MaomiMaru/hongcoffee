@@ -134,6 +134,28 @@ label input[type=radio]:checked:after{
   background-size: contain;
   border:1px #fff;
 }
+
+/* 알림 */
+/*토스트 메시지*/
+#tost_message {
+    opacity: 0;
+    position: fixed;
+	bottom: -100px; 
+    left: 50%;
+    transform: translate(-50%,0);
+    padding: 10px 50px;
+    background: rgba(0, 0, 0, 0.70);
+    border-radius: 100px;
+    color: #fff;
+    box-shadow: 3px 4px 11px 0px #00000040;
+    transition: all 0.5s;
+}
+/*토스트 메시지 활성화 되었을 때*/
+#tost_message.active {
+    opacity: 100%;
+    bottom: 50px;
+}
+
 </style>
 <head>
   <!-- Required meta tags -->
@@ -196,6 +218,51 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>입고 관리</h2>
 		
+		<div id="tost_message"></div>
+<!--     <button id="tost_btn" type="button">클릭하면 토스트 메시지가 나옵니다!</button> -->
+  <script>
+//1. 토스트 메시지, 버튼요소를 변수에 대입
+  let tostMessage = document.getElementById('tost_message');
+  let tostBtn = document.getElementById('tost_btn');
+
+  let date = new Date();
+  let d = date.getDate();
+  if(d == 15){
+	  tostMessage.innerText = '결제일 5일 전입니다';
+  }
+  if(d == 16){
+	  tostMessage.innerText = '결제일 4일 전입니다';
+  }
+  if(d == 17){
+	  tostMessage.innerText = '결제일 3일 전입니다';
+  }
+  if(d == 18){
+	  tostMessage.innerText = '결제일 2일 전입니다';
+  }
+  if(d == 19){
+	  tostMessage.innerText = '결제일 1일 전입니다';
+  }
+  if(d == 20){
+	  tostMessage.innerText = '결제 당일 입니다';
+  }
+  
+  //2. 토스트 메시지 노출-사라짐 함수 작성
+  function tostOn(){
+      tostMessage.classList.add('active');
+      setTimeout(function(){
+          tostMessage.classList.remove('active');
+      },2000);
+  }
+
+  //3. 토스트 버튼에 이벤트 연결
+window.addEventListener('load',function(){
+      console.log('이벤트가 잘 연결 됐는지 확인');
+      tostOn()
+  });
+
+  </script>
+		
+		
 		<form action="${pageContext.request.contextPath}/store/receiveSearch" method="post">
 			<div id="search">
 				<ul>
@@ -257,6 +324,8 @@ label input[type=radio]:checked:after{
    	
 
  	</tr>
+ 	
+ 	
   		</c:forEach>
   
  		 </table>

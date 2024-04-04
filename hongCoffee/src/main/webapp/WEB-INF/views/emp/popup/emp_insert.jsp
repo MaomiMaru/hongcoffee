@@ -32,7 +32,7 @@ select{
 <div><b>생년월일</b></div><input type="date" name="emp_birth" class="emp_birth" style="width: 177px"><br>
 <sub></sub>
 <div><b>부서</b></div>
-<select name="emp_dept" class="emp_dept">
+<select name="emp_dept" id="emp_dept"  >
 <option value="100">선택해주세요.</option>
 <option value="0">무소속</option>
 <option value="1">인사팀</option>

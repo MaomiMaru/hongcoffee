@@ -90,6 +90,7 @@ input[type=text]{
 }
 
 
+
 </style>
 <head>
   <!-- Required meta tags -->
@@ -154,6 +155,9 @@ input[type=text]{
       <div class="main-panel">
         <div class="content-wrapper">
         <h2>대시보드</h2>
+      
+      
+      
          <fieldset>
     
 	<script>
@@ -294,6 +298,9 @@ $(function() {
          </fieldset>
 
         </div>
+        
+     
+        
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
          <!--     include bottom -->

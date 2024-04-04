@@ -206,7 +206,7 @@ label input[type=radio]:checked:after{
 		<form action="${pageContext.request.contextPath}/store/resultSearch" method="post">
 			<div id="search">
 				<ul>
-					<li><div class="search_div"><label class="search_name"><b>등록일</b></label>
+					<li><div class="search_div"><label class="search_name"><b>영업일</b></label>
 						<input type="date" name="rs_date" max="9999-12-31">
 
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
@@ -229,7 +229,7 @@ label input[type=radio]:checked:after{
 		<table class="table">
   			<tr style="background-color: transparent !important;">
     		<th style=" font-size:20px !important; color: black;">선택</th>
-    		<th style=" font-size:20px !important; color: black;">등록일</th>
+    		<th style=" font-size:20px !important; color: black;">영업일</th>
     		<th style=" font-size:20px !important; color: black;">일 지출</th>
     		<th style=" font-size:20px !important; color: black;">일 매출</th>
     		<th style=" font-size:20px !important; color: black;">순이익</th>
