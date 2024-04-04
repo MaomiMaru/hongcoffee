@@ -216,11 +216,11 @@ label input[type=radio]:checked:after{
 					<li><div class="search_div"><label class="search_name"><b>수주일시</b></label>
 						<input type="date" name="od_time" max="9999-12-31"></div></li>
 						
-					<li><div class="search_div"><label class="search_name"><b>입고여부</b></label>
-						<select class="choose" name="received_not">
+					<li><div class="search_div"><label class="search_name"><b>출하여부</b></label>
+						<select class="choose" name="shipment_not">
 							<option value="100">-----------------------------------------------</option>
-							<option value="0">미입고</option>
-							<option value="1">입고완료</option>
+							<option value="0">미출하</option>
+							<option value="1">출하완료</option>
 						</select>
 						
 					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
@@ -250,7 +250,7 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">총금액</th>
     		<th style=" font-size:20px !important; color: black;">수주일시</th>
-    		<th style=" font-size:20px !important; color: black;">입고여부</th>
+    		<th style=" font-size:20px !important; color: black;">출하여부</th>
  		 </tr>
  		 <c:forEach var="OrderDTO" items="${orderList}">
   <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_order?od_num=${OrderDTO.od_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
@@ -273,11 +273,11 @@ label input[type=radio]:checked:after{
        
    	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${OrderDTO.od_time}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
 	
-	<c:if test="${OrderDTO.received_not eq 0}">
-      <td style="text-align: center !important; font-size:20px !important; color:red; ">미입고</td>
+	<c:if test="${OrderDTO.shipment_not eq 0}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">미출하</td>
   	</c:if>
-	<c:if test="${OrderDTO.received_not eq 1}">
-		<td style="text-align: center !important; font-size:20px !important; color:green; ">입고완료</td>
+	<c:if test="${OrderDTO.shipment_not eq 1}">
+		<td style="text-align: center !important; font-size:20px !important; color:green; ">출하완료</td>
 	</c:if>
 
 

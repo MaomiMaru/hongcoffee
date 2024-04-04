@@ -265,9 +265,9 @@ public class EmployeeController {
 				pageDTO.setEndPage(endPage);
 				pageDTO.setPageCount(pageCount);
 		
-			List<ItemDTO> ingredientList = employeeService.getItemList(pageDTO);
+			List<ItemDTO> itemList = employeeService.getItemList(pageDTO);
 		
-			model.addAttribute("ingredientList",ingredientList);
+			model.addAttribute("itemList",itemList);
 			model.addAttribute("pageDTO",pageDTO);
 			
 		return "/emp/item";
@@ -512,10 +512,10 @@ public class EmployeeController {
 			orderDTO.setOd_time(date1);
 		}
 
-		String received_sNot = request.getParameter("received_not");
+		String shipment_sNot = request.getParameter("shipment_not");
 
 		try {
-			orderDTO.setReceived_not(received_sNot != null ? Integer.parseInt(received_sNot) : 100);
+			orderDTO.setShipment_not(shipment_sNot != null ? Integer.parseInt(shipment_sNot) : 100);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
@@ -534,7 +534,7 @@ public class EmployeeController {
 		//리스트
 		List<OrderDTO> orderList;
 
-		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_time == "" && received_sNot == null) {
+		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_time == "" && shipment_sNot == null) {
 			orderList = employeeService.getOrderList(pageDTO);
 		} else {
 			orderList = employeeService.searchOrderList(orderDTO);

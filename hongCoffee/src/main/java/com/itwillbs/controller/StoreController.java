@@ -603,6 +603,48 @@ public class StoreController {
 		System.out.println("close()");
 		return "/emp/popup/close";
 	}
+	
+	//===============상세
+	//재료 상세
+	@GetMapping("detail/d_item")
+	public String d_item(HttpServletRequest request, Model model) {
+		System.out.println("StoreController d_item");
+		int item_num = Integer.parseInt(request.getParameter("item_num"));
+		ItemDTO itemDTO = storeService.getItem(item_num);
+		model.addAttribute("itemDTO", itemDTO);
+		return "store/detail/d_item";
+	}
+	
+	//재고 상세
+		@GetMapping("detail/d_stock")
+		public String d_stock(HttpServletRequest request, Model model) {
+			System.out.println("StoreController d_stock");
+			int stock_num = Integer.parseInt(request.getParameter("stock_num"));
+			StockDTO stockDTO = storeService.getStock(stock_num);
+			model.addAttribute("stockDTO", stockDTO);
+			return "store/detail/d_stock";
+		}
+		
+
+		//발주 상세
+			@GetMapping("detail/d_order")
+			public String d_order(HttpServletRequest request, Model model) {
+				System.out.println("StoreController d_order");
+				int od_num = Integer.parseInt(request.getParameter("od_num"));
+				OrderDTO orderDTO = storeService.getOrder(od_num);
+				model.addAttribute("orderDTO", orderDTO);
+				return "store/detail/d_order";
+			}
+			
+		//입고 상세
+		@GetMapping("detail/d_receive")
+		public String d_receive(HttpServletRequest request, Model model) {
+			System.out.println("StoreController d_receive");
+			int od_num = Integer.parseInt(request.getParameter("od_num"));
+			ReceiveDTO receiveDTO = storeService.getReceive(od_num);
+			model.addAttribute("receiveDTO", receiveDTO);
+			return "store/detail/d_receive";
+		}
 
 
 }

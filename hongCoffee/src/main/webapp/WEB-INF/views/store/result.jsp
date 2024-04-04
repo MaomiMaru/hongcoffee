@@ -239,14 +239,14 @@ label input[type=radio]:checked:after{
 
 <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
    	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${ResultDTO.rs_date}" pattern="yyyy.MM.dd"/></td>
-   	<td style="text-align: center !important; font-size:20px !important;">
+   	<td style="text-align: center !important; font-size:20px !important; color:red;">
    	<fmt:formatNumber value="${ResultDTO.jichul}" pattern="#,###"></fmt:formatNumber>
    	</td>
-    <td style="text-align: center !important; font-size:20px !important;">
+    <td style="text-align: center !important; font-size:20px !important; color:green;">
     <fmt:formatNumber value="${ResultDTO.maechul}" pattern="#,###"></fmt:formatNumber>
     </td>
 
-   	<td style="text-align: center !important; font-size:20px !important; ">
+   	<td style="text-align: center !important; font-size:20px !important; color:blue; ">
    	<fmt:formatNumber value="${ResultDTO.income}" pattern="#,###"></fmt:formatNumber>
    	</td>
 

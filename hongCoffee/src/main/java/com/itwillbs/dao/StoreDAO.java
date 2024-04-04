@@ -193,7 +193,10 @@ public class StoreDAO {
 		return sqlSession.selectOne(namespace+".getReceive", od_num);
 	}
 
-
+	public ItemDTO getItem(int item_num) {
+		System.out.println("StoreDAO getItem()");
+		return sqlSession.selectOne(namespace+".getItem", item_num);
+	}
 
 
 

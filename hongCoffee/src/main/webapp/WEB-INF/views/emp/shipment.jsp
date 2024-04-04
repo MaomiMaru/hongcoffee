@@ -243,6 +243,7 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">총금액</th>
     		<th style=" font-size:20px !important; color: black;">출하일시</th>
+    		<th style=" font-size:20px !important; color: black;">입고여부</th>
     		<th style=" font-size:20px !important; color: black;">결제여부</th>
  		 </tr>
  		 <c:forEach var="ShipmentDTO" items="${shipmentList}">
@@ -258,6 +259,13 @@ label input[type=radio]:checked:after{
  	<fmt:formatNumber value="${ShipmentDTO.item_price * ShipmentDTO.sh_amount}" pattern="#,###"></fmt:formatNumber>
  	</td>
  	 <td style="text-align: center !important; font-size:20px !important;"><%-- <fmt:formatDate value="${ShipmentDTO.sh_time}" pattern="yyyy.MM.dd HH:mm:ss"/> --%>${ShipmentDTO.sh_time}</td>
+	
+	<c:if test="${ShipmentDTO.received_not eq 0}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">미입고</td>
+  	</c:if>
+  	 <c:if test="${ShipmentDTO.received_not eq 1}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">입고완료</td>
+  	</c:if>
 
   	<c:if test="${ShipmentDTO.pay eq 0}">
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미결제</td>

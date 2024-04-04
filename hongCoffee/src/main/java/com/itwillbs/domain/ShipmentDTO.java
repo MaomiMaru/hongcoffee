@@ -14,8 +14,19 @@ public class ShipmentDTO {
 	private String name; //지졈명
 	private String item_name; //재료명
 	private int pay; //결제여부
+	private int received_not;//입고여부
 	
 	
+	
+
+	public int getReceived_not() {
+		return received_not;
+	}
+
+	public void setReceived_not(int received_not) {
+		this.received_not = received_not;
+	}
+
 	@Override
 	public String toString() {
 		return "ShipmentDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", sh_amount=" + sh_amount

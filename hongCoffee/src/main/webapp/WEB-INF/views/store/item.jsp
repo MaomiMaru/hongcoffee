@@ -212,7 +212,7 @@ tr:hover {background-color: #F0F0F0;}
     		<th style=" font-size:20px !important; color: black;">재료상태</th>
  		 </tr>
  		 <c:forEach var="ItemDTO" items="${itemList}">
-  <tr>
+  <tr onclick="window.open('${pageContext.request.contextPath}/store/detail/d_item?item_num=${ItemDTO.item_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
   <c:if test="${ItemDTO.item_type eq 0}">
    	  		<td style="text-align: center !important; font-size:20px !important; color:#4E342E;">식품</td>
    	  	</c:if>

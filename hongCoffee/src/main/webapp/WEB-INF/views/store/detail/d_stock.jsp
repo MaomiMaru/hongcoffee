@@ -40,30 +40,31 @@ font-size: 16px;
 <div class="detail2">
 <table border="1">
 <tr>
-	<th>재료 번호</th><td>${itemDTO.item_num} </td> <th>재료명</th><td>${itemDTO.item_name}</td>
+	<th>재고 번호</th><td>${stockDTO.stock_num} </td> <th>재료명</th><td>${stockDTO.item_name}</td>
 </tr>
 <tr>
-	<th>유형</th><c:if test="${itemDTO.item_type eq 0}">
+	<th>유형</th><c:if test="${stockDTO.item_type eq 0}">
    	  			<td style=" color:#4E342E;">식품</td>
    	  	</c:if>
-   	  	 <c:if test="${itemDTO.item_type eq 1}">
+   	  	 <c:if test="${stockDTO.item_type eq 1}">
    	  		<td style="color:#FF3D00;" >비식품</td>
    	  	</c:if>
    	  	 <th>단가</th>
-   	  	 <td>${itemDTO.item_price}</td>
+   	  	 <td>${stockDTO.item_price}</td>
 </tr>
 <tr>
+	<th>보유량</th><td>${stockDTO.amount}</td>
 	<th>상태</th>	
-	<c:if test="${itemDTO.item_state eq 0}">
+	<c:if test="${stockDTO.item_state eq 0}">
       <td style="color:green;">취급</td>
   	</c:if>
-  	<c:if test="${itemDTO.item_state eq 1}">
+  	<c:if test="${stockDTO.item_state eq 1}">
       <td style="color:red;">미취급</td>
   	</c:if>
  
 </tr>
 <tr>
-	<th>적요</th><td colspan="3">${itemDTO.item_note }</td>
+	<th>적요</th><td colspan="3">${stockDTO.stock_note }</td>
 </tr>
 </table>
 </div>

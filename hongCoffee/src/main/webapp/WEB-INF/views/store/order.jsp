@@ -244,11 +244,12 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">총금액</th>
     		<th style=" font-size:20px !important; color: black;">발주일시</th>
+    		<th style=" font-size:20px !important; color: black;">출하여부</th>
     		<th style=" font-size:20px !important; color: black;">입고여부</th>
  		 </tr>
  		 <c:forEach var="OrderDTO" items="${orderList}">
-  <tr>
-  <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+  <tr onclick="window.open('${pageContext.request.contextPath}/store/detail/d_order?od_num=${OrderDTO.od_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
+  <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
 
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
 
@@ -260,6 +261,15 @@ label input[type=radio]:checked:after{
    	<fmt:formatNumber value="${OrderDTO.item_price * OrderDTO.od_amount}" pattern="#,###"></fmt:formatNumber>
    	</td>
    	 <td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${OrderDTO.od_time}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
+	
+	<c:if test="${OrderDTO.shipment_not eq 0}">
+      <td style="text-align: center !important; font-size:20px !important; color:red; ">미출하</td>
+  	</c:if>
+  	<c:if test="${OrderDTO.shipment_not eq 1}">
+      <td style="text-align: center !important; font-size:20px !important; color:green; ">출하완료</td>
+  	</c:if>
+	
+	
 	<c:if test="${OrderDTO.received_not eq 0}">
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미입고</td>
   	</c:if>

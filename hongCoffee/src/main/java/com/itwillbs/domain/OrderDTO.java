@@ -9,6 +9,17 @@ public class OrderDTO {
 	private int item_num; //재료 번호
 	private int od_amount; //발주량/수주량
 	private Timestamp od_time; //발주일시
+	private int shipment_not; //출하여부
+	public int getShipment_not() {
+		return shipment_not;
+	}
+
+
+
+	public void setShipment_not(int shipment_not) {
+		this.shipment_not = shipment_not;
+	}
+
 	private int received_not; //입고여부
 	private String od_note; //발주적요
 	private String ob_note; //수주적요

@@ -106,7 +106,7 @@ public class EmployeeService {
 	//출하 출력
 
 	public List<ShipmentDTO> getShipmentList(PageDTO pageDTO){
-		System.out.println("EmployeeService getChulList()");
+		System.out.println("EmployeeService getShipmentList()");
 
 		int currentPage = pageDTO.getCurrentPage();
 		int pageSize = pageDTO.getPageSize();
@@ -114,11 +114,11 @@ public class EmployeeService {
 		int endRow = startRow + pageSize - 1;
 		
 		pageDTO.setStartRow(startRow - 1);
-		pageDTO.setPageSize(pageSize);
+//		pageDTO.setPageSize(pageSize);
 		pageDTO.setEndRow(endRow);
 		
 		return employeeDAO.getShipmentList(pageDTO);
-	}//getChulhaList
+	}//getShipmentList
 	
 	//출하 필터링 출력
 	public List<ShipmentDTO> searchShipmentList(ShipmentDTO shipmentDTO) {

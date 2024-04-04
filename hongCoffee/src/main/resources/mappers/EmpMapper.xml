@@ -76,14 +76,14 @@
 	</select>
  	
  	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
- 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.received_not  
+ 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.shipment_not , o.received_not
  		from `order` o join store s on o.num = s.num 
  		join item i on o.item_num = i.item_num
  		limit #{startRow},#{pageSize}
  	</select>
  	
  	<select id="searchOrderList" resultType="com.itwillbs.domain.OrderDTO">
- 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.received_not 
+ 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.shipment_not 
  		from `order` o join store s on o.num = s.num 
  		join item i on o.item_num = i.item_num
  		<where>
@@ -102,17 +102,17 @@
     		<if test="od_time != null">
       			and date(o.od_time) = #{od_time}
     		</if>
-    		<if test="received_not != 100">
-    			and o.received_not = #{received_not}
+    		<if test="shipment_not != 100">
+    			and o.shipment_not = #{shipment_not}
     		</if>
  		</where>
  	</select>
  	
  	<select id="getShipmentList" resultType="com.itwillbs.domain.ShipmentDTO"> 
  		select h.od_num, s.name, i.item_name, h.sh_amount, i.item_price, h.sh_time, r.pay 
- 		from shipment h join store s on h.num = s.num
- 		join item i on h.item_num = i.item_num
- 		join receive r on h.od_num = r.od_num
+ 		from shipment h left join store s on h.num = s.num
+ 		left join item i on h.item_num = i.item_num
+ 		left join receive r on h.od_num = r.od_num
  		limit #{startRow},#{pageSize}
  	</select>
  	
@@ -198,7 +198,7 @@
  	</update>
  	
  	<select id="getOrder" resultType="com.itwillbs.domain.OrderDTO">
- 		select a.od_num, a.item_num, a.num, a.od_amount, a.received_not, a.od_note, a.od_time, a.item_num, b.name, c.item_name, c.item_price
+ 		select a.od_num, a.item_num, a.num, a.od_amount, a.shipment_not, a.ob_note, a.od_time, a.item_num, b.name, c.item_name, c.item_price, a.received_not
  		from `order` a join store b
  		on a.num = b.num
  		join item c
@@ -227,12 +227,14 @@
  	</update>
  	
  	<select id="getShipment" resultType="com.itwillbs.domain.ShipmentDTO">
- 		select a.od_num, a.num, a.item_num, a.sh_amount, a.sh_time, a.sh_note, b.name, c.item_name, c.item_price
+ 		select a.od_num, a.num, a.item_num, a.sh_amount, a.sh_time, a.sh_note, b.name, c.item_name, c.item_price, o.received_not
  		from shipment a join store b
  		on a.num = b.num
- 		join item c
+ 		 join item c
  		on a.item_num = c.item_num
- 		where od_num = #{od_num}
+ 		 join `order` o
+ 		on a.od_num = o.od_num
+ 		where a.od_num = #{od_num}
  	</select>
  	
  	<select id="getEmployee" resultType="com.itwillbs.domain.EmployeeDTO">

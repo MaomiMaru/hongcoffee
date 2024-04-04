@@ -192,6 +192,11 @@ public class StoreService {
 		System.out.println("StoreService getReceive()");
 		return storeDAO.getReceive(od_num);
 	}
+	
+	public ItemDTO getItem(int item_num) {
+		System.out.println("StoreService getItem()");
+		return storeDAO.getItem(item_num);
+	}
 
 
 

@@ -233,14 +233,14 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">상태</th>
  		 </tr>
  		 <c:forEach var="StockDTO" items="${stockList}">
-  <tr>
+  <tr onclick="window.open('${pageContext.request.contextPath}/store/detail/d_stock?stock_num=${StockDTO.stock_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
 
-<td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+<td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
   <c:if test="${StockDTO.item_type eq 0}">
-   	<td style="text-align: center !important; font-size:20px !important;">식품</td>
+   	<td style="text-align: center !important; font-size:20px !important; color:#4E342E;">식품</td>
    	</c:if>
    	<c:if test="${StockDTO.item_type eq 1}">
-   	<td style="text-align: center !important; font-size:20px !important;">비식품</td>
+   	<td style="text-align: center !important; font-size:20px !important; color:#FF3D00;">비식품</td>
    	</c:if>
    	
 

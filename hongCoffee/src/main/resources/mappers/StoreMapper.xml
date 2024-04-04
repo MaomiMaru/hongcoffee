@@ -77,8 +77,9 @@
 
 
 	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
- 		select t.item_name, o.od_amount, t.item_price, o.od_time, o.received_not
+ 		select o.od_num,t.item_name, o.od_amount, t.item_price, o.od_time, o.received_not, s.name, o.shipment_not
  		from `order` o join item t on o.item_num = t.item_num
+ 		join store s on o.num = s.num
  	</select>
  	
  	
@@ -157,10 +158,16 @@
  	</select>
  	
  	<select id="getOrder" resultType="com.itwillbs.domain.OrderDTO">
- 		select o.od_num, o.num, o.od_amount, o.od_note, i.item_type, i.item_name, i.item_price
+ 		select o.od_num, o.num, o.od_amount, o.od_note, i.item_type, i.item_name, i.item_price, o.od_time, s.name, o.received_not, o.shipment_not
  		from `order` o join item i
  		on o.item_num = i.item_num
+ 		join store s on o.num = s.num
  		where o.od_num = #{od_num}
+ 	</select>
+ 	
+ 	<select id="getItem" resultType="com.itwillbs.domain.ItemDTO">
+ 		select * from item
+ 		where item_num = #{item_num}
  	</select>
  	
  	<insert id="receiveInsert">
@@ -186,9 +193,10 @@
  	</update>
  	
  	<select id="getReceive" resultType="com.itwillbs.domain.ReceiveDTO">
- 		select a.od_num, a.num, a.item_num, a.rc_amount, a.rc_note, b.item_type, b.item_price, b.item_name
+ 		select a.od_num, a.num, a.item_num, a.rc_amount, a.rc_note, b.item_type, b.item_price, b.item_name, c.name, a.pay , a.rc_time
  		from receive a join item b
  		on a.item_num = b.item_num
+ 		join store c on a.num = c.num
  		where od_num = #{od_num}
  	</select>
 
@@ -226,7 +234,7 @@
  	
  	
  	<select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
-		select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (sum((r.sales*p.prod_price))-sum((r.consume*i.item_price))) "income"
+	select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (ifnull(sum((r.sales*p.prod_price)),0)-ifnull(sum((r.consume*i.item_price)),0)) "income"
 		from result r left join product p
 		on r.prod_num = p.prod_num
 		left join stock s on r.stock_num = s.stock_num

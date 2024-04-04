@@ -229,15 +229,15 @@ label input[type=radio]:checked:after{
   			<tr style="background-color: transparent !important;">
     		<th style=" font-size:20px !important; color: black;">선택</th>
     		<th style=" font-size:20px !important; color: black;">재료명</th>
-    		<th style=" font-size:20px !important; color: black;">입고수량</th>
+    		<th style=" font-size:20px !important; color: black;">입고량</th>
     		<th style=" font-size:20px !important; color: black;">단가</th>
     		<th style=" font-size:20px !important; color: black;">총금액</th>
     		<th style=" font-size:20px !important; color: black;">입고일시</th>
     		<th style=" font-size:20px !important; color: black;">결제여부</th>
  		 </tr>
  		 <c:forEach var="ReceiveDTO" items="${receiveList}">
-  <tr>
-<td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+  <tr onclick="window.open('${pageContext.request.contextPath}/store/detail/d_receive?od_num=${ReceiveDTO.od_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
+<td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_amount}</td>
 

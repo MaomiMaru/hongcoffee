@@ -241,7 +241,7 @@ label input[type=radio]:checked:after{
    	<td style="text-align: center !important; font-size:20px !important;">
    	<fmt:formatNumber value="${ResultDTO.prod_price}" pattern="#,###"></fmt:formatNumber>
    	</td>
-   	<td style="text-align: center !important; font-size:20px !important;">
+   	<td style="text-align: center !important; font-size:20px !important; color:green;">
    	<fmt:formatNumber value="${ResultDTO.prod_price * ResultDTO.sales}" pattern="#,###"></fmt:formatNumber>
    	</td>
   </tr>
