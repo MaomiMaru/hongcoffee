@@ -197,6 +197,22 @@ public class StoreService {
 		System.out.println("StoreService getItem()");
 		return storeDAO.getItem(item_num);
 	}
+	
+	//==그래프
+	
+	//재고 그래프
+		public List<StockDTO> getStock6(int num) {
+			System.out.println("StoreService getStock6()");
+			return storeDAO.getStock6(num);
+		}
+
+
+
+		public List<ResultDTO> getResultMain(int num) {
+			System.out.println("StoreService getResultMain()");
+			return storeDAO.getResultMain(num);
+		}
+
 
 
 

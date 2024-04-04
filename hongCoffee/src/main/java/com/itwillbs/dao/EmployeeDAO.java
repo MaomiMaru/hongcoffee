@@ -11,7 +11,7 @@ import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.PageDTO;
-import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.SalesDTO;
 import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 
@@ -213,7 +213,11 @@ public class EmployeeDAO {
 			}
 
 	
-	
+			// 메인 그래프용 매출 TOP5 지점들 가져오기
+			public List<SalesDTO> getTop5() {
+				System.out.println("EmployeeDAO getTop5()");
+				return sqlSession.selectList(namespace+".getTop5");
+			}
 	
 	
 	

@@ -1,34 +1,28 @@
 package com.itwillbs.controller;
 
 
-import java.util.Date;
-import java.net.http.HttpRequest;
-
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
-
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.PageDTO;
-import com.itwillbs.domain.ReceiveDTO;
-
+import com.itwillbs.domain.SalesDTO;
 import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 import com.itwillbs.service.EmployeeService;
@@ -73,6 +67,13 @@ public class EmployeeController {
 		return "/emp/main";
 	}
 
+	//1-1. 13일의 금요일 제이슨
+		@GetMapping("/mainJson")
+		public ResponseEntity<List<SalesDTO>> mainJson() {
+			List<SalesDTO> salesList = employeeService.getTop5();
+			ResponseEntity<List<SalesDTO>> entity = new ResponseEntity<List<SalesDTO>>(salesList, HttpStatus.OK);
+			return entity;
+		}
 	
 	
 	

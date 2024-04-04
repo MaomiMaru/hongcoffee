@@ -382,6 +382,16 @@
  		</where>
  	</select>
 
+<select id="getTop5" resultType="com.itwillbs.domain.SalesDTO">
+ 		select s.name, sum((r.sales*p.prod_price)) "maechul"
+		from result r left join product p
+		on r.prod_num = p.prod_num
+		left join store s on r.num = s.num
+		where r.rs_date = '2024-03-20'
+		group by s.name
+		order by 2 desc
+		limit 5
+ 	</select>
 
 </mapper>
 

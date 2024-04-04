@@ -11,8 +11,7 @@ import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.PageDTO;
-import com.itwillbs.domain.ReceiveDTO;
-
+import com.itwillbs.domain.SalesDTO;
 import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 
@@ -276,6 +275,11 @@ public class EmployeeService {
 		}
 
 
+//===그래프
+		public List<SalesDTO> getTop5() {
+			System.out.println("EmployeeService getTop5()");
+			return employeeDAO.getTop5();
+		}
 
 
 

@@ -7,15 +7,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
@@ -76,6 +76,27 @@ public class StoreController {
 		return "store/main";
 
 	}
+	
+	//1-1. 13일의 금요일 제이슨
+		@GetMapping("/mainJson")
+		public ResponseEntity<List<StockDTO>> mainJson(HttpSession session) {
+			System.out.println("StoreController mainJson");
+			int num = (int)session.getAttribute("num");
+			List<StockDTO> stockList = storeService.getStock6(num);
+			ResponseEntity<List<StockDTO>> entity = new ResponseEntity<List<StockDTO>>(stockList, HttpStatus.OK);
+			return entity;
+		}
+		
+		
+		//1-2. 홍현희 남편 제이슨
+		@GetMapping("/mainJson2")
+		public ResponseEntity<List<ResultDTO>> mainJson2(HttpSession session) {
+			System.out.println("StoreController mainJson2");
+			int num = (int)session.getAttribute("num");
+			List<ResultDTO> resultList = storeService.getResultMain(num);
+			ResponseEntity<List<ResultDTO>> entity = new ResponseEntity<List<ResultDTO>>(resultList, HttpStatus.OK);
+			return entity;
+		}
 
 
 	
