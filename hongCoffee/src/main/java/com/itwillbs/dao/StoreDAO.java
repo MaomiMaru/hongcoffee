@@ -66,5 +66,17 @@ public class StoreDAO {
 	}
 
 
+	public List<StockDTO> getStock6(int num) {
+		System.out.println("StoreDAO getStock6()");
+		return sqlSession.selectList(namespace+".getStock6", num);
+	}
+
+
+	public List<ResultDTO> getResultMain(int num) {
+		System.out.println("StoreDAO getResultMain()");
+		return sqlSession.selectList(namespace+".getResultMain", num);
+	}
+
+
 	
 }

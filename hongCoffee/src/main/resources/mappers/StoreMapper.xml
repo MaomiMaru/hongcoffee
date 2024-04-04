@@ -37,6 +37,26 @@
 		select rs_num, rs_date, sales, consume
 		from result
  	</select>
+ 	
+ 	<select id="getStock6" resultType="com.itwillbs.domain.StockDTO">
+ 		select i.item_name, s.amount
+ 		from stock s join item i on s.item_num = i.item_num
+ 		where s.num = #{num}
+ 		order by s.amount
+ 		limit 6
+ 	</select>
+ 	
+ 	<select id="getResultMain" resultType="com.itwillbs.domain.ResultDTO">
+ 		select r.rs_date, sum((r.sales*p.prod_price)) "maechul",
+ 						sum((r.consume*i.item_price)) "jichul",
+ 						(sum((r.sales*p.prod_price))-sum((r.consume*i.item_price))) "income"
+		from result r left join product p
+		on r.prod_num = p.prod_num
+		left join stock s on r.stock_num = s.stock_num
+		left join item i on s.item_num = i.item_num
+		where r.num = #{num}
+		group by r.rs_date;
+ 	</select>
 
 </mapper>
 

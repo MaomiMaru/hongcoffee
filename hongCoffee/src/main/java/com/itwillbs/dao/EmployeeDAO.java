@@ -11,6 +11,7 @@ import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.SalesDTO;
 import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 @Repository
@@ -136,12 +137,16 @@ public class EmployeeDAO {
 		return sqlSession.selectOne(namespace+".getShipment", od_num);
 	}
 
-//	public EmployeeDTO getEmployeeA(int emp_num) {
-//		System.out.println("EmployeeDAO getEmployeeA()");
-//		return sqlSession.selectOne(namespace+".getEmployeeA",emp_num);
-//	}
+	public EmployeeDTO getEmployeeA(int emp_num) {
+		System.out.println("EmployeeDAO getEmployeeA()");
+		return sqlSession.selectOne(namespace+".getEmployeeA",emp_num);
+	}
 
-
+	// 메인 그래프용 매출 TOP5 지점들 가져오기
+	public List<SalesDTO> getTop5() {
+		System.out.println("EmployeeDAO getTop5()");
+		return sqlSession.selectList(namespace+".getTop5");
+	}
 
 	
 	

@@ -1,16 +1,28 @@
 package com.itwillbs.controller;
 
-import java.util.Date;
-import java.net.http.HttpRequest;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +33,7 @@ import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
+import com.itwillbs.domain.SalesDTO;
 import com.itwillbs.domain.ShipmentDTO;
 import com.itwillbs.domain.StoreDTO;
 import com.itwillbs.service.EmployeeService;
@@ -57,10 +70,19 @@ private EmployeeService employeeService;
 	
 	//1. 대시 보드
 	@GetMapping("/main")
-	public String main() {
+	public String main(Model model) {
 		System.out.println("EmployeeController main()");
-		
+		List<SalesDTO> salesList = employeeService.getTop5();
+		model.addAttribute("salesList", salesList);
 		return "/emp/main";
+	}
+	
+	//1-1. 13일의 금요일 제이슨
+	@GetMapping("/mainJson")
+	public ResponseEntity<List<SalesDTO>> mainJson() {
+		List<SalesDTO> salesList = employeeService.getTop5();
+		ResponseEntity<List<SalesDTO>> entity = new ResponseEntity<List<SalesDTO>>(salesList, HttpStatus.OK);
+		return entity;
 	}
 	
 	//2. 기준 정보 관리
@@ -277,6 +299,145 @@ private EmployeeService employeeService;
 	}
 	
 	
+	//3-1-3 수주 관리 - 엑셀
+	@PostMapping("/orderEx")
+	public void orderEx(HttpServletResponse response, Model model) throws Exception {
+		 XSSFWorkbook objWorkBook = new XSSFWorkbook();
+		    XSSFSheet objSheet = null;
+		    XSSFRow objRow = null;
+		    XSSFCell objCell = null; // 셀 생성
+
+		    // 제목 폰트
+		    XSSFFont font = objWorkBook.createFont();
+		    font.setFontHeightInPoints((short) 10);
+		    font.setBoldweight((short) font.BOLDWEIGHT_BOLD);
+		    font.setFontName("맑은고딕");
+
+		    // 제목 스타일에 폰트 적용, 정렬
+		    XSSFCellStyle styleHd = objWorkBook.createCellStyle(); // 제목 스타일
+		    styleHd.setFont(font);
+		    styleHd.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		    styleHd.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+		    
+		    // 내용 폰트
+		    XSSFFont fontC = objWorkBook.createFont();
+		    fontC.setFontHeightInPoints((short) 9);
+		    fontC.setFontName("맑은고딕");
+
+		    // 내용 스타일에 폰트 적용, 정렬
+		    XSSFCellStyle styleCo = objWorkBook.createCellStyle(); // 내용 스타일
+		    styleCo.setFont(fontC);
+		    styleCo.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		    styleCo.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+
+		    objSheet = objWorkBook.createSheet("첫번째 시트"); // 워크시트 생성
+
+		    List<OrderDTO> orderList = employeeService.getOrderList();
+
+		    // 행으로 제작을 하네
+		    // 1행
+		    objRow = objSheet.createRow(0);
+		    objRow.setHeight((short) 0x150);
+
+		    objCell = objRow.createCell(0);
+		    objCell.setCellValue("번호");
+		    objCell.setCellStyle(styleHd);
+
+		    objCell = objRow.createCell(1);
+		    objCell.setCellValue("지점명");
+		    objCell.setCellStyle(styleHd);
+
+		    objCell = objRow.createCell(2);
+		    objCell.setCellValue("재료명");
+		    objCell.setCellStyle(styleHd);
+
+		    objCell = objRow.createCell(3);
+		    objCell.setCellValue("수주량");
+		    objCell.setCellStyle(styleHd);
+		    
+		    objCell = objRow.createCell(4);
+		    objCell.setCellValue("수주일시");
+		    objCell.setCellStyle(styleHd);
+		    
+		    objCell = objRow.createCell(5);
+		    objCell.setCellValue("출하여부");
+		    objCell.setCellStyle(styleHd);
+		    
+		    objCell = objRow.createCell(6);
+		    objCell.setCellValue("입고여부");
+		    objCell.setCellStyle(styleHd);
+		    
+		    objCell = objRow.createCell(7);
+		    objCell.setCellValue("발주적요");
+		    objCell.setCellStyle(styleHd);
+		    
+		    objCell = objRow.createCell(8);
+		    objCell.setCellValue("수주적요");
+		    objCell.setCellStyle(styleHd);
+
+		    int index = 1;
+		    for (OrderDTO orderDTO : orderList) {
+		      objRow = objSheet.createRow(index);
+		      objRow.setHeight((short) 0x150);
+
+		      objCell = objRow.createCell(0);
+		      objCell.setCellValue(orderDTO.getOd_num());
+		      objCell.setCellStyle(styleCo);
+
+		      objCell = objRow.createCell(1);
+		      objCell.setCellValue(orderDTO.getName());
+		      objCell.setCellStyle(styleCo);
+
+		      objCell = objRow.createCell(2);
+		      objCell.setCellValue(orderDTO.getItem_name());
+		      objCell.setCellStyle(styleCo);
+
+		      objCell = objRow.createCell(3);
+		      objCell.setCellValue(orderDTO.getOd_amount());
+		      objCell.setCellStyle(styleCo);
+		      
+		      objCell = objRow.createCell(4);
+		      objCell.setCellValue(orderDTO.getOd_time().toString());
+		      objCell.setCellStyle(styleCo);
+		      
+		      objCell = objRow.createCell(5);
+		      if(orderDTO.getShipment_not()==1) objCell.setCellValue("출하완료");
+		      else objCell.setCellValue("미출하");
+		      objCell.setCellStyle(styleCo);
+		      
+		      objCell = objRow.createCell(6);
+		      if(orderDTO.getReceived_not()==1) objCell.setCellValue("입고완료");
+		      else objCell.setCellValue("미입고");
+		      objCell.setCellStyle(styleCo);
+		      
+		      objCell = objRow.createCell(7);
+		      objCell.setCellValue(orderDTO.getOd_note());
+		      objCell.setCellStyle(styleCo);
+		      
+		      objCell = objRow.createCell(8);
+		      objCell.setCellValue(orderDTO.getOb_note());
+		      objCell.setCellStyle(styleCo);
+		      
+		      index++;
+		    }
+
+		    for (int i = 0; i < orderList.size(); i++) {
+		      objSheet.autoSizeColumn(i);
+		    }
+
+		    response.setContentType("Application/Msexcel");
+		    response.setHeader("Content-Disposition", "ATTachment; Filename="
+		        + URLEncoder.encode("order", "UTF-8") + ".xlsx");
+
+		    OutputStream fileOut = response.getOutputStream();
+		    objWorkBook.write(fileOut);
+		    fileOut.close();
+
+		    response.getOutputStream().flush();
+		    response.getOutputStream().close();
+	}
+	
+	
 	//3-2-2 출하 관리 - 수정
 	@GetMapping("popup/shipment_update")
 	public String shipment_update(HttpServletRequest request, Model model) {
@@ -327,14 +488,13 @@ private EmployeeService employeeService;
 	
 	//4-1-2. 사원 관리 - 수정(관리자)
 	@GetMapping("popup/emp_update_admin")
-//	public String emp_update_admin(HttpServletRequest request, Model model) {
-//		System.out.println("EmployeeController emp_update_admin()");
-//		int emp_num = Integer.parseInt(request.getParameter("emp_num"));
-//		EmployeeDTO employeeDTO = employeeService.getEmployeeA(emp_num);		
-//				
-//				
-//		return "/emp/popup/emp_update_admin";
-//	}
+	public String emp_update_admin(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController emp_update_admin()");
+		int emp_num = Integer.parseInt(request.getParameter("emp_num"));
+		EmployeeDTO employeeDTO = employeeService.getEmployee(emp_num);
+		model.addAttribute("employeeDTO", employeeDTO);
+		return "/emp/popup/emp_update_admin";
+	}
 	
 	@PostMapping("popup/emp_updateProAdmin")
 	public String emp_updatePro1(EmployeeDTO employeeDTO) {
@@ -360,6 +520,17 @@ private EmployeeService employeeService;
 		employeeService.employeeUpdate(employeeDTO);
 		return "redirect:/emp/popup/close";
 	}
+	
+	
+	//4-1-4. 사원 관리 - 사원 상세 정보
+	@GetMapping("popup/emp_content")
+	public String emp_content(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController emp_content()");
+		int num = Integer.parseInt(request.getParameter("emp_num"));
+		model.addAttribute("empDTO", employeeService.getEmployee(num));
+		return "/emp/popup/emp_content";
+	}
+	
 	
 	//창 닫기
 	@GetMapping("popup/close")

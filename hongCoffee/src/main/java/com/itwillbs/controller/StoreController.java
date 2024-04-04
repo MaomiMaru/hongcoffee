@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,7 @@ import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
+import com.itwillbs.domain.SalesDTO;
 import com.itwillbs.domain.StockDTO;
 import com.itwillbs.domain.StoreDTO;
 import com.itwillbs.service.StoreService;
@@ -58,13 +61,34 @@ private StoreService storeService;
 		System.out.println();
 		return "store/main";
 	}
-
-
 	
-//2. 기준 정보 관리 - 재료 관리
-@GetMapping("/store/item")
-public String itemList(HttpServletRequest request, Model model) {
-	System.out.println("itemList");
+	
+	//1-1. 13일의 금요일 제이슨
+	@GetMapping("/mainJson")
+	public ResponseEntity<List<StockDTO>> mainJson(HttpSession session) {
+		System.out.println("StoreController mainJson");
+		int num = (int)session.getAttribute("num");
+		List<StockDTO> stockList = storeService.getStock6(num);
+		ResponseEntity<List<StockDTO>> entity = new ResponseEntity<List<StockDTO>>(stockList, HttpStatus.OK);
+		return entity;
+	}
+	
+	
+	//1-2. 홍현희 남편 제이슨
+	@GetMapping("/mainJson2")
+	public ResponseEntity<List<ResultDTO>> mainJson2(HttpSession session) {
+		System.out.println("StoreController mainJson2");
+		int num = (int)session.getAttribute("num");
+		List<ResultDTO> resultList = storeService.getResultMain(num);
+		ResponseEntity<List<ResultDTO>> entity = new ResponseEntity<List<ResultDTO>>(resultList, HttpStatus.OK);
+		return entity;
+	}
+	
+	
+	//2. 기준 정보 관리 - 재료 관리
+	@GetMapping("/store/item")
+	public String itemList(HttpServletRequest request, Model model) {
+		System.out.println("itemList");
 	
 		List<ItemDTO> itemList = storeService.getitemList();
 	

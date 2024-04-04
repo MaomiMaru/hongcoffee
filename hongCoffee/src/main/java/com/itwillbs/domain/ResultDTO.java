@@ -11,6 +11,9 @@ public class ResultDTO {
 	private Timestamp rs_date; //영업일
 	private int sales;//판매량
 	private int consume;//판매량
+	private int maechul; //매출
+	private int jichul; //지출
+	private int income; //순수익
 	
 	public int getSales() {
 		return sales;
@@ -62,6 +65,24 @@ public class ResultDTO {
 	}
 	public void setRs_date(Timestamp rs_date) {
 		this.rs_date = rs_date;
+	}
+	public int getMaechul() {
+		return maechul;
+	}
+	public void setMaechul(int maechul) {
+		this.maechul = maechul;
+	}
+	public int getJichul() {
+		return jichul;
+	}
+	public void setJichul(int jichul) {
+		this.jichul = jichul;
+	}
+	public int getIncome() {
+		return income;
+	}
+	public void setIncome(int income) {
+		this.income = income;
 	}
 
 	

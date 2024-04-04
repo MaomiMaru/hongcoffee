@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
+ <script src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
     <script>
 
       document.addEventListener('DOMContentLoaded', function() {
@@ -167,26 +168,45 @@ input[type=text]{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <canvas id="bar-chart-horizontal" width="600" height="250"></canvas>
 <script>
-new Chart(document.getElementById("bar-chart-horizontal"), {
-    type: 'horizontalBar',
-    data: {
-      labels: ["서면점", "홍대점", "이태원점", "서울역점", "부산역점"],
-      datasets: [
-        {
-          label: "실적량",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [2478,5267,734,784,433]
+$(document).ready(function() {
+    $.ajax({
+        url: "${pageContext.request.contextPath}/emp/mainJson",
+        method: "GET",
+        success: function (result) {
+            var sname=[];
+            var ssales = [];
+            for (var i in result) {
+                sname.push(result[i].name);
+                ssales.push(result[i].maechul);
+            }
+            console.log(ssales);
+            var data = {
+                labels: sname,
+                datasets: [{
+                    label: "실적량",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    borderColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: ssales
+                }],
+            };
+            
+        	var myJ = new Chart(document.getElementById("bar-chart-horizontal"), {
+            	type: 'horizontalBar',
+            	data: data,
+            	options: {
+              		legend: { display: false },
+              		title: {
+                		display: true,
+                		text: '지점 실적'
+              			}
+            	}
+        	});
+        	
         }
-      ]
-    },
-    options: {
-      legend: { display: false },
-      title: {
-        display: true,
-        text: '지점 실적'
-      }
-    }
+    	
+    });
 });
+
 </script>
 </div>
 </div>
