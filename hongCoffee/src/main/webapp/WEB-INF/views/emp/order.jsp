@@ -173,9 +173,9 @@ label input[type=radio]:checked:after{
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close ti-close"></i>
-               <p class="settings-heading">사이드바 색상 및 바로가기</p>
-          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div><button style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/store/login'">지점 페이지</button></div>
-          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div></div>
+             <p class="settings-heading">사이드바 색상 및 바로가기</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>light</div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>dark</div>
           <p class="settings-heading mt-2">헤더 색상</p>
           <div class="color-tiles mx-0 px-4">
             <div class="tiles success"></div>
@@ -185,6 +185,7 @@ label input[type=radio]:checked:after{
             <div class="tiles dark"></div>
             <div class="tiles default"></div>
           </div>
+          <button style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/store/login'">지점 페이지</button>
         </div>
       </div>
 
