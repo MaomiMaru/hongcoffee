@@ -168,9 +168,9 @@ label input[type=radio]:checked:after{
         <div id="settings-trigger"><i class="ti-settings"></i></div>
         <div id="theme-settings" class="settings-panel">
           <i class="settings-close ti-close"></i>
-          <p class="settings-heading">사이드바 색상</p>
-          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
-          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+               <p class="settings-heading">사이드바 색상 및 바로가기</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div><button style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/store/login'">지점 페이지</button></div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div></div>
           <p class="settings-heading mt-2">헤더 색상</p>
           <div class="color-tiles mx-0 px-4">
             <div class="tiles success"></div>
@@ -180,6 +180,7 @@ label input[type=radio]:checked:after{
             <div class="tiles dark"></div>
             <div class="tiles default"></div>
           </div>
+
         </div>
       </div>
 
@@ -236,7 +237,6 @@ label input[type=radio]:checked:after{
 		<table class="table">
   			<tr style="background-color: transparent !important;">
     		<th style=" font-size:20px !important; color: black;">선택</th>
-    		<th style=" font-size:20px !important; color: black;">지점번호</th>
     		<th style=" font-size:20px !important; color: black;">지점명</th>
     		<th style=" font-size:20px !important; color: black;">대표자명</th>
     		<th style=" font-size:20px !important; color: black;">연락처</th>
@@ -245,6 +245,7 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">상태</th>
  		 </tr>
  		 <c:forEach var="StoreDTO" items="${storeList}">
+
   <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_store?num=${StoreDTO.num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
   <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
 
