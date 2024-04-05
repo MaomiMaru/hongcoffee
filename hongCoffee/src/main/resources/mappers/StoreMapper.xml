@@ -80,6 +80,7 @@
  		select o.od_num,t.item_name, o.od_amount, t.item_price, o.od_time, o.received_not, s.name, o.shipment_not
  		from `order` o join item t on o.item_num = t.item_num
  		join store s on o.num = s.num
+ 		order by o.od_time desc
  	</select>
  	
  	
@@ -109,6 +110,7 @@
  	<select id="getReceiveList" resultType="com.itwillbs.domain.ReceiveDTO"> 
 		select r.od_num, t.item_name, r.rc_amount, t.item_price, r.rc_time, r.pay
 		from receive r join item t on r.item_num = t.item_num
+		order by r.rc_time desc
  	</select>
  	
  	
@@ -136,7 +138,7 @@
 		select r.rs_date, i.item_name, r.consume, i.item_price
 		from result r join stock s on r.stock_num = s.stock_num
 		join item i on s.item_num = i.item_num
-		order by r.rs_date; 
+		order by r.rs_date desc
  	</select>
  	
  	<insert id="stockInsert">
@@ -217,7 +219,7 @@
     <select id="getPanmeList" resultType="com.itwillbs.domain.ResultDTO"> 
 	    select r.rs_date , p.prod_name, r.sales, p.prod_price
         from result r join product p on r.prod_num = p.prod_num
-        order by r.rs_date; 
+        order by r.rs_date desc 
 	</select>
 
  	
@@ -240,7 +242,8 @@
 		left join stock s on r.stock_num = s.stock_num
 		left join item i on s.item_num = i.item_num
 		where r.num = 1
-		group by r.rs_date;
+		group by r.rs_date
+		order by r.rs_date desc
  	</select>
  	
  	

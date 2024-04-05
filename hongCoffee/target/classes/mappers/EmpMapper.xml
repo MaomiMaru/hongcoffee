@@ -81,6 +81,7 @@
 
  		from `order` o join store s on o.num = s.num 
  		join item i on o.item_num = i.item_num
+ 		order by o.od_time desc
  		limit #{startRow},#{pageSize}
  	</select>
  	
@@ -116,6 +117,7 @@
  		left join item i on h.item_num = i.item_num
  		left join receive r on h.od_num = r.od_num
  		left join `order` o on h.od_num = o.od_num
+ 		order by h.sh_time desc
 		limit #{startRow},#{pageSize}
  	</select>
  	

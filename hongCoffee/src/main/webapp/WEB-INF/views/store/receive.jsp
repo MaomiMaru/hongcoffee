@@ -245,15 +245,15 @@ label input[type=radio]:checked:after{
   if(d == 20){
 	  tostMessage.innerText = '결제 당일 입니다';
   }
-  
-  //2. 토스트 메시지 노출-사라짐 함수 작성
-  function tostOn(){
-      tostMessage.classList.add('active');
-      setTimeout(function(){
-          tostMessage.classList.remove('active');
-      },2000);
+  if(d >= 15 && d <=20){
+  	//2. 토스트 메시지 노출-사라짐 함수 작성
+  	function tostOn(){
+      	tostMessage.classList.add('active');
+      	setTimeout(function(){
+         	 tostMessage.classList.remove('active');
+      	},2000);
+  	}
   }
-
   //3. 토스트 버튼에 이벤트 연결
 window.addEventListener('load',function(){
       console.log('이벤트가 잘 연결 됐는지 확인');
