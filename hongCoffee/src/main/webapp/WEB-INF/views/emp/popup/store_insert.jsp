@@ -33,7 +33,7 @@ select{
 <div><b>연락처</b></div><input type="tel" name="phone" class="phone"><br>
 <sub></sub>
 <div><b>이메일</b></div><input type="text" name="email" class="email"><br>
-<sub></sub>
+<sub></sub>																																
 <div><b>우편번호</b></div><input type="text" id="sample4_postcode" placeholder="우편번호" name="postalcode"> <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="background-color: black; color: #EFBDBC;"><br>
 <sub></sub>
 <div><b>도로명주소</b></div><input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="address"><br>
@@ -48,11 +48,11 @@ select{
 <option value="2">폐업</option>
 </select><br>
 <sub></sub>
-<b>적요</b><textarea rows="30" cols="37" name="note"></textarea><br>
+<b>적요</b><br><textarea rows="30" cols="37" name="note" style="height: 465px; width: 300px;"></textarea><br>
 <sub></sub>
 <br>
-<span style="float:right; margin-right: 105px">
-<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+<span style="float:right">
+<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
 </fieldset>
 </form>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,13 +26,13 @@ select{
 <input type="hidden" name="num" value="${orderDTO.num}">
 <div class="check"></div><br>
 <div><b>유형</b></div>
-<input type="text" name="item_type" value="${orderDTO.item_type}" readonly>
+<input type="text" value="<c:if test="${orderDTO.item_type eq 0}">식품</c:if><c:if test="${orderDTO.item_type eq 1}">비식품</c:if>" readonly>
 <sub></sub><br>
 <div><b>재료명</b></div><input type="text" name="item_name" value="${orderDTO.item_name}" readonly><br>
 <sub></sub>
 <div><b>단가</b></div><input type="text" name="item_price" value="${orderDTO.item_price}" readonly><br>
 <sub></sub>
-<div><b>입고량</b></div><input type="text" name="rc_amount" value="${orderDTO.od_amount}"><br>
+<div><b>입고량</b></div><input type="text" name="rc_amount" class="rc_amount" value="${orderDTO.od_amount}"><br>
 <sub></sub>
 <div><b>적요</b></div><input type="text" name="rc_note" value="${orderDTO.od_note}"><br>
 <sub></sub>

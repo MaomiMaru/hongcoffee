@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.dao.StoreDAO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
@@ -86,34 +87,34 @@ public class StoreService {
 	
 	
 	//소모 출력
-	public List<ResultDTO> getSomoList(){
-		System.out.println("StoreService getSomoList()");
+	public List<ResultDTO> getConsumeList(){
+		System.out.println("StoreService getConsumeList()");
 		
-		return storeDAO.getSomoList();
+		return storeDAO.getConsumeList();
 	}//getSomoList
 
 	
 	//소모 필터링 출력
-	public List<ResultDTO> searchSomoList(ResultDTO resultDTO) {
-		System.out.println("StoreService searchSomoList()");
+	public List<ResultDTO> searchConsumeList(ResultDTO resultDTO) {
+		System.out.println("StoreService searchConsumeList()");
 		
-		return storeDAO.searchSomoList(resultDTO);
+		return storeDAO.searchConsumeList(resultDTO);
 	}//searchSomoList
 	
 	
 	//판매 출력
-	public List<ResultDTO> getPanmeList(){
-		System.out.println("StoreService getPanmeList()");
+	public List<ResultDTO> getSellList(){
+		System.out.println("StoreService getSellList()");
 		
-		return storeDAO.getPanmeList();
+		return storeDAO.getSellList();
 	}//getPanmeList
 
 	
 	//판매 필터링 출력
-	public List<ResultDTO> searchPanmeList(ResultDTO resultDTO) {
-		System.out.println("StoreService searchPanmeList()");
+	public List<ResultDTO> searchSellList(ResultDTO resultDTO) {
+		System.out.println("StoreService searchSellList()");
 		
-		return storeDAO.searchPanmeList(resultDTO);
+		return storeDAO.searchSellList(resultDTO);
 	}//searchPanmeList
 	
 	
@@ -212,6 +213,57 @@ public class StoreService {
 			System.out.println("StoreService getResultMain()");
 			return storeDAO.getResultMain(num);
 		}
+
+
+
+	public void consumeInsert(ResultDTO resultDTO) {
+		System.out.println("StoreService consumeInsert()");
+		storeDAO.consumeInsert(resultDTO);
+	}
+
+
+	public int getStockNum(String item_name) {
+		System.out.println("StoreService getStockNum()");
+		return storeDAO.getStockNum(item_name);
+	}
+
+
+	public Object getConsume(int rs_num) {
+		System.out.println("StoreService getConsume");
+		return storeDAO.getConsume(rs_num);
+	}
+
+
+	public void consumeUpdate(ResultDTO resultDTO) {
+		System.out.println("StoreService consumeUpdate()");
+		storeDAO.consumUpdate(resultDTO);
+	}
+
+
+	public void sellInsert(ResultDTO resultDTO) {
+		System.out.println("StoreService sellInsert()");
+		storeDAO.sellInsert(resultDTO);
+	}
+
+
+	public void stockUpdate(StockDTO stockDTO) {
+		System.out.println("StoreService stockUpdate()");
+		storeDAO.stockUpdate(stockDTO);
+	}
+
+
+	public ResultDTO getSales(int rs_num) {
+		System.out.println("StoreService getSales()");
+		return storeDAO.getSales(rs_num);
+	}
+
+
+	public void salesUpdate(ResultDTO resultDTO) {
+		System.out.println("StoreService salesUpdate()");
+		storeDAO.salesUpdate(resultDTO);
+	}
+
+
 
 
 

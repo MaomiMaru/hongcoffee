@@ -203,7 +203,7 @@
  	</update>
  	
  	<select id="getOrder" resultType="com.itwillbs.domain.OrderDTO">
- 		select a.od_num, a.item_num, a.num, a.od_amount, a.shipment_not, a.ob_note, a.od_time, a.item_num, b.name, c.item_name, c.item_price, a.received_not
+ 		select a.od_num, a.item_num, a.num, a.od_amount, a.received_not, a.od_note, a.ob_note, a.od_time, a.item_num, b.name, c.item_name, c.item_price, a.shipment_not
  		from `order` a join store b
  		on a.num = b.num
  		join item c
@@ -224,6 +224,12 @@
  		insert into shipment
  		values (#{od_num}, #{num}, #{item_num}, #{sh_amount}, #{sh_time}, #{sh_note})
  	</insert>
+ 	
+ 	<update id="shipmentState">
+ 		update `order`
+ 		set shipment_not = 1
+ 		where od_num = #{od_num}
+ 	</update>
  	
  	<update id="shipmentUpdate">
  		update shipment

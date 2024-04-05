@@ -164,6 +164,7 @@ public class EmployeeDAO {
 	public void shipmentInsert(ShipmentDTO shipmentDTO) {
 		System.out.println("EmployeeDAO shipmentInsert()");
 		sqlSession.insert(namespace+".shipmentInsert", shipmentDTO);
+		sqlSession.update(namespace+".shipmentState", shipmentDTO);
 	}
 
 	public void shipmentUpdate(ShipmentDTO shipmentDTO) {

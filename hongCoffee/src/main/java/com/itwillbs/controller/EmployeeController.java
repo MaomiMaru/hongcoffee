@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwillbs.domain.EmployeeDTO;
 import com.itwillbs.domain.ItemDTO;
@@ -52,9 +53,9 @@ public class EmployeeController {
 
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(HttpSession session) {
 		System.out.println("EmployeeService login()");
-		
+	
 		return "/emp/login";
 	}
 
@@ -1061,6 +1062,24 @@ public class EmployeeController {
 		
 		employeeService.employeeInsert(employeeDTO);
 		return "redirect:/emp/popup/close";
+	}
+	
+	//중복 확인
+	@GetMapping("/emp_numCheck")
+	@ResponseBody
+	public String emp_numCheck(EmployeeDTO employeeDTO) {
+		System.out.println("EmployeeController emp_numCheck()");
+		
+		EmployeeDTO employeeDTO1 = employeeService.getEmployee(employeeDTO.getEmp_num());
+		
+		String result ="";
+		if(employeeDTO1 != null) {
+			result = "emp_numDup";
+		} else {
+			result = "emp_numOk";
+		}
+		System.out.println(result);
+		return result;
 	}
 	
 	//4-1-2. 사원 관리 - 수정(관리자)

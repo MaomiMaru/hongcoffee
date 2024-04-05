@@ -43,6 +43,10 @@
   	background: #EFBDBC !important;
 }
 
+#search {
+	height: 300px;
+	margin: 0 auto;
+}
 
 ul{
 	list-style:none;
@@ -50,37 +54,25 @@ ul{
 
 #search {
 	height: 250px;
-
-	padding-top: 35px;
-
 	width: 100%;
 	border: 1px solid black;
 }
 
-.search_name {
+.name {
 	width: 100px;
+	margin: 35px 0 20px 50px;
 	text-align: left;
 	font-size: 15px;
-	font-weight: bold;
-}
-
-.search_div {
- 	margin: 0 0 0 50px;
 }
 
 .choose {
 	width: 300px;
-	height: 29.63px;
-	font-size: 15px;
+		font-size: 15px;
 }
 
 #search li {
 	width: 600px;
-
-	height: 30px;
-
-
-
+	height: 50px;
 }
 input[type=text] {
 
@@ -94,6 +86,11 @@ input[type=text]{
 .button{
 	margin-left: 10px;
 }
+input[type=text] {
+
+    color: black !important;
+}
+
 
 /* 항목 스타일 끝 */
 /* 목록 스타일 */
@@ -135,8 +132,7 @@ label input[type=radio]:checked:after{
   background-size: contain;
   border:1px #fff;
 }
-
-
+/* 목록 스타일 끝 */
 </style>
 <head>
   <!-- Required meta tags -->
@@ -248,39 +244,26 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>사원 관리</h2>
 		
-		<form action="${pageContext.request.contextPath}/emp/empSearch" method="post">
+		<form action="">
 			<div id="search">
 				<ul>
-
-					<li><div class="search_div"><label class="search_name"><b>부서</b></label>
-					<select class="choose" name="emp_dept">
-					<option value="100">-----------------------------------------------</option>
-					<option value="1">인사부</option>
-					<option value="2">영업부</option>
-					<option value="3">재무부</option>
-					<option value="0">무소속</option></select></div></li>
-
+					<li><label class="name">부서</label>
+					<select class="choose">
+					<option value="">-----------------------------------------------</option>
+					<option value="인사">인사</option>
+					<option value="관리">관리</option></select></li>
 				
-
-					<li><div class="search_div"><label class="search_name"><b>직급</b></label>
-					<select class="choose" name="emp_rank">
-					<option value="100">-----------------------------------------------</option>
-					<option value="1">대표</option>
-					<option value="2">팀장</option>
-					<option value="3">대리</option>
-					<option value="4">사원</option>
-					<option value="0">무보직</option></select></div></li>
-
+					<li><label class="name">직급</label>
+					<select class="choose">
+					<option value="">-----------------------------------------------</option>
+					<option>사원</option>
+					<option>관리</option></select></li>
 				
-
-				<li><div class="search_div"><label class="search_name"><b>사원번호</b></label>
-					<input type="text" name="emp_num"></div></li>
-					
-				<li><div class="search_div"><label class="search_name"><b>사원이름</b></label>
-					<input type="text" name="emp_name">
-					
-					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
-
+				<li><label class="name">사원번호</label>
+					<input type="text"></li>
+				<li><label class="name">사원이름</label>
+					<input type="text">
+					<span class="button"><button type="button" style="background-color: black; color: #EFBDBC;">조회</button></span></li>
 				</ul>	
 			</div>
 		</form>
@@ -291,8 +274,8 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		
 		<c:if test="${sessionScope.emp_right eq 1 }">
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=350,height=900')">추가</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num=105','홍커피','width=350,height=900')">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=450,height=900,top=100,left=200')">추가</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num=105','홍커피','width=450,height=900,top=100,left=200')">수정</button>
 		</c:if>
 		<c:if test="${sessionScope.emp_right eq 0 }">
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num }','홍커피','width=370,height=520')">수정</button>
@@ -305,10 +288,7 @@ label input[type=radio]:checked:after{
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-  				<c:if test="${sessionScope.emp_right eq 1 }">
- 		<th style=" font-size:20px !important; color: black;">선택</th>
- 				</c:if>
-    
+    		<th style=" font-size:20px !important; color: black;">선택</th>
     		<th style=" font-size:20px !important; color: black;">사원번호</th>
     		<th style=" font-size:20px !important; color: black;">이름</th>
     		<th style=" font-size:20px !important; color: black;">생년월일</th>
@@ -323,6 +303,7 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">상태</th>
  		 </tr>
  		 <c:forEach var="EmployeeDTO" items="${empList}">
+
   <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_emp?emp_num=${EmployeeDTO.emp_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
   		<c:if test="${sessionScope.emp_right eq 1 }">
     <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
@@ -330,10 +311,11 @@ label input[type=radio]:checked:after{
  				<c:if test="${sessionScope.emp_right eq 0 }">
  		
  				</c:if>
+
     <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_name}</td>
-
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_birth}</td>
+
     <c:if test="${EmployeeDTO.emp_dept eq 0}">
     <td style="text-align: center !important; font-size:20px !important;">소속없음</td>
     </c:if>
@@ -369,6 +351,7 @@ label input[type=radio]:checked:after{
    		<c:if test="${EmployeeDTO.emp_right eq 0}">일반</c:if>
    	</td>
    	</c:if>
+
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_phone}</td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.hire_date}</td>

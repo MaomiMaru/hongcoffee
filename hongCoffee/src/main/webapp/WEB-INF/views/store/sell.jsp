@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
      <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -201,74 +199,51 @@ label input[type=radio]:checked:after{
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>실적 관리</h2>
+		<h2>판매 관리</h2>
 		
-		<form action="${pageContext.request.contextPath}/store/resultSearch" method="post">
+		<form action="${pageContext.request.contextPath}/store/sellSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>영업일</b></label>
 						<input type="date" name="rs_date" max="9999-12-31">
-
-						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
-
+						
+						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC">조회</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
 
 		<hr>
    	
-		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">실적 목록</h3></div>
-
+		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">판매 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/sell_insert','홍커피','width=370,height=520')">추가</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/sell_update?rs_num=13','홍커피','width=370,height=520')">수정</button>
+<!-- 		<button style="background-color: black; color: #EFBDBC">삭제</button> -->
 		</div>
-
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
     		<th style=" font-size:20px !important; color: black;">선택</th>
-    		<th style=" font-size:20px !important; color: black;">영업일</th>
-    		<th style=" font-size:20px !important; color: black;">일 지출</th>
-    		<th style=" font-size:20px !important; color: black;">일 매출</th>
-    		<th style=" font-size:20px !important; color: black;">순이익</th>
+    		<th style=" font-size:20px !important; color: black;">등록일</th>
+    		<th style=" font-size:20px !important; color: black;">상품명</th>
+    		<th style=" font-size:20px !important; color: black;">판매량</th>
+    		<th style=" font-size:20px !important; color: black;">판매가</th>
+ 			<th style=" font-size:20px !important; color: black;">총금액</th>
  		 </tr>
- 		 <c:forEach var="ResultDTO" items="${resultList}">
+ 		 <c:forEach var="ResultDTO" items="${sellList}">
   <tr>
-
 <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
-
-<%--    	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${ResultDTO.rs_date}" pattern="yyyy.MM.dd"/></td> --%>
-<!--    	<td style="text-align: center !important; font-size:20px !important; color:red;"> -->
-
    	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.rs_date}</td>
-   	<td style="text-align: center !important; font-size:20px !important; color:red;">
-
-   	<fmt:formatNumber value="${ResultDTO.jichul}" pattern="#,###"></fmt:formatNumber>
+   	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.prod_name}</td>
+    <td style="text-align: center !important; font-size:20px !important;">${ResultDTO.sales}</td>
+   	<td style="text-align: center !important; font-size:20px !important;">
+   	<fmt:formatNumber value="${ResultDTO.prod_price}" pattern="#,###"></fmt:formatNumber>
    	</td>
-    <td style="text-align: center !important; font-size:20px !important; color:green;">
-    <fmt:formatNumber value="${ResultDTO.maechul}" pattern="#,###"></fmt:formatNumber>
-    </td>
-
-<c:if test="${ResultDTO.income eq 0}">
-   	<td style="text-align: center !important; font-size:20px !important; color:blue; ">
-   	<fmt:formatNumber value="${ResultDTO.income}" pattern="#,###"></fmt:formatNumber>
+   	<td style="text-align: center !important; font-size:20px !important; color:green;">
+   	<fmt:formatNumber value="${ResultDTO.prod_price * ResultDTO.sales}" pattern="#,###"></fmt:formatNumber>
    	</td>
-</c:if>
-
-<c:if test="${ResultDTO.income gt 0}">
-   	<td style="text-align: center !important; font-size:20px !important; color:green; ">
-   	<fmt:formatNumber value="${ResultDTO.income}" pattern="#,###"></fmt:formatNumber>
-   	</td>
-</c:if>
-
-<c:if test="${ResultDTO.income lt 0}">
-   	<td style="text-align: center !important; font-size:20px !important; color:red; ">
-   	<fmt:formatNumber value="${ResultDTO.income}" pattern="#,###"></fmt:formatNumber>
-   	</td>
-</c:if>
-
-
   </tr>
   		</c:forEach>
   
