@@ -303,8 +303,8 @@
 	</update>
 
 	<insert id="sellInsert">
-		insert into result(num, prod_num, rs_date, sales, rs_note)
-		values(#{num}, #{prod_num}, #{rs_date}, #{sales}, #{rs_note})
+		insert into result(num, prod_num, rs_date, sales)
+		values(#{num}, #{prod_num}, #{rs_date}, #{sales})
 	</insert>
 	
 	<update id="stockIncrease">
@@ -326,7 +326,7 @@
  	</select>
 
 	<select id="getSales" resultType="com.itwillbs.domain.ResultDTO">
-		select a.rs_num, a.rs_date, a.sales, a.rs_note, b.prod_name, b.prod_type, b.prod_price
+		select a.rs_num, a.rs_date, a.sales, b.prod_name, b.prod_type, b.prod_price
 		from result a join product b
 		on a.prod_num = b.prod_num
         where rs_num = #{rs_num}

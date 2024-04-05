@@ -48,11 +48,11 @@ select{
 <option value="2">폐업</option>
 </select><br>
 <sub></sub>
-<b>적요</b><textarea rows="30" cols="37" name="note"></textarea><br>
+<b>적요</b><br><textarea rows="30" cols="37" name="note" style="height: 465px; width: 300px;"></textarea><br>
 <sub></sub>
 <br>
-<span style="float:right; margin-right: 105px">
-<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+<span style="float:right">
+<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
 </fieldset>
 </form>

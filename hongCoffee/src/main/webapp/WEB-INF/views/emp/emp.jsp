@@ -274,8 +274,8 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		
 		<c:if test="${sessionScope.emp_right eq 1 }">
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=350,height=900')">추가</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num=105','홍커피','width=350,height=920')">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=450,height=900,top=100,left=200')">추가</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num=105','홍커피','width=450,height=900,top=100,left=200')">수정</button>
 		</c:if>
 		<c:if test="${sessionScope.emp_right eq 0 }">
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num }','홍커피','width=370,height=520')">수정</button>

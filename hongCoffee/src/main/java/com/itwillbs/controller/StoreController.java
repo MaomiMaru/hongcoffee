@@ -546,7 +546,6 @@ public class StoreController {
 		resultDTO.setRs_date(rs_date);
 		resultDTO.setNum(Integer.parseInt(request.getParameter("num")));
 		resultDTO.setConsume(Integer.parseInt(request.getParameter("consume")));
-		resultDTO.setRs_note(request.getParameter("rs_note"));
 		resultDTO.setStock_num(stock_num);
 		storeService.consumeInsert(resultDTO);
 		

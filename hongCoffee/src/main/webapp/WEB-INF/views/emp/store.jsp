@@ -132,6 +132,7 @@ label input[type=radio]:checked:after{
 }
 
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -225,17 +226,17 @@ label input[type=radio]:checked:after{
 		</form>
 
 		<hr>
-   	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=450,height=520')"> 
-		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_update?num=7','홍커피','width=450,height=520')"></div>
+		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=450px,height=900px,top=100,left=200')"> 
+		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="store_update()"></div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
     		<th style=" font-size:20px !important; color: black;">선택</th>
+    		<th style=" font-size:20px !important; color: black;">지점번호</th>
     		<th style=" font-size:20px !important; color: black;">지점명</th>
     		<th style=" font-size:20px !important; color: black;">대표자명</th>
     		<th style=" font-size:20px !important; color: black;">연락처</th>
@@ -245,7 +246,8 @@ label input[type=radio]:checked:after{
  		 </tr>
  		 <c:forEach var="StoreDTO" items="${storeList}">
   <tr >
-  <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+  <td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${StoreDTO.num }"></label></td>
+  	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.boss}</td>
     <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>
@@ -306,6 +308,34 @@ label input[type=radio]:checked:after{
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+
+<script type="text/javascript">
+
+function store_update() {
+    // 라디오 버튼 그룹을 가져옵니다.
+    var radioButtons = document.getElementsByName('radio1');
+
+    // 라디오 버튼 그룹의 각 라디오 버튼에 이벤트 리스너를 추가합니다.
+    for (var i = 0; i < radioButtons.length; i++) {
+        radioButtons[i].addEventListener('change', function() {
+            // 선택된 라디오 버튼의 value 값을 가져옵니다.
+            var selectedNum = this.value;
+
+            // 선택된 라디오 버튼의 상위 <tr> 요소를 가져옵니다.
+            var selectedRow = this.closest('tr');
+
+            // 선택된 지점의 번호를 가져옵니다.
+            var storeNum = selectedRow.querySelector('td:nth-child(2)').innerText;
+
+            // 팝업 창을 엽니다.
+            window.open('${pageContext.request.contextPath}/emp/popup/store_update?num=' + storeNum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+        });
+    }
+}
+
+</script>
+
+
 </body>
 
 </html>

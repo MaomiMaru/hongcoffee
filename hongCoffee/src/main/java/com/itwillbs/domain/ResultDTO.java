@@ -1,6 +1,5 @@
 package com.itwillbs.domain;
 
-import java.sql.Timestamp;
 
 public class ResultDTO {
 
@@ -21,10 +20,7 @@ public class ResultDTO {
 	private int income; // 매출 - 소모가 = 순수익
 	private String prod_name; // 상품명
 	private int prod_price; // 판매가
-	private String rs_note; // 적요
 	private int prod_type; //상품 유형
-	
-	
 
 	public int getProd_type() {
 		return prod_type;
@@ -160,14 +156,6 @@ public class ResultDTO {
 
 	public void setStock_num(int stock_num) {
 		this.stock_num = stock_num;
-	}
-
-	public String getRs_note() {
-		return rs_note;
-	}
-
-	public void setRs_note(String rs_note) {
-		this.rs_note = rs_note;
 	}
 
 	public String getRs_date() {
