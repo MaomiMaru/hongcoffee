@@ -849,7 +849,7 @@ public class EmployeeController {
 
 	
 	//5. 로그아웃
-	@GetMapping("/emp/logout")
+	@GetMapping("logout")
 	public String logout(HttpSession session) {
 		System.out.println("EmployeeController logout()");
 		session.invalidate();
@@ -859,7 +859,7 @@ public class EmployeeController {
 	
 	//팝업 주소 매핑
 	//2-1-1. 지점 관리 - 추가
-	@GetMapping("/popup/store_insert")
+	@GetMapping("popup/store_insert")
 	public String store_insert() {
 		System.out.println("EmployeeController store_insert()");
 
@@ -1161,24 +1161,33 @@ public class EmployeeController {
 		return "emp/detail/d_order";
 	}
 	
-		//출하 상세
-		@GetMapping("detail/d_shipment")
-		public String d_shipment(HttpServletRequest request, Model model) {
-			System.out.println("EmployeeController d_shipment");
-			int od_num = Integer.parseInt(request.getParameter("od_num"));
-			ShipmentDTO shipmentDTO = employeeService.getShipment(od_num);
-			model.addAttribute("shipmentDTO", shipmentDTO);
-			return "emp/detail/d_shipment";
-		}
+	//출하 상세
+	@GetMapping("detail/d_shipment")
+	public String d_shipment(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController d_shipment");
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		ShipmentDTO shipmentDTO = employeeService.getShipment(od_num);
+		model.addAttribute("shipmentDTO", shipmentDTO);
+		return "emp/detail/d_shipment";
+	}
+
+	//사원 상세
+	@GetMapping("detail/d_emp")
+	public String d_emp(HttpServletRequest request, Model model) {
+		System.out.println("EmployeeController d_emp");
+		int emp_num = Integer.parseInt(request.getParameter("emp_num"));
+		EmployeeDTO employeeDTO = employeeService.getEmployee(emp_num);
+		model.addAttribute("employeeDTO", employeeDTO);
+		return "emp/detail/d_emp";
+	}
 	
-		//사원 상세
-		@GetMapping("detail/d_emp")
-		public String d_emp(HttpServletRequest request, Model model) {
-			System.out.println("EmployeeController d_emp");
-			int emp_num = Integer.parseInt(request.getParameter("emp_num"));
-			EmployeeDTO employeeDTO = employeeService.getEmployee(emp_num);
-			model.addAttribute("employeeDTO", employeeDTO);
-			return "emp/detail/d_emp";
-		}
+	@GetMapping("popup/shipment_delete")
+	public String shipment_delete() {
+		System.out.println("EmployeeController shipment_delete()");
+		
+		
+		
+		return "redirect:/emp/shipment";
+	}
 		
 }

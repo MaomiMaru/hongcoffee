@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -138,6 +136,7 @@ label input[type=radio]:checked:after{
 }
 
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -236,8 +235,8 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 <!-- 		<button>추가</button> -->
 		<button type="button" onclick="location.href='${pageContext.request.contextPath}/excel/orderList'" style="background-color: black; color: #EFBDBC;">엑셀 다운로드</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/shipment_insert?od_num=4','홍커피','width=370,height=520')">출하 추가</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/order_update?od_num=1','홍커피','width=370,height=520')">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/shipment_insert?od_num=4','홍커피','width=370,height=520, top=100, left=200')">출하 추가</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="order_update()">수정</button>
 		</div>
 		
 <!-- 		목록 -->
@@ -256,7 +255,7 @@ label input[type=radio]:checked:after{
  		 </tr>
  		 <c:forEach var="OrderDTO" items="${orderList}">
   <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_order?od_num=${OrderDTO.od_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
-   <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+   <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${OrderDTO.od_num }"></label></td>
 
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
@@ -345,6 +344,20 @@ label input[type=radio]:checked:after{
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+
+
+
+<script>
+function order_update(){
+	let onum = $('input[name=radio1]:checked').val();
+	if(onum == null || onum == undefined){
+		alert('수정하고자 하는 내용을 선택해주세요');
+		return false;
+	}
+	window.open('${pageContext.request.contextPath}/emp/popup/order_update?od_num='+onum, '홍커피','width=370,height=520, top=100, left=200');
+}
+</script>
+
 </body>
 
 </html>

@@ -135,8 +135,8 @@ label input[type=radio]:checked:after{
   background-size: contain;
   border:1px #fff;
 }
-
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -230,8 +230,8 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">출하 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button type="button" onclick="location.href='${pageContext.request.contextPath}/excel/shipmentList'" style="background-color: black; color: #EFBDBC;">엑셀 다운로드</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/shipment_update?od_num=1','홍커피','width=370,height=520')">수정</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="${pageContext.request.contextPath}/emp/popup/shipment_delete?od_num=1'">삭제</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="shipment_update()">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="">삭제</button> <!-- shipment_delete() -->
 		</div>
 		
 <!-- 		목록 -->
@@ -250,7 +250,7 @@ label input[type=radio]:checked:after{
  		 </tr>
  		 <c:forEach var="ShipmentDTO" items="${shipmentList}">
   <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_shipment?od_num=${ShipmentDTO.od_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
-    <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+    <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${ShipmentDTO.od_num }"></label></td>
    	<td style="text-align: center !important; font-size:20px !important;">${ShipmentDTO.name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ShipmentDTO.item_name}</td>
     <td style="text-align: center !important; font-size:20px !important;">${ShipmentDTO.sh_amount}</td>
@@ -328,6 +328,26 @@ label input[type=radio]:checked:after{
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+
+<script type="text/javascript">
+function shipment_update(){
+ let sunum = $('input[name=radio1]:checked').val();
+ if(sunum == null || sunum == undefined){
+	 alert('수정하고자 하는 내용을 선택해주세요');
+	 return false;
+ }
+ window.open('${pageContext.request.contextPath}/emp/popup/shipment_update?od_num'+sunum '홍커피','width=370,height=520, top=100, left=200');
+}
+
+
+function shipment_delete(){
+	
+}
+
+</script>
+
+
+
 </body>
 
 </html>

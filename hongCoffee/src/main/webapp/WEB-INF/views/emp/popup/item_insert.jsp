@@ -20,14 +20,14 @@ div{
 <fieldset style="border:0px">
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 <div class="check"></div><br>
-<div><b>재료명</b></div><input type="text" name="item_name" class="item_name"><br>
-<sub></sub>
 <div><b>유형</b></div>
 <select name="item_type" class="item_type" style="width: 177px">
 <option value="100">유형를 선택해주세요</option>
 <option value="0">식품</option>
 <option value="1">비식품</option>
 </select><br>
+<sub></sub>
+<div><b>재료명</b></div><input type="text" name="item_name" class="item_name"><br>
 <sub></sub>
 <div><b>단가</b></div><input type="text" name="item_price" class="item_price"><br>
 <sub></sub>

@@ -249,8 +249,7 @@ label input[type=radio]:checked:after{
  		 <c:forEach var="StoreDTO" items="${storeList}">
 
   <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_store?num=${StoreDTO.num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
-  <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
-
+    <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${StoreDTO.num}"></label></td>
 	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.boss}</td>
@@ -331,27 +330,17 @@ label input[type=radio]:checked:after{
 
 <script type="text/javascript">
 
+
+
 function store_update() {
-    // 라디오 버튼 그룹을 가져옵니다.
-    var radioButtons = document.getElementsByName('radio1');
-
-    // 라디오 버튼 그룹의 각 라디오 버튼에 이벤트 리스너를 추가합니다.
-    for (var i = 0; i < radioButtons.length; i++) {
-        radioButtons[i].addEventListener('change', function() {
-            // 선택된 라디오 버튼의 value 값을 가져옵니다.
-            var selectedNum = this.value;
-
-            // 선택된 라디오 버튼의 상위 <tr> 요소를 가져옵니다.
-            var selectedRow = this.closest('tr');
-
-            // 선택된 지점의 번호를 가져옵니다.
-            var storeNum = selectedRow.querySelector('td:nth-child(2)').innerText;
-
-            // 팝업 창을 엽니다.
-            window.open('${pageContext.request.contextPath}/emp/popup/store_update?num=' + storeNum, '홍커피', 'width=450px,height=900px,top=100,left=200');
-        });
-    }
+	let snum = $('input[name=radio1]:checked').val();
+	if(snum == null   || snum == undefined){
+		alert('수정하고자 하는 내용을 선택해주세요');
+		return false;
+	}
+    window.open('${pageContext.request.contextPath}/emp/popup/store_update?num=' + snum, '홍커피', 'width=450px,height=900px,top=100,left=200');
 }
+
 
 </script>
 
