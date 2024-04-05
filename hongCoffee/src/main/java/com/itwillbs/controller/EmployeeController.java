@@ -1003,11 +1003,13 @@ public class EmployeeController {
 	}
 	
 	//3-2-3 출하 - 삭제
-	@GetMapping("shipment_delete")
-	public String shipment_delete(ShipmentDTO shipmentDTO) {
+	@GetMapping("popup/shipment_delete")
+	public String shipment_delete(HttpServletRequest request) {
 		System.out.println("EmployeeController shipment_delete()");
 		
-		employeeService.shipmentDelete(shipmentDTO);
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		
+		employeeService.shipmentDelete(od_num);
 		
 		return "redirect:/emp/shipment";
 	}
@@ -1181,13 +1183,6 @@ public class EmployeeController {
 		return "emp/detail/d_emp";
 	}
 	
-	@GetMapping("popup/shipment_delete")
-	public String shipment_delete() {
-		System.out.println("EmployeeController shipment_delete()");
-		
-		
-		
-		return "redirect:/emp/shipment";
-	}
+
 		
 }

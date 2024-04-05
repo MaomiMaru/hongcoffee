@@ -237,9 +237,9 @@ public class EmployeeService {
 	}
 
 
-	public void shipmentDelete(ShipmentDTO shipmentDTO) {
+	public void shipmentDelete(int od_num) {
 		System.out.println("EmployeeDTO shipmentDelete()");
-		employeeDAO.shipmentDelete(shipmentDTO);
+		employeeDAO.shipmentDelete(od_num);
 	}
 
 

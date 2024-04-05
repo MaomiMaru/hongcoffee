@@ -403,7 +403,14 @@
 		order by 2 desc
 		limit 5
  	</select>
+ 	
+ 	<update id="shipmentStateReset">
+ 		update `order`
+ 		set shipment_not = 0
+ 		where od_num = #{od_num}
+ 	</update>
+ 	
+ 	
+ 	
 
 </mapper>
-
-

@@ -276,10 +276,10 @@ label input[type=radio]:checked:after{
 		
 		<c:if test="${sessionScope.emp_right eq 1 }">
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=450,height=900,top=100,left=200')">추가</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num=105','홍커피','width=450,height=900,top=100,left=200')">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="emp_updateAdmin()">수정</button>
 		</c:if>
 		<c:if test="${sessionScope.emp_right eq 0 }">
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num }','홍커피','width=370,height=520')">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num}','홍커피','width=370,height=520')">수정</button>
 <%-- 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num}','홍커피','width=370,height=520')">수정</button> --%>
 		</c:if>
 		</div>
@@ -309,7 +309,7 @@ label input[type=radio]:checked:after{
 
   <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_emp?emp_num=${EmployeeDTO.emp_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
   		<c:if test="${sessionScope.emp_right eq 1 }">
-    <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+    <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${EmployeeDTO.emp_num }"></label></td>
  		</c:if>
  				<c:if test="${sessionScope.emp_right eq 0 }">
  		
@@ -434,6 +434,20 @@ function cola() {
 	document.querySelector("#pjh2").className = 'nav-item';
 	document.querySelector("#pjh3").className = 'nav-item';
 }
+
+
+// window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num=105','홍커피','width=450,height=900,top=100,left=200')"
+
+function emp_updateAdmin(){
+	let enuma = $('input[name=radio1]:checked').val();
+	if(enuma == null || enuma == undefined){
+		alert('수정하고자 하는 내용을 선택해주세요');
+		return false;
+	}
+	window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num='+enuma, '홍커피','width=370,height=520, top=100, left=200');
+}
+
+
 </script>
 
 </body>

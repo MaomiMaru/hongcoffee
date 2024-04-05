@@ -231,7 +231,7 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button type="button" onclick="location.href='${pageContext.request.contextPath}/excel/shipmentList'" style="background-color: black; color: #EFBDBC;">엑셀 다운로드</button>
 		<button style="background-color: black; color: #EFBDBC;" onclick="shipment_update()">수정</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="">삭제</button> <!-- shipment_delete() -->
+		<button style="background-color: black; color: #EFBDBC;" onclick="shipment_delete()">삭제</button> 
 		</div>
 		
 <!-- 		목록 -->
@@ -330,24 +330,27 @@ label input[type=radio]:checked:after{
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
 
 <script type="text/javascript">
+
 function shipment_update(){
- let sunum = $('input[name=radio1]:checked').val();
- if(sunum == null || sunum == undefined){
-	 alert('수정하고자 하는 내용을 선택해주세요');
-	 return false;
- }
- window.open('${pageContext.request.contextPath}/emp/popup/shipment_update?od_num'+sunum '홍커피','width=370,height=520, top=100, left=200');
+	 let sunum = $('input[name=radio1]:checked').val();
+	 if(sunum == null || sunum == undefined){
+		 alert('수정하고자 하는 내용을 선택해주세요');
+		 return false;
+	 }
+	 window.open('${pageContext.request.contextPath}/emp/popup/shipment_update?od_num='+sunum, '홍커피','width=370,height=520, top=100, left=200');
 }
 
 
 function shipment_delete(){
-	
+	let sdnum = $('input[name=radio1]:checked').val();
+	 if(sdnum == null || sdnum == undefined){
+		 alert('삭제하고자 하는 내용을 선택해주세요');
+		 return false;
+	 }
+	 location.href="${pageContext.request.contextPath}/emp/popup/shipment_delete?od_num="+sdnum;	
 }
 
 </script>
 
-
-
 </body>
-
 </html>

@@ -182,9 +182,10 @@ public class EmployeeDAO {
 		return sqlSession.selectOne(namespace+".getEmployee",emp_num);
 	}
 
-	public void shipmentDelete(ShipmentDTO shipmentDTO) {
+	public void shipmentDelete(int od_num) {
 		System.out.println("EMployeeDAO shipmentDelete()");
-		sqlSession.delete(namespace+".shipmentDelete", shipmentDTO);
+		sqlSession.delete(namespace+".shipmentDelete", od_num);
+		sqlSession.update(namespace+".shipmentStateReset",od_num);
 	}
 
 			//페이지 처리
