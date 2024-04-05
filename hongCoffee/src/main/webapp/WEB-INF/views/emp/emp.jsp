@@ -288,7 +288,9 @@ label input[type=radio]:checked:after{
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
+  			<c:if test="${sessionScope.emp_right eq 1 }">
     		<th style=" font-size:20px !important; color: black;">선택</th>
+    				</c:if>
     		<th style=" font-size:20px !important; color: black;">사원번호</th>
     		<th style=" font-size:20px !important; color: black;">이름</th>
     		<th style=" font-size:20px !important; color: black;">생년월일</th>
