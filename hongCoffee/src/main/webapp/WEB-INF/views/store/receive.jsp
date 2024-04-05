@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
      <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
 /* 항목 스타일 */
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
@@ -287,7 +285,7 @@ window.addEventListener('load',function(){
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">입고 목록</h3></div>
 		<div style="width: 50%; height: 50px; float: left; text-align: right !important; padding-top: 15px;">
-			<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/receive_update?od_num=4','홍커피','width=350,height=900')">수정</button>
+			<button style="background-color: black; color: #EFBDBC" onclick="receive_update()">수정</button>
 		</div> 
 		
 <!-- 		목록 -->
@@ -304,7 +302,7 @@ window.addEventListener('load',function(){
  		 </tr>
  		 <c:forEach var="ReceiveDTO" items="${receiveList}">
   <tr onclick="window.open('${pageContext.request.contextPath}/store/detail/d_receive?od_num=${ReceiveDTO.od_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
-<td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+<td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${ReceiveDTO.od_num}"></label></td>
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.item_name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ReceiveDTO.rc_amount}</td>
 
@@ -371,6 +369,20 @@ window.addEventListener('load',function(){
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+
+<script>
+// window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=1','홍커피','width=370,height=520')
+function receive_update() {
+	let rnum = $('input[name=radio1]:checked').val();
+	if(rnum == null   || rnum == undefined){
+		alert('수정하고자 하는 내용을 선택해주세요');
+		return false;
+	}
+    window.open('${pageContext.request.contextPath}/store/popup/receive_update?od_num=' + rnum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+}
+
+</script>
+
 </body>
 
 </html>

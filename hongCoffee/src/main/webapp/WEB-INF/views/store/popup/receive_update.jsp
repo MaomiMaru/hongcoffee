@@ -23,6 +23,7 @@ select{
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 <input type="hidden" name="od_num" value="${receiveDTO.od_num}">
 <input type="hidden" name="num" value="${receiveDTO.num}">
+<input type="hidden" name="item_num" value="${receiveDTO.item_num}">
 <div class="check"></div><br>
 <div><b>유형</b></div><input type="text" name="item_type" value="${receiveDTO.item_type }" readonly><br>
 <div><b>재료명</b></div><input type="text" name="item_name" value="${receiveDTO.item_name}" readonly><br>

@@ -128,6 +128,7 @@ label input[type=radio]:checked:after{
   border:1px #fff;
 }
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -217,7 +218,7 @@ label input[type=radio]:checked:after{
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">재료 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=1','홍커피','width=370,height=520')">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="stock_update()">수정</button>
 		</div>
 		
 <!-- 		목록 -->
@@ -234,7 +235,7 @@ label input[type=radio]:checked:after{
  		 <c:forEach var="StockDTO" items="${stockList}">
   <tr onclick="window.open('${pageContext.request.contextPath}/store/detail/d_stock?stock_num=${StockDTO.stock_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
 
-<td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+<td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${StockDTO.stock_num }"></label></td>
   <c:if test="${StockDTO.item_type eq 0}">
    	<td style="text-align: center !important; font-size:20px !important; color:#4E342E;">식품</td>
    	</c:if>
@@ -301,6 +302,22 @@ label input[type=radio]:checked:after{
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+
+<script type="text/javascript">
+// window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=1','홍커피','width=370,height=520')
+function stock_update() {
+	let snum = $('input[name=radio1]:checked').val();
+	if(snum == null   || snum == undefined){
+		alert('수정하고자 하는 내용을 선택해주세요');
+		return false;
+	}
+    window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=' + snum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+}
+
+</script>
+
+
+
 </body>
 
 </html>

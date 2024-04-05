@@ -80,7 +80,7 @@
  		select o.od_num,t.item_name, o.od_amount, t.item_price, o.od_time, o.received_not, s.name, o.shipment_not
  		from `order` o join item t on o.item_num = t.item_num
  		join store s on o.num = s.num
- 		order by o.od_time desc
+ 		order by o.received_not, o.shipment_not desc, o.od_time desc
  	</select>
  	
  	
@@ -369,6 +369,16 @@
 		update result
 		set sales = #{sales}
 		where rs_num = #{rs_num}
+	</update>
+	
+	<delete id="orderDelete">
+		delete from `order` where od_num = #{od_num}
+	</delete>
+	
+	<update id="stockDecreaseReset">
+		update stock
+		set amount = amount-#{rc_amount}
+		where item_num = #{item_num} and num = #{num}
 	</update>
 
 </mapper>

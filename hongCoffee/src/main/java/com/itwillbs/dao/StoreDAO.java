@@ -194,7 +194,8 @@ public class StoreDAO {
 	public void receiveUpdate(ReceiveDTO receiveDTO) {
 		System.out.println("StoreDAO receiveUpdate()");
 		sqlSession.update(namespace+".receiveUpdate", receiveDTO);
-		
+		sqlSession.update(namespace+".stockDecreaseReset", receiveDTO);
+		sqlSession.insert(namespace+".stockIncrease", receiveDTO);
 	}
 
 
@@ -268,6 +269,12 @@ public class StoreDAO {
 	public List<ResultDTO> getResultMain(int num) {
 		System.out.println("StoreDAO getResultMain()");
 		return sqlSession.selectList(namespace+".getResultMain", num);
+	}
+
+
+	public void orderDelete(int od_num) {
+		System.out.println("StoreDAO orderDelete()");
+		sqlSession.delete(namespace+".orderDelete", od_num);
 	}
 
 

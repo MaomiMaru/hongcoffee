@@ -264,6 +264,12 @@ public class StoreService {
 	}
 
 
+	public void orderDelete(int od_num) {
+		System.out.println("StoreService orderDelete()");
+		storeDAO.orderDelete(od_num);
+	}
+
+
 
 
 

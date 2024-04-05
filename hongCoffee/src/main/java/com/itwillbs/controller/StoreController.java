@@ -421,7 +421,7 @@ public class StoreController {
 		return "store/popup/close";
 	}// receive_insertPro
 
-	// 3-3-1. 물류 관리 - 발주 추가
+	// 3-2-1. 물류 관리 - 발주 추가
 	@GetMapping("/popup/order_insert")
 	public String order_insert() {
 		System.out.println("StoreController order_insert()");
@@ -440,7 +440,7 @@ public class StoreController {
 		return "store/popup/close";
 	}
 
-	// 3-3-2. 물류 관리 - 발주 수정
+	// 3-2-2. 물류 관리 - 발주 수정
 	@GetMapping("/popup/order_update")
 	public String order_update(HttpServletRequest request, Model model) {
 		System.out.println("StoreController order_update()");
@@ -449,6 +449,15 @@ public class StoreController {
 		model.addAttribute("orderDTO", storeService.getOrder(od_num));
 
 		return "store/popup/order_update";
+	}
+	
+	// 3-2-2. 물류 관리 - 발주 수정
+	@GetMapping("/popup/order_delete")
+	public String order_delete(HttpServletRequest request, Model model) {
+		System.out.println("StoreController order_delete()");
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		storeService.orderDelete(od_num);
+		return "redirect:/store/order";
 	}
 
 	@PostMapping("/popup/order_updatePro")

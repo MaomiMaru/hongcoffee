@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
 /* 항목 스타일 */
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
@@ -228,10 +226,10 @@ label input[type=radio]:checked:after{
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">발주 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=10','홍커피','width=350,height=900')">입고 추가</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="receive_insert()">입고 추가</button>
 		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/order_insert','홍커피','width=350,height=900')">발주 추가</button>
-		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/order_update?od_num=22','홍커피','width=350,height=900')">발주 수정</button>
-		<button style="background-color: black; color: #EFBDBC">삭제</button></div>
+		<button style="background-color: black; color: #EFBDBC" onclick="order_update()">발주 수정</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="order_delete()">발주 삭제</button></div>
 		
 <!-- 		목록 -->
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
@@ -249,7 +247,7 @@ label input[type=radio]:checked:after{
  		 </tr>
  		 <c:forEach var="OrderDTO" items="${orderList}">
   <tr onclick="window.open('${pageContext.request.contextPath}/store/detail/d_order?od_num=${OrderDTO.od_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
-  <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+  <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${OrderDTO.od_num }"></label></td>
 
    	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.item_name}</td>
 
@@ -322,6 +320,35 @@ label input[type=radio]:checked:after{
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+
+<script>
+// window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=1','홍커피','width=370,height=520')
+function receive_insert() {
+	let rnum = $('input[name=radio1]:checked').val();
+	if(rnum == null   || rnum == undefined){
+		alert('입고 추가 하려는 내용을 선택해주세요');
+		return false;
+	}
+    window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=' + rnum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+}
+function order_update() {
+	let onum = $('input[name=radio1]:checked').val();
+	if(onum == null   || onum == undefined){
+		alert('발주 수정 하려는 내용을 선택해주세요');
+		return false;
+	}
+    window.open('${pageContext.request.contextPath}/store/popup/order_update?od_num=' + onum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+}
+function order_delete() {
+	let onum = $('input[name=radio1]:checked').val();
+	if(onum == null   || onum == undefined){
+		alert('발주 삭제 하려는 내용을 선택해주세요');
+		return false;
+	}
+    location.href='${pageContext.request.contextPath}/store/popup/order_delete?od_num='+onum
+}
+</script>
+
 </body>
 
 </html>
