@@ -1,4 +1,3 @@
-<!-- 정규표현식 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,7 +33,7 @@ select{
 <sub></sub>
 <div><b>이메일</b></div><input type="text" name="email" class="email"><br>
 <sub></sub>																																
-<div><b>우편번호</b></div><input type="text" id="sample4_postcode" placeholder="우편번호" name="postalcode"> <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="background-color: black; color: #EFBDBC;"><br>
+<div><b>우편번호</b></div><input type="text" id="sample4_postcode" placeholder="우편번호" name="postalcode"> <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="float:right; ;background-color: black; color: #EFBDBC;"><br>
 <sub></sub>
 <div><b>도로명주소</b></div><input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="address"><br>
 <sub></sub>
@@ -48,7 +47,7 @@ select{
 <option value="2">폐업</option>
 </select><br>
 <sub></sub>
-<b>적요</b><br><textarea rows="30" cols="37" name="note" style="height: 465px; width: 300px;"></textarea><br>
+<b>적요</b><br><textarea rows="30" cols="35" name="note" style="height: 210px; width: 410px;"></textarea><br>
 <sub></sub>
 <br>
 <span style="float:right">
@@ -60,7 +59,14 @@ select{
 <!-- 주소 찾기 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    function sample4_execDaumPostcode() {
+var isPopupOpened = false; 
+
+function sample4_execDaumPostcode() {
+	
+    if (isPopupOpened) {
+        return;
+    }
+	
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -114,20 +120,13 @@ select{
             }
 
         }).open();
+        
+        isPopupOpened = true;
     }
-
-</script>
-
-
-
-
-
-
-<script type="text/javascript">
-
-
-
-$(function(){
+    
+    //===========================================================
+    	
+    	$(function(){
 	$('.form').submit(function(){
 
 		//지점명 : 한글 2자 이상 20자 이하
@@ -142,7 +141,6 @@ $(function(){
 				return false;
 		}
 		
-		//비밀번호 : 영문 대소문자 + 숫자 + 특수문자 1개 이상씩 4자 이상 20자 이하
 		if($('.pw').val()=='' || $('.pw').val()==null||$('.pw').val()==undefined){
 			alert('비밀번호를 입력해주세요.');
 			return false;
@@ -219,7 +217,6 @@ $(function(){
             this.value = str;
         }
     });
-
 </script>
 
 </body>

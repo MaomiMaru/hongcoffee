@@ -23,7 +23,7 @@ select{
 <fieldset style="border:0px">
 <div><b>사원번호</b></div><input type="text" name="emp_num" value="${employeeDTO.emp_num }" readonly><br>
 <sub></sub>
-<div><b>비밀번호</b></div><input type="password" name="emp_pw" value="${employeeDTO.emp_pw }"><br>
+<div><b>비밀번호</b></div><input type="password" name="emp_pw" class="emp_pw" value="${employeeDTO.emp_pw }"><br>
 <sub></sub>
 <div><b>사원명</b></div><input type="text" name="emp_name" value="${employeeDTO.emp_name }"><br>
 <sub></sub>
@@ -52,9 +52,9 @@ select{
 <option value="1" <c:if test="${employeeDTO.emp_right eq '1'}"> selected </c:if>>관리자</option>
 </select><br>
 <sub></sub>
-<div><b>연락처</b></div><input type="tel" name="emp_phone" value="${employeeDTO.emp_phone }"><br>
+<div><b>연락처</b></div><input type="text" name="emp_phone" class="emp_phone" value="${employeeDTO.emp_phone }"><br>
 <sub></sub>
-<div><b>이메일</b></div><input type="email" name="emp_email" value="${employeeDTO.emp_email }"><br>
+<div><b>이메일</b></div><input type="email" name="emp_email" class="emp_email" value="${employeeDTO.emp_email }"><br>
 <sub></sub>
 <div><b>입사일</b></div><input type="date" name="hire_date" style="width: 177px" value="${employeeDTO.hire_date }"><br>
 <sub></sub>
@@ -65,7 +65,7 @@ select{
 <option value="2" <c:if test="${employeeDTO.emp_state eq '2'}"> selected </c:if>>퇴직</option>
 </select><br>
 <sub></sub>
-<b>적요</b><br><textarea rows="30" cols="37" name="emp_note">${employeeDTO.emp_note }</textarea><br>
+<b>적요</b><br><textarea rows="30" cols="37" name="emp_note" style="height: 210px; width: 410px;">${employeeDTO.emp_note }</textarea><br>
 <sub></sub>
 <br>
 <span style="float:right">
@@ -74,7 +74,6 @@ select{
 </fieldset>
 </form>
 
-<script type="text/javascript">
 <script type="text/javascript">
 $(function(){
 	$('.form').submit(function(){
@@ -112,44 +111,44 @@ $(function(){
 		}
 		
 	});
+});	
+	
+$(".emp_phone").on('keydown keyup', function() {
+	this.value = this.value.replace(/[^0-9]/g, '');
+
+	var str = this.value;
+	var tmp = '';
+	var bullet = '-';
+
+	if (str.length > 3 && str.length < 8) {
+		tmp += str.substr(0, 3);
+		tmp += bullet;
+		tmp += str.substr(3);
+		this.value = tmp;
+	} else if (str.length == 8) {
+		tmp += str.substr(0, 4);
+		tmp += bullet;
+		tmp += str.substr(4);
+		this.value = tmp;
+	} else if (str.length == 10) {
+		tmp += str.substr(0, 2);
+		tmp += bullet;
+		tmp += str.substr(2, 4);
+		tmp += bullet;
+		tmp += str.substr(6); // 10자리일때
+		this.value = tmp;
+	} else if (str.length > 8) {
+		tmp += str.substr(0, 3);
+		tmp += bullet;
+		tmp += str.substr(3, 4);
+		tmp += bullet;
+		tmp += str.substr(7, 4);
+		this.value = tmp;
+	} else {
+		this.value = str;
+	}
 	
 });
-	
-	$(".emp_phone").on('keydown keyup',function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
-
-        var str = this.value;
-        var tmp = '';
-        var bullet = '-';
-
-        if (str.length > 3 && str.length < 8) {
-            tmp += str.substr(0, 3);
-            tmp += bullet;
-            tmp += str.substr(3);
-            this.value = tmp;
-        } else if (str.length == 8) {
-            tmp += str.substr(0, 4);
-            tmp += bullet;
-            tmp += str.substr(4);
-            this.value = tmp;
-        } else if (str.length == 10) {
-            tmp += str.substr(0, 2);
-            tmp += bullet;
-            tmp += str.substr(2, 4);
-            tmp += bullet;
-            tmp += str.substr(6); // 10자리일때
-            this.value = tmp;
-        } else if (str.length > 8) {
-            tmp += str.substr(0, 3);
-            tmp += bullet;
-            tmp += str.substr(3, 4);
-            tmp += bullet;
-            tmp += str.substr(7, 4);
-            this.value = tmp;
-        } else {
-            this.value = str;
-        }
-    });
 
 </script>
 

@@ -31,11 +31,12 @@ div{
 <sub></sub>
 <div><b>단가</b></div><input type="text" name="item_price" class="item_price"><br>
 <sub></sub>
-<b>적요</b><textarea rows="30" cols="37" name="item_note"></textarea><br>
+<b>적요</b><br>
+<textarea rows="30" cols="37" name="item_note" style="height: 210px; width: 410px;"></textarea><br>
 <sub></sub>
 <br>
-<span style="float:right; margin-right: 50px">
-<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+<span style="float:right">
+<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;">  <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
 </fieldset>
 </form>
@@ -43,15 +44,16 @@ div{
 <script type="text/javascript">
 $('.form').submit(function(){
 
-	if($('.item_name').val()=='' || $('.item_name').val()==null||$('.item_name').val()==undefined){
-		alert('재료명을 입력해주세요.');
-		$('.item_name').focus();
-		return false;
-	}
 	
 	if($('.item_type').val() == "100"){
 		alert("유형을 선택하세요.");
 		$('.item_type').focus();
+		return false;
+	}
+	
+	if($('.item_name').val()=='' || $('.item_name').val()==null||$('.item_name').val()==undefined){
+		alert('재료명을 입력해주세요.');
+		$('.item_name').focus();
 		return false;
 	}
 	
@@ -60,6 +62,14 @@ $('.form').submit(function(){
 		$('.item_price').focus();
 		return false;
 	}
+	
+	var priceCheck = RegExp(/^[0-9]*$/);
+	if(!priceCheck.test($('.item_price').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_price').focus();
+		return false;
+	}
+		
 	
 });
 

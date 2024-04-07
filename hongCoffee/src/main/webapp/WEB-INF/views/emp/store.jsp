@@ -196,32 +196,30 @@ label input[type=radio]:checked:after{
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>지점 관리</h2>
-		
-		<form action="${pageContext.request.contextPath}/emp/storeSearch" method="post">
+		<div><h3 style="margin-top: 15px;">지점 검색</h3></div>
+		<form action="${pageContext.request.contextPath}/emp/storeSearch" class="storeSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
-						<input type="text" name="name"></div></li>
+						<input type="text" name="name" class="storeName"></div></li>
 					
 					<li><div class="search_div"><label class="search_name"><b>대표자명</b></label>
-						<input type="text" name="boss"></div></li>	
+						<input type="text" name="boss" class="boss"></div></li>	
 				
-					<li><div class="search_div"><label class="search_name"><b>지역</b></label>
-						<input type="text" name="address"></div></li>	
+					<li><div class="search_div"><label class="search_name"><b>주소</b></label>
+						<input type="text" name="address" class="address"></div></li>	
 						
 					<li><div class="search_div"><label class="search_name"><b>연락처</b></label>
-						<input type="text" name="phone"></div>
+						<input type="text" name="phone" class="phone"></div>
 				
 					<li><div class="search_div"><label class="search_name"><b>상태</b></label>
-						<select class="choose" name="state">
+						<select name="state" class="choose">
 							<option value="100">-----------------------------------------------</option>
 							<option value="0">정상영업</option>
-							<option value="1">미영업</option></select>
-				
+							<option value="1">미영업</option>
+							<option value="2">폐업</option></select>
 
-					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
-
+					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 				</ul>	
 
 			</div>
@@ -230,7 +228,7 @@ label input[type=radio]:checked:after{
 		<hr>
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">지점 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=450px,height=900px,top=100,left=200')"> 
+		<input type="button" value="추가" name="store_insert" style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/store_insert','홍커피','width=460px,height=640px,top=100,left=200')"> 
 		<input type="button" value="수정" name="store_update" style="background-color: black; color: #EFBDBC;" onclick="store_update()"></div>
 		
 <!-- 		목록 -->
@@ -330,18 +328,59 @@ label input[type=radio]:checked:after{
 
 <script type="text/javascript">
 
-
-
 function store_update() {
 	let snum = $('input[name=radio1]:checked').val();
 	if(snum == null   || snum == undefined){
-		alert('수정하고자 하는 내용을 선택해주세요');
+		alert('수정하고자 하는 목록을 선택해주세요');
 		return false;
 	}
-    window.open('${pageContext.request.contextPath}/emp/popup/store_update?num=' + snum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+    window.open('${pageContext.request.contextPath}/emp/popup/store_update?num=' + snum, '홍커피', 'width=460px,height=700px,top=100,left=200');
 }
 
+$(".phone").on('keydown keyup',function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
 
+    var str = this.value;
+    var tmp = '';
+    var bullet = '-';
+
+    if (str.length > 3 && str.length < 8) {
+        tmp += str.substr(0, 3);
+        tmp += bullet;
+        tmp += str.substr(3);
+        this.value = tmp;
+    } else if (str.length == 8) {
+        tmp += str.substr(0, 4);
+        tmp += bullet;
+        tmp += str.substr(4);
+        this.value = tmp;
+    } else if (str.length == 10) {
+        tmp += str.substr(0, 2);
+        tmp += bullet;
+        tmp += str.substr(2, 4);
+        tmp += bullet;
+        tmp += str.substr(6); // 10자리일때
+        this.value = tmp;
+    } else if (str.length > 8) {
+        tmp += str.substr(0, 3);
+        tmp += bullet;
+        tmp += str.substr(3, 4);
+        tmp += bullet;
+        tmp += str.substr(7, 4);
+        this.value = tmp;
+    } else {
+        this.value = str;
+    }
+});
+
+$(function(){
+    $('.storeSearch').submit(function(){
+        if($('.choose').val()=="100" && $('.storeName').val() =="" && $('.boss').val() == "" && $('.address').val() == "" && $('.phone').val() ==""){
+            alert('지점을 조회하기 위해서는 지점명, 대표자명, 주소, 연락처, 상태 중 하나 이상 입력해야합니다.');
+            return false;
+        }
+    }); 
+});
 </script>
 
 

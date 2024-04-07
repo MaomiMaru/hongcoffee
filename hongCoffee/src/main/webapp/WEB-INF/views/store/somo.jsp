@@ -6,7 +6,7 @@
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
 /* 항목 스타일 */
 .sidebar .nav:not(.sub-menu) > .nav-item.active{

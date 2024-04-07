@@ -61,7 +61,7 @@ select{
 <sub></sub>
 <div><b>입사일</b></div><input type="date" name="hire_date" class="hire_date" style="width: 177px"><br>
 <sub></sub>
-<b>적요</b><br><textarea rows="30" cols="37" name="emp_note"></textarea><br>
+<b>적요</b><br><textarea rows="30" cols="37" name="emp_note" style="height: 210px; width: 410px;"></textarea><br>
 <sub></sub>
 <br>
 <span style="float:right">

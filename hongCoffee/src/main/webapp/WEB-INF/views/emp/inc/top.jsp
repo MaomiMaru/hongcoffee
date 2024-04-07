@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <style>
 /* 항목 스타일 */
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
@@ -114,7 +113,7 @@ input[type=text]{
 		<div class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" data-toggle="dropdown" aria-expanded="false" style="color: black;">
 			<c:if test="${sessionScope.emp_right eq 1 }"><b>${sessionScope.emp_name }</b> 관리자 님</c:if>
-			<c:if test="${sessionScope.emp_right eq 0 }"><b>${sessionScope.emp_name }</b> 사원 님</c:if></a>
+			<c:if test="${sessionScope.emp_right eq 0 }"><b>${sessionScope.emp_name }</b> <c:if test="${sessionScope.emp_rank eq 2}">팀장</c:if><c:if test="${sessionScope.emp_rank eq 3}">대리</c:if><c:if test="${sessionScope.emp_rank eq 4}">사원</c:if>님</c:if></a>
 			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<li><a class="dropdown-item" href="${pageContext.request.contextPath}/emp/logout">로그아웃</a></li>
 			</ul>

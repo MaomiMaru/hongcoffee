@@ -244,21 +244,27 @@ label input[type=radio]:checked:after{
       <div class="main-panel">
         <div class="content-wrapper">
 		<h2>사원 관리</h2>
-		
+		<div><h3 style="margin-top: 15px;">직원 검색</h3></div>
 		<form action="">
 			<div id="search">
 				<ul>
 					<li><label class="name">부서</label>
 					<select class="choose">
-					<option value="">-----------------------------------------------</option>
-					<option value="인사">인사</option>
-					<option value="관리">관리</option></select></li>
+					<option value="100">-----------------------------------------------</option>
+					<option value="0">무소속</option>
+					<option value="1">인사</option>
+					<option value="2">영업</option>
+					<option value="3">재무</option>
+					</select></li>
 				
 					<li><label class="name">직급</label>
 					<select class="choose">
-					<option value="">-----------------------------------------------</option>
-					<option>사원</option>
-					<option>관리</option></select></li>
+					<option value="100">-----------------------------------------------</option>
+					<option value="0">무보직</option>
+					<option value="1">대표</option>
+					<option value="2">팀장</option>
+					<option value="3">대리</option>
+					<option value="4">사원</option></select></li>
 				
 				<li><label class="name">사원번호</label>
 					<input type="text"></li>
@@ -275,11 +281,11 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		
 		<c:if test="${sessionScope.emp_right eq 1 }">
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=450,height=900,top=100,left=200')">추가</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=460,height=660,top=100,left=200')">추가</button>
 		<button style="background-color: black; color: #EFBDBC;" onclick="emp_updateAdmin()">수정</button>
 		</c:if>
 		<c:if test="${sessionScope.emp_right eq 0 }">
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num}','홍커피','width=370,height=520')">수정</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num}','홍커피','width=460,height=660, top=100, left=200')">수정</button>
 <%-- 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num}','홍커피','width=370,height=520')">수정</button> --%>
 		</c:if>
 		</div>
@@ -436,16 +442,25 @@ function cola() {
 }
 
 
-// window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num=105','홍커피','width=450,height=900,top=100,left=200')"
-
 function emp_updateAdmin(){
 	let enuma = $('input[name=radio1]:checked').val();
 	if(enuma == null || enuma == undefined){
 		alert('수정하고자 하는 내용을 선택해주세요');
 		return false;
 	}
-	window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num='+enuma, '홍커피','width=370,height=520, top=100, left=200');
+	window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num='+enuma, '홍커피','width=460,height=660, top=100, left=200');
 }
+
+//이거는 제대로 된거에 넣기
+$(function(){
+    $('.empSearch').submit(function(){
+        if($('.choose').val()=="100" && $('.storeName').val() =="" && $('.item_name').val() == "" && $('.item_minPrice').val()=="" && $('.item_maxPrice').val()=="" && $('.od_time').val() ==""){
+            alert('직원를 조회하기 위해서는 부서, 직급, 사원 번호, 사원 이름 중 하나 이상 입력해야합니다.');
+            return false;
+        }
+    });
+});
+
 
 
 </script>

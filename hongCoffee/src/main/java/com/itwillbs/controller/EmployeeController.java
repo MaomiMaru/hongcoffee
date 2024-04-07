@@ -45,6 +45,7 @@ public class EmployeeController {
 			session.setAttribute("emp_num", employeeDTO1.getEmp_num());
 			session.setAttribute("emp_name", employeeDTO1.getEmp_name());
 			session.setAttribute("emp_right", employeeDTO1.getEmp_right());
+			session.setAttribute("emp_rank", employeeDTO1.getEmp_rank());
 			return "redirect:/emp/main";
 		} else {
 			return "/emp/msg";

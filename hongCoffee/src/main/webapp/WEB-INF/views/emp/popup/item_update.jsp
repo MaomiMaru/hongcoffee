@@ -21,13 +21,13 @@ div{
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 <div class="check"></div><br>
 <input type="hidden" name="item_num" value="${itemDTO.item_num}">
-<div><b>재료명</b></div><input type="text" name="item_name" class="item_name" value="${itemDTO.item_name}"><br>
-<sub></sub>
 <div><b>재료유형</b></div>
 <select name="item_type" class="item_type" style="width: 177px">
 <option value="0" <c:if test="${itemDTO.item_type eq '0'}"> selected </c:if>>식품</option>
 <option value="1" <c:if test="${itemDTO.item_type eq '1'}"> selected </c:if>>비식품</option>
 </select><br>
+<sub></sub>
+<div><b>재료명</b></div><input type="text" name="item_name" class="item_name" value="${itemDTO.item_name}"><br>
 <sub></sub>
 <div><b>단가</b></div><input type="text" name="item_price" class="item_price" value="${itemDTO.item_price}"><br>
 <sub></sub>
@@ -37,11 +37,11 @@ div{
 <option value="1" <c:if test="${itemDTO.item_state eq '1'}"> selected </c:if>>미취급</option>
 </select><br>
 <sub></sub>
-<b>적요</b><br><textarea rows="30" cols="37" name="item_note" >${itemDTO.item_note}</textarea><br>
+<b>적요</b><br><textarea rows="30" cols="37" name="item_note" style="height: 210px; width: 410px;">${itemDTO.item_note}</textarea><br>
 <sub></sub>
 <br>
-<span style="float:right; margin-right: 50px">
-<input type="submit" value="수정하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+<span style="float:right">
+<input type="submit" value="수정하기" style="background-color: black; color: #EFBDBC;">  <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
 </fieldset>
 </form>
@@ -72,6 +72,14 @@ $('.form').submit(function(){
 		$('.item_price').focus();
 		return false;
 	}
+	
+	var priceCheck = RegExp(/^[0-9]*$/);
+	if(!priceCheck.test($('.item_price').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_price').focus();
+		return false;
+	}
+	
 	
 });
 

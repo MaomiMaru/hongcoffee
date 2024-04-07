@@ -199,22 +199,22 @@ label input[type=radio]:checked:after{
       <div class="main-panel">
         <div class="content-wrapper">
 		<h2>수주 관리</h2>
-		
-		<form action="${pageContext.request.contextPath}/emp/orderSearch" method="post">
+		<div><h3 style="margin-top: 15px;">수주 검색</h3></div>
+		<form action="${pageContext.request.contextPath}/emp/orderSearch" class="orderSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
-						<input type="text" name="name"></div></li>
+						<input type="text" name="name" class="storeName"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text" name="item_name"></div></li>
+						<input type="text" name="item_name" class="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text" name="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
-						<input type="text" name="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
+						<input type="text" name="item_minPrice" class="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
+						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>수주일시</b></label>
-						<input type="date" name="od_time" max="9999-12-31"></div></li>
+						<input type="date" name="od_time" class="od_time" max="9999-12-31"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>출하여부</b></label>
 						<select class="choose" name="shipment_not">
@@ -223,7 +223,7 @@ label input[type=radio]:checked:after{
 							<option value="1">출하완료</option>
 						</select>
 						
-					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
 				</ul>	
 			</div>
@@ -235,7 +235,7 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 <!-- 		<button>추가</button> -->
 		<button type="button" onclick="location.href='${pageContext.request.contextPath}/excel/orderList'" style="background-color: black; color: #EFBDBC;">엑셀 다운로드</button>
-		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/shipment_insert?od_num=4','홍커피','width=370,height=520, top=100, left=200')">출하 추가</button>
+		<button style="background-color: black; color: #EFBDBC;" onclick="shipment_insert()">출하 추가</button>
 		<button style="background-color: black; color: #EFBDBC;" onclick="order_update()">수정</button>
 		</div>
 		
@@ -347,18 +347,81 @@ label input[type=radio]:checked:after{
 
 
 
-<script>
+<script type="text/javascript">
 function order_update(){
 	let onum = $('input[name=radio1]:checked').val();
 	if(onum == null || onum == undefined){
-		alert('수정하고자 하는 내용을 선택해주세요');
+		alert('수정하고자 하는 목록을 선택해주세요');
 		return false;
 	}
-	window.open('${pageContext.request.contextPath}/emp/popup/order_update?od_num='+onum, '홍커피','width=370,height=520, top=100, left=200');
+	window.open('${pageContext.request.contextPath}/emp/popup/order_update?od_num='+onum, '홍커피','width=460,height=540, top=100, left=200');
 }
+
+function shipment_insert(){
+	let smnum = $('input[name=radio1]:checked').val();
+	if(smnum == null || smnum == undefined){
+		alert('출하된 목록을 선택해주세요');
+		return false;
+	}
+	window.open('${pageContext.request.contextPath}/emp/popup/shipment_insert?od_num='+smnum,'홍커피','width=460,height=540, top=100, left=200');
+}
+
+
+	$('.orderSearch').submit(function(){
+		  var minPrice = $('.item_minPrice').val();
+		  var maxPrice = $('.item_maxPrice').val();
+	
+		  if (minPrice !== '' && maxPrice !== '') {
+		     if (parseFloat(minPrice) > parseFloat(maxPrice)) {
+		        alert('최소 금액은 최대 금액보다 클 수 없습니다.');
+		        return false; 
+		        }
+		    }
+		    return true;
+		});
+	
+	
+	$('.orderSearch').submit(function(){
+		
+	var priceCheck = RegExp(/^[0-9]*$/);
+	if(!priceCheck.test($('.item_minPrice').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_minPrice').focus();
+		return false;
+	}
+	
+	if(!priceCheck.test($('.item_maxPrice').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_maxPrice').focus();
+		return false;
+	}
+		
+	});
+	
+	document.addEventListener('DOMContentLoaded', function() {
+	    document.querySelector('.orderSearch').addEventListener('submit', function(event) {
+	        var inputDate = new Date(document.querySelector('.od_time').value);
+	        
+	        var today = new Date();
+	        
+	        if (inputDate > today) {
+	            alert("수주일시는 오늘 날짜 이후로 선택할 수 없습니다.");
+	            event.preventDefault();
+	        }
+	    });
+	});
+	
+	$(function(){
+	    $('.orderSearch').submit(function(){
+	        if($('.choose').val()=="100" && $('.storeName').val() =="" && $('.item_name').val() == "" && $('.item_minPrice').val()=="" && $('.item_maxPrice').val()=="" && $('.od_time').val() ==""){
+	            alert('수주를 조회하기 위해서는 지점명, 재료명, 최소 금액, 최대 금액, 수주 일시, 출하여부 중 하나 이상 입력해야합니다.');
+	            return false;
+	        }
+	    });
+	});
+	
 </script>
 
 </body>
-
 </html>
 

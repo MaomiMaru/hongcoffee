@@ -1,4 +1,3 @@
-<!-- 정규표현식 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -35,11 +34,11 @@ select{
 <sub></sub>
 <div><b>출하일시</b></div><input type="datetime-local" name="sh_time" class="sh_time" style="width: 177px"><br>
 <sub></sub>
-<b>적요</b><br><textarea rows="30" cols="37" name="sh_note"></textarea><br>
+<b>적요</b><br><textarea rows="30" cols="37" name="sh_note" style="height: 210px; width: 410px;"></textarea><br>
 <sub></sub>
 <br>
-<span style="float:right; margin-right: 50px">
-<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+<span style="float:right">
+<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;">  <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
 </fieldset>
 </form>
@@ -54,6 +53,13 @@ $('.form').submit(function(){
 		return false;
 	}
 	
+	var amountCheck = RegExp(/^[0-9]*$/);
+	if(!amountCheck.test($('.sh_amount').val())){
+		alert('출하량은 숫자만 입력이 가능합니다.');
+		$('.sh_amount').focus();
+		return false;
+	}
+	
 	if($('.sh_time').val()=='' || $('.sh_time').val()==null||$('.sh_time').val()==undefined){
 		alert('출하일시를 입력해주세요.');
 		$('.sh_time').focus();
@@ -62,6 +68,18 @@ $('.form').submit(function(){
 	
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.form').addEventListener('submit', function(event) {
+        var inputDate = new Date(document.querySelector('.sh_time').value);
+        
+        var today = new Date();
+        
+        if (inputDate > today) {
+            alert("출하일시는 오늘 날짜 이후로 선택할 수 없습니다.");
+            event.preventDefault();
+        }
+    });
+});
 
 
 
