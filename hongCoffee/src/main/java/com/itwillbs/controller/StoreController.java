@@ -798,5 +798,12 @@ public class StoreController {
 			model.addAttribute("receiveDTO", receiveDTO);
 			return "store/detail/d_receive";
 		}
+		
+		// 3-4 결제
+		@GetMapping("/autoPay")
+		public void autoPay(HttpSession session) {
+			System.out.println("StoreController autoPay");
+			storeService.autoPay();
+		}
 
 }

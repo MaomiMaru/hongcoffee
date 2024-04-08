@@ -372,6 +372,17 @@ window.addEventListener('load',function(){
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
 
 <script>
+$(function() {
+	$.ajax({
+    	url: "${pageContext.request.contextPath}/store/autoPay",
+    	method: "GET",
+    	success: function (result) {
+        	console.log(result);
+    	}
+	});
+});
+
+
 // window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=1','홍커피','width=370,height=520')
 function receive_update() {
 	let rnum = $('input[name=radio1]:checked').val();
@@ -381,6 +392,7 @@ function receive_update() {
 	}
     window.open('${pageContext.request.contextPath}/store/popup/receive_update?od_num=' + rnum, '홍커피', 'width=450px,height=900px,top=100,left=200');
 }
+
 
 </script>
 

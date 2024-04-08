@@ -1,5 +1,6 @@
 package com.itwillbs.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -269,6 +270,12 @@ public class StoreService {
 		storeDAO.orderDelete(od_num);
 	}
 
+	public void autoPay() {
+		System.out.println("StoreService autoPay()");
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		System.out.println(now);
+		storeDAO.autoPay(now);
+	}
 
 
 

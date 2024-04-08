@@ -425,4 +425,16 @@
 		where item_num = #{item_num} and num = #{num}
 	</update>
 
+	<update id="autoPay">
+		update receive
+		set pay = 1
+		<where>
+		<if test="date lt 20">
+		rc_time &lt;= concat(#{year}, '-', (#{month}-1), '-', 20) 
+		</if>
+		<if test="date >= 20">
+		rc_time &lt;= concat(#{year}, '-', (#{month}), '-', 20)
+		</if>
+		</where>
+	</update>
 </mapper>

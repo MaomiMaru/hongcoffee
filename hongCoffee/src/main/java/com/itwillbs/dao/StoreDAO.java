@@ -1,5 +1,6 @@
 package com.itwillbs.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,8 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.ItemDTO;
+import com.itwillbs.domain.NowDTO;
 import com.itwillbs.domain.OrderDTO;
-import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
@@ -277,6 +278,16 @@ public class StoreDAO {
 	public void orderDelete(int od_num) {
 		System.out.println("StoreDAO orderDelete()");
 		sqlSession.delete(namespace+".orderDelete", od_num);
+	}
+	
+	public void autoPay(Timestamp now) {
+		System.out.println("StoreDAO autoPay()");
+		NowDTO nowDTO = new NowDTO();
+		nowDTO.setYear(now.getYear()+1900);
+		nowDTO.setMonth(now.getMonth()+1);
+		nowDTO.setDate(now.getDate());
+		System.out.println(nowDTO);
+		sqlSession.update(namespace+".autoPay", nowDTO);
 	}
 
 
