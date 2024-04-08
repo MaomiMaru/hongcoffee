@@ -39,10 +39,10 @@ public class StoreService {
 
 	
 	//재고 출력
-	public List<StockDTO> getStockList(){
+	public List<StockDTO> getStockList(int num){
 		System.out.println("StoreService getStockList()");
 		
-		return storeDAO.getStockList();
+		return storeDAO.getStockList(num);
 	}//getStockList
 	
 	
@@ -55,10 +55,10 @@ public class StoreService {
 	
 	
 	//발주 출력
-	public List<OrderDTO> getOrderList(){
+	public List<OrderDTO> getOrderList(int num){
 		System.out.println("StoreService getOrderList()");
 		
-		return storeDAO.getOrderList();
+		return storeDAO.getOrderList(num);
 	}//getOrderList
 	
 
@@ -71,10 +71,10 @@ public class StoreService {
 
 	
 	//입고 출력
-	public List<ReceiveDTO> getReceiveList(){
+	public List<ReceiveDTO> getReceiveList(int num){
 		System.out.println("StoreService getReceiveList()");
 		
-		return storeDAO.getReceiveList();
+		return storeDAO.getReceiveList(num);
 	}//getReceiveList
 	
 	
@@ -87,10 +87,10 @@ public class StoreService {
 	
 	
 	//소모 출력
-	public List<ResultDTO> getConsumeList(){
+	public List<ResultDTO> getConsumeList(int num){
 		System.out.println("StoreService getConsumeList()");
 		
-		return storeDAO.getConsumeList();
+		return storeDAO.getConsumeList(num);
 	}//getSomoList
 
 	
@@ -103,10 +103,10 @@ public class StoreService {
 	
 	
 	//판매 출력
-	public List<ResultDTO> getSellList(){
+	public List<ResultDTO> getSellList(int num){
 		System.out.println("StoreService getSellList()");
 		
-		return storeDAO.getSellList();
+		return storeDAO.getSellList(num);
 	}//getPanmeList
 
 	
@@ -119,10 +119,10 @@ public class StoreService {
 	
 	
 	//실적 출력
-	public List<ResultDTO> getResultList(){
+	public List<ResultDTO> getResultList(int num){
 		System.out.println("StoreService getEmpList()");
 		
-		return storeDAO.getResultList();
+		return storeDAO.getResultList(num);
 	}//getResultList
 
 	

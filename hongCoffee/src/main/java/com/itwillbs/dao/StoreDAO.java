@@ -41,10 +41,10 @@ public class StoreDAO {
 
 
 	//재고 목록
-	public List<StockDTO> getStockList() {
+	public List<StockDTO> getStockList(int num) {
 		System.out.println("StoreDAO getStockList()");
 		
-		return sqlSession.selectList(namespace + ".getStockList");
+		return sqlSession.selectList(namespace + ".getStockList", num);
 	}//getStockList
 
 	
@@ -57,10 +57,10 @@ public class StoreDAO {
 
 	
 	//발주 목록
-	public List<OrderDTO> getOrderList() {
+	public List<OrderDTO> getOrderList(int num) {
 		System.out.println("StoreDAO getOrderList()");
 		
-		return sqlSession.selectList(namespace + ".getOrderList");
+		return sqlSession.selectList(namespace + ".getOrderList", num);
 	}//getOrderList
 
 	
@@ -73,10 +73,10 @@ public class StoreDAO {
 	
 	
 	//입고 목록
-	public List<ReceiveDTO> getReceiveList() {
+	public List<ReceiveDTO> getReceiveList(int num) {
 		System.out.println("StoreDAO getReceiveList()");
 		
-		return sqlSession.selectList(namespace + ".getReceiveList");
+		return sqlSession.selectList(namespace + ".getReceiveList", num);
 	}//getReceiveList
 	
 	
@@ -89,10 +89,10 @@ public class StoreDAO {
 	
 	
 	//소모 목록
-	public List<ResultDTO> getConsumeList() {
+	public List<ResultDTO> getConsumeList(int num) {
 		System.out.println("StoreDAO getConsumeList()");
 		
-		return sqlSession.selectList(namespace + ".getConsumeList");
+		return sqlSession.selectList(namespace + ".getConsumeList", num);
 	}//getSomoList
 	
 	
@@ -105,10 +105,10 @@ public class StoreDAO {
 		
 
 	//판매 목록
-	public List<ResultDTO> getSellList() {
+	public List<ResultDTO> getSellList(int num) {
 		System.out.println("StoreDAO getSellList()");
 			
-		return sqlSession.selectList(namespace + ".getSellList");
+		return sqlSession.selectList(namespace + ".getSellList", num);
 	}//getPanmeList
 
 		
@@ -121,10 +121,10 @@ public class StoreDAO {
 		
 
 	//실적 목록
-	public List<ResultDTO> getResultList() {
+	public List<ResultDTO> getResultList(int num) {
 		System.out.println("StoreDAO getResultList()");
 		
-		return sqlSession.selectList(namespace + ".getResultList");
+		return sqlSession.selectList(namespace + ".getResultList", num);
 	}//getResultList
 	
 

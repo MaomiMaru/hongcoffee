@@ -99,9 +99,10 @@ public class StoreController {
 
 	// 2. 기준 정보 관리 - 재료 관리
 	@GetMapping("/store/item")
-	public String item(HttpServletRequest request, Model model) {
+	public String item(HttpSession session, Model model, HttpServletRequest request) {
 		System.out.println("StoreController item()");
 
+		
 		List<ItemDTO> itemList = storeService.getItemList();
 
 		model.addAttribute("itemList", itemList);
@@ -173,11 +174,13 @@ public class StoreController {
 	// 3-1. 재고 관리
 	@GetMapping("/stock")
 
-	public String stock(HttpServletRequest request, Model model) {
+	public String stock(HttpServletRequest request, Model model, HttpSession session) {
 
 		System.out.println("StoreController stock()");
 
-		List<StockDTO> stockList = storeService.getStockList();
+		int num = (int)session.getAttribute("num");
+		System.out.println(num);
+		List<StockDTO> stockList = storeService.getStockList(num);
 
 		model.addAttribute("stockList", stockList);
 
@@ -186,7 +189,7 @@ public class StoreController {
 
 	// 3-1-1. 재고 관리 필터링
 	@PostMapping("/stockSearch")
-	public String stockSearch(HttpServletRequest request, Model model) {
+	public String stockSearch(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("StoreController stockSearch()");
 
 		StockDTO stockDTO = new StockDTO();
@@ -214,13 +217,14 @@ public class StoreController {
 			e.printStackTrace();
 		}
 
+		int num = (int)session.getAttribute("num");
 		String item_name = request.getParameter("item_name");
 		stockDTO.setItem_name(item_name);
 
 		List<StockDTO> stockList;
 
 		if (item_sType == null && item_name == "" && item_sminPrice == null && item_smaxPrice == null) {
-			stockList = storeService.getStockList();
+			stockList = storeService.getStockList(num);
 		} else {
 			stockList = storeService.searchStockList(stockDTO);
 		}
@@ -273,10 +277,12 @@ public class StoreController {
 
 	// 3-2. 발주 관리
 	@GetMapping("/order")
-	public String order(HttpServletRequest request, Model model) {
+	public String order(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("StoreController order()");
 
-		List<OrderDTO> orderList = storeService.getOrderList();
+		int num = (int)session.getAttribute("num");
+		System.out.println(num);
+		List<OrderDTO> orderList = storeService.getOrderList(num);
 
 		model.addAttribute("orderList", orderList);
 
@@ -286,7 +292,7 @@ public class StoreController {
 
 	// 3-2-1. 발주 필터링
 	@PostMapping("/orderSearch")
-	public String orderSearch(HttpServletRequest request, Model model) throws Exception {
+	public String orderSearch(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		System.out.println("StoreController orderSearch()");
 
 		OrderDTO orderDTO = new OrderDTO();
@@ -326,11 +332,12 @@ public class StoreController {
 			e.printStackTrace();
 		}
 
+		int num = (int)session.getAttribute("num");
 		List<OrderDTO> orderList;
 
 		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_time == ""
 				&& received_sNot == null) {
-			orderList = storeService.getOrderList();
+			orderList = storeService.getOrderList(num);
 		} else {
 			orderList = storeService.searchOrderList(orderDTO);
 		}
@@ -342,10 +349,12 @@ public class StoreController {
 
 	// 3-3. 입고 관리
 	@GetMapping("/receive")
-	public String receive(HttpServletRequest request, Model model) {
+	public String receive(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("StoreController receive()");
 
-		List<ReceiveDTO> receiveList = storeService.getReceiveList();
+		int num = (int)session.getAttribute("num");
+		
+		List<ReceiveDTO> receiveList = storeService.getReceiveList(num);
 
 		model.addAttribute("receiveList", receiveList);
 
@@ -355,7 +364,7 @@ public class StoreController {
 
 	// 3-3-1. 입고 필터링
 	@PostMapping("/receiveSearch")
-	public String receiveSearch(HttpServletRequest request, Model model) throws Exception {
+	public String receiveSearch(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		System.out.println("StoreController receiveSearch()");
 
 		ReceiveDTO receiveDTO = new ReceiveDTO();
@@ -387,10 +396,11 @@ public class StoreController {
 			receiveDTO.setRc_time(date1);
 		}
 
+		int num = (int)session.getAttribute("num");
 		List<ReceiveDTO> receiveList;
 
 		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && rc_time == "") {
-			receiveList = storeService.getReceiveList();
+			receiveList = storeService.getReceiveList(num);
 		} else {
 			receiveList = storeService.searchReceiveList(receiveDTO);
 		}
@@ -492,10 +502,11 @@ public class StoreController {
 	// 4. 영업 관리
 	// 4-1. 실적 관리
 	@GetMapping("/result")
-	public String result(HttpServletRequest request, Model model) {
+	public String result(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("StoreController result()");
 
-		List<ResultDTO> resultList = storeService.getResultList();
+		int num = (int)session.getAttribute("num");
+		List<ResultDTO> resultList = storeService.getResultList(num);
 
 		model.addAttribute("resultList", resultList);
 
@@ -512,7 +523,7 @@ public class StoreController {
 
 	// 4-1-1. 실적 필터링
 	@PostMapping("/resultSearch")
-	public String resultSearch(HttpServletRequest request, Model model) throws Exception {
+	public String resultSearch(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		System.out.println("StoreController resultSearch()");
 
 		ResultDTO resultDTO = new ResultDTO();
@@ -525,10 +536,11 @@ public class StoreController {
 //			Timestamp date1 = new Timestamp(d1.getTime());
 			resultDTO.setRs_date(rs_date);
 		}
+		int num = (int)session.getAttribute("num");
 		List<ResultDTO> resultList;
 
 		if (rs_date == "") {
-			resultList = storeService.getResultList();
+			resultList = storeService.getResultList(num);
 		} else {
 			resultList = storeService.searchResultList(resultDTO);
 		}
@@ -540,10 +552,11 @@ public class StoreController {
 
 	// 4-2. 소모 관리
 	@GetMapping("/store/consume")
-	public String consume(HttpServletRequest request, Model model) {
+	public String consume(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("StoreController consume()");
 
-		List<ResultDTO> consumeList = storeService.getConsumeList();
+		int num = (int)session.getAttribute("num");
+		List<ResultDTO> consumeList = storeService.getConsumeList(num);
 
 		model.addAttribute("consumeList", consumeList);
 
@@ -604,7 +617,7 @@ public class StoreController {
 
 	// 4-2-1. 소모 필터링
 	@PostMapping("/consumeSearch")
-	public String consumeSearch(HttpServletRequest request, Model model) throws Exception {
+	public String consumeSearch(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		System.out.println("StoreController consumeSearch()");
 
 		ResultDTO resultDTO = new ResultDTO();
@@ -618,10 +631,11 @@ public class StoreController {
 			resultDTO.setRs_date(rs_date);
 		}
 
+		int num = (int)session.getAttribute("num");
 		List<ResultDTO> consumeList;
 
 		if (rs_date == "") {
-			consumeList = storeService.getConsumeList();
+			consumeList = storeService.getConsumeList(num);
 		} else {
 			consumeList = storeService.searchConsumeList(resultDTO);
 		}
@@ -633,10 +647,11 @@ public class StoreController {
 
 	// 4-3. 판매 관리
 	@GetMapping("/sell")
-	public String sell(HttpServletRequest request, Model model) {
+	public String sell(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("StoreController sell()");
 
-		List<ResultDTO> sellList = storeService.getSellList();
+		int num = (int)session.getAttribute("num");
+		List<ResultDTO> sellList = storeService.getSellList(num);
 
 		model.addAttribute("sellList", sellList);
 
@@ -645,7 +660,7 @@ public class StoreController {
 
 	// 4-3-.1 판매 필터링
 	@PostMapping("/sellSearch")
-	public String sellSearch(HttpServletRequest request, Model model) throws Exception {
+	public String sellSearch(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		System.out.println("StoreController sellSearch()");
 
 		ResultDTO resultDTO = new ResultDTO();
@@ -658,10 +673,12 @@ public class StoreController {
 //			Timestamp date3 = new Timestamp(d3.getTime());
 			resultDTO.setRs_date(rs_date);
 		}
+		
+		int num = (int)session.getAttribute("num");
 		List<ResultDTO> sellList;
 
 		if (rs_date == "") {
-			sellList = storeService.getSellList();
+			sellList = storeService.getSellList(num);
 		} else {
 			sellList = storeService.searchSellList(resultDTO);
 		}
