@@ -132,6 +132,8 @@ public class StoreDAO {
 	public List<ResultDTO> searchResultList(ResultDTO resultDTO) {
 		System.out.println("StoreDAO searchResultList()");
 				
+		System.out.println(resultDTO);
+		
 		return sqlSession.selectList(namespace + ".searchResultList", resultDTO);
 	}//searchResultList
 		

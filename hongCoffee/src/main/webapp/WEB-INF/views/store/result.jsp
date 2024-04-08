@@ -208,7 +208,8 @@ label input[type=radio]:checked:after{
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>영업일</b></label>
-						<input type="date" name="rs_date" max="9999-12-31">
+						<input type="date" name="rs_minDate" max="9999-12-31" style="width : 140.5px;"> ~
+						<input type="date" name="rs_maxDate" max="9999-12-31" style="width : 140.5px;">
 
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
 
