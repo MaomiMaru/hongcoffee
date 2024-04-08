@@ -198,7 +198,7 @@ label input[type=radio]:checked:after{
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>수주 관리</h2>
+		<h2>수주 관리</h2><br>
 		<div><h3 style="margin-top: 15px;">수주 검색</h3></div>
 		<form action="${pageContext.request.contextPath}/emp/orderSearch" class="orderSearch" method="post">
 			<div id="search">

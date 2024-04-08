@@ -214,7 +214,8 @@ label input[type=radio]:checked:after{
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>입고 관리</h2>
+		<h2>입고 관리</h2><br>
+		<div><h3 style="margin-top: 15px;">입고 검색</h3></div>
 		
 		<div id="tost_message"></div>
 <!--     <button id="tost_btn" type="button">클릭하면 토스트 메시지가 나옵니다!</button> -->

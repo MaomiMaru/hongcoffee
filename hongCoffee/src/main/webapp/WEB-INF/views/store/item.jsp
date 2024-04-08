@@ -164,8 +164,8 @@ tr:hover {background-color: #F0F0F0;}
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>재료 관리</h2>
-		
+		<h2>재료 관리</h2><br>
+		<div><h3 style="margin-top: 15px;">재료 검색</h3></div>
 		<form action="${pageContext.request.contextPath}/store/itemSearch" method="post">
 			<div id="search">
 				<ul>

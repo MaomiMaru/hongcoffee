@@ -194,7 +194,8 @@ label input[type=radio]:checked:after{
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-		<h2>발주 관리</h2>
+		<h2>발주 관리</h2><br>
+		<div><h3 style="margin-top: 15px;">발주 검색</h3></div>
 		
 		<form action="${pageContext.request.contextPath}/store/orderSearch" method="post">
 			<div id="search">
@@ -266,6 +267,7 @@ label input[type=radio]:checked:after{
   	<c:if test="${OrderDTO.shipment_not eq 1}">
       <td style="text-align: center !important; font-size:20px !important; color:green; ">출하완료</td>
   	</c:if>
+
 	
 	
 	<c:if test="${OrderDTO.received_not eq 0}">

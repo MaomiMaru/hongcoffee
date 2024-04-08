@@ -22,6 +22,7 @@
 
  	<select id="searchStoreList" resultType="com.itwillbs.domain.StoreDTO">
  		select * from store 
+ 	
  		<where>
  		<if test="name != ''">
  			name like concat ('%', #{name}, '%')
@@ -39,6 +40,7 @@
  			and state = #{state}
  		</if>
  		</where>
+ 			order by num desc
  	</select>
  	
 
@@ -47,7 +49,7 @@
  	</select>
  	
  	<select id="searchItemList" resultType="com.itwillbs.domain.ItemDTO">
-		select item_num, item_name, item_type, item_price, item_state, item_note from item
+		select * from item
 		<where>
 		<if test="item_type != 100">
 			item_type = #{item_type}
@@ -76,9 +78,7 @@
 	</select>
  	
  	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
-
- 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.received_not, o.od_num, o.shipment_not, o.od_note, o.ob_note  
-
+ 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.shipment_not, o.od_note, o.ob_note  
  		from `order` o join store s on o.num = s.num 
  		join item i on o.item_num = i.item_num
  		order by o.od_time desc
@@ -86,9 +86,10 @@
  	</select>
  	
  	<select id="searchOrderList" resultType="com.itwillbs.domain.OrderDTO">
- 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.shipment_not 
+ 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.shipment_not, o.od_note, o.ob_note  
  		from `order` o join store s on o.num = s.num 
  		join item i on o.item_num = i.item_num
+ 		
  		<where>
  			<if test="name != ''">
      			s.name like concat('%', #{name}, '%')
@@ -109,6 +110,7 @@
     			and o.shipment_not = #{shipment_not}
     		</if>
  		</where>
+ 		order by o.od_time desc
  	</select>
  	
  	<select id="getShipmentList" resultType="com.itwillbs.domain.ShipmentDTO"> 
@@ -122,10 +124,12 @@
  	</select>
  	
  	<select id="searchShipmentList" resultType="com.itwillbs.domain.ShipmentDTO">
- 		select  s.name, i.item_name, h.sh_amount, i.item_price, h.sh_time, r.pay 
- 		from shipment h join store s on h.num = s.num
- 		join item i on h.item_num = i.item_num
- 		join receive r on h.od_num = r.od_num
+ 		select  h.od_num, s.name, i.item_name, h.sh_amount, i.item_price, h.sh_time, r.pay, r.od_num, h.sh_note, o.received_not
+ 		from shipment h left join store s on h.num = s.num
+ 		left join item i on h.item_num = i.item_num
+ 		left join receive r on h.od_num = r.od_num
+ 		left join `order` o on h.od_num = o.od_num
+ 
  		<where>
  			<if test="name != ''">
      			s.name like concat('%', #{name}, '%')
@@ -143,6 +147,7 @@
       			and date(h.sh_time) = #{sh_time}
     		</if>
  		</where>
+ 				order by h.sh_time desc
  	</select>
  	
  	<select id="getEmpList" resultType="com.itwillbs.domain.EmployeeDTO"> 
