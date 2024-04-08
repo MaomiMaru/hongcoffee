@@ -266,13 +266,21 @@
  	
  	
  	<select id="searchResultList" resultType="com.itwillbs.domain.ResultDTO">
- 		select rs_num, rs_date, sales, consume
- 		from result
+ 		select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (ifnull(sum((r.sales*p.prod_price)),0)-ifnull(sum((r.consume*i.item_price)),0)) "income"
+		from result r left join product p
+		on r.prod_num = p.prod_num
+		left join stock s on r.stock_num = s.stock_num
+		left join item i on s.item_num = i.item_num
+ 		
  		<where>
  			<if test="rs_date != null">
  				rs_date = #{rs_date}
  			</if>
  		</where>
+ 		group by r.rs_date
+		order by r.rs_date desc
+ 		
+ 		
  	</select>
  	
 
