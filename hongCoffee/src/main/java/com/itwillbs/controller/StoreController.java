@@ -517,17 +517,20 @@ public class StoreController {
 
 		ResultDTO resultDTO = new ResultDTO();
 
-		String rs_date = request.getParameter("rs_date");
+		String rs_minDate = request.getParameter("rs_minDate");
+		String rs_maxDate = request.getParameter("rs_maxDate");
 
-		if (rs_date != "") {
+		if (rs_minDate != "" || rs_maxDate != "") {
 //			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //			Date d1 = format.parse(rs_date);
 //			Timestamp date1 = new Timestamp(d1.getTime());
-			resultDTO.setRs_date(rs_date);
+			resultDTO.setRs_minDate(rs_minDate);
+			resultDTO.setRs_maxDate(rs_maxDate);
 		}
+		
 		List<ResultDTO> resultList;
 
-		if (rs_date == "") {
+		if (rs_minDate == "" && rs_maxDate == "") {
 			resultList = storeService.getResultList();
 		} else {
 			resultList = storeService.searchResultList(resultDTO);
@@ -609,18 +612,20 @@ public class StoreController {
 
 		ResultDTO resultDTO = new ResultDTO();
 
-		String rs_date = request.getParameter("rs_date");
+		String rs_minDate = request.getParameter("rs_minDate");
+		String rs_maxDate = request.getParameter("rs_maxDate");
 
-		if (rs_date != "") {
+		if (rs_minDate != "" || rs_maxDate != "") {
 //			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //			Date d2 = format.parse(rs_date);
 //			Timestamp date2 = new Timestamp(d2.getTime());
-			resultDTO.setRs_date(rs_date);
+			resultDTO.setRs_minDate(rs_minDate);
+			resultDTO.setRs_maxDate(rs_maxDate);
 		}
 
 		List<ResultDTO> consumeList;
 
-		if (rs_date == "") {
+		if (rs_minDate == "" && rs_maxDate == "") {
 			consumeList = storeService.getConsumeList();
 		} else {
 			consumeList = storeService.searchConsumeList(resultDTO);
@@ -650,17 +655,19 @@ public class StoreController {
 
 		ResultDTO resultDTO = new ResultDTO();
 
-		String rs_date = request.getParameter("rs_date");
+		String rs_minDate = request.getParameter("rs_minDate");
+		String rs_maxDate = request.getParameter("rs_maxDate");
 
-		if (rs_date != "") {
+		if (rs_minDate != "" || rs_maxDate != "") {
 //			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //			Date d3 = format.parse(rs_date);
 //			Timestamp date3 = new Timestamp(d3.getTime());
-			resultDTO.setRs_date(rs_date);
+			resultDTO.setRs_minDate(rs_minDate);
+			resultDTO.setRs_maxDate(rs_maxDate);
 		}
 		List<ResultDTO> sellList;
 
-		if (rs_date == "") {
+		if (rs_minDate == "" && rs_maxDate == "") {
 			sellList = storeService.getSellList();
 		} else {
 			sellList = storeService.searchSellList(resultDTO);

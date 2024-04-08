@@ -225,11 +225,17 @@
 		join item i on s.item_num = i.item_num
 	
 		<where>
- 			<if test="rs_date != null">
- 				r.rs_date = #{rs_date}
- 			</if>
+			<if test="rs_maxDate != ''">
+    			r.rs_date between #{rs_minDate} and #{rs_maxDate}
+    		</if>
+			<if test="rs_minDate != '' and rs_maxDate == ''">
+				r.rs_date >= #{rs_minDate}
+			</if>
+<!--  			<if test="rs_date != null"> -->
+<!--  				r.rs_date = #{rs_date} -->
+<!--  			</if> -->
  		</where>
-		order by r.rs_date
+		order by r.rs_date desc
  	</select>
 
 
@@ -245,16 +251,22 @@
         from result r join product p on r.prod_num = p.prod_num
        
         <where>
- 			<if test="rs_date != null">
- 				r.rs_date = #{rs_date}
- 			</if>
+        	<if test="rs_maxDate != ''">
+    			r.rs_date between #{rs_minDate} and #{rs_maxDate}
+    		</if>
+			<if test="rs_minDate != '' and rs_maxDate == ''">
+				r.rs_date >= #{rs_minDate}
+			</if>
+<!--  			<if test="rs_date != null"> -->
+<!--  				r.rs_date = #{rs_date} -->
+<!--  			</if> -->
  		</where>
-        order by r.rs_date
+        order by r.rs_date desc
  	</select>
  	
  	
  	<select id="getResultList" resultType="com.itwillbs.domain.ResultDTO"> 
-	select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (ifnull(sum((r.sales*p.prod_price)),0)-ifnull(sum((r.consume*i.item_price)),0)) "income"
+		select r.rs_date "rs_date", sum((r.sales*p.prod_price)) "maechul", sum((r.consume*i.item_price)) "jichul", (ifnull(sum((r.sales*p.prod_price)),0)-ifnull(sum((r.consume*i.item_price)),0)) "income"
 		from result r left join product p
 		on r.prod_num = p.prod_num
 		left join stock s on r.stock_num = s.stock_num
@@ -273,14 +285,18 @@
 		left join item i on s.item_num = i.item_num
  		
  		<where>
- 			<if test="rs_date != null">
- 				rs_date = #{rs_date}
- 			</if>
+ 			<if test="rs_maxDate != ''">
+    			rs_date between #{rs_minDate} and #{rs_maxDate}
+    		</if>
+			<if test="rs_minDate != '' and rs_maxDate == ''">
+				rs_date >= #{rs_minDate}
+			</if>
+<!--  			<if test="rs_date != null"> -->
+<!--  				r.rs_date = #{rs_date} -->
+<!--  			</if> -->
  		</where>
  		group by r.rs_date
 		order by r.rs_date desc
- 		
- 		
  	</select>
  	
 
