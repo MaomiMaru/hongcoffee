@@ -190,12 +190,12 @@ public class EmployeeDAO {
 			//페이지 처리
 			public int getStoreCount(StoreDTO storeDTO) {
 				System.out.println("getStoreCount");
-				return sqlSession.selectOne(namespace + ".getStoreCount", storeDTO);
+				return sqlSession.selectOne(namespace + ".getStoreCountS", storeDTO);
 			}
 		
 			public int getItemCount(ItemDTO itemDTO) {
 				System.out.println("getIngredientCount");
-				return sqlSession.selectOne(namespace + ".getItemCount", itemDTO);
+				return sqlSession.selectOne(namespace + ".getItemCountI", itemDTO);
 			}
 
 			public int getOrderCount(OrderDTO orderDTO) {
@@ -218,6 +218,18 @@ public class EmployeeDAO {
 			public List<SalesDTO> getTop5() {
 				System.out.println("EmployeeDAO getTop5()");
 				return sqlSession.selectList(namespace+".getTop5");
+			}
+
+
+			public int getStoreCount(PageDTO pageDTO) {
+				System.out.println("getStoreCount");
+				return sqlSession.selectOne(namespace + ".getStoreCount");
+			}
+
+
+			public int getItemCount(PageDTO pageDTO) {
+				System.out.println("getItemCount");
+				return sqlSession.selectOne(namespace + ".getItemCount");
 			}
 	
 	

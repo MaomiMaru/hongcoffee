@@ -198,7 +198,7 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>지점 관리</h2>
 		
-		<form action="${pageContext.request.contextPath}/emp/storeSearch" method="post">
+		<form action="${pageContext.request.contextPath}/emp/storeSearch" method="get">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
@@ -275,10 +275,18 @@ label input[type=radio]:checked:after{
 		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 			<a href="${pageContext.request.contextPath}/emp/store?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
 		</c:if>
-
+		
+		<c:if test="${pageDTO.count ne -1}">
 		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 			<a href="${pageContext.request.contextPath}/emp/store?pageNum=${i}">${i}</a>
 		</c:forEach>
+		</c:if>
+		
+		<c:if test="${pageDTO.count eq -1}">
+		<c:forEach var="i" begin="${storeDTO.startPage}" end="${storeDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/emp/storeSearch?pageNum=${i}&name=${storeDTO.name}&boss=${storeDTO.boss}&address=${storeDTO.address}&phone=${storeDTO.phone}&state=${storeDTO.state}">${i}</a>
+		</c:forEach>
+		</c:if>
 
 		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
 			<a href="${pageContext.request.contextPath}/emp/store?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>

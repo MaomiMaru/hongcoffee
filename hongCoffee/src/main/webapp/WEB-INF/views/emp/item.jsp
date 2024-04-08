@@ -273,20 +273,28 @@ label input[type=radio]:checked:after{
   
  		 </table>
  		 
-<!--  		 <div id="page_control"> -->
-<%-- <c:if test="${pageDTO.startPage > pageDTO.pageBlock}"> --%>
-<%-- 	<a href="${pageContext.request.contextPath}/emp/item?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a> --%>
-<%-- </c:if> --%>
+ <div id="page_control">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/emp/item?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+		</c:if>
+		
+		<c:if test="${pageDTO.count ne -1}">
+		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/emp/item?pageNum=${i}">${i}</a>
+		</c:forEach>
+		</c:if>
+		
+		<c:if test="${pageDTO.count eq -1}">
+		<c:forEach var="i" begin="${itemDTO.startPage}" end="${itemDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/emp/itemSearch?pageNum=${i}&name=${itemDTO.name}&boss=${itemDTO.boss}&address=${itemDTO.address}&phone=${itemDTO.phone}&state=${itemDTO.state}">${i}</a>
+		</c:forEach>
+		</c:if>
 
-<%-- <c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1"> --%>
-<%-- 	<a href="${pageContext.request.contextPath}/emp/item?pageNum=${i}">${i}</a> --%>
-<%-- </c:forEach> --%>
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/emp/item?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		</c:if>
 
-<%-- <c:if test="${pageDTO.endPage < pageDTO.pageCount}"> --%>
-<%-- 	<a href="${pageContext.request.contextPath}/emp/item?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a> --%>
-<%-- </c:if> --%>
-
-<!-- </div> -->
+		</div>
  		 
 		</div>
         

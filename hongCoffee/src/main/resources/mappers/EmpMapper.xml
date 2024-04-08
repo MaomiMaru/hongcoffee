@@ -39,11 +39,15 @@
  			and state = #{state}
  		</if>
  		</where>
+ 		order by num desc
+ 		limit #{startRow},#{pageSize}
  	</select>
  	
 
  	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
- 		select * from item limit #{startRow},#{pageSize}
+ 		select * from item 
+ 		order by item_num desc
+ 		limit #{startRow},#{pageSize}
  	</select>
  	
  	<select id="searchItemList" resultType="com.itwillbs.domain.ItemDTO">
@@ -73,12 +77,12 @@
 			</if>
 		</if>
 		</where>
+		order by item_num desc
+ 		limit #{startRow},#{pageSize}
 	</select>
  	
  	<select id="getOrderList" resultType="com.itwillbs.domain.OrderDTO"> 
-
  		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.received_not, o.od_num, o.shipment_not, o.od_note, o.ob_note  
-
  		from `order` o join store s on o.num = s.num 
  		join item i on o.item_num = i.item_num
  		order by o.od_time desc
@@ -276,7 +280,7 @@
  		where od_num = #{od_num}
  	</delete>
 	
-	<select id="getStoreCount" resultType="java.lang.Integer"> 
+	<select id="getStoreCountS" resultType="java.lang.Integer"> 
  		select count(*) from store  
  		<where>
  		<if test="name != ''">
@@ -297,7 +301,11 @@
  		</where>
  	</select>
  	
- 	<select id="getItemCount" resultType="java.lang.Integer"> 
+ 	<select id="getStoreCount" resultType="java.lang.Integer"> 
+ 		select count(*) from store  
+ 	</select>
+ 	
+ 	<select id="getItemCountI" resultType="java.lang.Integer"> 
  		select count(*) from item
  		<where>
 		<if test="item_type != 100">
@@ -325,6 +333,10 @@
 		</if>
 		</where>
  		
+ 	</select>
+ 	
+ 	<select id="getItemCount" resultType="java.lang.Integer"> 
+ 		select count(*) from item  
  	</select>
  	
  	<select id="getOrderCount" resultType="java.lang.Integer"> 

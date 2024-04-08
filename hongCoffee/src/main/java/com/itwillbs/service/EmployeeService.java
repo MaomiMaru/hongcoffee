@@ -49,7 +49,16 @@ public class EmployeeService {
 	//지점 필터링 출력
 	public List<StoreDTO> searchStoreList(StoreDTO storeDTO) {
 		System.out.println("EmployeeService searchStoreList()");
-
+		
+		int currentPage = storeDTO.getCurrentPage();
+		int pageSize = storeDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		storeDTO.setStartRow(startRow - 1);
+		storeDTO.setEndRow(endRow);
+		
+		System.out.println("서비스" + storeDTO);
 
 		return employeeDAO.searchStoreList(storeDTO);
 	}//searchStoreList
@@ -75,6 +84,16 @@ public class EmployeeService {
 	//재료 필터링 출력
 	public List<ItemDTO> searchItemList(ItemDTO itemDTO) {
 		System.out.println("EmployeeService searchItemList()");
+		
+		int currentPage = itemDTO.getCurrentPage();
+		int pageSize = itemDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		itemDTO.setStartRow(startRow - 1);
+		itemDTO.setEndRow(endRow);
+		
+		System.out.println("서비스" + itemDTO);
 		
 		return employeeDAO.searchItemList(itemDTO);
 	}//searchItemList
@@ -279,6 +298,17 @@ public class EmployeeService {
 		public List<SalesDTO> getTop5() {
 			System.out.println("EmployeeService getTop5()");
 			return employeeDAO.getTop5();
+		}
+
+// == 페이징		
+		public int getStoreCount(PageDTO pageDTO) {
+			System.out.println("getStoreCount()");
+			return employeeDAO.getStoreCount(pageDTO);
+		}
+
+		public int getItemCount(PageDTO pageDTO) {
+			System.out.println("getItemCount()");
+			return employeeDAO.getItemCount(pageDTO);
 		}
 
 
