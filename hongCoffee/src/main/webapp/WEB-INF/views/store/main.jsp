@@ -214,6 +214,7 @@ $(document).ready(function() {
                     scales: {
                         y: {
                             beginAtZero: true
+                    
                         }
                     }
                 }

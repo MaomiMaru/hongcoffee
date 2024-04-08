@@ -318,7 +318,7 @@ window.addEventListener('load',function(){
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미결제</td>
   	</c:if>
   	 <c:if test="${ReceiveDTO.pay eq 1}">
-      <td style="text-align: center !important; font-size:20px !important; color:red; ">결제완료</td>
+      <td style="text-align: center !important; font-size:20px !important; color:green; ">결제완료</td>
   	</c:if>
    	
 
