@@ -61,8 +61,9 @@
 		select s.stock_num, t.item_type, t.item_name, t.item_price, s.amount, t.item_state
  		from stock s join item t on s.item_num = t.item_num
 		<where>
+			s.num = #{num}
 			<if test="item_type != 100">
-				t.item_type = #{item_type}
+				and t.item_type = #{item_type}
 			</if>	
 			<if test="item_maxPrice != 0">
     			and t.item_price between #{item_minPrice} and #{item_maxPrice}
@@ -91,10 +92,10 @@
  		select o.od_num,t.item_name, o.od_amount, t.item_price, o.od_time, o.shipment_not, o.received_not, s.name 
  		from `order` o join item t on o.item_num = t.item_num
  		join store s on o.num = s.num
- 		
  		<where>
+ 			o.num = #{num}
  			<if test="item_name != ''">
-     			t.item_name like concat('%', #{item_name}, '%')
+     			and t.item_name like concat('%', #{item_name}, '%')
     		</if>
     		<if test="item_maxPrice != 0">
     			and t.item_price between #{item_minPrice} and #{item_maxPrice}
@@ -127,8 +128,9 @@
   		from receive r join item t on r.item_num = t.item_num
   		
   		<where>
+  		 r.num = #{num}
     		<if test="item_name != ''">
-     			t.item_name like concat('%', #{item_name}, '%')
+     			and t.item_name like concat('%', #{item_name}, '%')
     		</if>
     		<if test="item_maxPrice != 0">
     			and t.item_price between #{item_minPrice} and #{item_maxPrice}
@@ -232,11 +234,12 @@
 		join item i on s.item_num = i.item_num
 	
 		<where>
+		r.num = #{num}
 			<if test="rs_maxDate != ''">
-    			r.rs_date between #{rs_minDate} and #{rs_maxDate}
+    			and r.rs_date between #{rs_minDate} and #{rs_maxDate}
     		</if>
 			<if test="rs_minDate != '' and rs_maxDate == ''">
-				r.rs_date >= #{rs_minDate}
+				and r.rs_date >= #{rs_minDate}
 			</if>
 <!--  			<if test="rs_date != null"> -->
 <!--  				r.rs_date = #{rs_date} -->
@@ -259,11 +262,12 @@
         from result r join product p on r.prod_num = p.prod_num
        
         <where>
+        r.num = #{num}
         	<if test="rs_maxDate != ''">
-    			r.rs_date between #{rs_minDate} and #{rs_maxDate}
+    			and r.rs_date between #{rs_minDate} and #{rs_maxDate}
     		</if>
 			<if test="rs_minDate != '' and rs_maxDate == ''">
-				r.rs_date >= #{rs_minDate}
+				and r.rs_date >= #{rs_minDate}
 			</if>
 <!--  			<if test="rs_date != null"> -->
 <!--  				r.rs_date = #{rs_date} -->
@@ -293,11 +297,12 @@
 		left join item i on s.item_num = i.item_num
  		
  		<where>
+ 		r.num = #{num}
  			<if test="rs_maxDate != ''">
-    			rs_date between #{rs_minDate} and #{rs_maxDate}
+    			and rs_date between #{rs_minDate} and #{rs_maxDate}
     		</if>
 			<if test="rs_minDate != '' and rs_maxDate == ''">
-				rs_date >= #{rs_minDate}
+			and	rs_date >= #{rs_minDate}
 			</if>
 <!--  			<if test="rs_date != null"> -->
 <!--  				r.rs_date = #{rs_date} -->

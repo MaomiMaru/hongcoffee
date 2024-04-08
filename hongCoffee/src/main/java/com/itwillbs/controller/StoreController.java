@@ -218,6 +218,7 @@ public class StoreController {
 		}
 
 		int num = (int)session.getAttribute("num");
+		stockDTO.setNum(num);
 		String item_name = request.getParameter("item_name");
 		stockDTO.setItem_name(item_name);
 
@@ -294,7 +295,7 @@ public class StoreController {
 	@PostMapping("/orderSearch")
 	public String orderSearch(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		System.out.println("StoreController orderSearch()");
-
+		
 		OrderDTO orderDTO = new OrderDTO();
 
 		String item_name = request.getParameter("item_name");
@@ -333,6 +334,7 @@ public class StoreController {
 		}
 
 		int num = (int)session.getAttribute("num");
+		orderDTO.setNum(num);
 		List<OrderDTO> orderList;
 
 		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_time == ""
@@ -397,6 +399,7 @@ public class StoreController {
 		}
 
 		int num = (int)session.getAttribute("num");
+		receiveDTO.setNum(num);
 		List<ReceiveDTO> receiveList;
 
 		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && rc_time == "") {
@@ -540,7 +543,7 @@ public class StoreController {
 		}
 
 		int num = (int)session.getAttribute("num");
-
+		resultDTO.setNum(num);
 		List<ResultDTO> resultList;
 
 
@@ -640,6 +643,7 @@ public class StoreController {
 		}
 
 		int num = (int)session.getAttribute("num");
+		resultDTO.setNum(num);
 		List<ResultDTO> consumeList;
 
 
@@ -661,6 +665,7 @@ public class StoreController {
 		System.out.println("StoreController sell()");
 
 		int num = (int)session.getAttribute("num");
+	
 		List<ResultDTO> sellList = storeService.getSellList(num);
 
 		model.addAttribute("sellList", sellList);
@@ -687,6 +692,7 @@ public class StoreController {
 		}
 		
 		int num = (int)session.getAttribute("num");
+		resultDTO.setNum(num);
 		List<ResultDTO> sellList;
 
 
