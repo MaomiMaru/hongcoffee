@@ -28,12 +28,12 @@ background-color: #EEEEEE;
 <div id="checkdiv"></div>
 <div class="inner">
 <label>지점번호</label>
-<input type="text" name="num" class="num"><br>
+<input type="text" name="num" class="num" id="userId"><br>
 <label>비밀번호</label>
 <input type="password" name="pw" class="pw"><br>
 <input type="submit" value="로그인" class="submit" style="margin-left: 70px; width: 177px; background-color: #C9DAF8">
 <hr width="315">
-<input type="checkbox">지점번호 기억하기
+<input type="checkbox" id="idSaveCheck">지점번호 기억하기
 </div>
 </form>
 </div>
@@ -56,6 +56,59 @@ background-color: #EEEEEE;
 	});
 });
 
+
+	$(document).ready(function(){
+		  
+	    
+	    var key = getCookie("key");
+	    $("#userId").val(key); 
+	      
+	    if($("#userId").val() != ""){
+	        $("#idSaveCheck").attr("checked", true); 
+	    }
+	      
+	    $("#idSaveCheck").change(function(){ 
+	        if($("#idSaveCheck").is(":checked")){ 
+	            setCookie("key", $("#userId").val(), 7); 
+	        }else{ 
+	            deleteCookie("key");
+	        }
+	    });
+	      
+	    
+	    $("#userId").keyup(function(){ 
+	        if($("#idSaveCheck").is(":checked")){ 
+	            setCookie("key", $("#userId").val(), 7); 
+	        }
+	    });
+	});
+	  
+	function setCookie(cookieName, value, exdays){
+	    var exdate = new Date();
+	    exdate.setDate(exdate.getDate() + exdays);
+	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+	    document.cookie = cookieName + "=" + cookieValue;
+	}
+	  
+	function deleteCookie(cookieName){
+	    var expireDate = new Date();
+	    expireDate.setDate(expireDate.getDate() - 1);
+	    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+	}
+	  
+	function getCookie(cookieName) {
+	    cookieName = cookieName + '=';
+	    var cookieData = document.cookie;
+	    var start = cookieData.indexOf(cookieName);
+	    var cookieValue = '';
+	    if(start != -1){
+	        start += cookieName.length;
+	        var end = cookieData.indexOf(';', start);
+	        if(end == -1)end = cookieData.length;
+	        cookieValue = cookieData.substring(start, end);
+	    }
+	    return unescape(cookieValue);
+	}
 
 
 
