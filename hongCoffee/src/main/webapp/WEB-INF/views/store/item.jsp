@@ -7,7 +7,7 @@
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
 /* 항목 스타일 */
 
@@ -165,8 +165,8 @@ tr:hover {background-color: #F0F0F0;}
       <div class="main-panel">
         <div class="content-wrapper">
 		<h2>재료 관리</h2>
-		
-		<form action="${pageContext.request.contextPath}/store/itemSearch" method="post">
+		<div><h3 style="margin-top: 15px;">재료 검색</h3></div>
+		<form action="${pageContext.request.contextPath}/store/itemSearch" class="itemSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>유형</b></label>
@@ -177,13 +177,13 @@ tr:hover {background-color: #F0F0F0;}
 						</select></div></li>
 				
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text" name="item_name"></div></li>
+						<input type="text" name="item_name" class="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text" name="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
-						<input type="text" name="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;">
+						<input type="text" name="item_minPrice" class="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
+						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;">
 
-						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
 				</ul>	
 			</div>
@@ -277,6 +277,48 @@ tr:hover {background-color: #F0F0F0;}
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+
+<script type="text/javascript">
+
+$('.itemSearch').submit(function(){
+	  var minPrice = $('.item_minPrice').val();
+	  var maxPrice = $('.item_maxPrice').val();
+
+	  if (minPrice !== '' && maxPrice !== '') {
+	     if (parseFloat(minPrice) > parseFloat(maxPrice)) {
+	        alert('최소 금액은 최대 금액보다 클 수 없습니다.');
+	        return false; 
+	        }
+	    }
+	    return true;
+	});
+	
+	$('.itemSearch').submit(function(){
+	var priceCheck = RegExp(/^[0-9]*$/);
+	if(!priceCheck.test($('.item_minPrice').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_minPrice').focus();
+		return false;
+	}
+	if(!priceCheck.test($('.item_maxPrice').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_maxPrice').focus();
+		return false;
+	}
+		
+});
+
+	$(function(){
+	    $('.itemSearch').submit(function(){
+	        if($('.choose').val()=="100" && $('.item_name').val() =="" && $('.item_minPrice').val() == "" && $('.item_maxPrice').val() ==""){
+	            alert('재료를 조회하기 위해서는 유형, 재료명, 최소 금액, 최대 금액 중 하나 이상 입력해야합니다.');
+	            return false;
+	        }
+	    });
+	});
+
+</script>
+
 </body>
 
 </html>
