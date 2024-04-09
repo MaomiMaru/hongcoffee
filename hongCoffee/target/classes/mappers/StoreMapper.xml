@@ -17,7 +17,7 @@
 	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select item_num, item_name, item_type, item_price, item_state, item_note
  		from item
- 		order by num desc
+ 		order by item_num desc
  		limit #{startRow},#{pageSize} 
  	</select>
  	
@@ -49,6 +49,8 @@
 				</if>
 			</if>
 		</where>
+		order by num desc
+ 		limit #{startRow},#{pageSize} 
 	</select>
 
 
@@ -372,6 +374,40 @@
 		set sales = #{sales}
 		where rs_num = #{rs_num}
 	</update>
+
+<select id="getItemCountI" resultType="java.lang.Integer"> 
+ 		select count(*) from item
+ 		<where>
+		<if test="item_type != 100">
+			item_type = #{item_type}
+			<if test="item_name != null">
+				and item_name like concat('%', #{item_name}, '%')
+			</if>
+			<if test="item_maxPrice != 0">
+				and item_price between #{item_minPrice} and #{item_maxPrice}
+			</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and item_price >= #{item_minPrice}
+			</if>
+		</if>
+		<if test="item_type == 100">
+			<if test="item_name != null">
+				item_name like concat('%', #{item_name}, '%')
+			</if>
+			<if test="item_maxPrice != 0">
+				and item_price between #{item_minPrice} and #{item_maxPrice}
+			</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and item_price >= #{item_minPrice}
+			</if>
+		</if>
+		</where>
+ 		
+ 	</select>
+ 	
+ 	<select id="getItemCount" resultType="java.lang.Integer"> 
+ 		select count(*) from item  
+ 	</select>
 
 
 </mapper>

@@ -418,11 +418,12 @@
     		</if>
  		</where>
  	</select>
-<select id="getEmployeeCount" resultType="java.lang.Integer"> 
+ 	
+    <select id="getEmployeeCount" resultType="java.lang.Integer"> 
  		select count(*) from  employee 
  	</select>
 
-<select id="getTop5" resultType="com.itwillbs.domain.SalesDTO">
+    <select id="getTop5" resultType="com.itwillbs.domain.SalesDTO">
  		select s.name, sum((r.sales*p.prod_price)) "maechul"
 		from result r left join product p
 		on r.prod_num = p.prod_num
