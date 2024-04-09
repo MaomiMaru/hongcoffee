@@ -272,4 +272,15 @@ public class StoreDAO {
 	}
 
 
+	public int getItemCount(PageDTO pageDTO) {
+		System.out.println("getItemCount");
+		return sqlSession.selectOne(namespace + ".getItemCount");
+	}
+
+
+	public int getItemCount(ItemDTO itemDTO) {
+		System.out.println("getIngredientCount");
+		return sqlSession.selectOne(namespace + ".getItemCountI", itemDTO);
+	}
+
 }

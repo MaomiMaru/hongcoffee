@@ -16,7 +16,9 @@
 	
 	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select item_num, item_name, item_type, item_price, item_state, item_note
- 		from item 
+ 		from item
+ 		order by num desc
+ 		limit #{startRow},#{pageSize} 
  	</select>
  	
  	
@@ -370,5 +372,6 @@
 		set sales = #{sales}
 		where rs_num = #{rs_num}
 	</update>
+
 
 </mapper>

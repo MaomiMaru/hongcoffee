@@ -287,6 +287,7 @@ public class StoreService {
 		return storeDAO.getItemCount(pageDTO);
 	}
 	
+	
 	public int getItemCount(ItemDTO itemDTO) {
 		System.out.println("getItemCount()");
 		return storeDAO.getItemCount(itemDTO);
