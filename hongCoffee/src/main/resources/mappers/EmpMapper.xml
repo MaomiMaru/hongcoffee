@@ -113,6 +113,8 @@
     			and o.shipment_not = #{shipment_not}
     		</if>
  		</where>
+ 		order by od_num desc
+ 		limit #{startRow},#{pageSize}
  	</select>
  	
  	<select id="getShipmentList" resultType="com.itwillbs.domain.ShipmentDTO"> 
@@ -147,6 +149,8 @@
       			and date(h.sh_time) = #{sh_time}
     		</if>
  		</where>
+ 		order by h.sh_time desc
+		limit #{startRow},#{pageSize}
  	</select>
  	
  	<select id="getEmpList" resultType="com.itwillbs.domain.EmployeeDTO"> 
@@ -250,6 +254,8 @@
  		 join `order` o
  		on a.od_num = o.od_num
  		where a.od_num = #{od_num}
+ 		order by od_num desc
+ 		limit #{startRow},#{pageSize}
  	</select>
  	
  	<select id="getEmployee" resultType="com.itwillbs.domain.EmployeeDTO">
@@ -339,7 +345,11 @@
  		select count(*) from item  
  	</select>
  	
+ 	
  	<select id="getOrderCount" resultType="java.lang.Integer"> 
+ 		select count(*) from `order`  
+ 	</select>
+ 	<select id="getOrderCountO" resultType="java.lang.Integer"> 
  		select count(*) from `order` o join store s on o.num = s.num
  		join item i on o.item_num = i.item_num
  		<where>
@@ -365,7 +375,11 @@
  		
  	</select>
  	
+ 	
  	<select id="getShipmentCount" resultType="java.lang.Integer"> 
+ 		select count(*) from  shipment 
+ 	</select>
+ 	<select id="getShipmentCountS" resultType="java.lang.Integer"> 
  		select count(*) from shipment h join store s on h.num = s.num
  		join item i on h.item_num = i.item_num
  		<where>
@@ -387,7 +401,7 @@
  		</where>
  	</select>
  	
- 	<select id="getEmployeeCount" resultType="java.lang.Integer"> 
+ 	<select id="getEmployeeCountE" resultType="java.lang.Integer"> 
  		select count(*) from employee
  		<where>
  			<if test="emp_dept != 100">
@@ -403,6 +417,9 @@
     			and emp_name like concat('%', #{emp_name}, '%')
     		</if>
  		</where>
+ 	</select>
+<select id="getEmployeeCount" resultType="java.lang.Integer"> 
+ 		select count(*) from  employee 
  	</select>
 
 <select id="getTop5" resultType="com.itwillbs.domain.SalesDTO">

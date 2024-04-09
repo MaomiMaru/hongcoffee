@@ -108,7 +108,6 @@ public class EmployeeService {
 		int endRow = startRow + pageSize - 1;
 		
 		pageDTO.setStartRow(startRow - 1);
-		pageDTO.setPageSize(pageSize);
 		pageDTO.setEndRow(endRow);
 		
 		return employeeDAO.getOrderList(pageDTO);
@@ -117,6 +116,16 @@ public class EmployeeService {
 	//수주 필터링 출력
 	public List<OrderDTO> searchOrderList(OrderDTO orderDTO) {
 		System.out.println("EmployeeService searchOrderList()");
+		
+		int currentPage = orderDTO.getCurrentPage();
+		int pageSize = orderDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		orderDTO.setStartRow(startRow - 1);
+		orderDTO.setEndRow(endRow);
+		
+		System.out.println("서비스" + orderDTO);
 		
 		return employeeDAO.searchOrderList(orderDTO);
 	}//searchOrderList
@@ -309,6 +318,21 @@ public class EmployeeService {
 		public int getItemCount(PageDTO pageDTO) {
 			System.out.println("getItemCount()");
 			return employeeDAO.getItemCount(pageDTO);
+		}
+
+		public int getOrderCount(PageDTO pageDTO) {
+			System.out.println("getOrderCount()");
+			return employeeDAO.getOrderCount(pageDTO);
+		}
+
+		public int getShipmentCount(PageDTO pageDTO) {
+			System.out.println("getShipmentCount()");
+			return employeeDAO.getShipmentCount(pageDTO);
+		}
+
+		public int getEmployeeCount(PageDTO pageDTO) {
+			System.out.println("getEmployeeCount()");
+			return employeeDAO.getEmployeeCount(pageDTO);
 		}
 
 

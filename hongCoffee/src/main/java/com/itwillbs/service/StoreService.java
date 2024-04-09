@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.itwillbs.dao.StoreDAO;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
@@ -23,10 +24,17 @@ public class StoreService {
 	private StoreDAO storeDAO;
 	
 	//재료 출력
-	public List<ItemDTO> getItemList(){
+	public List<ItemDTO> getItemList(PageDTO pageDTO){
 		System.out.println("StoreService getItemList()");
-
-		return storeDAO.getItemList();
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setEndRow(endRow);
+		return storeDAO.getItemList(pageDTO);
 	}//getItemList
 
 
@@ -34,6 +42,15 @@ public class StoreService {
 	public List<ItemDTO> searchItemList(ItemDTO itemDTO) {
 		System.out.println("StoreService searchItemList()");
 				
+		int currentPage = itemDTO.getCurrentPage();
+		int pageSize = itemDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		itemDTO.setStartRow(startRow - 1);
+		itemDTO.setEndRow(endRow);
+		
+		System.out.println("서비스" + itemDTO);
 		return storeDAO.searchItemList(itemDTO);
 	}//searchItemList	
 
@@ -263,9 +280,17 @@ public class StoreService {
 		storeDAO.salesUpdate(resultDTO);
 	}
 
-
-
-
+	// == 페이징
+	
+	public int getItemCount(PageDTO pageDTO) {
+		System.out.println("getItemCount()");
+		return storeDAO.getItemCount(pageDTO);
+	}
+	
+	public int getItemCount(ItemDTO itemDTO) {
+		System.out.println("getItemCount()");
+		return storeDAO.getItemCount(itemDTO);
+	}
 
 
 

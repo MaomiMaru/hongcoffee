@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
@@ -25,7 +26,7 @@ public class StoreDAO {
 	private static final String namespace="com.itwillbs.mappers.StoreMapper";
 
 	//재료 목록
-	public List<ItemDTO> getItemList() {
+	public List<ItemDTO> getItemList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getItemList()");
 		
 		return sqlSession.selectList(namespace + ".getItemList");

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ProductDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
@@ -99,23 +100,100 @@ public class StoreController {
 
 	// 2. 기준 정보 관리 - 재료 관리
 	@GetMapping("/store/item")
-	public String item(HttpServletRequest request, Model model) {
+	public String item(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("StoreController item()");
-
-		List<ItemDTO> itemList = storeService.getItemList();
+		ItemDTO itemDTO = new ItemDTO();
+		
+		//===========페이징
+				int pageSize = 10;
+				String pageNum = request.getParameter("pageNum");
+				if(pageNum == null) {
+					pageNum = "1";
+				}
+				int currentPage = Integer.parseInt(pageNum);
+				pageDTO.setPageSize(pageSize);
+				pageDTO.setPageNum(pageNum);
+				pageDTO.setCurrentPage(currentPage);
+		
+				// 페이징 작업
+				// 전체 글개수 구하기  int 리턴할형 count = getItemCount(pageDTO) 검색어 포함
+				int count = storeService.getItemCount(pageDTO);
+				// 한 화면에 보여줄 페이지 개수 설정
+				int pageBlock = 10;
+				// 한 화면에 보여줄 시작페이지 구하기
+				// 1~10 => 1, 11~20 => 11,..
+				int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+				// 한 화면에 보여줄 끝페이지 구하기
+				int endPage = startPage + pageBlock - 1;
+				// 전체 페이지개수 구하기
+				int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+				// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
+				
+				// pageDTO 저장
+				pageDTO.setCount(count);
+				pageDTO.setPageBlock(pageBlock);
+				pageDTO.setStartPage(startPage);
+				pageDTO.setEndPage(endPage);
+				pageDTO.setPageCount(pageCount);
+				
+				System.out.println(pageDTO);
+				
+		
+		List<ItemDTO> itemList = storeService.getItemList(pageDTO);
 
 		model.addAttribute("itemList", itemList);
-
+		model.addAttribute("pageDTO",pageDTO);
+		
 		return "store/item";
 	}// itemList
 
 	// 2-1. 재료 필터링
 	@PostMapping("/itemSearch")
-	public String itemSearch(HttpServletRequest request, Model model) {
+	public String itemSearch(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("StoreController itemSearch()");
 
 		ItemDTO itemDTO = new ItemDTO();
 
+		//===========페이징
+				int pageSize = 10;
+				String pageNum = request.getParameter("pageNum");
+				if(pageNum == null) {
+						pageNum = "1";
+					}
+				int currentPage = Integer.parseInt(pageNum);
+				pageDTO.setPageSize(pageSize);
+				pageDTO.setPageNum(pageNum);
+				pageDTO.setCurrentPage(currentPage);
+				
+				// 페이징 작업
+				// 전체 글개수 구하기  int 리턴할형 count = getItemCount(itemDTO) 검색어 포함
+				int count = storeService.getItemCount(pageDTO);
+				// 한 화면에 보여줄 페이지 개수 설정
+				int pageBlock = 10;
+				// 한 화면에 보여줄 시작페이지 구하기
+				// 1~10 => 1, 11~20 => 11,..
+				int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+				// 한 화면에 보여줄 끝페이지 구하기
+				int endPage = startPage + pageBlock - 1;
+				// 전체 페이지개수 구하기
+				int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+				// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+				if(endPage > pageCount) {
+					endPage = pageCount;
+				}
+				
+				// pageDTO 저장
+				pageDTO.setCount(count);
+				pageDTO.setPageBlock(pageBlock);
+				pageDTO.setStartPage(startPage);
+				pageDTO.setEndPage(endPage);
+				pageDTO.setPageCount(pageCount);
+				
+	   //필터 작업
+					
 		String item_sType = request.getParameter("item_type");
 		int item_type = 100;
 
@@ -156,16 +234,28 @@ public class StoreController {
 		itemDTO.setItem_minPrice(item_minPrice);
 		itemDTO.setItem_maxPrice(item_maxPrice);
 
+		//필터 페이징 itemDTO 저장
+				count = storeService.getItemCount(itemDTO);
+				itemDTO.setPageSize(pageSize);
+				itemDTO.setPageNum(pageNum);
+				itemDTO.setCurrentPage(currentPage);
+				itemDTO.setCount(count);
+				itemDTO.setPageBlock(pageBlock);
+				itemDTO.setStartPage(startPage);
+				itemDTO.setEndPage(endPage);
+				itemDTO.setPageCount(pageCount);
+		
+		
 		List<ItemDTO> itemList;
 
 		if (item_type == 100 && item_name == null && item_minPrice == 0 && item_maxPrice == 0) {
-			itemList = storeService.getItemList();
+			itemList = storeService.getItemList(pageDTO);
 		} else {
 			itemList = storeService.searchItemList(itemDTO);
 		}
 
 		model.addAttribute("itemList", itemList);
-
+		model.addAttribute("pageDTO",pageDTO);
 		return "/store/item";
 	}// itemSearchList
 

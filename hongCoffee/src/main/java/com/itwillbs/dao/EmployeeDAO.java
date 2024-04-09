@@ -200,17 +200,17 @@ public class EmployeeDAO {
 
 			public int getOrderCount(OrderDTO orderDTO) {
 				System.out.println("getOrderCount");
-				return sqlSession.selectOne(namespace + ".getOrderCount", orderDTO);
+				return sqlSession.selectOne(namespace + ".getOrderCountO", orderDTO);
 			}
 
 			public int getShipmentCount(ShipmentDTO shipmentDTO) {
 				System.out.println("getShipmentCount");
-				return sqlSession.selectOne(namespace + ".getShipmentCount", shipmentDTO);
+				return sqlSession.selectOne(namespace + ".getShipmentCountS", shipmentDTO);
 			}
 			
 			public int getEmployeeCount(EmployeeDTO employeeDTO) {
 				System.out.println("getEmployeeCount");
-				return sqlSession.selectOne(namespace + ".getEmployeeCount", employeeDTO);
+				return sqlSession.selectOne(namespace + ".getEmployeeCountE", employeeDTO);
 			}
 
 	
@@ -231,11 +231,25 @@ public class EmployeeDAO {
 				System.out.println("getItemCount");
 				return sqlSession.selectOne(namespace + ".getItemCount");
 			}
-	
-	
-	
-	
-	
+
+
+			public int getOrderCount(PageDTO pageDTO) {
+				System.out.println("getOrderCount");
+				return sqlSession.selectOne(namespace + ".getOrderCount");
+			}
+
+
+			public int getShipmentCount(PageDTO pageDTO) {
+				System.out.println("getShipmentCount");
+				return sqlSession.selectOne(namespace + ".getShipmentCount");
+
+			}
+
+
+			public int getEmployeeCount(PageDTO pageDTO) {
+				System.out.println("getEmployeeCount");
+				return sqlSession.selectOne(namespace + ".getEmployeeCount");
+			}
 	
 
 }
