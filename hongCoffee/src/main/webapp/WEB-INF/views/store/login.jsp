@@ -55,10 +55,12 @@ background-color: #EEEEEE;
 			return false;
 		}
 		
-		if($('.num').val != isNaN){
-			alert('지점번호 또는 비밀번호를 확인해주세요.')
+		var numCheck = RegExp(/^[0-9]{2,10}$/);
+		if (!numCheck.test($('.num').val())) {
+			alert("지점번호 또는 비밀 번호를 확인해주세요."); //보안상 메세지 내용을 이와 같이함
+			$('.emp_num').focus();
 			return false;
-		}
+		}		
 		
 	});
 });

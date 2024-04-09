@@ -37,68 +37,8 @@ background-color: #EEEEEE;
 <input type="checkbox" class="rememberCheck" id="idSaveCheck">사원번호 기억하기
 </div>
 </form>
-<script >
-$(document).ready(function(){
-	  
-    
-    var key = getCookie("key");
-    $("#userId").val(key); 
-      
-    if($("#userId").val() != ""){
-        $("#idSaveCheck").attr("checked", true); 
-    }
-      
-    $("#idSaveCheck").change(function(){ 
-        if($("#idSaveCheck").is(":checked")){ 
-            setCookie("key", $("#userId").val(), 7); 
-        }else{ 
-            deleteCookie("key");
-        }
-    });
-      
-    
-    $("#userId").keyup(function(){ 
-        if($("#idSaveCheck").is(":checked")){ 
-            setCookie("key", $("#userId").val(), 7); 
-        }
-    });
-});
-  
-function setCookie(cookieName, value, exdays){
-    var exdate = new Date();
-    exdate.setDate(exdate.getDate() + exdays);
-    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
-    document.cookie = cookieName + "=" + cookieValue;
-}
-  
-function deleteCookie(cookieName){
-    var expireDate = new Date();
-    expireDate.setDate(expireDate.getDate() - 1);
-    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
-}
-  
-function getCookie(cookieName) {
-    cookieName = cookieName + '=';
-    var cookieData = document.cookie;
-    var start = cookieData.indexOf(cookieName);
-    var cookieValue = '';
-    if(start != -1){
-        start += cookieName.length;
-        var end = cookieData.indexOf(';', start);
-        if(end == -1)end = cookieData.length;
-        cookieValue = cookieData.substring(start, end);
-    }
-    return unescape(cookieValue);
-}
-
-
-</script>
 </div>
 </div>
-
-
-
-
 <script type="text/javascript">
 
 	$(function(){
@@ -114,17 +54,69 @@ function getCookie(cookieName) {
 			$('.emp_pw').focus();
 			return false;
 		}
-		
-		if($('.emp_num').val() != isNaN ){
-			alert('사원번호 또는 비밀번호를 확인해주세요.');
-			return false;
-		}
-		
-		
+		var numCheck = RegExp(/^[0-9]{2,10}$/);
+			if (!numCheck.test($('.emp_num').val())) {
+				alert("지점번호 또는 비밀 번호를 확인해주세요.");
+				$('.emp_num').focus();
+				return false;
+			}		
 	});
 });
 	
-	$
+	$(document).ready(function(){
+		  
+	    
+	    var key = getCookie("key");
+	    $("#userId").val(key); 
+	      
+	    if($("#userId").val() != ""){
+	        $("#idSaveCheck").attr("checked", true); 
+	    }
+	      
+	    $("#idSaveCheck").change(function(){ 
+	        if($("#idSaveCheck").is(":checked")){ 
+	            setCookie("key", $("#userId").val(), 7); 
+	        }else{ 
+	            deleteCookie("key");
+	        }
+	    });
+	      
+	    
+	    $("#userId").keyup(function(){ 
+	        if($("#idSaveCheck").is(":checked")){ 
+	            setCookie("key", $("#userId").val(), 7); 
+	        }
+	    });
+	});
+	  
+	function setCookie(cookieName, value, exdays){
+	    var exdate = new Date();
+	    exdate.setDate(exdate.getDate() + exdays);
+	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+	    document.cookie = cookieName + "=" + cookieValue;
+	}
+	  
+	function deleteCookie(cookieName){
+	    var expireDate = new Date();
+	    expireDate.setDate(expireDate.getDate() - 1);
+	    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+	}
+	  
+	function getCookie(cookieName) {
+	    cookieName = cookieName + '=';
+	    var cookieData = document.cookie;
+	    var start = cookieData.indexOf(cookieName);
+	    var cookieValue = '';
+	    if(start != -1){
+	        start += cookieName.length;
+	        var end = cookieData.indexOf(';', start);
+	        if(end == -1)end = cookieData.length;
+	        cookieValue = cookieData.substring(start, end);
+	    }
+	    return unescape(cookieValue);
+	}
+
+
 
 </script>
 
