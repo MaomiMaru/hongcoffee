@@ -6,7 +6,7 @@
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
 /* 항목 스타일 */
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
@@ -202,14 +202,14 @@ label input[type=radio]:checked:after{
 		<h2>소모 관리</h2><br>
 		<div><h3 style="margin-top: 15px;">소모 검색</h3></div>
 		
-		<form action="${pageContext.request.contextPath}/store/consumeSearch" method="post">
+		<form action="${pageContext.request.contextPath}/store/consumeSearch" class="consumeSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>영업일</b></label>
-						<input type="date" name="rs_minDate" max="9999-12-31" style="width : 140.5px;"> ~
-						<input type="date" name="rs_maxDate" max="9999-12-31" style="width : 140.5px;">
+						<input type="date" name="rs_minDate" class="rs_minDate" max="9999-12-31" style="width : 140.5px;"> ~
+						<input type="date" name="rs_maxDate" class="rs_maxDate" max="9999-12-31" style="width : 140.5px;">
 						
-						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC">조회</button></span></div></li>
+						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 				</ul>	
 			</div>
 		</form>
@@ -291,7 +291,60 @@ label input[type=radio]:checked:after{
   
   <!-- nav mouseover 고유색 -->
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
+
+<script type="text/javascript">
+$('.consumeSearch').submit(function(){
+    $('.rs_minDate, .rs_maxDate').change(function() {
+        var minDate = $('.rs_minDate').val();
+        var maxDate = $('.rs_maxDate').val();
+
+        if (new Date(minDate) > new Date(maxDate)) {
+            alert("시작일은 종료일 이전이어야 합니다.");
+            $('.rs_minDate').val('');
+            return false;
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.consumeSearch').addEventListener('submit', function(event) {
+        var inputDate1 = new Date(document.querySelector('.rs_minDate').value);
+        
+        var today = new Date();
+        
+        if (inputDate1 > today) {
+            alert("일시는 오늘 날짜 이후로 선택할 수 없습니다.");
+            event.preventDefault();
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.consumeSearch').addEventListener('submit', function(event) {
+        var inputDate2 = new Date(document.querySelector('.rs_maxDate').value);
+        
+        var today = new Date();
+        
+        if (inputDate2 > today) {
+            alert("일시는 오늘 날짜 이후로 선택할 수 없습니다.");
+            event.preventDefault();
+        }
+    });
+});
+
+
+$(function(){
+	  $('.consumeSearch').submit(function(){
+	      if($('.rs_minDate').val() =="" && $('.rs_maxDate').val() == ""){
+	          alert('조회하기 위해서는 영업일을 입력해야합니다.');
+	          return false;
+	      }
+	  });
+	});
+
+
+</script>
+
+
 </body>
-
 </html>
-

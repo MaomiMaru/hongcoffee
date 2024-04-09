@@ -71,6 +71,7 @@ public class EmployeeController {
 
 	//1-1. 13일의 금요일 제이슨
 		@GetMapping("/mainJson")
+		@ResponseBody
 		public ResponseEntity<List<SalesDTO>> mainJson() {
 			List<SalesDTO> salesList = employeeService.getTop5();
 			ResponseEntity<List<SalesDTO>> entity = new ResponseEntity<List<SalesDTO>>(salesList, HttpStatus.OK);

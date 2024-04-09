@@ -253,36 +253,36 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>사원 관리</h2><br>
 		<div><h3 style="margin-top: 15px;">사원 검색</h3></div>
-		<form action="${pageContext.request.contextPath}/emp/empSearch" method="post">
+		<form action="${pageContext.request.contextPath}/emp/empSearch" class="empSearch" method="post">
 			<div id="search">
 				<ul>
 
 					<li><div class="search_div"><label class="search_name"><b>부서</b></label>
-					<select class="choose" name="emp_dept">
+					<select class="choose1" name="emp_dept">
 					<option value="100">-----------------------------------------------</option>
+					<option value="0">무소속</option>
 					<option value="1">인사부</option>
 					<option value="2">영업부</option>
-					<option value="3">재무부</option>
-					<option value="0">무소속</option></select></div></li>
+					<option value="3">재무부</option></select></div></li>
 
 				
 
 					<li><div class="search_div"><label class="search_name"><b>직급</b></label>
-					<select class="choose" name="emp_rank">
+					<select class="choose2" name="emp_rank">
 					<option value="100">-----------------------------------------------</option>
+					<option value="0">무보직</option>
 					<option value="1">대표</option>
 					<option value="2">팀장</option>
 					<option value="3">대리</option>
-					<option value="4">사원</option>
-					<option value="0">무보직</option></select></div></li>
+					<option value="4">사원</option></select></div></li>
 
 				
 
 				<li><div class="search_div"><label class="search_name"><b>사원번호</b></label>
-					<input type="text" name="emp_num"></div></li>
+					<input type="text" class="emp_num" name="emp_num"></div></li>
 					
 				<li><div class="search_div"><label class="search_name"><b>사원이름</b></label>
-					<input type="text" name="emp_name">
+					<input type="text" class="emp_name" name="emp_name">
 					
 					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
@@ -466,10 +466,9 @@ function emp_updateAdmin(){
 	window.open('${pageContext.request.contextPath}/emp/popup/emp_update_admin?emp_num='+enuma, '홍커피','width=460,height=660, top=100, left=200');
 }
 
-//이거는 제대로 된거에 넣기
 $(function(){
     $('.empSearch').submit(function(){
-        if($('.choose').val()=="100" && $('.storeName').val() =="" && $('.item_name').val() == "" && $('.item_minPrice').val()=="" && $('.item_maxPrice').val()=="" && $('.od_time').val() ==""){
+        if($('.choose1').val()=="100" && $('.choose2').val()=="100" && $('.emp_num').val() =="" && $('.emp_name').val() == ""){
             alert('직원를 조회하기 위해서는 부서, 직급, 사원 번호, 사원 이름 중 하나 이상 입력해야합니다.');
             return false;
         }

@@ -44,7 +44,7 @@ background-color: #EEEEEE;
 	$(function(){
 		$('#login').submit(function(){
 		if($('.num').val() === ''|| $('.num').val === null || $('.num').val === undefined){
-			$('#checkdiv').html("사원번호를 입력해주세요.").css("color","red");
+			$('#checkdiv').html("지점번호를 입력해주세요.").css("color","red");
 			$('.num').focus();
 			return false;
 		}
@@ -55,10 +55,10 @@ background-color: #EEEEEE;
 			return false;
 		}
 		
-		var numCheck = RegExp(/^[0-9]{2,10}$/);
+		var numCheck = RegExp(/^[0-9]{1,10}$/);
 		if (!numCheck.test($('.num').val())) {
 			alert("지점번호 또는 비밀 번호를 확인해주세요."); //보안상 메세지 내용을 이와 같이함
-			$('.emp_num').focus();
+			$('.num').focus();
 			return false;
 		}		
 		

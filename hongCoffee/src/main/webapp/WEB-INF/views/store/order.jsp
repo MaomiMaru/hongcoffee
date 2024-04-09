@@ -197,18 +197,18 @@ label input[type=radio]:checked:after{
 		<h2>발주 관리</h2><br>
 		<div><h3 style="margin-top: 15px;">발주 검색</h3></div>
 		
-		<form action="${pageContext.request.contextPath}/store/orderSearch" method="post">
+		<form action="${pageContext.request.contextPath}/store/orderSearch" class="orderSearch" method="post">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text" name="item_name"></div></li>
+						<input type="text" name="item_name" class="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text" name="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
-						<input type="text" name="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
+						<input type="text" name="item_minPrice" class="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
+						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>발주일시</b></label>
-						<input type="date" name="od_time" max="9999-12-31"></div></li>
+						<input type="date" name="od_time" class="od_time" max="9999-12-31"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고여부</b></label>
 						<select class="choose" name="received_not">
@@ -217,7 +217,7 @@ label input[type=radio]:checked:after{
 							<option value="1">입고완료</option>
 						</select>
 
-					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
 				</ul>	
 			</div>
@@ -349,6 +349,59 @@ function order_delete() {
 	}
     location.href='${pageContext.request.contextPath}/store/popup/order_delete?od_num='+onum
 }
+
+$('.orderSearch').submit(function(){
+	  var minPrice = $('.item_minPrice').val();
+	  var maxPrice = $('.item_maxPrice').val();
+
+	  if (minPrice !== '' && maxPrice !== '') {
+	     if (parseFloat(minPrice) > parseFloat(maxPrice)) {
+	        alert('최소 금액은 최대 금액보다 클 수 없습니다.');
+	        return false; 
+	        }
+	    }
+	    return true;
+	});
+	
+	$('.orderSearch').submit(function(){
+	var priceCheck = RegExp(/^[0-9]*$/);
+	if(!priceCheck.test($('.item_minPrice').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_minPrice').focus();
+		return false;
+	}
+	if(!priceCheck.test($('.item_maxPrice').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_maxPrice').focus();
+		return false;
+	}
+		
+});
+
+	document.addEventListener('DOMContentLoaded', function() {
+	    document.querySelector('.orderSearch').addEventListener('submit', function(event) {
+	        var inputDate = new Date(document.querySelector('.od_time').value);
+	        
+	        var today = new Date();
+	        
+	        if (inputDate > today) {
+	            alert("발주일시는 오늘 날짜 이후로 선택할 수 없습니다.");
+	            event.preventDefault();
+	        }
+	    });
+	});
+	
+	
+	
+$(function(){
+    $('.orderSearch').submit(function(){
+        if($('.choose').val()=="100" && $('.od_time').val() =="" && $('.item_minPrice').val() == "" && $('.item_maxPrice').val() == "" && $('.item_name').val() == ""){
+            alert('발주를 조회하기 위해서는 재료명, 최소 금액, 최대 금액, 입고 여부 중 하나 이상 입력해야합니다.');
+            return false;
+        }
+    });
+});
+
 </script>
 
 </body>

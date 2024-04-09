@@ -399,7 +399,7 @@
  	</select>
 
 <select id="getTop5" resultType="com.itwillbs.domain.SalesDTO">
- 		select s.name, sum((r.sales*p.prod_price)) "maechul"
+ 		select s.name, sum(r.sales*p.prod_price) "maechul"
 		from result r left join product p
 		on r.prod_num = p.prod_num
 		left join store s on r.num = s.num
@@ -407,6 +407,16 @@
 		group by s.name
 		order by 2 desc
 		limit 5
+		
+<!--  		select s.name, format(sum(r.sales*p.prod_price),0) "maechul" -->
+<!-- 		from result r left join product p -->
+<!-- 		on r.prod_num = p.prod_num -->
+<!-- 		left join store s on r.num = s.num -->
+<!-- 		where r.rs_date = DATE_SUB(#{rs_date}, INTERVAL 1 DAY) -->
+<!-- 		group by s.name -->
+<!-- 		order by 2 desc -->
+<!-- 		limit 5 -->
+		
  	</select>
  	
  	<update id="shipmentStateReset">

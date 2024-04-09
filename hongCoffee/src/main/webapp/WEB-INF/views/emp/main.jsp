@@ -180,7 +180,7 @@ $(document).ready(function() {
                 sname.push(result[i].name);
                 ssales.push(result[i].maechul);
             }
-            console.log(ssales);
+            console.log(ssales.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             var data = {
                 labels: sname,
                 datasets: [{
