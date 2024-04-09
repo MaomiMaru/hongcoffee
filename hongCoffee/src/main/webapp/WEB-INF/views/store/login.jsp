@@ -43,16 +43,23 @@ background-color: #EEEEEE;
 
 	$(function(){
 		$('#login').submit(function(){
-		if($('.employee_num').val() === ''|| $('.employee_num').val === null || $('.employee_num').val === undefined){
+		if($('.num').val() === ''|| $('.num').val === null || $('.num').val === undefined){
 			$('#checkdiv').html("사원번호를 입력해주세요.").css("color","red");
-			$('.employee_num').focus();
+			$('.num').focus();
 			return false;
 		}
-		if($('.employee_pw').val() === ''|| $('.employee_pw').val === null || $('.employee_pw').val === undefined){
+		
+		if($('.pw').val() === ''|| $('.pw').val === null || $('.pw').val === undefined){
 			$('#checkdiv').html("비밀번호를 입력해주세요.").css("color","red");
-			$('.employee_pw').focus();
+			$('.pw').focus();
 			return false;
 		}
+		
+		if($('.num').val != isNaN){
+			alert('지점번호 또는 비밀번호를 확인해주세요.')
+			return false;
+		}
+		
 	});
 });
 

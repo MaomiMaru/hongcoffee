@@ -108,16 +108,23 @@ function getCookie(cookieName) {
 			$('.emp_num').focus();
 			return false;
 		}
+		
 		if($('.emp_pw').val() === ''|| $('.emp_pw').val === null || $('.emp_pw').val === undefined){
 			$('#checkdiv').html("비밀번호를 입력해주세요.").css("color","red");
 			$('.emp_pw').focus();
 			return false;
 		}
+		
+		if($('.emp_num').val() != isNaN ){
+			alert('사원번호 또는 비밀번호를 확인해주세요.');
+			return false;
+		}
+		
+		
 	});
 });
-
-
-
+	
+	$
 
 </script>
 
