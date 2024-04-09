@@ -322,9 +322,9 @@
  	</select>
  	
  	<select id="getResultMain" resultType="com.itwillbs.domain.ResultDTO">
- 		select r.rs_date, sum((r.sales*p.prod_price)) "maechul",
- 						sum((r.consume*i.item_price)) "jichul",
- 						(sum((r.sales*p.prod_price))-sum((r.consume*i.item_price))) "income"
+ 		select r.rs_date, sum(ifnull(r.sales*p.prod_price,0)) "maechul",
+ 						sum(ifnull(r.consume*i.item_price,0)) "jichul",
+ 						(sum(ifnull(r.sales*p.prod_price,0))-sum(ifnull(r.consume*i.item_price,0))) "income"
 		from result r left join product p
 		on r.prod_num = p.prod_num
 		left join stock s on r.stock_num = s.stock_num
