@@ -64,10 +64,11 @@ select {
 			<div>
 				<b>적요</b>
 			</div>
-			<input type="text" name="od_note"><br> <sub></sub> 
-			<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> |
-			<button type="button" style="background-color: black; color: #EFBDBC;"
-				onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+			<textarea name="od_note" rows="30" cols="37" style="height: 210px; width: 410px;"></textarea><br>
+			<sub></sub> 
+			<span style="float:right">
+			<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> <button type="button" style="background-color: black; color: #EFBDBC;"
+				onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button></span>
 		</fieldset>
 	</form>
 
@@ -86,68 +87,125 @@ select {
 					});
 		});
 
-		$(function() {
-			$('select[name="item_type"] ').on(
-					'change',
-					function() {
-						let arrType = getAgreeType();
-						let optionType = $(this).parents('.box-body').find(
-								$('select[name="item_name"]'));
-						optionType.empty();
 
-						if ($(this).val() == '0') {
-							for (prop in arrType['식품']) {
-								optionType.append('<option value='+prop+' >'
-										+ arrType['식품'][prop] + '</option>');
-							}
-						} else {
-							for (prop in arrType['비식품']) {
-								optionType.append('<option value='+prop+' >'
-										+ arrType['비식품'][prop] + '</option>');
-							}
-						}
-					});
+$(function() {
+    $('select[name="item_type"]').on('change', function() {
+        let arrType = getAgreeType();
+        let optionType = $(this).parents('.box-body').find('select[name="item_name"]');
+        optionType.empty();
 
-			$('#item_name').change(
-					function() {
-						//	 		var selectedValue = $('#item_name').val();
-						if ($('#item_name').val() == "에티오피아"
-								|| $('#item_name').val() == "콜롬비아") {
-							$('#item_price').val(3500);
-						} else {
-							$('#item_price').val(10);
-						}
+        if ($(this).val() == '0') {
+            for (let prop in arrType['식품']) {
+                optionType.append('<option value="' + prop + '">' + arrType['식품'][prop] + '</option>');
+            }
+        } else {
+            for (let prop in arrType['비식품']) {
+                optionType.append('<option value="' + prop + '">' + arrType['비식품'][prop] + '</option>');
+            }
+        }
+    });
 
-					});
-		});
+    $('select[name="item_name"]').change(function() {
+        let itemName = $(this).val();
+        let itemPrice = $('#item_price');
 
-		function getAgreeType() {
-			var obj = {
-				"식품" : {
-					'100' : '선택해주세요',
-					'에티오피아' : '에티오피아',
-					'콜롬비아' : '콜롬비아',
-				},
-				"비식품" : {
-					'100' : '선택해주세요',
-					'유리컵M' : '유리컵M',
-					'유리컵L' : '유리컵L',
-					'종이컵M' : '종이컵M',
-					'종이컵L' : '종이컵L',
-					'플라스틱컵M' : '플라스틱컵M',
-					'플라스틱컵L' : '플라스틱컵L',
-					'컵홀더' : '컵홀더',
-					'스트로우M' : '스트로우M',
-					'스트로우L' : '스트로우L',
-					'버블티스트로우' : '버블티스트로우',
-					'2컵캐리어' : '2컵캐리어',
-					'4컵캐리어' : '4컵캐리어',
-				}
+        switch (itemName) {
+            case "에티오피아":
+            case "콜롬비아":
+                itemPrice.val(3500);
+                break;
+            case "바닐라 시럽 500g":
+            case "초코 시럽 500g":
+            case "딸기 시럽 500g":
+            case "생크림 500ml":
+            case "카라멜 500ml":
+            case "딸기잼 500g":
+            case "초콜릿 500g":
+            case "망고 500g":
+            case "자몽 500g":
+                itemPrice.val(4000);
+                break;
+            case "유자 500g":
+            case "오렌지 500g":
+            case "타피오카펄 500g":
+                itemPrice.val(5000);
+                break;
+            case "레몬 500g":
+            case "사과 500g":
+                itemPrice.val(7000);
+                break;
+            case "딸기 500g":
+            case "녹차 300g":
+            case "카모마일 300g":
+            case "자스민 300g":
+            case "라벤더 300g":
+            case "얼그레이 300g":
+                itemPrice.val(10000);
+                break;
+            case "꿀 500g":
+                itemPrice.val(12000);
+                break;
+            default:
+                itemPrice.val(10);
+                break;
+        }
+    });
+});
 
-			}
-			return obj;
+function getAgreeType() {
+    let obj = {
+        "식품": {
+            '100': '선택해주세요',
+            '에티오피아 250g': '에티오피아 250g',
+            '바닐라 시럽 500g': '바닐라 시럽 500g',
+            '초코 시럽 500g': '초코 시럽 500g',
+            '딸기 시럽 500g': '딸기 시럽 500g',
+            '생크림 500ml': '생크림 500ml',
+            '카라멜 500ml': '카라멜 500ml',
+            '토피넛 500g': '토피넛 500g',
+            '딸기잼 500g': '딸기잼 500g',
+            '초콜릿 500g': '초콜릿 500g',
+            '딸기 500g': '딸기 500g',
+            '레몬 500g': '레몬 500g',
+            '망고 500g': '망고 500g',
+            '자몽 500g': '자몽 500g',
+            '유자 500g': '유자 500g',
+            '사과 500g': '사과 500g',
+            '오렌지 500g': '오렌지 500g',
+            '탄산수 1L': '탄산수 1L',
+            '꿀 500g': '꿀 500g',
+            '타피오카펄 500g': '타피오카펄 500g',
+            '녹차 300g': '녹차 300g',
+            '카모마일 300g': '카모마일 300g',
+            '자스민 300g': '자스민 300g',
+            '라벤더 300g': '라벤더 300g',
+            '얼그레이 300g': '얼그레이 300g',
+        },
+        "비식품": {
+            '100': '선택해주세요',
+            '유리컵M': '유리컵M',
+            '유리컵L': '유리컵L',
+            '종이컵M': '종이컵M',
+            '종이컵L': '종이컵L',
+            '플라스틱컵M': '플라스틱컵M',
+            '플라스틱컵L': '플라스틱컵L',
+            '컵홀더': '컵홀더',
+            '스트로우M': '스트로우M',
+            '스트로우L': '스트로우L',
+            '버블티스트로우': '버블티스트로우',
+            '2컵캐리어': '2컵캐리어',
+            '4컵캐리어': '4컵캐리어',
+        }
+    };
+    return obj;
+}
 
-		}
+
+
+
+
+
+
 	</script>
 </body>
 </html>
