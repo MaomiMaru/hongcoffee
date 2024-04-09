@@ -891,6 +891,9 @@ public class EmployeeController {
 			empList = employeeService.getEmpList(pageDTO);
 		} else {
 			empList = employeeService.searchEmpList(employeeDTO);
+			pageDTO.setCount(-1);
+			model.addAttribute("employeeDTO", employeeDTO);	
+			
 		}
 		
 		model.addAttribute("empList", empList);

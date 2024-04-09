@@ -134,7 +134,6 @@ public class EmployeeService {
 
 	public List<ShipmentDTO> getShipmentList(PageDTO pageDTO){
 		System.out.println("EmployeeService getShipmentList()");
-
 		int currentPage = pageDTO.getCurrentPage();
 		int pageSize = pageDTO.getPageSize();
 		int startRow = (currentPage - 1) * pageSize + 1;
@@ -150,7 +149,14 @@ public class EmployeeService {
 	//출하 필터링 출력
 	public List<ShipmentDTO> searchShipmentList(ShipmentDTO shipmentDTO) {
 		System.out.println("EmployeeService searchShipmentList()");
+		int currentPage = shipmentDTO.getCurrentPage();
+		int pageSize = shipmentDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		shipmentDTO.setStartRow(startRow - 1);
+//		pageDTO.setPageSize(pageSize);
+		shipmentDTO.setEndRow(endRow);
 		return employeeDAO.searchShipmentList(shipmentDTO);
 	}//searchShipmentList
 	
@@ -173,7 +179,14 @@ public class EmployeeService {
 	//사원 필터링 출력
 	public List<EmployeeDTO> searchEmpList(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeService searchEmpList()");
+		int currentPage = employeeDTO.getCurrentPage();
+		int pageSize = employeeDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		employeeDTO.setStartRow(startRow - 1);
+		employeeDTO.setPageSize(pageSize);
+		employeeDTO.setEndRow(endRow);
 		return employeeDAO.searchEmpList(employeeDTO);
 	}//searchEmpList
 

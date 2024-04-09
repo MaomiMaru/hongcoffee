@@ -389,7 +389,9 @@ label input[type=radio]:checked:after{
 		
 		<c:if test="${pageDTO.count eq -1}">
 		<c:forEach var="i" begin="${employeeDTO.startPage}" end="${employeeDTO.endPage}" step="1">
-			<a href="${pageContext.request.contextPath}/emp/empSearch?pageNum=${i}&name=${employeeDTO.name}&boss=${employeeDTO.boss}&address=${employeeDTO.address}&phone=${employeeDTO.phone}&state=${employeeDTO.state}">${i}</a>
+			<a href="${pageContext.request.contextPath}/emp/empSearch?pageNum=${i}&emp_dept=${employeeDTO.emp_dept}
+			&emp_rank=${employeeDTO.emp_rank}&emp_num=${employeeDTO.emp_num}
+			&emp_name=${employeeDTO.emp_name}">${i}</a>
 		</c:forEach>
 		</c:if>
 
