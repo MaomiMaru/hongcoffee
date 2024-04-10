@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,22 +37,27 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	//0. 로그인 진행 과정
-	@PostMapping("/loginPro")
-	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
-		System.out.println("EmployeeService loginPro()");
+//	@PostMapping("/loginPro")
+//	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
+//		System.out.println("EmployeeService loginPro()");
+//
+//		EmployeeDTO employeeDTO1 = employeeService.userCheck(employeeDTO);
+//		if (employeeDTO1 != null) {
+//			session.setAttribute("emp_num", employeeDTO1.getEmp_num());
+//			session.setAttribute("emp_name", employeeDTO1.getEmp_name());
+//			session.setAttribute("emp_right", employeeDTO1.getEmp_right());
+//			session.setAttribute("emp_rank", employeeDTO1.getEmp_rank());
+//			return "redirect:/emp/main";
+//		} else {
+//			return "/emp/msg";
+//		}
+//	}
 
-		EmployeeDTO employeeDTO1 = employeeService.userCheck(employeeDTO);
-		if (employeeDTO1 != null) {
-			session.setAttribute("emp_num", employeeDTO1.getEmp_num());
-			session.setAttribute("emp_name", employeeDTO1.getEmp_name());
-			session.setAttribute("emp_right", employeeDTO1.getEmp_right());
-			session.setAttribute("emp_rank", employeeDTO1.getEmp_rank());
-			return "redirect:/emp/main";
-		} else {
-			return "/emp/msg";
-		}
+	@GetMapping("/insert")
+	public String insert() {
+		return "/emp/insert";
 	}
-
+	
 	
 	@GetMapping("/login")
 	public String login(HttpSession session) {
@@ -872,6 +878,9 @@ public class EmployeeController {
 	public String store_insertPro(StoreDTO storeDTO) {
 		System.out.println("EmployeeController store_insertPro()");
 		
+		// 비밀번호 암호화
+		storeDTO.setPw(new BCryptPasswordEncoder().encode(storeDTO.getPw()));
+		
 		employeeService.storeInsert(storeDTO);
 		
 		return "redirect:/emp/popup/close";
@@ -897,6 +906,9 @@ public class EmployeeController {
 	@PostMapping("/popup/store_updatePro")
 	public String store_updatePro(StoreDTO storeDTO) {
 		System.out.println("EmployeeController store_updatePro()");
+		
+		// 비밀번호 암호화
+		storeDTO.setPw(new BCryptPasswordEncoder().encode(storeDTO.getPw()));
 		
 		employeeService.storeUpdate(storeDTO);
 		
@@ -1063,7 +1075,11 @@ public class EmployeeController {
 //		Timestamp jdate2 = new Timestamp(d2.getTime());
 //		employeeDTO.setEmp_birth(jdate2);
 		
+		// 비밀번호 암호화
+		employeeDTO.setEmp_pw(new BCryptPasswordEncoder().encode(employeeDTO.getEmp_pw()));
+		
 		employeeService.employeeInsert(employeeDTO);
+		
 		return "redirect:/emp/popup/close";
 	}
 	
@@ -1100,7 +1116,11 @@ public class EmployeeController {
 	public String emp_updateProAdmin(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeController emp_updatePro_admin()");
 		
+		// 비밀번호 암호화
+		employeeDTO.setEmp_pw(new BCryptPasswordEncoder().encode(employeeDTO.getEmp_pw()));
+		
 		employeeService.employeeUpdate1(employeeDTO);
+		
 		return "redirect:/emp/popup/close";
 	}
 	
@@ -1121,8 +1141,11 @@ public class EmployeeController {
 	public String emp_update(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeController emp_updatePro()");
 		
+		// 비밀번호 암호화
+		employeeDTO.setEmp_pw(new BCryptPasswordEncoder().encode(employeeDTO.getEmp_pw()));
 		
 		employeeService.employeeUpdate(employeeDTO);
+		
 		return "redirect:/emp/popup/close";
 	}
 	

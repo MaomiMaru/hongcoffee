@@ -415,7 +415,21 @@
  		where od_num = #{od_num}
  	</update>
  	
+ 	<insert id="employeeInsertAuth">
+		insert into auth(emp_num, auth)
+		values(#{emp_num}, #{auth})
+	</insert>
+	
+	<update id="employeeUpdateAuth">
+		update auth
+		set auth = #{auth}
+		where emp_num = #{emp_num}
+	</update>
  	
+ 	 <insert id="storeInsertAuth">
+		insert into auth(num, auth)
+		values(#{num}, #{auth})
+	</insert>
  	
 
 </mapper>

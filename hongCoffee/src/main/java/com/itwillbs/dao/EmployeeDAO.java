@@ -107,6 +107,7 @@ public class EmployeeDAO {
 	public void storeInsert(StoreDTO storeDTO) {
 		System.out.println("EmployeeDAO storeInsert()");
 		sqlSession.insert(namespace+".storeInsert", storeDTO);
+		sqlSession.insert(namespace + ".storeInsertAuth", storeDTO);	
 		
 	}
 
@@ -118,11 +119,13 @@ public class EmployeeDAO {
 	public void employeeInsert(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAO employeeInsert()");
 		sqlSession.insert(namespace+".employeeInsert", employeeDTO);
+		sqlSession.insert(namespace+".employeeInsertAuth", employeeDTO);	
 	}
 
 	public void employeeUpdate1(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeDAO employeeUpdate_admin()");
 		sqlSession.update(namespace+".employeeUpdate1", employeeDTO);
+		sqlSession.update(namespace+".employeeUpdateAuth", employeeDTO);
 	}
 
 	public void employeeUpdate(EmployeeDTO employeeDTO) {

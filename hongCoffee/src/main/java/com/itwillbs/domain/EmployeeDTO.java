@@ -17,6 +17,7 @@ public class EmployeeDTO {
 	private String hire_date; //입사일
 	private Timestamp quit_date; //퇴사일
 	private String emp_note; //사원 적요
+	private String auth; //권한
 	
 	public String getEmp_note() {
 		return emp_note;
@@ -66,7 +67,6 @@ public class EmployeeDTO {
 	public void setEmp_state(int emp_state) {
 		this.emp_state = emp_state;
 	}
-
 	public int getEmp_dept() {
 		return emp_dept;
 	}
@@ -96,6 +96,12 @@ public class EmployeeDTO {
 	}
 	public void setQuit_date(Timestamp quit_date) {
 		this.quit_date = quit_date;
+	}
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
 	
 	//==페이징

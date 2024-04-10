@@ -14,6 +14,7 @@ public class StoreDTO {
 	private String note; //적요
 	private int state; //상태(정상영업=0, 미영업=1, 폐업=2 미설정=3)
 	private String address_detail; //상세주소
+	private String auth; //권한
 	
 	public String getAddress_detail() {
 		return address_detail;
@@ -21,21 +22,18 @@ public class StoreDTO {
 	public void setAddress_detail(String address_detail) {
 		this.address_detail = address_detail;
 	}
-	
 	public int getNum() {
 		return num;
 	}
 	public void setNum(int num) {
 		this.num = num;
 	}
-	
 	public String getPw() {
 		return pw;
 	}
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	
 	public String getName() {
 		return name;
 	}
@@ -90,8 +88,14 @@ public class StoreDTO {
 	public void setState(int state) {
 		this.state = state;
 	}
+	public String getAuth() {
+		return auth;
+	}
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
 
-	//==
+	//==페이징
 	
 	private int pageSize;
 	private String pageNum;
@@ -169,16 +173,16 @@ public class StoreDTO {
 		this.pageCount = pageCount;
 	}
 	
+	
 	@Override
 	public String toString() {
 		return "StoreDTO [num=" + num + ", pw=" + pw + ", name=" + name + ", boss=" + boss + ", phone=" + phone
 				+ ", tel=" + tel + ", email=" + email + ", address=" + address + ", postalcode=" + postalcode
-				+ ", note=" + note + ", state=" + state + ", address_detail=" + address_detail + ", pageSize="
-				+ pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow=" + startRow
-				+ ", endRow=" + endRow + ", pageBlock=" + pageBlock + ", startPage=" + startPage + ", endPage="
-				+ endPage + ", count=" + count + ", pageCount=" + pageCount + "]";
+				+ ", note=" + note + ", state=" + state + ", address_detail=" + address_detail + ", auth=" + auth
+				+ ", pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
+				+ startRow + ", endRow=" + endRow + ", pageBlock=" + pageBlock + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", count=" + count + ", pageCount=" + pageCount + "]";
 	}
-	
 	
 	
 }

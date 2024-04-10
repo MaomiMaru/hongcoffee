@@ -153,6 +153,10 @@ public class EmployeeService {
 	//지점 추가
 	public void storeInsert(StoreDTO storeDTO) {
 		System.out.println("EmployeeService storeInsert()");
+		
+		//security 적용
+		storeDTO.setAuth("ROLE_USER");
+		
 		employeeDAO.storeInsert(storeDTO);
 	}
 
@@ -199,6 +203,14 @@ public class EmployeeService {
 	//사원 수정(관리자)
 	public void employeeUpdate1(EmployeeDTO employeeDTO) {
 		System.out.println("EmployeeService employeeUpdate_admin()");
+		
+		//security 적용
+		if(employeeDTO.getEmp_num() == 100 || employeeDTO.getEmp_num() == 101 || employeeDTO.getEmp_num() == 102 || employeeDTO.getEmp_num() == 103) {
+			employeeDTO.setAuth("ROLE_ADMIN");
+		}else {
+			employeeDTO.setAuth("ROLE_MEMBER");
+		}
+		
 		employeeDAO.employeeUpdate1(employeeDTO);
 	}
 	
