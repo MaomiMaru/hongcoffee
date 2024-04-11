@@ -51,7 +51,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 35px;
+	padding-top: 10px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -69,7 +69,7 @@ input[type=text] {
 
     color: black !important;
 }
-.choose {
+.choose1 , .choose2 {
 	width: 300px;
 	height: 29.63px;
 	font-size: 15px;
@@ -77,7 +77,7 @@ input[type=text] {
 
 #search li {
 	width: 600px;
-	height: 30px;
+	height: 20px;
 }
 
 input[type=text]{
@@ -211,17 +211,32 @@ label input[type=radio]:checked:after{
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
 						<input type="text" name="item_name" class="item_name"></div></li>
 						
-					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text" name="item_minPrice" class="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
-						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
+<!-- 					<li><div class="search_div"><label class="search_name"><b>단가</b></label> -->
+<!-- 						<input type="text" name="item_minPrice" class="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~ -->
+<!-- 						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li> -->
 						
 					<li><div class="search_div"><label class="search_name"><b>출하일시</b></label>
-						<input type="date" name="sh_time" class="sh_time" max="9999-12-31">
+						<input type="date" name="sh_minTime" class="sh_minTime" max="9999-12-31" style="width : 140.5px;"> ~
+						<input type="date" name="sh_maxTime" class="sh_maxTime" max="9999-12-31" style="width : 140.5px;"></div></li>
 						
+					<li><div class="search_div"><label class="search_name"><b>입고여부</b></label>
+						<select class="choose1" name="received_not">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">미입고</option>
+							<option value="1">입고완료</option>
+						</select></div></li>	
+						
+					<li><div class="search_div"><label class="search_name"><b>결제여부</b></label>
+						<select class="choose2" name="pay">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">미결제</option>
+							<option value="1">결제완료</option>
+						</select>		
 
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
-
+					
 				</ul>	
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">	
 			</div>
 		</form>
 
@@ -350,40 +365,40 @@ function shipment_delete(){
 	 location.href="${pageContext.request.contextPath}/emp/popup/shipment_delete?od_num="+sdnum;	
 }
 
-$('.shipmentSearch').submit(function(){
-	  var minPrice = $('.item_minPrice').val();
-	  var maxPrice = $('.item_maxPrice').val();
+// $('.shipmentSearch').submit(function(){
+// 	  var minPrice = $('.item_minPrice').val();
+// 	  var maxPrice = $('.item_maxPrice').val();
 
-	  if (minPrice !== '' && maxPrice !== '') {
-	     if (parseFloat(minPrice) > parseFloat(maxPrice)) {
-	        alert('최소 금액은 최대 금액보다 클 수 없습니다.');
-	        return false; 
-	        }
-	    }
-	    return true;
-	});
+// 	  if (minPrice !== '' && maxPrice !== '') {
+// 	     if (parseFloat(minPrice) > parseFloat(maxPrice)) {
+// 	        alert('최소 금액은 최대 금액보다 클 수 없습니다.');
+// 	        return false; 
+// 	        }
+// 	    }
+// 	    return true;
+// 	});
 
 
-$('.shipmentSearch').submit(function(){
+// $('.shipmentSearch').submit(function(){
 	
-var priceCheck = RegExp(/^[0-9]*$/);
-if(!priceCheck.test($('.item_minPrice').val())){
-	alert('단가는 숫자만 입력이 가능합니다.');
-	$('.item_minPrice').focus();
-	return false;
-}
+// var priceCheck = RegExp(/^[0-9]*$/);
+// if(!priceCheck.test($('.item_minPrice').val())){
+// 	alert('단가는 숫자만 입력이 가능합니다.');
+// 	$('.item_minPrice').focus();
+// 	return false;
+// }
 
-if(!priceCheck.test($('.item_maxPrice').val())){
-	alert('단가는 숫자만 입력이 가능합니다.');
-	$('.item_maxPrice').focus();
-	return false;
-}
+// if(!priceCheck.test($('.item_maxPrice').val())){
+// 	alert('단가는 숫자만 입력이 가능합니다.');
+// 	$('.item_maxPrice').focus();
+// 	return false;
+// }
 	
-});
+// });
 
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.shipmentSearch').addEventListener('submit', function(event) {
-        var inputDate = new Date(document.querySelector('.sh_time').value);
+        var inputDate = new Date(document.querySelector('.sh_maxTime').value);
         
         var today = new Date();
         
@@ -396,8 +411,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(function(){
     $('.shipmentSearch').submit(function(){
-        if($('.storeName').val() =="" && $('.item_name').val() == "" && $('.item_minPrice').val()=="" && $('.item_maxPrice').val()=="" && $('.sh_time').val() ==""){
-            alert('출하를 조회하기 위해서는 지점명, 재료명, 최소 금액, 최대 금액, 수주 일시, 출하일시 중 하나 이상 입력해야합니다.');
+        if($('.storeName').val() =="" && $('.item_name').val() == "" && $('.sh_minTime').val() =="" && $('.sh_maxTime').val() =="" && $('.choose1').val() =="100" && $('.choose2').val() =="100"){
+            alert('출하를 조회하기 위해서는 지점명, 재료명, 최소 출하일시, 최대 출하일시, 입고여부, 결제여부 중 하나 이상 입력해야합니다.');
             return false;
         }
     });

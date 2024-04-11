@@ -218,6 +218,7 @@ label input[type=radio]:checked:after{
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
 				</ul>	
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			</div>
 		</form>
 

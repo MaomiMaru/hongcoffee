@@ -103,9 +103,12 @@
 			<if test="item_minPrice != 0 and item_maxPrice == 0">
 				and i.item_price >= #{item_minPrice}
 			</if>
-    		<if test="od_time != null">
-      			and date(o.od_time) = #{od_time}
+    		<if test="od_maxTime != ''">
+      			and date(o.od_time) between #{od_minTime} and #{od_maxTime}
     		</if>
+    		<if test="od_minTime != '' and od_maxTime == ''">
+				and date(o.od_time) >= #{od_minTime}
+			</if>
     		<if test="shipment_not != 100">
     			and o.shipment_not = #{shipment_not}
     		</if>
@@ -137,14 +140,23 @@
     		<if test="item_name != ''">
       			and i.item_name like concat('%', #{item_name}, '%')
     		</if>
-    		<if test="item_maxPrice != 0">
-    			and i.item_price between #{item_minPrice} and #{item_maxPrice}
+<!--     		<if test="item_maxPrice != 0"> -->
+<!--     			and i.item_price between #{item_minPrice} and #{item_maxPrice} -->
+<!--     		</if> -->
+<!-- 			<if test="item_minPrice != 0 and item_maxPrice == 0"> -->
+<!-- 				and i.item_price >= #{item_minPrice} -->
+<!-- 			</if> -->
+    		<if test="sh_maxTime != ''">
+      			and date(h.sh_time) between #{sh_minTime} and #{sh_maxTime}
     		</if>
-			<if test="item_minPrice != 0 and item_maxPrice == 0">
-				and i.item_price >= #{item_minPrice}
+    		<if test="sh_minTime != '' and sh_maxTime == ''">
+				and date(h.sh_time) >= #{sh_minTime}
 			</if>
-    		<if test="sh_time != null">
-      			and date(h.sh_time) = #{sh_time}
+			<if test="received_not != 100">
+    			and o.received_not = #{received_not}
+    		</if>
+    		<if test="pay != 100">
+    			and r.pay = #{pay}
     		</if>
  		</where>
  				order by h.sh_time desc
