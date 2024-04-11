@@ -77,7 +77,7 @@ public class StoreDAO {
 	public List<ReceiveDTO> getReceiveList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getReceiveList()");
 		
-		return sqlSession.selectList(namespace + ".getReceiveList");
+		return sqlSession.selectList(namespace + ".getReceiveList", pageDTO);
 	}//getReceiveList
 	
 	
@@ -90,10 +90,10 @@ public class StoreDAO {
 	
 	
 	//소모 목록
-	public List<ResultDTO> getConsumeList() {
+	public List<ResultDTO> getConsumeList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getConsumeList()");
 		
-		return sqlSession.selectList(namespace + ".getConsumeList");
+		return sqlSession.selectList(namespace + ".getConsumeList", pageDTO);
 	}//getSomoList
 	
 	
@@ -317,6 +317,12 @@ public class StoreDAO {
 	public int getReceiveCount(ReceiveDTO receiveDTO) {
 		System.out.println("StoreDAO getReceiveCount()");
 		return sqlSession.selectOne(namespace + ".getReceiveCountR", receiveDTO);
+	}
+
+
+	public int getConsumeCount(PageDTO pageDTO) {
+		System.out.println("StoreDAO getConsumeCount()");
+		return sqlSession.selectOne(namespace+".getConsumeCount", pageDTO);
 	}
 	
 	

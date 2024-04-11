@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -51,7 +50,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 57px;
+	padding-top: 35px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -274,8 +273,15 @@ window.addEventListener('load',function(){
 						<input type="text" name="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고일시</b></label>
-						<input type="date" name="rc_time" max="9999-12-31">
+						<input type="date" name="rc_minTime" max="9999-12-31" style="width: 140.5px;">
+						<input type="date" name="rc_maxTime" max="9999-12-31" style="width: 140.5px;"></div></li>
 						
+					<li><div class="search_div"><label class="search_name"><b>결제여부</b></label>
+						<select class="choose" name="pay">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">미결제</option>
+							<option value="1">결제완료</option>
+						</select>
 
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div>	</li>
 
@@ -330,7 +336,29 @@ window.addEventListener('load',function(){
   
  		 </table>
  		 
- 		 
+ 		 <div id="page_control">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/store/receive?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+		</c:if>
+		
+		<c:if test="${pageDTO.count ne -1}">
+		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/receive?pageNum=${i}">${i}</a>
+		</c:forEach>
+		</c:if>
+		
+		<c:if test="${pageDTO.count eq -1}">
+		<c:forEach var="i" begin="${receiveDTO.startPage}" end="${receiveDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/receiveSearch?pageNum=${i}&item_name=${receiveDTO.item_name}&item_type=${receiveDTO.item_type}&item_minPrice=${receiveDTO.item_minPrice}
+			&item_maxPrice=${receiveDTO.item_maxPrice}&rc_minTime=${receiveDTO.rc_minTime}&rc_maxTime=${receiveDTO.rc_maxTime}&pay=${receiveDTO.pay}">${i}</a>
+		</c:forEach>
+		</c:if>
+
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/store/receive?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		</c:if>
+
+		</div>
  		 
  		 
  		 

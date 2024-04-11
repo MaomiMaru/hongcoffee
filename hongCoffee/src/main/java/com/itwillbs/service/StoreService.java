@@ -158,10 +158,10 @@ public class StoreService {
 	
 	
 	//소모 출력
-	public List<ResultDTO> getConsumeList(){
+	public List<ResultDTO> getConsumeList(PageDTO pageDTO){
 		System.out.println("StoreService getConsumeList()");
 		
-		return storeDAO.getConsumeList();
+		return storeDAO.getConsumeList(pageDTO);
 	}//getSomoList
 
 	
@@ -377,6 +377,11 @@ public class StoreService {
 	public int getReceiveCount(PageDTO pageDTO) {
 		System.out.println("StoreService getReceiveCount()");
 		return storeDAO.getReceiveCount(pageDTO);
+	}
+
+	public int getConsumeCount(PageDTO pageDTO) {
+		System.out.println("StoreService getConsumeCount()");
+		return storeDAO.getConsumeCount(pageDTO);
 	}
 	
 	

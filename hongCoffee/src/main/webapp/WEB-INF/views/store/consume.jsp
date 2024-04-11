@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -248,6 +248,30 @@ label input[type=radio]:checked:after{
   		</c:forEach>
   
  		 </table>
+ 		 
+ 		 <div id="page_control">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/store/consume?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+		</c:if>
+		
+		<c:if test="${pageDTO.count ne -1}">
+		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/consume?pageNum=${i}">${i}</a>
+		</c:forEach>
+		</c:if>
+		
+		<c:if test="${pageDTO.count eq -1}">
+		<c:forEach var="i" begin="${receiveDTO.startPage}" end="${receiveDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/consumeSearch?pageNum=${i}&rs_minTime=${consumeDTO.rs_minTime}&rs_maxTime=${consumeDTO.rs_maxTime}">${i}</a>
+		</c:forEach>
+		</c:if>
+
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/store/consume?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		</c:if>
+
+		</div>
+ 		 
 		</div>
         
         
