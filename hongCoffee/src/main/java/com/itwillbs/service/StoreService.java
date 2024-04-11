@@ -278,6 +278,12 @@ public class StoreService {
 	}
 
 
+	public ResultDTO getSell(int rs_num) {
+		System.out.println("StoreService getSell()");
+		return storeDAO.getSell(rs_num);
+	}
+
+
 
 
 

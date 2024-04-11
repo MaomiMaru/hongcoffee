@@ -219,7 +219,7 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">소모 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/consume_insert','홍커피','width=370,height=520,top=100,left=200')">추가</button>
-		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/consume_update?rs_num=6','홍커피','width=370,height=520,top=100,left=200')">수정</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="consume_update()">수정</button>
 <!-- 		<button style="background-color: black; color: #EFBDBC">삭제</button> -->
 		</div>
 		
@@ -236,7 +236,7 @@ label input[type=radio]:checked:after{
  		 </tr>
  		 <c:forEach var="ResultDTO" items="${consumeList}">
   <tr>
-<td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true"></label></td>
+	<td style="text-align: center !important; font-size:20px !important;"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${ResultDTO.rs_num }"></label></td>
    	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.rs_date}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${ResultDTO.item_name}</td>
     <td style="text-align: center !important; font-size:20px !important;">${ResultDTO.consume}</td>
@@ -293,6 +293,18 @@ label input[type=radio]:checked:after{
 <%--   <script src="${pageContext.request.contextPath}/resources/js/navByJaeHwan.js"></script> --%>
 
 <script type="text/javascript">
+
+function consume_update() {
+	let csnum = $('input[name=radio1]:checked').val();
+	if(csnum == null   || csnum == undefined){
+		alert('수정하고자 하는 내용을 선택해주세요');
+		return false;
+	}
+    window.open('${pageContext.request.contextPath}/store/popup/consume_update?rs_num=' + csnum, '홍커피', 'width=370,height=520,top=100,left=200');
+}
+
+
+
 $('.consumeSearch').submit(function(){
     $('.rs_minDate, .rs_maxDate').change(function() {
         var minDate = $('.rs_minDate').val();

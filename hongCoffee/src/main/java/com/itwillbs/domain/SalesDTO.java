@@ -8,7 +8,7 @@ public class SalesDTO {
 	private String name; //지점명
 	private int maechul; //매출
 	private Timestamp rs_date; //영업일
-	
+
 	public int getNum() {
 		return num;
 	}

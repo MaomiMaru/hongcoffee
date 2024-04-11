@@ -39,27 +39,39 @@ select {
 			<div class="check"></div>
 			<br>
 			<div class="box-body">
-				<div>
-					<b>상품 유형</b>
-				</div>
-				<div class="input-group">
-					<select class="form-control" style="width: 177px" name="prod_type"
-						class="prod_type">
-						<option value="100">선택해주세요</option>
-						<option value="0">커피</option>
-						<option value="1">음료</option>
-						<option value="2">디저트</option>
-					</select>
-				</div>
-				<sub></sub><br>
-				<div>
-					<b>상품명</b>
-				</div>
-				<div class="input-group">
-					<select class="form-control" name="prod_name" id="prod_name">
-						<option value="100">선택해주세요</option>
-					</select>
-				</div>
+				<table>
+					<tr>
+						<td>
+							<div>
+								<b>상품 유형</b>
+							</div>
+						</td>
+						<td>
+							<div class="input-group">
+								<select class="form-control" style="width: 177px"
+									name="prod_type" class="prod_type">
+									<option value="100">선택해주세요</option>
+									<option value="0">커피</option>
+									<option value="1">음료</option>
+									<option value="2">디저트</option>
+								</select>
+							</div>
+						</td>
+					<tr>
+						<td>
+							<div>
+								<b>상품명</b>
+							</div>
+						</td>
+						<td>
+							<div class="input-group">
+								<select class="form-control" name="prod_name" id="prod_name">
+									<option value="100">선택해주세요</option>
+								</select>
+							</div>
+						</td>
+					</tr>
+				</table>
 			</div>
 			<br>
 			<div>
@@ -69,16 +81,18 @@ select {
 			<div>
 				<b>영업일</b>
 			</div>
-			<input type="date" name="rs_date" id="rs_date"><br>	
+			<input type="date" name="rs_date" id="rs_date"><br>
 			<div>
 				<b>판매량</b>
 			</div>
-			<input type="text" name="sales" class="sales"><br> <br> <input
-				type="submit" value="추가하기"
-				style="background-color: black; color: #EFBDBC;">  
+			<input type="text" name="sales" class="sales"><br><br>
+			<span style="float: right">
+			<input type="submit" value="추가하기"
+				style="background-color: black; color: #EFBDBC;">
 			<button type="button"
 				style="background-color: black; color: #EFBDBC;"
 				onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+			</span>
 		</fieldset>
 	</form>
 
@@ -94,7 +108,7 @@ select {
 							$('.sales').focus();
 							return false;
 						}
-												
+
 					});
 		});
 
@@ -112,7 +126,7 @@ select {
 								optionType.append('<option value='+prop+' >'
 										+ arrType['커피'][prop] + '</option>');
 							}
-						} else if ($(this).val() =='1'){
+						} else if ($(this).val() == '1') {
 							for (prop in arrType['음료']) {
 								optionType.append('<option value='+prop+' >'
 										+ arrType['음료'][prop] + '</option>');
@@ -128,33 +142,33 @@ select {
 			$('#prod_name').change(
 					function() {
 						if ($('#prod_name').val() == "아메리카노"
-							|| $('#prod_name').val() == "카페라떼"
-							|| $('#prod_name').val() == "콜드 브루"
-							|| $('#prod_name').val() == "아이스 아메리카노"
-							|| $('#prod_name').val() == "아이스 카페라떼"
-							|| $('#prod_name').val() == "에스프레소"
-							|| $('#prod_name').val() == "마키야또"
-							|| $('#prod_name').val() == "아인슈타인") {
+								|| $('#prod_name').val() == "카페라떼"
+								|| $('#prod_name').val() == "콜드 브루"
+								|| $('#prod_name').val() == "아이스 아메리카노"
+								|| $('#prod_name').val() == "아이스 카페라떼"
+								|| $('#prod_name').val() == "에스프레소"
+								|| $('#prod_name').val() == "마키야또"
+								|| $('#prod_name').val() == "아인슈타인") {
 							$('#prod_price').val(2000);
-						} else if($('#prod_name').val() == "사과주스"
-							|| $('#prod_name').val() == "수박주스"
-							|| $('#prod_name').val() == "바나나주스"
-							|| $('#prod_name').val() == "매실주스"
-							|| $('#prod_name').val() == "망고주스"
-							|| $('#prod_name').val() == "토마토주스"
-							|| $('#prod_name').val() == "치약초코"
-							|| $('#prod_name').val() == "초콜렛"
-							|| $('#prod_name').val() == "딸기주스"
-							|| $('#prod_name').val() == "포도주스"){
+						} else if ($('#prod_name').val() == "사과주스"
+								|| $('#prod_name').val() == "수박주스"
+								|| $('#prod_name').val() == "바나나주스"
+								|| $('#prod_name').val() == "매실주스"
+								|| $('#prod_name').val() == "망고주스"
+								|| $('#prod_name').val() == "토마토주스"
+								|| $('#prod_name').val() == "치약초코"
+								|| $('#prod_name').val() == "초콜렛"
+								|| $('#prod_name').val() == "딸기주스"
+								|| $('#prod_name').val() == "포도주스") {
 							$('#prod_price').val(3000);
-						}else if($('#prod_name').val() == "카스테라"
-							|| $('#prod_name').val() == "죽빵"){
+						} else if ($('#prod_name').val() == "카스테라"
+								|| $('#prod_name').val() == "죽빵") {
 							$('#prod_price').val(3500);
-						}else if($('#prod_name').val() == "쿠키"
-							|| $('#prod_name').val() == "허니브레드"
-							|| $('#prod_name').val() == "와플"){
+						} else if ($('#prod_name').val() == "쿠키"
+								|| $('#prod_name').val() == "허니브레드"
+								|| $('#prod_name').val() == "와플") {
 							$('#prod_price').val(1500);
-						}else {
+						} else {
 							$('#prod_price').val(5000);
 						}
 

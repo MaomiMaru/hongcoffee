@@ -291,4 +291,10 @@ public class StoreDAO {
 	}
 
 
+	public ResultDTO getSell(int rs_num) {
+		System.out.println("StoreDAO getSell()");
+		return sqlSession.selectOne(namespace+".getSell", rs_num);
+	}
+
+
 }

@@ -667,7 +667,7 @@ public class StoreController {
 		int num = (int)session.getAttribute("num");
 	
 		List<ResultDTO> sellList = storeService.getSellList(num);
-
+		System.out.println(sellList);
 		model.addAttribute("sellList", sellList);
 
 		return "store/sell";
@@ -709,8 +709,9 @@ public class StoreController {
 	}// panmeSearch
 	
 	@GetMapping("popup/sell_insert")
-	public String sell_insert() {
+	public String sell_insert(HttpServletRequest request, Model model) {
 		System.out.println("StoreController sell_insert()");
+		
 		
 		return "/store/popup/sell_insert";
 	}
@@ -736,6 +737,7 @@ public class StoreController {
 		int rs_num = Integer.parseInt(request.getParameter("rs_num"));
 		model.addAttribute("resultDTO", storeService.getSales(rs_num));
 		
+		System.out.println(rs_num);
 		
 		return "/store/popup/sell_update";
 	}

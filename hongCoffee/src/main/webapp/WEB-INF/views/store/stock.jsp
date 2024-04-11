@@ -313,7 +313,7 @@ function stock_update() {
 		alert('수정하고자 하는 내용을 선택해주세요');
 		return false;
 	}
-    window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=' + snum, '홍커피', 'width=460,height=540, top=100, left=200');
+    window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=' + snum, '홍커피', 'width=460,height=470, top=100, left=200');
 }
 
 //stockSearch

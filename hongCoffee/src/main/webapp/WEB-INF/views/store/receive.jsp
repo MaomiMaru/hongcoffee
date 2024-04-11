@@ -390,7 +390,7 @@ function receive_update() {
 		alert('수정하고자 하는 내용을 선택해주세요');
 		return false;
 	}
-    window.open('${pageContext.request.contextPath}/store/popup/receive_update?od_num=' + rnum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+    window.open('${pageContext.request.contextPath}/store/popup/receive_update?od_num=' + rnum, '홍커피', 'width=450px,height=480px,top=100,left=200');
 }
 
 $('.receiveSearch').submit(function(){

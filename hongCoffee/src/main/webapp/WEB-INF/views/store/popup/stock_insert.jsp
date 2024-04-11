@@ -130,25 +130,85 @@ select {
 						}
 					});
 
-			$('#item_name').change(
-					function() {
-						//	 		var selectedValue = $('#item_name').val();
-						if ($('#item_name').val() == "에티오피아"
-								|| $('#item_name').val() == "콜롬비아") {
-							$('#item_price').val(3500);
-						} else {
-							$('#item_price').val(10);
-						}
+		    $('select[name="item_name"]').change(function() {
+		        let itemName = $(this).val();
+		        let itemPrice = $('#item_price');
 
-					});
+		        switch (itemName) {
+		            case "에티오피아 250g":
+		            case "콜롬비아 250g":
+		                itemPrice.val(3500);
+		                break;
+		            case "바닐라 시럽 500g":
+		            case "초코 시럽 500g":
+		            case "딸기 시럽 500g":
+		            case "생크림 500ml":
+		            case "카라멜 500ml":
+		            case "딸기잼 500g":
+		            case "초콜릿 500g":
+		            case "망고 500g":
+		            case "자몽 500g":
+		                itemPrice.val(4000);
+		                break;
+		            case "유자 500g":
+		            case "오렌지 500g":
+		            case "타피오카펄 500g":
+		                itemPrice.val(5000);
+		                break;
+		            case "레몬 500g":
+		            case "사과 500g":
+		                itemPrice.val(7000);
+		                break;
+		            case "딸기 500g":
+		            case "녹차 300g":
+		            case "카모마일 300g":
+		            case "자스민 300g":
+		            case "라벤더 300g":
+		            case "얼그레이 300g":
+		                itemPrice.val(10000);
+		                break;
+		            case "꿀 500g":
+		                itemPrice.val(12000);
+		                break;
+		            default:
+		                itemPrice.val(10);
+		                break;
+		        }
+		    });
 		});
 
 		function getAgreeType() {
 			var obj = {
 				"식품" : {
 					'100' : '선택해주세요',
-					'에티오피아' : '에티오피아',
-					'콜롬비아' : '콜롬비아',
+		            '에티오피아 250g': '에티오피아 250g',
+		            '콜롬비아 250g': '콜롬비아 250g',
+		            '바닐라 시럽 500g': '바닐라 시럽 500g',
+		            '초코 시럽 500g': '초코 시럽 500g',
+		            '딸기 시럽 500g': '딸기 시럽 500g',
+		            '생크림 500ml': '생크림 500ml',
+		            '카라멜 500ml': '카라멜 500ml',
+		            '토피넛 500g': '토피넛 500g',
+		            '딸기잼 500g': '딸기잼 500g',
+		            '초콜릿 500g': '초콜릿 500g',
+		            '딸기 500g': '딸기 500g',
+		            '레몬 500g': '레몬 500g',
+		            '망고 500g': '망고 500g',
+		            '자몽 500g': '자몽 500g',
+		            '유자 500g': '유자 500g',
+		            '사과 500g': '사과 500g',
+		            '오렌지 500g': '오렌지 500g',
+		            '탄산수 1L': '탄산수 1L',
+		            '꿀 500g': '꿀 500g',
+		            '타피오카펄 500g': '타피오카펄 500g',
+		            '녹차 300g': '녹차 300g',
+		            '카모마일 300g': '카모마일 300g',
+		            '자스민 300g': '자스민 300g',
+		            '라벤더 300g': '라벤더 300g',
+		            '얼그레이 300g': '얼그레이 300g',
+					
+					
+					
 				},
 				"비식품" : {
 					'100' : '선택해주세요',

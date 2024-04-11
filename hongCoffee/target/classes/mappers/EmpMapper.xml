@@ -412,7 +412,7 @@
 <!-- 		from result r left join product p -->
 <!-- 		on r.prod_num = p.prod_num -->
 <!-- 		left join store s on r.num = s.num -->
-<!-- 		where r.rs_date = DATE_SUB(#{rs_date}, INTERVAL 1 DAY) -->
+<!-- 		where r.rs_date = DATE_SUB('2024-03-21', INTERVAL 1 DAY) -->
 <!-- 		group by s.name -->
 <!-- 		order by 2 desc -->
 <!-- 		limit 5 -->

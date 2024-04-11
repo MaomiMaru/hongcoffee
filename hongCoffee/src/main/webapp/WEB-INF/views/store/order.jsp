@@ -228,7 +228,7 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">발주 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button style="background-color: black; color: #EFBDBC" onclick="receive_insert()">입고 추가</button>
-		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/order_insert','홍커피','width=350,height=900')">발주 추가</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/order_insert','홍커피','width=450px,height=550px,top=100,left=200')">발주 추가</button>
 		<button style="background-color: black; color: #EFBDBC" onclick="order_update()">발주 수정</button>
 		<button style="background-color: black; color: #EFBDBC" onclick="order_delete()">발주 삭제</button></div>
 		
@@ -331,7 +331,7 @@ function receive_insert() {
 		alert('입고 추가 하려는 내용을 선택해주세요');
 		return false;
 	}
-    window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=' + rnum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+    window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=' + rnum, '홍커피', 'width=450px,height=490px,top=100,left=200');
 }
 function order_update() {
 	let onum = $('input[name=radio1]:checked').val();
@@ -339,7 +339,7 @@ function order_update() {
 		alert('발주 수정 하려는 내용을 선택해주세요');
 		return false;
 	}
-    window.open('${pageContext.request.contextPath}/store/popup/order_update?od_num=' + onum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+    window.open('${pageContext.request.contextPath}/store/popup/order_update?od_num=' + onum, '홍커피', 'width=450px,height=490px,top=100,left=200');
 }
 function order_delete() {
 	let onum = $('input[name=radio1]:checked').val();
