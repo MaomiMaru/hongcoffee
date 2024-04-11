@@ -102,28 +102,42 @@ select {
 	</form>
 
 	<script type="text/javascript">
-		$(function() {
-			$('.form').submit(
-					function() {
+	$(function() {
+	    $('.form').submit(function() {
+	        if ($('.rs_date').val() == "" || $('.rs_date').val() == null || $('.rs_date').val() == undefined) {
+	            alert("영업일을 선택해주세요");
+	            $('.rs_date').focus();
+	            return false;
+	        }
 
-						if ($('.rs_date').val() == ""
-								|| $('.rs_date').val() == null
-								|| $('.rs_date').val() == undefined) {
-							alert("영업일을 선택해주세요");
-							$('.rs_date').focus();
-							return false;
-						}
-						
-						if ($('.consume').val() == ""
-							|| $('.consume').val() == null
-							|| $('.consume').val() == undefined) {
-							alert("소모량을 입력해주세요");
-							$('.consume').focus();
-							return false;
-						}
-						
-					});
-		});
+	        if ($('.consume').val() == "" || $('.consume').val() == null || $('.consume').val() == undefined) {
+	            alert("소모량을 입력해주세요");
+	            $('.consume').focus();
+	            return false;
+	        }
+
+// 	        $.ajax({
+// 	            url: "${pageContext.request.contextPath}/stock/check",
+// 	            method: "POST",
+// 	            data: {
+// 	                item_name: $('#item_name').val(), 
+// 	                consume: $('.consume').val() 
+// 	            },
+// 	            success: function(result) {
+// 	                if (result === "out_of_stock") {
+// 	                    alert("재고가 부족합니다");
+// 	                } else {
+// 	                    $('.form').submit();
+// 	                }
+// 	            },
+// 	            error: function() {
+// 	                alert("재고 조회 중 오류가 발생했습니다");
+// 	            }
+// 	        });
+
+// 	        return false;
+// 	    });
+// 	});
 
 $(function() {
     $('select[name="item_type"]').on('change', function() {
@@ -237,6 +251,9 @@ function getAgreeType() {
     };
     return obj;
 }
+
+
+
 
 
 	</script>

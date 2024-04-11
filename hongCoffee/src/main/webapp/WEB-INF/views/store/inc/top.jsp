@@ -133,7 +133,7 @@ var sessionTimeout = ${session.maxInactiveInterval * 1000};
 
 function showSessionExpirationAlertAndRedirect() {
  alert("세션이 만료되었습니다. 로그인 페이지로 이동합니다.");
- window.location.href = "${pageContext.request.contextPath}/emp/login"; 
+ window.location.href = "${pageContext.request.contextPath}/store/login"; 
 }
 
 function checkSessionExpiration() {
