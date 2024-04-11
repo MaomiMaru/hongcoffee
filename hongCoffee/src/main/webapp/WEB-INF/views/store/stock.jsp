@@ -190,7 +190,7 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>재고 관리</h2>
 		
-		<form action="${pageContext.request.contextPath}/store/stockSearch" method="post">
+		<form action="${pageContext.request.contextPath}/store/stockSearch" method="get">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>유형</b></label>
@@ -260,6 +260,36 @@ label input[type=radio]:checked:after{
   		</c:forEach>
   
  		 </table>
+ 		 
+ 		 <div id="page_control">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/store/stock?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+		</c:if>
+		
+		<c:if test="${pageDTO.count ne -1}">
+		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/stock?pageNum=${i}">${i}</a>
+		</c:forEach>
+		</c:if>
+		
+		<c:if test="${pageDTO.count eq -1}">
+		<c:forEach var="i" begin="${stockDTO.startPage}" end="${stockDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/stockSearch?pageNum=${i}&item_type=${stockDTO.item_type}&item_name=${stockDTO.item_name}
+			&item_minPrice=${stockDTO.item_minPrice}&item_maxPrice=${stockDTO.item_maxPrice}">${i}</a>
+		</c:forEach>
+		</c:if>
+
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/store/stock?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		</c:if>
+
+		</div>
+ 		 
+ 		 
+ 		 
+ 		 
+ 		 
+ 		 
 		</div>
         
         

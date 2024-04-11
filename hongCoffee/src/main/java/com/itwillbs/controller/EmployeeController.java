@@ -305,7 +305,7 @@ public class EmployeeController {
 				pageDTO.setCurrentPage(currentPage);
 				
 				// 페이징 작업
-				// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(itemDTO) 검색어 포함
+				// 전체 글개수 구하기  int 리턴할형 count = getItemCount(pageDTO) 검색어 포함
 				int count = employeeService.getItemCount(pageDTO);
 				// 한 화면에 보여줄 페이지 개수 설정
 				int pageBlock = 10;
@@ -429,7 +429,7 @@ public class EmployeeController {
 		pageDTO.setCurrentPage(currentPage);
 		
 		// 페이징 작업
-		// 전체 글개수 구하기  int 리턴할형 count = getStoreCount(pageDTO) 검색어 포함
+		// 전체 글개수 구하기  int 리턴할형 count = getOrderCount(pageDTO) 검색어 포함
 		int count = employeeService.getOrderCount(pageDTO);
 		// 한 화면에 보여줄 페이지 개수 설정
 		int pageBlock = 10;

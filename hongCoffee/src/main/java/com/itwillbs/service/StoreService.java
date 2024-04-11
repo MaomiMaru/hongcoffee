@@ -32,8 +32,8 @@ public class StoreService {
 		int endRow = startRow + pageSize - 1;
 		
 		pageDTO.setStartRow(startRow - 1);
-		pageDTO.setPageSize(pageSize);
 		pageDTO.setEndRow(endRow);
+		
 		return storeDAO.getItemList(pageDTO);
 	}//getItemList
 
@@ -51,54 +51,108 @@ public class StoreService {
 		itemDTO.setEndRow(endRow);
 		
 		System.out.println("서비스" + itemDTO);
+		
 		return storeDAO.searchItemList(itemDTO);
 	}//searchItemList	
 
 	
 	//재고 출력
-	public List<StockDTO> getStockList(){
+	public List<StockDTO> getStockList(PageDTO pageDTO){
 		System.out.println("StoreService getStockList()");
 		
-		return storeDAO.getStockList();
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setEndRow(endRow);
+		
+		return storeDAO.getStockList(pageDTO);
 	}//getStockList
 	
 	
 	//재고 필터링 출력
 	public List<StockDTO> searchStockList(StockDTO stockDTO) {
 		System.out.println("StoreService searchStockList(()");
-					
+		
+		int currentPage = stockDTO.getCurrentPage();
+		int pageSize = stockDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		stockDTO.setStartRow(startRow - 1);
+		stockDTO.setEndRow(endRow);
+		
+		System.out.println("서비스" + stockDTO);
+		
 		return storeDAO.searchStockList(stockDTO);
 	}//searchStockList
 	
 	
 	//발주 출력
-	public List<OrderDTO> getOrderList(){
+	public List<OrderDTO> getOrderList(PageDTO pageDTO){
 		System.out.println("StoreService getOrderList()");
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
-		return storeDAO.getOrderList();
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
+		
+		
+		return storeDAO.getOrderList(pageDTO);
 	}//getOrderList
 	
 
 	//발주 필터링 출력
 	public List<OrderDTO> searchOrderList(OrderDTO orderDTO) {
 		System.out.println("StoreService searchOrderList()");
+		int currentPage = orderDTO.getCurrentPage();
+		int pageSize = orderDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		orderDTO.setStartRow(startRow - 1);
+		orderDTO.setEndRow(endRow);
+		
+		System.out.println("서비스" + orderDTO);
+		
 		
 		return storeDAO.searchOrderList(orderDTO);
 	}//searchOrderList
 
 	
 	//입고 출력
-	public List<ReceiveDTO> getReceiveList(){
+	public List<ReceiveDTO> getReceiveList(PageDTO pageDTO){
 		System.out.println("StoreService getReceiveList()");
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
-		return storeDAO.getReceiveList();
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setPageSize(pageSize);
+		pageDTO.setEndRow(endRow);
+		return storeDAO.getReceiveList(pageDTO);
 	}//getReceiveList
 	
 	
 	//입고 필터링 출력
 	public List<ReceiveDTO> searchReceiveList(ReceiveDTO receiveDTO) {
 		System.out.println("StoreService searchReceiveList()");
-			
+		int currentPage = receiveDTO.getCurrentPage();
+		int pageSize = receiveDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		receiveDTO.setStartRow(startRow - 1);
+		receiveDTO.setEndRow(endRow);
+		
+		System.out.println("서비스" + receiveDTO);
+		
 		return storeDAO.searchReceiveList(receiveDTO);
 	}//searchReceiveList
 	
@@ -282,16 +336,54 @@ public class StoreService {
 
 	// == 페이징
 	
+	//지점
+	public int getItemCount(ItemDTO itemDTO) {
+		System.out.println("StoreService getItemCount()");
+		return storeDAO.getItemCount(itemDTO);
+	}
+	
+	public int getStockCount(StockDTO stockDTO) {
+		System.out.println("StoreService getStockCount()");
+		return storeDAO.getStockCount(stockDTO);
+	}
+	
+	public int getOrderCount(OrderDTO orderDTO) {
+		System.out.println("StoreService getOrderCount()");
+		return storeDAO.getOrderCount(orderDTO);
+	}
+	
+	public int getReceiveCount(ReceiveDTO receiveDTO) {
+		System.out.println("StoreService getReceiveCount()");
+		return storeDAO.getReceiveCount(receiveDTO);
+	}
+	
+	// == 페이징
 	public int getItemCount(PageDTO pageDTO) {
-		System.out.println("getItemCount()");
+		System.out.println("StoreService getItemCount()");
 		return storeDAO.getItemCount(pageDTO);
 	}
 	
-	
-	public int getItemCount(ItemDTO itemDTO) {
-		System.out.println("getItemCount()");
-		return storeDAO.getItemCount(itemDTO);
+	public int getStockCount(PageDTO pageDTO) {
+		System.out.println("StoreService getStockCount()");
+		return storeDAO.getStockCount(pageDTO);
 	}
+
+
+	public int getOrderCount(PageDTO pageDTO) {
+		System.out.println("StoreService getOrderCount()");
+		return storeDAO.getOrderCount(pageDTO);
+	}
+
+	public int getReceiveCount(PageDTO pageDTO) {
+		System.out.println("StoreService getReceiveCount()");
+		return storeDAO.getReceiveCount(pageDTO);
+	}
+	
+	
+
+
+
+	
 
 
 

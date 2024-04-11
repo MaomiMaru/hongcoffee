@@ -49,7 +49,7 @@
 				</if>
 			</if>
 		</where>
-		order by num desc
+		order by item_num desc
  		limit #{startRow},#{pageSize} 
 	</select>
 
@@ -57,6 +57,8 @@
 	<select id="getStockList" resultType="com.itwillbs.domain.StockDTO"> 
  		select s.stock_num, t.item_type, t.item_name, t.item_price, s.amount, t.item_state
  		from stock s join item t on s.item_num = t.item_num
+ 		order by stock_num desc
+ 		limit #{startRow},#{pageSize}
  	</select>
  	
  	
@@ -77,6 +79,8 @@
 				and t.item_name like concat('%', #{item_name}, '%')
 			</if>
 		</where>
+		order by stock_num desc
+ 		limit #{startRow},#{pageSize}
 	</select>
 
 
@@ -85,6 +89,7 @@
  		from `order` o join item t on o.item_num = t.item_num
  		join store s on o.num = s.num
  		order by o.od_time desc
+ 		limit #{startRow},#{pageSize}
  	</select>
  	
  	
@@ -108,6 +113,8 @@
     			and o.received_not = #{received_not}
     		</if>
  		</where>
+ 		order by od_num desc
+ 		limit #{startRow},#{pageSize}
  	</select>
  	
  	
@@ -115,6 +122,7 @@
 		select r.od_num, t.item_name, r.rc_amount, t.item_price, r.rc_time, r.pay
 		from receive r join item t on r.item_num = t.item_num
 		order by r.rc_time desc
+		limit #{startRow},#{pageSize}
  	</select>
  	
  	
@@ -135,6 +143,8 @@
       			and date(r.rc_time) = #{rc_time}
     		</if>
   		</where>
+  		order by od_num desc
+		limit #{startRow},#{pageSize}
 	</select>
 
 
@@ -405,9 +415,86 @@
  		
  	</select>
  	
+ 	<select id="getStockCountS" resultType="java.lang.Integer"> 
+ 		select count(*) from stock s left join item t
+ 		on s.item_num = t.item_num
+ 		<where>
+			<if test="item_type != 100">
+				t.item_type = #{item_type}
+			</if>	
+			<if test="item_maxPrice != 0">
+    			and t.item_price between #{item_minPrice} and #{item_maxPrice}
+    		</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and t.item_price >= #{item_minPrice}
+			</if>
+			<if test="item_name != null">
+				and t.item_name like concat('%', #{item_name}, '%')
+			</if>
+		</where>
+ 	</select>
+ 	
+ 	<select id="getOrderCountO" resultType="java.lang.Integer"> 
+ 		select count(*) from `order` o join store s on o.num = s.num
+ 		join item i on o.item_num = i.item_num
+ 		<where>
+ 			<if test="name != ''">
+     			s.name like concat('%', #{name}, '%')
+    		</if>
+    		<if test="item_name != ''">
+      			and i.item_name like concat('%', #{item_name}, '%')
+    		</if>
+    		<if test="item_maxPrice != 0">
+    			and i.item_price between #{item_minPrice} and #{item_maxPrice}
+    		</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and i.item_price >= #{item_minPrice}
+			</if>
+    		<if test="od_time != null">
+      			and date(o.od_time) = #{od_time}
+    		</if>
+ 		</where>
+ 		
+ 	</select>
+ 	
+ 	<select id="getReceiveCountR" resultType="java.lang.Integer"> 
+ 		select count(*) from receive r join item i 
+ 		on r.item_num = i.item_num
+ 		
+ 		<where>
+ 			<if test="item_name != ''">
+     			i.item_name like concat('%', #{item_name}, '%')
+    		</if>
+    		<if test="item_maxPrice != 0">
+    			and i.item_price between #{item_minPrice} and #{item_maxPrice}
+    		</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and i.item_price >= #{item_minPrice}
+			</if>
+    		<if test="rc_time != null">
+      			and date(r.rc_time) = #{rc_time}
+    		</if>
+ 		</where>
+ 		
+ 	</select>
+ 	
+ 	
+ 	
+ 	
  	<select id="getItemCount" resultType="java.lang.Integer"> 
  		select count(*) from item  
  	</select>
 
+     <select id="getStockCount" resultType="java.lang.Integer"> 
+ 		select count(*) from stock  
+ 	</select>
+
+     <select id="getOrderCount" resultType="java.lang.Integer"> 
+ 		select count(*) from `order`  
+ 	</select>
+ 	
+ 	<select id="getReceiveCount" resultType="java.lang.Integer"> 
+ 		select count(*) from receive  
+ 	</select>
 
 </mapper>

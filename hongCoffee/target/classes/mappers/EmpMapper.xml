@@ -375,6 +375,34 @@
  		
  	</select>
  	
+ 	<select id="getReceiveCountR" resultType="java.lang.Integer"> 
+ 		select count(*) from receive r 
+ 		join `order` o on o.od_num = r.rc_amount
+ 		
+ 		<where>
+ 			<if test="name != ''">
+     			s.name like concat('%', #{name}, '%')
+    		</if>
+    		<if test="item_name != ''">
+      			and i.item_name like concat('%', #{item_name}, '%')
+    		</if>
+    		<if test="item_maxPrice != 0">
+    			and i.item_price between #{item_minPrice} and #{item_maxPrice}
+    		</if>
+			<if test="item_minPrice != 0 and item_maxPrice == 0">
+				and i.item_price >= #{item_minPrice}
+			</if>
+    		<if test="od_time != null">
+      			and date(o.od_time) = #{od_time}
+    		</if>
+    		<if test="received_not != 100">
+    			and o.received_not = #{received_not}
+    		</if>
+ 		</where>
+ 		
+ 	</select>
+ 	
+ 	
  	
  	<select id="getShipmentCount" resultType="java.lang.Integer"> 
  		select count(*) from  shipment 

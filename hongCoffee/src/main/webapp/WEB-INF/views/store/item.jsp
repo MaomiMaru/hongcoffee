@@ -166,7 +166,7 @@ tr:hover {background-color: #F0F0F0;}
         <div class="content-wrapper">
 		<h2>재료 관리</h2>
 		
-		<form action="${pageContext.request.contextPath}/store/itemSearch" method="post">
+		<form action="${pageContext.request.contextPath}/store/itemSearch" method="get">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>유형</b></label>
@@ -243,7 +243,7 @@ tr:hover {background-color: #F0F0F0;}
  		 
  		 
  		 
- 		<div id="page_control">
+ 	<div id="page_control">
 		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 			<a href="${pageContext.request.contextPath}/store/item?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
 		</c:if>
@@ -256,7 +256,8 @@ tr:hover {background-color: #F0F0F0;}
 		
 		<c:if test="${pageDTO.count eq -1}">
 		<c:forEach var="i" begin="${itemDTO.startPage}" end="${itemDTO.endPage}" step="1">
-			<a href="${pageContext.request.contextPath}/store/itemSearch?pageNum=${i}&name=${itemDTO.name}&boss=${itemDTO.boss}&address=${itemDTO.address}&phone=${itemDTO.phone}&state=${itemDTO.state}">${i}</a>
+			<a href="${pageContext.request.contextPath}/store/itemSearch?pageNum=${i}&item_name=${itemDTO.item_name}&item_type=${itemDTO.item_type}
+			&item_minPrice=${itemDTO.item_minPrice}&item_maxPrice=${itemDTO.item_maxPrice}">${i}</a>
 		</c:forEach>
 		</c:if>
 
