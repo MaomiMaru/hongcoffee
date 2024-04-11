@@ -296,17 +296,14 @@ label input[type=radio]:checked:after{
    	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">사원 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
-		
-		<sec:authentication property="principal" var="emp_num"/>
-		<sec:authorize access="isAuthenticated()">
-		<c:if test="${emp_num.username eq 132 }">
+				
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=460,height=660,top=100,left=200')">추가</button>
 		<button style="background-color: black; color: #EFBDBC;" onclick="emp_updateAdmin()">수정</button>
-		</c:if>
-		<c:if test="${!(emp_num.username eq 132) }">
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_MEMBER')">
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num}','홍커피','width=460,height=660, top=100, left=200')">수정</button>
 <%-- 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num}','홍커피','width=370,height=520')">수정</button> --%>
-		</c:if>
 		</sec:authorize>
 		</div>
 		
@@ -315,17 +312,17 @@ label input[type=radio]:checked:after{
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-  			<c:if test="${emp_num.username eq 132 }">
+  			<sec:authorize access="hasRole('ROLE_ADMIN')">
     		<th style=" font-size:20px !important; color: black;">선택</th>
-    				</c:if>
+    		</sec:authorize>
     		<th style=" font-size:20px !important; color: black;">사원번호</th>
     		<th style=" font-size:20px !important; color: black;">이름</th>
     		<th style=" font-size:20px !important; color: black;">생년월일</th>
     		<th style=" font-size:20px !important; color: black;">부서</th>
     		<th style=" font-size:20px !important; color: black;">직급</th>
-    		<c:if test="${emp_num.username eq 132 }">
+    		<sec:authorize access="hasRole('ROLE_ADMIN')">
     		<th style=" font-size:20px !important; color: black;">권한</th>
-    		</c:if>
+    		</sec:authorize>
     		<th style=" font-size:20px !important; color: black;">연락처</th>
     		<th style=" font-size:20px !important; color: black;">이메일</th>
     		<th style=" font-size:20px !important; color: black;">입사일</th>
@@ -334,13 +331,10 @@ label input[type=radio]:checked:after{
  		 <c:forEach var="EmployeeDTO" items="${empList}">
 
   <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_emp?emp_num=${EmployeeDTO.emp_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
-  		<c:if test="${emp_num.username eq 132 }">
+  		<sec:authorize access="hasRole('ROLE_ADMIN')">
     <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${EmployeeDTO.emp_num }"></label></td>
- 		</c:if>
- 				<c:if test="${!(emp_num.username eq 132) }">
- 		
- 				</c:if>
-
+ 		</sec:authorize>
+ 				
     <td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_num}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_name}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_birth}</td>
@@ -374,12 +368,12 @@ label input[type=radio]:checked:after{
     <td style="text-align: center !important; font-size:20px !important;">사원</td>
     </c:if>
    	
-<c:if test="${sessionScope.emp_right eq 1 }">
+<sec:authorize access="hasRole('ROLE_ADMIN')">
    	<td style="text-align: center !important; font-size:20px !important;">
    		<c:if test="${EmployeeDTO.emp_right eq 1}">관리자</c:if>
    		<c:if test="${EmployeeDTO.emp_right eq 0}">일반</c:if>
    	</td>
-   	</c:if>
+</sec:authorize>
 
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_phone}</td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>

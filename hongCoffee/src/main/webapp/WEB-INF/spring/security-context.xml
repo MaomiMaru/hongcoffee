@@ -21,30 +21,40 @@
 						 password-parameter="emp_pw"
 						 authentication-success-handler-ref="customLoginSuccess"/>
 						 
-	<security:logout logout-url="/emp/logout" invalidate-session="true"/>					 
+						 
+	<security:form-login login-page="/store/login"
+						 username-parameter="num"
+						 password-parameter="pw"
+						 authentication-success-handler-ref="customLoginSuccess"/>					 
+	 
+	<security:logout logout-url="/emp/logout" invalidate-session="true"/>	
+	
+	<security:logout logout-url="/store/logout" invalidate-session="true"/>						 
 
-	<security:access-denied-handler ref="customAccessDenied"/>					 
+	<security:access-denied-handler ref="customAccessDenied"/>
 						
 </security:http>
+
 
 <security:authentication-manager>
 
 	<security:authentication-provider>
 
 <!-- 		<security:password-encoder ref="customPasswordEncoder"/> -->
-	
-<!-- 		<security:jdbc-user-service data-source-ref="dataSource"  -->
-<!-- 			users-by-username-query="select emp_num, emp_pw from employee where emp_num = ? " -->
-<!-- 			authorities-by-username-query="select emp_num, auth from auth where emp_num = ? "/> -->
-			
-			<security:jdbc-user-service data-source-ref="dataSource" 
+				
+		<security:jdbc-user-service data-source-ref="dataSource" 
 		users-by-username-query="select emp_num, emp_pw, emp_state, emp_right from employee where emp_num = ? "
 		authorities-by-username-query="select emp_num, auth from auth where emp_num = ? "/>
+		
+		<security:jdbc-user-service data-source-ref="dataSource" 
+		users-by-username-query="select num, pw, state from store where num = ? "
+		authorities-by-username-query="select num, auth from auth where num = ? "/>
 			
 		<security:password-encoder ref="bcryptPasswordEncoder"/>
 
 	</security:authentication-provider>
 
 </security:authentication-manager>
+
 
 </beans>

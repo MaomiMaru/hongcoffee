@@ -29,12 +29,12 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		});
 		
 		if(roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect(request.getContextPath() + "/emp/main");
+			response.sendRedirect(request.getContextPath() + "/emp/main?emp_num=" + request.getParameter("emp_num"));
 			return;
 		}
 		
 		if(roleNames.contains("ROLE_MEMBER")) {
-			response.sendRedirect(request.getContextPath() + "/emp/main");
+			response.sendRedirect(request.getContextPath() + "/emp/main?emp_num=" + request.getParameter("emp_num"));
 			return;
 		}
 		
@@ -42,6 +42,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 			response.sendRedirect(request.getContextPath() + "/store/main");
 			return;
 		}
+		
 		response.sendRedirect(request.getContextPath() + "/");
 	}
 

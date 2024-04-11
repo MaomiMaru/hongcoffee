@@ -43,21 +43,21 @@ public class StoreController {
 	}
 
 	// 로그인 버튼을 눌렀을 때 처리 과정
-	@PostMapping("/loginPro")
-	public String loginPro(StoreDTO storeDTO, HttpSession session) {
-		System.out.println("StoreController loginPro()");
-
-		StoreDTO storeDTO1 = storeService.userCheck(storeDTO);
-		if (storeDTO1 != null) {
-			session.setAttribute("num", storeDTO1.getNum());
-			session.setAttribute("sname", storeDTO1.getName());
-			session.setAttribute("boss", storeDTO1.getBoss());
-			session.setAttribute("state", storeDTO1.getState());
-			return "redirect:/store/main";
-		} else {
-			return "/store/msg";
-		}
-	}
+//	@PostMapping("/loginPro")
+//	public String loginPro(StoreDTO storeDTO, HttpSession session) {
+//		System.out.println("StoreController loginPro()");
+//
+//		StoreDTO storeDTO1 = storeService.userCheck(storeDTO);
+//		if (storeDTO1 != null) {
+//			session.setAttribute("num", storeDTO1.getNum());
+//			session.setAttribute("sname", storeDTO1.getName());
+//			session.setAttribute("boss", storeDTO1.getBoss());
+//			session.setAttribute("state", storeDTO1.getState());
+//			return "redirect:/store/main";
+//		} else {
+//			return "/store/msg";
+//		}
+//	}
 
 	// 로그아웃
 	@GetMapping("/logout")

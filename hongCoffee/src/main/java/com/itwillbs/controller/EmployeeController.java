@@ -53,15 +53,10 @@ public class EmployeeController {
 //		}
 //	}
 
-	@GetMapping("/insert")
-	public String insert() {
-		return "/emp/insert";
-	}
-	
 	
 	@GetMapping("/login")
 	public String login(HttpSession session) {
-		System.out.println("EmployeeService login()");
+		System.out.println("EmployeeController login()");
 	
 		return "/emp/login";
 	}
@@ -69,9 +64,22 @@ public class EmployeeController {
 	
 	//1. 대시 보드
 	@GetMapping("/main")
-	public String main() {
+	public String main(HttpServletRequest request, HttpSession session) {
 		System.out.println("EmployeeController main()");
 
+		
+		
+		if (request.getParameter("emp_num") != null) {
+			int emp_num = Integer.parseInt(request.getParameter("emp_num"));
+			
+			EmployeeDTO employeeDTO = employeeService.getEmployee(emp_num);
+			
+			session.setAttribute("emp_num", employeeDTO.getEmp_num());
+			session.setAttribute("emp_name", employeeDTO.getEmp_name());
+			session.setAttribute("emp_right", employeeDTO.getEmp_right());
+			session.setAttribute("emp_rank", employeeDTO.getEmp_rank());
+		}
+		
 		return "/emp/main";
 	}
 

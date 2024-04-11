@@ -86,12 +86,12 @@ $(function(){
 			return false;
 		}
 			
-// 		//사원명
-// 		if($('.emp_name').val()=='' || $('.emp_name').val()==null||$('.emp_name').val()==undefined){
-// 			alert('사원명을 입력해주세요.');
-// 			$('.emp_name').focus();
-// 			return false;
-// 		}
+		//사원명
+		if($('.emp_name').val()=='' || $('.emp_name').val()==null||$('.emp_name').val()==undefined){
+			alert('사원명을 입력해주세요.');
+			$('.emp_name').focus();
+			return false;
+		}
 // 		var phoneCheck = RegExp(/^[0-9\-]{9,13}$/);
 // 		if( ! phoneCheck.test($('.emp_name').val()) ){
 // 			alert("숫자만 입력가능합니다.");
