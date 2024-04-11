@@ -47,9 +47,9 @@ select{
 </select><br>
 <sub></sub>
 <div><b>권한</b></div>
-<select name="emp_right">
-<option value="0" <c:if test="${employeeDTO.emp_right eq '0'}"> selected </c:if>>사원</option>
-<option value="1" <c:if test="${employeeDTO.emp_right eq '1'}"> selected </c:if>>관리자</option>
+<select name="auth">
+<option value="ROLE_MEMBER" <c:if test="${employeeDTO.auth eq 'ROLE_MEMBER'}"> selected </c:if>>사원</option>
+<option value="ROLE_ADMIN" <c:if test="${employeeDTO.auth eq 'ROLE_ADMIN'}"> selected </c:if>>관리자</option>
 </select><br>
 <sub></sub>
 <div><b>연락처</b></div><input type="text" name="emp_phone" class="emp_phone" value="${employeeDTO.emp_phone }"><br>
@@ -71,6 +71,7 @@ select{
 <span style="float:right">
 <input type="submit" value="등록하기" style="background-color: black; color: #EFBDBC;">  <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </fieldset>
 </form>
 
@@ -85,12 +86,12 @@ $(function(){
 			return false;
 		}
 			
-		//사원명
-		if($('.emp_name').val()=='' || $('.emp_name').val()==null||$('.emp_name').val()==undefined){
-			alert('사원명을 입력해주세요.');
-			$('.emp_name').focus();
-			return false;
-		}
+// 		//사원명
+// 		if($('.emp_name').val()=='' || $('.emp_name').val()==null||$('.emp_name').val()==undefined){
+// 			alert('사원명을 입력해주세요.');
+// 			$('.emp_name').focus();
+// 			return false;
+// 		}
 // 		var phoneCheck = RegExp(/^[0-9\-]{9,13}$/);
 // 		if( ! phoneCheck.test($('.emp_name').val()) ){
 // 			alert("숫자만 입력가능합니다.");

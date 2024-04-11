@@ -38,7 +38,7 @@
 <!-- 			authorities-by-username-query="select emp_num, auth from auth where emp_num = ? "/> -->
 			
 			<security:jdbc-user-service data-source-ref="dataSource" 
-		users-by-username-query="select emp_num, emp_pw, emp_state from employee where emp_num = ? "
+		users-by-username-query="select emp_num, emp_pw, emp_state, emp_right from employee where emp_num = ? "
 		authorities-by-username-query="select emp_num, auth from auth where emp_num = ? "/>
 			
 		<security:password-encoder ref="bcryptPasswordEncoder"/>

@@ -49,10 +49,10 @@ select{
 </select><br>
 <sub></sub>
 <div><b>권한</b></div>
-<select name="emp_right" class="emp_right">
+<select name="auth" class="emp_right">
 <option value="100">선택해주세요.</option>
-<option value="1">관리자</option>
-<option value="0">사원</option>
+<option value="ROLE_ADMIN">관리자</option>
+<option value="ROLE_MEMBER">사원</option>
 </select><br>
 <sub></sub>
 <div><b>연락처</b></div><input type="text" name="emp_phone" class="emp_phone"><br>
@@ -67,6 +67,7 @@ select{
 <span style="float:right">
 <input type="submit" value="등록하기" style="background-color: black; color: #EFBDBC;">  <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">	
 </fieldset>
 </form>
 

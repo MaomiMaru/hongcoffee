@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -252,7 +253,7 @@ label input[type=radio]:checked:after{
       <div class="main-panel">
         <div class="content-wrapper">
 		<h2>사원 관리</h2><br>
-		<div><h3 style="margin-top: 15px;">사원 검색</h3></div>
+		<div><h3 style="margin-top: 15px;">사원 검색</h3></div>		
 		<form action="${pageContext.request.contextPath}/emp/empSearch" method="post">
 			<div id="search">
 				<ul>
@@ -286,7 +287,8 @@ label input[type=radio]:checked:after{
 					
 					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
-				</ul>	
+				</ul>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">	
 			</div>
 		</form>
 
@@ -295,14 +297,17 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">사원 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		
-		<c:if test="${sessionScope.emp_right eq 1 }">
+		<sec:authentication property="principal" var="emp_num"/>
+		<sec:authorize access="isAuthenticated()">
+		<c:if test="${emp_num.username eq 132 }">
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_insert','홍커피','width=460,height=660,top=100,left=200')">추가</button>
 		<button style="background-color: black; color: #EFBDBC;" onclick="emp_updateAdmin()">수정</button>
 		</c:if>
-		<c:if test="${sessionScope.emp_right eq 0 }">
+		<c:if test="${!(emp_num.username eq 132) }">
 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num}','홍커피','width=460,height=660, top=100, left=200')">수정</button>
 <%-- 		<button style="background-color: black; color: #EFBDBC;" onclick="window.open('${pageContext.request.contextPath}/emp/popup/emp_update?emp_num=${sessionScope.emp_num}','홍커피','width=370,height=520')">수정</button> --%>
 		</c:if>
+		</sec:authorize>
 		</div>
 		
 		
@@ -310,7 +315,7 @@ label input[type=radio]:checked:after{
 		<div style="width:100%;  height:700px; border: black 1px solid; float: left; text-align: center;">
 		<table class="table">
   			<tr style="background-color: transparent !important;">
-  			<c:if test="${sessionScope.emp_right eq 1 }">
+  			<c:if test="${emp_num.username eq 132 }">
     		<th style=" font-size:20px !important; color: black;">선택</th>
     				</c:if>
     		<th style=" font-size:20px !important; color: black;">사원번호</th>
@@ -318,7 +323,7 @@ label input[type=radio]:checked:after{
     		<th style=" font-size:20px !important; color: black;">생년월일</th>
     		<th style=" font-size:20px !important; color: black;">부서</th>
     		<th style=" font-size:20px !important; color: black;">직급</th>
-    		<c:if test="${sessionScope.emp_right eq 1 }">
+    		<c:if test="${emp_num.username eq 132 }">
     		<th style=" font-size:20px !important; color: black;">권한</th>
     		</c:if>
     		<th style=" font-size:20px !important; color: black;">연락처</th>
@@ -329,10 +334,10 @@ label input[type=radio]:checked:after{
  		 <c:forEach var="EmployeeDTO" items="${empList}">
 
   <tr onclick="window.open('${pageContext.request.contextPath}/emp/detail/d_emp?emp_num=${EmployeeDTO.emp_num}','홍커피','width=1500,height=725,top=100, left=200,scrollbars=yes')">
-  		<c:if test="${sessionScope.emp_right eq 1 }">
+  		<c:if test="${emp_num.username eq 132 }">
     <td style="text-align: center !important; font-size:20px !important;" onclick="event.cancelBubble=true"><label for="radio1-true"><input type="radio" name="radio1" id="radio1-true" value="${EmployeeDTO.emp_num }"></label></td>
  		</c:if>
- 				<c:if test="${sessionScope.emp_right eq 0 }">
+ 				<c:if test="${!(emp_num.username eq 132) }">
  		
  				</c:if>
 
