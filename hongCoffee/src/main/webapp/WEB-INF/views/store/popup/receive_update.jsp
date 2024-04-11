@@ -21,10 +21,10 @@ select{
 <form action="${pageContext.request.contextPath}/store/popup/receive_updatePro" method="post" class="form">
 <h2 style="margin-left: 10px">입고 수정</h2>
 <fieldset style="border:0px">
-<!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 <input type="hidden" name="od_num" value="${receiveDTO.od_num}">
 <input type="hidden" name="num" value="${receiveDTO.num}">
 <input type="hidden" name="item_num" value="${receiveDTO.item_num}">
+<input type="hidden" name="rc_amountBefore" value="${receiveDTO.rc_amount}">
 <div class="check"></div><br>
 <div><b>유형</b></div><input type="text" value="<c:if test="${receiveDTO.item_type eq 0}">식품</c:if><c:if test="${receiveDTO.item_type eq 1}">비식품</c:if>" readonly><br>
 <div><b>재료명</b></div><input type="text" name="item_name" value="${receiveDTO.item_name}" readonly><br>

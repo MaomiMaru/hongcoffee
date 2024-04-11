@@ -120,3 +120,31 @@ input[type=text]{
 		</div>
 	</div>
 </nav>
+
+<body>
+<script type="text/javascript">
+
+var sessionTimeout = ${session.maxInactiveInterval * 1000};
+
+function showSessionExpirationAlertAndRedirect() {
+ alert("세션이 만료되었습니다. 로그인 페이지로 이동합니다.");
+ window.location.href = "${pageContext.request.contextPath}/emp/login"; 
+}
+
+function checkSessionExpiration() {
+ setTimeout(function() {
+     var now = new Date().getTime();
+     if (now >= sessionTimeout) {
+         showSessionExpirationAlertAndRedirect();
+     } else if (now >= alertTime) {
+         alert("세션이 곧 만료됩니다.");
+     }
+     checkSessionExpiration();
+ }, 60000); 
+}
+
+window.onload = function() {
+ checkSessionExpiration();
+};
+</script>
+</body>

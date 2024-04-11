@@ -39,7 +39,7 @@ public class EmployeeController {
 	@PostMapping("/loginPro")
 	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
 		System.out.println("EmployeeService loginPro()");
-
+		
 		EmployeeDTO employeeDTO1 = employeeService.userCheck(employeeDTO);
 		if (employeeDTO1 != null) {
 			session.setAttribute("emp_num", employeeDTO1.getEmp_num());

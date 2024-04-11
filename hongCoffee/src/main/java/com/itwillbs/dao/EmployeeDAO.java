@@ -205,12 +205,12 @@ public class EmployeeDAO {
 			}
 
 			public int getShipmentCount(ShipmentDTO shipmentDTO) {
-				System.out.println("getShipmentCount");
+				System.out.println("EmployeeDAO getShipmentCount()");
 				return sqlSession.selectOne(namespace + ".getShipmentCount", shipmentDTO);
 			}
 			
 			public int getEmployeeCount(EmployeeDTO employeeDTO) {
-				System.out.println("getEmployeeCount");
+				System.out.println("EmployeeDAO getEmployeeCount()");
 				return sqlSession.selectOne(namespace + ".getEmployeeCount", employeeDTO);
 			}
 
@@ -219,6 +219,18 @@ public class EmployeeDAO {
 			public List<SalesDTO> getTop5() {
 				System.out.println("EmployeeDAO getTop5()");
 				return sqlSession.selectList(namespace+".getTop5");
+			}
+
+
+			public List<ShipmentDTO> getShipmentListEx() {
+				System.out.println("EmployeeDAO getShipmentListEx()");
+				return sqlSession.selectList(namespace+".getShipmentListEx");
+			}
+
+
+			public List<OrderDTO> getOrderListEx() {
+				System.out.println("EmployeeDAO getOrderListEx()");
+				return sqlSession.selectList(namespace+".getOrderListEx");
 			}
 	
 	

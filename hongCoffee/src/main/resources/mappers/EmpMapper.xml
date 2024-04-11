@@ -85,6 +85,13 @@
  		limit #{startRow},#{pageSize}
  	</select>
  	
+ 	<select id="getOrderListEx" resultType="com.itwillbs.domain.OrderDTO"> 
+ 		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.shipment_not, o.od_note, o.ob_note  
+ 		from `order` o join store s on o.num = s.num 
+ 		join item i on o.item_num = i.item_num
+ 		order by o.od_time desc
+ 	</select>
+ 	
  	<select id="searchOrderList" resultType="com.itwillbs.domain.OrderDTO">
  		select o.od_num, s.name, i.item_name, i.item_price, o.od_amount, o.od_time, o.shipment_not, o.od_note, o.ob_note  
  		from `order` o join store s on o.num = s.num 
@@ -121,6 +128,15 @@
  		left join `order` o on h.od_num = o.od_num
  		order by h.sh_time desc
 		limit #{startRow},#{pageSize}
+ 	</select>
+ 	
+ 	<select id="getShipmentListEx" resultType="com.itwillbs.domain.ShipmentDTO"> 
+ 		select  h.od_num, s.name, i.item_name, h.sh_amount, i.item_price, h.sh_time, r.pay, r.od_num, h.sh_note, o.received_not
+ 		from shipment h left join store s on h.num = s.num
+ 		left join item i on h.item_num = i.item_num
+ 		left join receive r on h.od_num = r.od_num
+ 		left join `order` o on h.od_num = o.od_num
+ 		order by h.sh_time desc
  	</select>
  	
  	<select id="searchShipmentList" resultType="com.itwillbs.domain.ShipmentDTO">
@@ -399,11 +415,20 @@
  	</select>
 
 <select id="getTop5" resultType="com.itwillbs.domain.SalesDTO">
+<!--  		select s.name, sum(r.sales*p.prod_price) "maechul" -->
+<!-- 		from result r left join product p -->
+<!-- 		on r.prod_num = p.prod_num -->
+<!-- 		left join store s on r.num = s.num -->
+<!-- 		where r.rs_date = '2024-03-20' -->
+<!-- 		group by s.name -->
+<!-- 		order by 2 desc -->
+<!-- 		limit 5 -->
+
  		select s.name, sum(r.sales*p.prod_price) "maechul"
 		from result r left join product p
 		on r.prod_num = p.prod_num
 		left join store s on r.num = s.num
-		where r.rs_date = '2024-03-20'
+		where date(r.rs_date) = date_sub(CURDATE(), INTERVAL 1 DAY)
 		group by s.name
 		order by 2 desc
 		limit 5

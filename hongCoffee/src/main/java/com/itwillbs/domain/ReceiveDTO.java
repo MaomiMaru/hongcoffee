@@ -8,6 +8,7 @@ public class ReceiveDTO {
 	private int num; //지점번호
 	private int item_num; //물품번호
 	private int rc_amount; //입고수량
+	private int rc_amountBefore; //입고 수정 전 수량
 	private Timestamp rc_time; //입고일시
 	private String rc_note; //입고적요
 	private String sh_note; //출하적요
@@ -63,6 +64,14 @@ public class ReceiveDTO {
 	public void setRc_amount(int rc_amount) {
 		this.rc_amount = rc_amount;
 	}
+	public int getRc_amountBefore() {
+		return rc_amountBefore;
+	}
+
+	public void setRc_amountBefore(int rc_amountBefore) {
+		this.rc_amountBefore = rc_amountBefore;
+	}
+
 	public Timestamp getRc_time() {
 		return rc_time;
 	}

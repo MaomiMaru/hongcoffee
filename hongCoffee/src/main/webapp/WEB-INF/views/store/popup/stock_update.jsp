@@ -20,10 +20,8 @@ select{
 <body>
 <form action="${pageContext.request.contextPath}/store/popup/stock_updatePro" method="post" class="form">
 <h2 style="margin-left: 10px">재고 수정</h2>
-<input type="hidden" name="stock_num" value="${stockDTO.stock_num }">
+<input type="hidden" name="stock_num" value="${stockDTO.stock_num}">
 <fieldset style="border:0px">
-<!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
-
 				<div>
 					<b>유형</b>
 				</div>
@@ -31,11 +29,11 @@ select{
 				<div>
 					<b>재료명</b>
 				</div>
-					<input type="text" value="${stockDTO.item_name}" name="item_name" readonly ><br>
+					<input type="text" value="${stockDTO.item_name}" readonly ><br>
 			<div>
 				<b>단가</b>
 			</div>
-			<input type="text" name="item_price" id="item_price" value="${stockDTO.item_price}" readonly><br>
+			<input type="text" id="item_price" value="${stockDTO.item_price}" readonly><br>
 			<div>
 				<b>보유량</b>
 			</div>
@@ -43,7 +41,7 @@ select{
 			<div>
 				<b>적요</b>
 			</div>
-			<textarea name="stock_note" rows="30" cols="37" style="height: 210px; width: 410px;">${stockDTO.stock_note }</textarea><br>
+			<textarea name="stock_note" rows="30" cols="37" style="height: 210px; width: 410px;">${stockDTO.stock_note}</textarea><br>
 
 <span style="float:right">
 <input type="submit" value="수정하기" style="background-color: black; color: #EFBDBC;"> <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/store/popup/close'">취소하기</button>

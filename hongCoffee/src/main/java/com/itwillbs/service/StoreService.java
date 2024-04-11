@@ -223,9 +223,9 @@ public class StoreService {
 	}
 
 
-	public int getStockNum(String item_name) {
+	public int getStockNum(StockDTO stockDTO) {
 		System.out.println("StoreService getStockNum()");
-		return storeDAO.getStockNum(item_name);
+		return storeDAO.getStockNum(stockDTO);
 	}
 
 

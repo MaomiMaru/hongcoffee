@@ -281,6 +281,16 @@ public class EmployeeService {
 			return employeeDAO.getTop5();
 		}
 
+		public List<ShipmentDTO> getShipmentListEx() {
+			System.out.println("EmployeeService getShipmentListEx()");
+			return employeeDAO.getShipmentListEx();
+		}
+
+		public List<OrderDTO> getOrderListEx() {
+			System.out.println("EmployeeService getOrderListEx()");
+			return employeeDAO.getOrderListEx();
+		}
+
 
 
 

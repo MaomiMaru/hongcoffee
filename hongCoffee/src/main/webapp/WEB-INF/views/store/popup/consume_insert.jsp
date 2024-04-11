@@ -33,7 +33,7 @@ select {
 		action="${pageContext.request.contextPath}/store/popup/consume_insertPro"
 		method="post" class="form">
 		<input type="hidden" name="num" value="${sessionScope.num}">
-		<h2 style="margin-left: 10px">실적 추가</h2>
+		<h2 style="margin-left: 10px">소모 추가</h2>
 		<sub>반드시 유형을 먼저 선택해주셔야합니다.</sub>
 		<fieldset style="border: 0px">
 			<div class="check"></div>
@@ -147,8 +147,8 @@ $(function() {
         let itemPrice = $('#item_price');
 
         switch (itemName) {
-            case "에티오피아 350g":
-            case "콜롬비아 350g":
+            case "에티오피아 250g":
+            case "콜롬비아 250g":
                 itemPrice.val(3500);
                 break;
             case "바닐라 시럽 500g":
@@ -193,8 +193,8 @@ function getAgreeType() {
     let obj = {
         "식품": {
             '100': '선택해주세요',
-            '에티오피아 350g': '에티오피아 350g',
-            '콜롬비아 350g': '콜롬비아 350g',
+            '에티오피아 250g': '에티오피아 250g',
+            '콜롬비아 250g': '콜롬비아 250g',
             '바닐라 시럽 500g': '바닐라 시럽 500g',
             '초코 시럽 500g': '초코 시럽 500g',
             '딸기 시럽 500g': '딸기 시럽 500g',

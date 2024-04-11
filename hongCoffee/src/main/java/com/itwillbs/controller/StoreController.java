@@ -268,8 +268,13 @@ public class StoreController {
 	}
 	
 	@PostMapping("/popup/stock_updatePro")
-	public String stock_updatePro(StockDTO stockDTO){
+	public String stock_updatePro(HttpServletRequest request){
 		System.out.println("StoreController stock_updatePro");
+		
+		StockDTO stockDTO = new StockDTO();
+		stockDTO.setStock_num(Integer.parseInt(request.getParameter("stock_num")));
+		stockDTO.setAmount(Integer.parseInt(request.getParameter("amount")));
+		stockDTO.setStock_note(request.getParameter("stock_note"));
 		
 		storeService.stockUpdate(stockDTO);
 		
@@ -582,7 +587,10 @@ public class StoreController {
 	public String consume_insertPro(HttpServletRequest request) {
 		System.out.println("StoreController consume_insertPro()");
 		ResultDTO resultDTO = new ResultDTO(); 
-		int stock_num = storeService.getStockNum(request.getParameter("item_name")); 
+		StockDTO stockDTO = new StockDTO();
+		stockDTO.setNum(Integer.parseInt(request.getParameter("num")));
+		stockDTO.setItem_name(request.getParameter("item_name"));
+		int stock_num = storeService.getStockNum(stockDTO); 
 		
 		String rs_date = request.getParameter("rs_date");
 //		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -720,10 +728,13 @@ public class StoreController {
 	public String sell_insertPro(HttpServletRequest request, ResultDTO resultDTO) {
 		System.out.println("StoreController sell_insertPro()");
 		
+		resultDTO.setNum(Integer.parseInt(request.getParameter("num")));
 		resultDTO.setRs_date(request.getParameter("rs_date"));
 		resultDTO.setProd_name(request.getParameter("prod_name"));
 		resultDTO.setSales(Integer.parseInt(request.getParameter("sales")));
 //		resultDTO.setProd_price(Integer.parseInt(request.getParameter("prod_price")));
+		
+		System.out.println(resultDTO);
 		
 		storeService.sellInsert(resultDTO);
 		

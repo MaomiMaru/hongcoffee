@@ -224,9 +224,9 @@ public class StoreDAO {
 	}
 
 
-	public int getStockNum(String item_name) {
+	public int getStockNum(StockDTO stockDTO) {
 		System.out.println("StoreDAO getStockNum()");
-		return sqlSession.selectOne(namespace+".getStockNum", item_name);
+		return sqlSession.selectOne(namespace+".getStockNum", stockDTO);
 	}
 
 
