@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -205,24 +204,18 @@ label input[type=radio]:checked:after{
 		
 
 		<form action="${pageContext.request.contextPath}/store/resultSearch" class="resultSearch" method="get">
-
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>영업일</b></label>
 						<input type="date" name="rs_minDate" class="rs_minDate" max="9999-12-31" style="width : 140.5px;"> ~
 						<input type="date" name="rs_maxDate" class="rs_maxDate" max="9999-12-31" style="width : 140.5px;">
-
-
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
-
 				</ul>	
 			</div>
 		</form>
 
 		<hr>
-   	
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">실적 목록</h3></div>
-
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		</div>
 

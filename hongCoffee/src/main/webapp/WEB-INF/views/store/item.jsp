@@ -50,7 +50,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 57px;
+	padding-top: 35px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -66,6 +66,12 @@ ul{
 }
 
 .choose {
+	width: 300px;
+	height: 29.63px;
+	font-size: 15px;
+}
+
+.choose2 {
 	width: 300px;
 	height: 29.63px;
 	font-size: 15px;
@@ -182,7 +188,14 @@ tr:hover {background-color: #F0F0F0;}
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
 						<input type="text" name="item_minPrice" class="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
-						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;">
+						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
+					
+					<li><div class="search_div"><label class="search_name"><b>상태</b></label>
+						<select class="choose2" name="item_state">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">취급</option>
+							<option value="1">미취급</option>
+						</select>
 
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
@@ -254,7 +267,7 @@ tr:hover {background-color: #F0F0F0;}
 		<c:if test="${pageDTO.count eq -1}">
 		<c:forEach var="i" begin="${itemDTO.startPage}" end="${itemDTO.endPage}" step="1">
 			<a href="${pageContext.request.contextPath}/store/itemSearch?pageNum=${i}&item_name=${itemDTO.item_name}&item_type=${itemDTO.item_type}
-			&item_minPrice=${itemDTO.item_minPrice}&item_maxPrice=${itemDTO.item_maxPrice}">${i}</a>
+			&item_minPrice=${itemDTO.item_minPrice}&item_maxPrice=${itemDTO.item_maxPrice}&item_state=${itemDTO.item_state}">${i}</a>
 		</c:forEach>
 		</c:if>
 
@@ -337,8 +350,8 @@ $('.itemSearch').submit(function(){
 
 	$(function(){
 	    $('.itemSearch').submit(function(){
-	        if($('.choose').val()=="100" && $('.item_name').val() =="" && $('.item_minPrice').val() == "" && $('.item_maxPrice').val() ==""){
-	            alert('재료를 조회하기 위해서는 유형, 재료명, 최소 금액, 최대 금액 중 하나 이상 입력해야합니다.');
+	        if($('.choose').val()=="100" && $('.item_name').val() =="" && $('.item_minPrice').val() == "" && $('.item_maxPrice').val() =="" && $('.choose2').val()=="100"){
+	            alert('재료를 조회하기 위해서는 유형, 재료명, 최소 금액, 최대 금액, 상태 중 하나 이상 입력해야합니다.');
 	            return false;
 	        }
 	    });

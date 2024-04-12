@@ -159,115 +159,112 @@ public class StoreController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 					
-					// 페이징 작업
-					// 전체 글개수 구하기  int 리턴할형 count = getItemCount(itemDTO) 검색어 포함
-					int count = storeService.getItemCount(pageDTO);
-					// 한 화면에 보여줄 페이지 개수 설정
-					int pageBlock = 10;
-					// 한 화면에 보여줄 시작페이지 구하기
-					// 1~10 => 1, 11~20 => 11,..
-					int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
-					// 한 화면에 보여줄 끝페이지 구하기
-					int endPage = startPage + pageBlock - 1;
-					// 전체 페이지개수 구하기
-					int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-					// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
-					if(endPage > pageCount) {
-						endPage = pageCount;
-					}
+		// 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getItemCount(itemDTO) 검색어 포함
+		int count = storeService.getItemCount(pageDTO);
+		// 한 화면에 보여줄 페이지 개수 설정
+		int pageBlock = 10;
+		// 한 화면에 보여줄 시작페이지 구하기
+		// 1~10 => 1, 11~20 => 11,..
+		int startPage = (currentPage - 1)/pageBlock * pageBlock + 1;
+			// 한 화면에 보여줄 끝페이지 구하기
+		int endPage = startPage + pageBlock - 1;
+		// 전체 페이지개수 구하기
+		int pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
+		// pageDTO 저장
+		pageDTO.setCount(count);
+		pageDTO.setPageBlock(pageBlock);
+		pageDTO.setStartPage(startPage);
+		pageDTO.setEndPage(endPage);
+		pageDTO.setPageCount(pageCount);
+		
+		//필터 작업
+			
+		String item_sType = request.getParameter("item_type");
+		int item_type = 100;
+
+		try {
+			if (item_sType != null || item_sType != "") {
+				item_type = Integer.parseInt(item_sType);
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		itemDTO.setItem_type(item_type);
+
+		String item_name = request.getParameter("item_name");
+		itemDTO.setItem_name(item_name);
+
+		String item_sminPrice = request.getParameter("item_minPrice");
+		int item_minPrice = 0;
+		String item_smaxPrice = request.getParameter("item_maxPrice");
+		int item_maxPrice = 0;
+
+		try {
+			if (item_sminPrice != null || item_sminPrice != "") {
+				item_minPrice = Integer.parseInt(item_sminPrice);
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		try {
+			if (item_smaxPrice != null || item_smaxPrice != "") {
+				item_maxPrice = Integer.parseInt(item_smaxPrice);
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+
+		itemDTO.setItem_minPrice(item_minPrice);
+		itemDTO.setItem_maxPrice(item_maxPrice);
+		
+		int item_state = Integer.parseInt(request.getParameter("item_state"));
+		itemDTO.setItem_state(item_state);
+			
+		// 필터 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getItemCount(itemDTO) 검색어 포함
+		count = storeService.getItemCount(itemDTO);
+		// 전체 페이지개수 구하기
+		pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		//필터 페이징 itemDTO 저장
+		itemDTO.setPageSize(pageSize);
+		itemDTO.setPageNum(pageNum);
+		itemDTO.setCurrentPage(currentPage);
+		itemDTO.setCount(count);
+		itemDTO.setPageBlock(pageBlock);
+		itemDTO.setStartPage(startPage);
+		itemDTO.setEndPage(endPage);
+		itemDTO.setPageCount(pageCount);
 					
-					// pageDTO 저장
-					pageDTO.setCount(count);
-					pageDTO.setPageBlock(pageBlock);
-					pageDTO.setStartPage(startPage);
-					pageDTO.setEndPage(endPage);
-					pageDTO.setPageCount(pageCount);
-					
-		   //필터 작업
-						
-			String item_sType = request.getParameter("item_type");
-			int item_type = 100;
+		List<ItemDTO> itemList;
 
-			try {
-				if (item_sType != null || item_sType != "") {
-					item_type = Integer.parseInt(item_sType);
-				}
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
+		if (item_type == 100 && item_name == null && item_minPrice == 0 && item_maxPrice == 0 && item_state == 100) {
+			itemList = storeService.getItemList(pageDTO);
+		} else {
+			itemList = storeService.searchItemList(itemDTO);
+			pageDTO.setCount(-1);
+			model.addAttribute("itemDTO", itemDTO);
+		}
 
-			itemDTO.setItem_type(item_type);
-
-			String item_name = request.getParameter("item_name");
-			itemDTO.setItem_name(item_name);
-
-			String item_sminPrice = request.getParameter("item_minPrice");
-			int item_minPrice = 0;
-
-			String item_smaxPrice = request.getParameter("item_maxPrice");
-			int item_maxPrice = 0;
-
-			try {
-				if (item_sminPrice != null || item_sminPrice != "") {
-					item_minPrice = Integer.parseInt(item_sminPrice);
-				}
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (item_smaxPrice != null || item_smaxPrice != "") {
-					item_maxPrice = Integer.parseInt(item_smaxPrice);
-				}
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			}
-
-			itemDTO.setItem_minPrice(item_minPrice);
-			itemDTO.setItem_maxPrice(item_maxPrice);
-			
-			// 필터 페이징 작업
-					// 전체 글개수 구하기  int 리턴할형 count = getItemCount(itemDTO) 검색어 포함
-					count = storeService.getItemCount(itemDTO);
-					// 전체 페이지개수 구하기
-					pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
-					// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
-					if(endPage > pageCount) {
-						endPage = pageCount;
-					}
-
-			//필터 페이징 itemDTO 저장
-					itemDTO.setPageSize(pageSize);
-					itemDTO.setPageNum(pageNum);
-					itemDTO.setCurrentPage(currentPage);
-					itemDTO.setCount(count);
-					itemDTO.setPageBlock(pageBlock);
-					itemDTO.setStartPage(startPage);
-					itemDTO.setEndPage(endPage);
-					itemDTO.setPageCount(pageCount);
-			
-			
-			List<ItemDTO> itemList;
-
-			if (item_type == 100 && item_name == null && item_minPrice == 0 && item_maxPrice == 0) {
-				itemList = storeService.getItemList(pageDTO);
-			} else {
-				itemList = storeService.searchItemList(itemDTO);
-				pageDTO.setCount(-1);
-				model.addAttribute("itemDTO", itemDTO);
-			}
-
-			model.addAttribute("itemList", itemList);
-			model.addAttribute("pageDTO",pageDTO);
-			return "/store/item";
-		}// itemSearch
+		model.addAttribute("itemList", itemList);
+		model.addAttribute("pageDTO",pageDTO);
+		return "/store/item";
+	}// itemSearch
 
 	// 3. 물류 관리
 	// 3-1. 재고 관리
 	@GetMapping("/stock")
-
-
 	public String stock(HttpSession session, HttpServletRequest request, Model model,PageDTO pageDTO) {
-
 		System.out.println("StoreController stock()");
 
 		//===========페이징
@@ -318,9 +315,7 @@ public class StoreController {
 
 	@GetMapping("/stockSearch")
 	public String stockSearch(HttpSession session, HttpServletRequest request, Model model,PageDTO pageDTO) {
-
 		System.out.println("StoreController stockSearch()");
-
 		StockDTO stockDTO = new StockDTO();
 
 		//===========페이징
@@ -351,7 +346,6 @@ public class StoreController {
 		if(endPage > pageCount) {
 			endPage = pageCount;
 		}
-		
 		// pageDTO 저장
 		pageDTO.setCount(count);
 		pageDTO.setPageBlock(pageBlock);
@@ -361,45 +355,52 @@ public class StoreController {
 		
 		
 		//필터 작업
-		String item_sType = request.getParameter("item_type");
-
-		try {
-			stockDTO.setItem_type(item_sType != null ? Integer.parseInt(item_sType) : 100);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-
-		String item_sminPrice = request.getParameter("item_minPrice");
-
-		String item_smaxPrice = request.getParameter("item_maxPrice");
-
-		try {
-			stockDTO.setItem_minPrice(item_sminPrice != null ? Integer.parseInt(item_sminPrice) : 0);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-		try {
-			stockDTO.setItem_maxPrice(item_smaxPrice != null ? Integer.parseInt(item_smaxPrice) : 0);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-
-		int num = (int)session.getAttribute("num");
-		stockDTO.setNum(num);
+		int item_type = Integer.parseInt(request.getParameter("item_type"));
 		String item_name = request.getParameter("item_name");
+		String item_minPrice = request.getParameter("item_minPrice");
+		String item_maxPrice = request.getParameter("item_maxPrice");
+		stockDTO.setItem_type(item_type);
 		stockDTO.setItem_name(item_name);
+		try {
+			stockDTO.setItem_minPrice(Integer.parseInt(item_minPrice));
+			stockDTO.setItem_maxPrice(Integer.parseInt(item_maxPrice));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 		stockDTO.setNum((int)session.getAttribute("num"));
-
+		
+		// 필터 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getStockCount(resultDTO) 검색어 포함
+		count = storeService.getStockCount(stockDTO);
+		// 전체 페이지개수 구하기
+		pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+				
+		//필터 페이징 stockDTO 저장
+		stockDTO.setPageSize(pageSize);
+		stockDTO.setPageNum(pageNum);
+		stockDTO.setCurrentPage(currentPage);
+		stockDTO.setCount(count);
+		stockDTO.setPageBlock(pageBlock);
+		stockDTO.setStartPage(startPage);
+		stockDTO.setEndPage(endPage);
+		stockDTO.setPageCount(pageCount);
+		
 		List<StockDTO> stockList;
 
-		if (item_sType == null && item_name == "" && item_sminPrice == null && item_smaxPrice == null) {
+		if (item_type == 100 && item_name == "" && item_minPrice == "" && item_maxPrice == "") {
 			stockList = storeService.getStockList(pageDTO);
 		} else {
 			stockList = storeService.searchStockList(stockDTO);
+			pageDTO.setCount(-1);
+			model.addAttribute("stockDTO", stockDTO);
 		}
 
 		model.addAttribute("stockList", stockList);
-
+		model.addAttribute("pageDTO", pageDTO);
 		return "/store/stock";
 	}// stockSearchList
 
@@ -451,10 +452,8 @@ public class StoreController {
 
 	// 3-2. 발주 관리
 	@GetMapping("/order")
-
 	public String order(HttpSession session, HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("StoreController order()");
-
 		
 		// 페이징
 		int pageSize = 10;
@@ -491,24 +490,20 @@ public class StoreController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
-		
 				
 		List<OrderDTO> orderList = storeService.getOrderList(pageDTO);
 
 		model.addAttribute("orderList", orderList);
+		model.addAttribute("pageDTO", pageDTO);
 
 		return "store/order";
-
 	}// orderList
 
 	// 3-2-1. 발주 필터링
-
 	@GetMapping("/orderSearch")
 	public String orderSearch(HttpSession session, HttpServletRequest request, Model model, PageDTO pageDTO) throws Exception {
-
 		System.out.println("StoreController orderSearch()");
 		OrderDTO orderDTO = new OrderDTO();
-
 
 		//===========페이징
 		int pageSize = 10;
@@ -551,7 +546,6 @@ public class StoreController {
 		orderDTO.setItem_name(item_name);
 
 		String item_sminPrice = request.getParameter("item_minPrice");
-
 		String item_smaxPrice = request.getParameter("item_maxPrice");
 
 		try {
@@ -565,23 +559,19 @@ public class StoreController {
 			e.printStackTrace();
 		}
 
-		String od_time = request.getParameter("od_time");
+		String od_minTime = request.getParameter("od_minTime");
+		String od_maxTime = request.getParameter("od_maxTime");
+//		if (od_time != "") {
+//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//			Date d1 = format.parse(od_time);
+//			Timestamp date1 = new Timestamp(d1.getTime());
+//			orderDTO.setOd_time(date1);
+//		}
+		orderDTO.setOd_minTime(od_minTime);
+		orderDTO.setOd_maxTime(od_maxTime);
 
-		if (od_time != "") {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			Date d1 = format.parse(od_time);
-			Timestamp date1 = new Timestamp(d1.getTime());
-			orderDTO.setOd_time(date1);
-		}
-
-		String received_sNot = request.getParameter("received_not");
-
-		try {
-			orderDTO.setReceived_not(received_sNot != null ? Integer.parseInt(received_sNot) : 100);
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-
+		int received_not = Integer.parseInt(request.getParameter("received_not"));
+		orderDTO.setReceived_not(received_not);
 		orderDTO.setNum((int)session.getAttribute("num"));
 		
 		// 필터 페이징 작업
@@ -593,32 +583,37 @@ public class StoreController {
 		if(endPage > pageCount) {
 			endPage = pageCount;
 		}
-
-
-		int num = (int)session.getAttribute("num");
-		orderDTO.setNum(num);
+		//필터 페이징 orderDTO 저장
+		orderDTO.setPageSize(pageSize);
+		orderDTO.setPageNum(pageNum);
+		orderDTO.setCurrentPage(currentPage);
+		orderDTO.setCount(count);
+		orderDTO.setPageBlock(pageBlock);
+		orderDTO.setStartPage(startPage);
+		orderDTO.setEndPage(endPage);
+		orderDTO.setPageCount(pageCount);
+		
+		
 		List<OrderDTO> orderList;
-
-		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_time == ""
-				&& received_sNot == null) {
+		
+		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_minTime == ""
+				&& od_maxTime == "" && received_not == 100) {
 			orderList = storeService.getOrderList(pageDTO);
 		} else {
 			orderList = storeService.searchOrderList(orderDTO);
+			pageDTO.setCount(-1);
+			model.addAttribute("orderDTO", orderDTO);
 		}
 
 		model.addAttribute("orderList", orderList);
-
+		model.addAttribute("pageDTO", pageDTO);
 		return "/store/order";
 	}// orderSearchList
 
 	// 3-3. 입고 관리
 	@GetMapping("/receive")
-
 	public String receive(HttpSession session, HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("StoreController receive()");
-
-
-
         
 		//===========페이징
 		int pageSize = 10;
@@ -655,10 +650,11 @@ public class StoreController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);		
-				
+		
 		List<ReceiveDTO> receiveList = storeService.getReceiveList(pageDTO);
 
 		model.addAttribute("receiveList", receiveList);
+		model.addAttribute("pageDTO", pageDTO);
 
 		return "store/receive";
 
@@ -670,7 +666,6 @@ public class StoreController {
 	public String receiveSearch(HttpSession session, HttpServletRequest request, Model model,PageDTO pageDTO) throws Exception {
 		System.out.println("StoreController receiveSearch()");
 		ReceiveDTO receiveDTO = new ReceiveDTO();
-
         
 		//===========페이징
 		int pageSize = 10;
@@ -707,12 +702,12 @@ public class StoreController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);
-		String item_name = request.getParameter("item_name");
-		receiveDTO.setItem_name(item_name);
+		
 		
 		// 필터링
+		String item_name = request.getParameter("item_name");
+		receiveDTO.setItem_name(item_name);
 		String item_sminPrice = request.getParameter("item_minPrice");
-
 		String item_smaxPrice = request.getParameter("item_maxPrice");
 
 		try {
@@ -731,9 +726,8 @@ public class StoreController {
 		receiveDTO.setRc_minTime(rc_minTime);
 		receiveDTO.setRc_maxTime(rc_maxTime);
 		
-		String spay = request.getParameter("pay");
-		if(spay != null) receiveDTO.setPay(Integer.parseInt(spay));
-		else receiveDTO.setPay(100);
+		int pay = Integer.parseInt(request.getParameter("pay"));
+		receiveDTO.setPay(pay);
 		
 		receiveDTO.setNum((int)session.getAttribute("num"));
 
@@ -747,7 +741,7 @@ public class StoreController {
 			endPage = pageCount;
 		}
 		
-		//필터 페이징 stockDTO 저장
+		//필터 페이징 receiveDTO 저장
 		receiveDTO.setPageSize(pageSize);
 		receiveDTO.setPageNum(pageNum);
 		receiveDTO.setCurrentPage(currentPage);
@@ -759,14 +753,16 @@ public class StoreController {
 		
 		List<ReceiveDTO> receiveList;
 
-
-		if (item_name == "" && item_sminPrice == null && item_smaxPrice == null && rc_minTime == "" && rc_maxTime == "" && spay == null) {
+		if (item_name == "" && item_sminPrice == "" && item_smaxPrice == "" && rc_minTime == "" && rc_maxTime == "" && pay == 100) {
 			receiveList = storeService.getReceiveList(pageDTO);
 		} else {
 			receiveList = storeService.searchReceiveList(receiveDTO);
+			pageDTO.setCount(-1);
+			model.addAttribute("receiveDTO", receiveDTO);
 		}
 
 		model.addAttribute("receiveList", receiveList);
+		model.addAttribute("pageDTO", pageDTO);
 
 		return "/store/receive";
 	}// receiveSearchList
@@ -863,7 +859,6 @@ public class StoreController {
 	// 4. 영업 관리
 	// 4-1. 실적 관리
 	@GetMapping("/result")
-
 	public String result(HttpSession session, HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("StoreController result()");
 
@@ -921,7 +916,6 @@ public class StoreController {
 	}
 
 	// 4-1-1. 실적 필터링
-
 	@GetMapping("/resultSearch")
 	public String resultSearch(HttpSession session, HttpServletRequest request, Model model, PageDTO pageDTO) throws Exception {
 		System.out.println("StoreController resultSearch()");
@@ -982,7 +976,7 @@ public class StoreController {
 			endPage = pageCount;
 		}
 						
-		//필터 페이징 stockDTO 저장
+		//필터 페이징 resultDTO 저장
 		resultDTO.setPageSize(pageSize);
 		resultDTO.setPageNum(pageNum);
 		resultDTO.setCurrentPage(currentPage);
@@ -1010,7 +1004,6 @@ public class StoreController {
 
 	// 4-2. 소모 관리
 	@GetMapping("/store/consume")
-
 	public String consume(HttpSession session, HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("StoreController consume()");
 		//===========페이징
@@ -1048,14 +1041,11 @@ public class StoreController {
 		pageDTO.setStartPage(startPage);
 		pageDTO.setEndPage(endPage);
 		pageDTO.setPageCount(pageCount);		
-				
-
 
 		List<ResultDTO> consumeList = storeService.getConsumeList(pageDTO);
 
 		model.addAttribute("consumeList", consumeList);
 		model.addAttribute("pageDTO",pageDTO);
-
 		return "store/consume";
 	}// somoList
 
@@ -1286,7 +1276,7 @@ public class StoreController {
 	}// panmeList
 
 	// 4-3-.1 판매 필터링
-	@PostMapping("/sellSearch")
+	@GetMapping("/sellSearch")
 
 	public String sellSearch(HttpSession session, HttpServletRequest request, Model model, PageDTO pageDTO) throws Exception {
 		System.out.println("StoreController sellSearch()");

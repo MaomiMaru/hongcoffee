@@ -8,46 +8,39 @@ public class OrderDTO {
 	private int num; //지점 번호
 	private int item_num; //재료 번호
 	private int od_amount; //발주량/수주량
-
 	private Timestamp od_time; //발주일시
+	private String od_minTime; //발주일시 최소범위
+	private String od_maxTime; //발주일시 최대범위
 	private int shipment_not; //출하여부
-	public int getShipment_not() {
-		return shipment_not;
-	}
-
-
-
-	public void setShipment_not(int shipment_not) {
-		this.shipment_not = shipment_not;
-	}
-
-
 	private int received_not; //입고여부
-
 	private String od_note; //발주적요
 	private String ob_note; //수주적요
 	private String name; //지점명
 	private String item_name; //재료명
 	private int item_price; //단가
-
 	private int item_minPrice; //최소 단가
 	private int item_maxPrice; //최대 단가
-
 	private int item_type; //재료유형
 
-	
-	
+
 	@Override
 	public String toString() {
 		return "OrderDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", od_amount=" + od_amount
-				+ ", od_time=" + od_time + ", received_not=" + received_not + ", shipment_not=" + shipment_not
-				+ ", od_note=" + od_note + ", ob_note=" + ob_note + ", name=" + name + ", item_name=" + item_name
-				+ ", item_price=" + item_price + ", item_minPrice=" + item_minPrice + ", item_maxPrice=" + item_maxPrice
-				+ "]";
+				+ ", od_time=" + od_time + ", od_minTime=" + od_minTime + ", od_maxTime=" + od_maxTime
+				+ ", shipment_not=" + shipment_not + ", received_not=" + received_not + ", od_note=" + od_note
+				+ ", ob_note=" + ob_note + ", name=" + name + ", item_name=" + item_name + ", item_price=" + item_price
+				+ ", item_minPrice=" + item_minPrice + ", item_maxPrice=" + item_maxPrice + ", item_type=" + item_type
+				+ ", pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
+				+ startRow + ", endRow=" + endRow + ", pageBlock=" + pageBlock + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", count=" + count + ", pageCount=" + pageCount + "]";
 	}
 	
-
-	
+	public int getShipment_not() {
+		return shipment_not;
+	}
+	public void setShipment_not(int shipment_not) {
+		this.shipment_not = shipment_not;
+	}
 	public int getItem_type() {
 		return item_type;
 	}
@@ -86,6 +79,26 @@ public class OrderDTO {
 	public void setOd_time(Timestamp od_time) {
 		this.od_time = od_time;
 	}
+	public String getOd_minTime() {
+		return od_minTime;
+	}
+
+
+	public void setOd_minTime(String od_minTime) {
+		this.od_minTime = od_minTime;
+	}
+
+
+	public String getOd_maxTime() {
+		return od_maxTime;
+	}
+
+
+	public void setOd_maxTime(String od_maxTime) {
+		this.od_maxTime = od_maxTime;
+	}
+
+
 	public int getReceived_not() {
 		return received_not;
 	}

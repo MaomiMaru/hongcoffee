@@ -211,8 +211,6 @@ label input[type=radio]:checked:after {
 		<jsp:include page="inc/left.jsp"/>
       
       
-     
-
 			<!-- partial -->
 			<div class="main-panel">
 				<div class="content-wrapper">
