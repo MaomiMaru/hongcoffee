@@ -182,7 +182,6 @@ $(document).ready(function() {
                 iname.push(result[i].item_name);
                 amount.push(result[i].amount);
             }
-            console.log(amount);
             var data = {
                 labels: iname,
                 datasets: [{

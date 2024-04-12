@@ -216,6 +216,19 @@ select {
 			return obj;
 
 		}
+		
+    	document.addEventListener('DOMContentLoaded', function() {
+    	    document.querySelector('.form').addEventListener('submit', function(event) {
+    	        var inputDate = new Date(document.querySelector('.rs_date').value);
+    	        
+    	        var today = new Date();
+    	        
+    	        if (inputDate > today) {
+    	            alert("영업일은 오늘 날짜 이후로 선택할 수 없습니다.");
+    	            event.preventDefault();
+    	        }
+    	    });
+    	});
 	</script>
 </body>
 </html>

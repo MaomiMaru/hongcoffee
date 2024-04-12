@@ -337,7 +337,7 @@
 		select b.stock_num  	
  		from item a join stock b
  		on a.item_num = b.item_num
- 		where a.item_name like concat('%', #{item_name}, '%') and b.num = #{num}
+ 		where a.item_name = #{item_name} and b.num = #{num}
  	</select>
  	
 	<insert id="consumeInsert">
@@ -438,4 +438,25 @@
 		</if>
 		</where>
 	</update>
+	
+<!-- 	<select id="stockCheck" resultType="com.itwillbs.domain.StockDTO"> -->
+<!-- 	    select distinct i.*, s.amount -->
+<!-- 	    from item i -->
+<!-- 	    join stock s  -->
+<!-- 	    on i.item_num = s.item_num -->
+<!-- 	    where s.num = #{num} AND s.amount > 0 -->
+<!-- 	    order by i.item_num -->
+<!-- 	</select> -->
+
+	<select id="getAmount" resultType="java.lang.Integer">
+		select amount
+		from stock
+		where stock_num = #{stock_num}
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>

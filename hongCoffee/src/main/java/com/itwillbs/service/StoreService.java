@@ -284,6 +284,20 @@ public class StoreService {
 	}
 
 
+	public int getAmount(int stock_num) {
+		System.out.println("StoreService getAmount()");
+		return storeDAO.getAmount(stock_num);
+	}
+
+
+
+
+//	public List<StockDTO> stockCheck(int stock_num) {
+//		System.out.println("StoreService stockCheck()");
+//	    return storeDAO.stockCheck(stock_num);
+//	}
+
+
 
 
 

@@ -297,4 +297,16 @@ public class StoreDAO {
 	}
 
 
+	public int getAmount(int stock_num) {
+		System.out.println("StoreDAO getAmount()");
+		return sqlSession.selectOne(namespace+".getAmount", stock_num);
+	}
+
+
+//	public List<StockDTO> stockCheck(int stock_num) {
+//		System.out.println("StoreDAO stockCheck()");
+//		return sqlSession.selectList(namespace+".stockCheck", stock_num);
+//	}
+
+
 }
