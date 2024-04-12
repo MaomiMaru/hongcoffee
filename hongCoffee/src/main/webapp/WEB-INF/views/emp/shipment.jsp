@@ -74,6 +74,11 @@ input[type=text] {
 	height: 29.63px;
 	font-size: 15px;
 }
+.choose2 {
+	width: 300px;
+	height: 29.63px;
+	font-size: 15px;
+}
 
 #search li {
 	width: 600px;
@@ -217,8 +222,15 @@ label input[type=radio]:checked:after{
 						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>출하일시</b></label>
-						<input type="date" name="sh_time" class="sh_time" max="9999-12-31">
+						<input type="date" name="sh_minTime" class="sh_minTime" max="9999-12-31" style="width : 140.5px;"> ~
+						<input type="date" name="sh_maxTime" class="sh_maxTime" max="9999-12-31" style="width : 140.5px;"></div></li>
 						
+						<li><div class="search_div"><label class="search_name"><b>입고여부</b></label>
+						<select class="choose" name="received_not">
+							<option value="100">-----------------------------------------------</option>
+							<option value="0">미입고</option>
+							<option value="1">입고완료</option>
+						</select>	
 
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
@@ -416,13 +428,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(function(){
     $('.shipmentSearch').submit(function(){
-        if($('.storeName').val() =="" && $('.item_name').val() == "" && $('.item_minPrice').val()=="" && $('.item_maxPrice').val()=="" && $('.sh_time').val() ==""){
-            alert('출하를 조회하기 위해서는 지점명, 재료명, 최소 금액, 최대 금액, 수주 일시, 출하일시 중 하나 이상 입력해야합니다.');
+        if($('.storeName').val() =="" && $('.item_name').val() == "" &&  $('.item_minPrice').val() =="" && $('.item_maxPrice').val() =="" && $('.sh_minTime').val() =="" && $('.sh_maxTime').val() =="" && $('.choose').val() =="100"){
+            alert('출하를 조회하기 위해서는 지점명, 재료명, 단가 범위, 최소 출하일시, 최대 출하일시, 입고여부 중 하나 이상 입력해야합니다.');
             return false;
         }
     });
 });
-
 
 </script>
 

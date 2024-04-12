@@ -202,7 +202,7 @@ label input[type=radio]:checked:after{
 		<div><h3 style="margin-top: 15px;">발주 검색</h3></div>
 		
 
-		<form action="${pageContext.request.contextPath}/store/orderSearch" method="get">
+		<form action="${pageContext.request.contextPath}/store/orderSearch"  class="orderSearch"  method="get">
 
 			<div id="search">
 				<ul>
@@ -265,7 +265,7 @@ label input[type=radio]:checked:after{
    	<td style="text-align: center !important; font-size:20px !important;">
    	<fmt:formatNumber value="${OrderDTO.item_price * OrderDTO.od_amount}" pattern="#,###"></fmt:formatNumber>
    	</td>
-   	 <td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${OrderDTO.od_time}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
+   	 <td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_time}</td>
 	
 	<c:if test="${OrderDTO.shipment_not eq 0}">
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미출하</td>

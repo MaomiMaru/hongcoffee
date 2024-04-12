@@ -567,12 +567,16 @@ public class StoreController {
 
 		String od_time = request.getParameter("od_time");
 
-		if (od_time != "") {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			Date d1 = format.parse(od_time);
-			Timestamp date1 = new Timestamp(d1.getTime());
-			orderDTO.setOd_time(date1);
-		}
+		
+		orderDTO.setOd_time(od_time);
+		
+		
+//		if (od_time != "") {
+//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//			Date d1 = format.parse(od_time);
+//			Timestamp date1 = new Timestamp(d1.getTime());
+//			orderDTO.setOd_time(od_time);
+//		}
 
 		String received_sNot = request.getParameter("received_not");
 

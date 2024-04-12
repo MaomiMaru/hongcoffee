@@ -7,6 +7,8 @@ public class ShipmentDTO {
 	private int item_num; //물품번호
 	private int sh_amount; //입고수량
 	private String sh_time; //입고일
+	private String sh_minTime; // 최소 입고일
+	private String sh_maxTime; // 최대 입고일
 	private String sh_note; //출하적요
 	private int item_price; //단가
 	private int item_minPrice; //최소 단가
@@ -14,23 +16,18 @@ public class ShipmentDTO {
 	private String name; //지졈명
 	private String item_name; //재료명
 	private int pay; //결제여부
-
 	private int received_not;//입고여부
 
 	
-
-	
-	
-
-	
-
-
 	@Override
 	public String toString() {
 		return "ShipmentDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", sh_amount=" + sh_amount
-				+ ", sh_time=" + sh_time + ", sh_note=" + sh_note + ", item_price=" + item_price + ", item_minPrice="
-				+ item_minPrice + ", item_maxPrice=" + item_maxPrice + ", name=" + name + ", item_name=" + item_name
-				+ ", pay=" + pay + ", received_not=" + received_not + "]";
+				+ ", sh_time=" + sh_time + ", sh_minTime=" + sh_minTime + ", sh_maxTime=" + sh_maxTime + ", sh_note="
+				+ sh_note + ", item_price=" + item_price + ", item_minPrice=" + item_minPrice + ", item_maxPrice="
+				+ item_maxPrice + ", name=" + name + ", item_name=" + item_name + ", pay=" + pay + ", received_not="
+				+ received_not + ", pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage
+				+ ", startRow=" + startRow + ", endRow=" + endRow + ", pageBlock=" + pageBlock + ", startPage="
+				+ startPage + ", endPage=" + endPage + ", count=" + count + ", pageCount=" + pageCount + "]";
 	}
 	
 	public int getOd_num() {
@@ -62,6 +59,18 @@ public class ShipmentDTO {
 	}
 	public void setSh_time(String sh_time) {
 		this.sh_time = sh_time;
+	}
+	public String getSh_minTime() {
+		return sh_minTime;
+	}
+	public void setSh_minTime(String sh_minTime) {
+		this.sh_minTime = sh_minTime;
+	}
+	public String getSh_maxTime() {
+		return sh_maxTime;
+	}
+	public void setSh_maxTime(String sh_maxTime) {
+		this.sh_maxTime = sh_maxTime;
 	}
 	public String getSh_note() {
 		return sh_note;

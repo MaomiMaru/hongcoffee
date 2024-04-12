@@ -215,8 +215,9 @@ label input[type=radio]:checked:after{
 						<input type="text" name="item_minPrice" class="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
 						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
-					<li><div class="search_div"><label class="search_name"><b>수주일시</b></label>
-						<input type="date" name="od_time" class="od_time" max="9999-12-31"></div></li>
+				<li><div class="search_div"><label class="search_name"><b>수주일시</b></label>
+						<input type="date" name="od_minTime" class="od_minTime" max="9999-12-31" style="width : 140.5px;"> ~
+						<input type="date" name="od_maxTime" class="od_maxTime" max="9999-12-31" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>출하여부</b></label>
 						<select class="choose" name="shipment_not">
@@ -274,7 +275,7 @@ label input[type=radio]:checked:after{
        <fmt:formatNumber value="${OrderDTO.item_price * OrderDTO.od_amount}" pattern="#,###"></fmt:formatNumber>
      </td>
        
-   	<td style="text-align: center !important; font-size:20px !important;"><fmt:formatDate value="${OrderDTO.od_time}" pattern="yyyy.MM.dd HH:mm:ss"/></td>
+   	<td style="text-align: center !important; font-size:20px !important;">${OrderDTO.od_time}</td>
 	
 	<c:if test="${OrderDTO.shipment_not eq 0}">
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미출하</td>
@@ -429,10 +430,20 @@ function shipment_insert(){
 	    });
 	});
 	
+// 	$(function(){
+// 	    $('.orderSearch').submit(function(){
+// 	        if($('.choose').val()=="100" && $('.storeName').val() =="" && $('.item_name').val() == "" && $('.item_minPrice').val()=="" && $('.item_maxPrice').val()=="" && $('.od_time').val() ==""){
+// 	            alert('수주를 조회하기 위해서는 지점명, 재료명, 최소 금액, 최대 금액, 수주 일시, 출하여부 중 하나 이상 입력해야합니다.');
+// 	            return false;
+// 	        }
+// 	    });
+// 	});
+	
+	
 	$(function(){
 	    $('.orderSearch').submit(function(){
-	        if($('.choose').val()=="100" && $('.storeName').val() =="" && $('.item_name').val() == "" && $('.item_minPrice').val()=="" && $('.item_maxPrice').val()=="" && $('.od_time').val() ==""){
-	            alert('수주를 조회하기 위해서는 지점명, 재료명, 최소 금액, 최대 금액, 수주 일시, 출하여부 중 하나 이상 입력해야합니다.');
+	        if($('.choose').val()=="100" && $('.storeName').val() =="" && $('.item_name').val() == "" && $('.item_minPrice').val()=="" && $('.item_maxPrice').val()=="" && $('.od_minTime').val() =="" && $('.od_maxTime').val() ==""){
+	            alert('수주를 조회하기 위해서는 지점명, 재료명, 최소 금액, 최대 금액, 최소 수주일시, 최대 수주일시, 출하여부 중 하나 이상 입력해야합니다.');
 	            return false;
 	        }
 	    });

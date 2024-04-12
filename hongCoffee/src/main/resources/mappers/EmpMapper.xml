@@ -115,14 +115,17 @@
 			<if test="item_minPrice != 0 and item_maxPrice == 0">
 				and i.item_price >= #{item_minPrice}
 			</if>
-    		<if test="od_time != null">
-      			and date(o.od_time) = #{od_time}
+    		<if test="od_maxTime != ''">
+      			and date(o.od_time) between #{od_minTime} and #{od_maxTime}
     		</if>
+    		<if test="od_minTime != '' and od_maxTime == ''">
+				and date(o.od_time) >= #{od_minTime}
+			</if>
     		<if test="shipment_not != 100">
     			and o.shipment_not = #{shipment_not}
     		</if>
  		</where>
- 		order by od_num desc
+ 		order by o.od_time desc
  		limit #{startRow},#{pageSize}
  	</select>
  	
@@ -151,7 +154,6 @@
  		left join item i on h.item_num = i.item_num
  		left join receive r on h.od_num = r.od_num
  		left join `order` o on h.od_num = o.od_num
- 
  		<where>
  			<if test="name != ''">
      			s.name like concat('%', #{name}, '%')
@@ -165,11 +167,17 @@
 			<if test="item_minPrice != 0 and item_maxPrice == 0">
 				and i.item_price >= #{item_minPrice}
 			</if>
-    		<if test="sh_time != null">
-      			and date(h.sh_time) = #{sh_time}
+    		<if test="sh_maxTime != ''">
+      			and date(h.sh_time) between #{sh_minTime} and #{sh_maxTime}
+    		</if>
+    		<if test="sh_minTime != '' and sh_maxTime == ''">
+				and date(h.sh_time) >= #{sh_minTime}
+			</if>
+			<if test="received_not != 100">
+    			and o.received_not = #{received_not}
     		</if>
  		</where>
- 		order by h.sh_time desc
+ 				order by o.received_not, h.sh_time desc
 		limit #{startRow},#{pageSize}
  	</select>
  	
@@ -383,14 +391,16 @@
 			<if test="item_minPrice != 0 and item_maxPrice == 0">
 				and i.item_price >= #{item_minPrice}
 			</if>
-    		<if test="od_time != null">
-      			and date(o.od_time) = #{od_time}
+    		<if test="od_maxTime != ''">
+      			and date(o.od_time) between #{od_minTime} and #{od_maxTime}
     		</if>
-    		<if test="received_not != 100">
-    			and o.received_not = #{received_not}
+    		<if test="od_minTime != '' and od_maxTime == ''">
+				and date(o.od_time) >= #{od_minTime}
+			</if>
+    		<if test="shipment_not != 100">
+    			and o.shipment_not = #{shipment_not}
     		</if>
  		</where>
- 		
  	</select>
  	
  	<select id="getReceiveCountR" resultType="java.lang.Integer"> 
@@ -425,9 +435,11 @@
  	<select id="getShipmentCount" resultType="java.lang.Integer"> 
  		select count(*) from  shipment 
  	</select>
+ 	
  	<select id="getShipmentCountS" resultType="java.lang.Integer"> 
  		select count(*) from shipment h join store s on h.num = s.num
  		join item i on h.item_num = i.item_num
+ 		join receive r h.od_num = r.od_num
  		<where>
  			<if test="name != ''">
      			s.name like concat('%', #{name}, '%')
@@ -441,8 +453,14 @@
 			<if test="item_minPrice != 0 and item_maxPrice == 0">
 				and i.item_price >= #{item_minPrice}
 			</if>
-    		<if test="sh_time != null">
-      			and date(h.sh_time) = #{sh_time}
+    		<if test="sh_maxTime != ''">
+      			and date(h.sh_time) between #{sh_minTime} and #{sh_maxTime}
+    		</if>
+    		<if test="sh_minTime != '' and sh_maxTime == ''">
+				and date(h.sh_time) >= #{sh_minTime}
+			</if>
+			<if test="received_not != 100">
+    			and o.received_not = #{received_not}
     		</if>
  		</where>
  	</select>

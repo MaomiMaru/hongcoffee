@@ -84,7 +84,6 @@ public class EmployeeController {
 	@GetMapping("/store")
 	public String store(HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("EmployeeController store()");
-		StoreDTO storeDTO = new StoreDTO() ;
 
 		
 		//===========페이징
@@ -239,7 +238,6 @@ public class EmployeeController {
 	@GetMapping("/item")
 	public String item(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("EmployeeController item()");
-		ItemDTO itemDTO = new ItemDTO();
 		
 		
 		//===========페이징
@@ -415,7 +413,6 @@ public class EmployeeController {
 	@GetMapping("/order")
 	public String order(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("EmployeeController order()");
-		OrderDTO orderDTO = new OrderDTO();
 		
 		
 		int pageSize = 10;
@@ -528,14 +525,18 @@ public class EmployeeController {
 			e.printStackTrace();
 		}
 
-		String od_time = request.getParameter("od_time");
+		String od_minTime = request.getParameter("od_minTime");
+		String od_maxTime = request.getParameter("od_maxTime");
+		orderDTO.setOd_minTime(od_minTime);
+		orderDTO.setOd_maxTime(od_maxTime);
 
-		if (od_time != "") {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			Date d1 = format.parse(od_time);
-			Timestamp date1 = new Timestamp(d1.getTime());
-			orderDTO.setOd_time(date1);
-		}
+		
+//		if (od_time != "") {
+//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//			Date d1 = format.parse(od_time);
+//			Timestamp date1 = new Timestamp(d1.getTime());
+//			orderDTO.setOd_time(od_time);
+//		}
 
 		String shipment_sNot = request.getParameter("shipment_not");
 
@@ -568,7 +569,7 @@ public class EmployeeController {
 		//리스트
 		List<OrderDTO> orderList;
 
-		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_time == "" && shipment_sNot == null) {
+		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && od_minTime == "" && od_maxTime == "" && shipment_sNot == null) {
 			orderList = employeeService.getOrderList(pageDTO);
 		} else {
 			orderList = employeeService.searchOrderList(orderDTO);
@@ -587,7 +588,6 @@ public class EmployeeController {
 	@GetMapping("/shipment")
 	public String shipment(HttpServletRequest request, Model model, PageDTO pageDTO) {
 		System.out.println("EmployeeController shipment()");
-		ShipmentDTO shipmentDTO = new ShipmentDTO();		
 		
 		int pageSize = 10;
 		String pageNum = request.getParameter("pageNum");
@@ -701,14 +701,19 @@ public class EmployeeController {
 			e.printStackTrace();
 		}
 
-		String sh_time = request.getParameter("sh_time");
+		String sh_minTime = request.getParameter("sh_minTime");
+		String sh_maxTime = request.getParameter("sh_maxTime");
+		shipmentDTO.setSh_minTime(sh_minTime);
+		shipmentDTO.setSh_maxTime(sh_maxTime);
+		
+		int received_not = Integer.parseInt(request.getParameter("received_not"));
+		shipmentDTO.setReceived_not(received_not);
 
-		if (sh_time != "") {
+//		if (sh_time != "") {
 //			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 //			Date d1 = format.parse(sh_time);
 //			Timestamp date1 = new Timestamp(d1.getTime());
-			shipmentDTO.setSh_time(sh_time);
-		}
+//		}
 
 		
 		
@@ -727,7 +732,7 @@ public class EmployeeController {
 		
 		List<ShipmentDTO> shipmentList;
 
-		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && sh_time == "") {
+		if (name == "" && item_name == "" && item_sminPrice == null && item_smaxPrice == null && sh_minTime == "" && sh_maxTime == "" && received_not==100 ) {
 			shipmentList = employeeService.getShipmentList(pageDTO);
 		} else {
 			shipmentList = employeeService.searchShipmentList(shipmentDTO);
@@ -746,7 +751,6 @@ public class EmployeeController {
 	@GetMapping("/emp")
 	public String emp(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("EmployeeController emp()");
-		EmployeeDTO employeeDTO = new EmployeeDTO();
 		
 		int pageSize = 10;
 		String pageNum = request.getParameter("pageNum");
