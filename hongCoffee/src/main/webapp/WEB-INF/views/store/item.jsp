@@ -201,6 +201,7 @@ tr:hover {background-color: #F0F0F0;}
 
 				</ul>	
 			</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</form>
 
 		<hr>

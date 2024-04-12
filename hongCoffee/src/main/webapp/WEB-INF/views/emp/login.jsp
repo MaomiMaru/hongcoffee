@@ -24,7 +24,7 @@ background-color: #EEEEEE;
 <div class="container">
 <img src="${pageContext.request.contextPath}/resources/imgs/logo.png" width="265" height="265" alt="Hong Coffee"><br>
 <div class="loginform">
-<form action="${pageContext.request.contextPath}/emp/loginPro" method="post" id="login">
+<form action="${pageContext.request.contextPath}/login" method="post" id="login">
 <label></label>
 <div id="checkdiv"></div>
 <div class="inner">
@@ -35,6 +35,7 @@ background-color: #EEEEEE;
 <input type="submit" value="로그인" class="submit" style="margin-left: 70px; width: 177px; background-color: #C9DAF8">
 <hr width="315">
 <input type="checkbox" class="rememberCheck" id="idSaveCheck">사원번호 기억하기
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </div>
 </form>
 </div>

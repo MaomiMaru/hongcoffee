@@ -79,6 +79,7 @@ select {
 				style="background-color: black; color: #EFBDBC;"
 				onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 		</fieldset>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
 
 	<script type="text/javascript">

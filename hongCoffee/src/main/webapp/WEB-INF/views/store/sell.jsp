@@ -237,6 +237,7 @@ label input[type=radio]:checked:after {
 									</div></li>
 							</ul>
 						</div>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 					</form>
 
 					<hr>

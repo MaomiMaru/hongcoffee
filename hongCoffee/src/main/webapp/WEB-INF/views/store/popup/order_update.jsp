@@ -58,6 +58,7 @@ select {
 				onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 			</span>
 		</fieldset>
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
 
 	<script type="text/javascript">

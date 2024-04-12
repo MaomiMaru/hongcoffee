@@ -51,7 +51,7 @@ ul{
 
 #search {
 	height: 250px;
-	padding-top: 35px;
+	padding-top: 10px;
 	width: 100%;
 	border: 1px solid black;
 }
@@ -236,6 +236,7 @@ label input[type=radio]:checked:after{
 
 				</ul>	
 			</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</form>
 
 		<hr>

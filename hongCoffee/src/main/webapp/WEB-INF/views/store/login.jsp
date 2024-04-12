@@ -34,6 +34,7 @@ background-color: #EEEEEE;
 <input type="submit" value="로그인" class="submit" style="margin-left: 70px; width: 177px; background-color: #C9DAF8">
 <hr width="315">
 <input type="checkbox" id="idSaveCheck">지점번호 기억하기
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </div>
 </form>
 </div>

@@ -54,6 +54,7 @@ select{
 <input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
 </fieldset>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </form>
 
 <!-- 주소 찾기 API -->

@@ -39,6 +39,7 @@ select{
 <sub></sub>
 <input type="submit" value="추가하기">
 </fieldset>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 </form>
 
 <script type="text/javascript">
