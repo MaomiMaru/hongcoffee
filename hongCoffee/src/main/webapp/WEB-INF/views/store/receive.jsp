@@ -273,7 +273,7 @@ window.addEventListener('load',function(){
 						<input type="text" name="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고일시</b></label>
-						<input type="date" name="rc_minTime" max="9999-12-31" style="width: 140.5px;">
+						<input type="date" name="rc_minTime" max="9999-12-31" style="width: 140.5px;"> ~
 						<input type="date" name="rc_maxTime" max="9999-12-31" style="width: 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>결제여부</b></label>

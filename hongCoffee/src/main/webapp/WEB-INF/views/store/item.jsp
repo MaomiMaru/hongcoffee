@@ -10,7 +10,6 @@
 
 <style>
 /* 항목 스타일 */
-
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
    background: #EFBDBC !important;
 }
@@ -237,10 +236,6 @@ tr:hover {background-color: #F0F0F0;}
   		</c:forEach>
   
  		 </table>
- 		 
- 		 
- 		 
- 		 
  		 
  		 
  	<div id="page_control">

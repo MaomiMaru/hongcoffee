@@ -306,9 +306,6 @@ label input[type=radio]:checked:after{
 
 		</div>
  		 
- 		 
- 		 
- 		 
 		</div>
         
         

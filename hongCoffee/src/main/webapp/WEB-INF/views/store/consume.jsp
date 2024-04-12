@@ -201,11 +201,12 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>소모 관리</h2>
 		
-		<form action="${pageContext.request.contextPath}/store/consumeSearch" method="post">
+		<form action="${pageContext.request.contextPath}/store/consumeSearch" method="get">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>영업일</b></label>
-						<input type="date" name="rs_date" max="9999-12-31">
+						<input type="date" name="rs_minDate" max="9999-12-31" style="width : 140.5px;"> ~
+						<input type="date" name="rs_maxDate" max="9999-12-31" style="width : 140.5px;">
 						
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC">조회</button></span></div></li>
 				</ul>	
@@ -261,8 +262,8 @@ label input[type=radio]:checked:after{
 		</c:if>
 		
 		<c:if test="${pageDTO.count eq -1}">
-		<c:forEach var="i" begin="${receiveDTO.startPage}" end="${receiveDTO.endPage}" step="1">
-			<a href="${pageContext.request.contextPath}/store/consumeSearch?pageNum=${i}&rs_minTime=${consumeDTO.rs_minTime}&rs_maxTime=${consumeDTO.rs_maxTime}">${i}</a>
+		<c:forEach var="i" begin="${resultDTO.startPage}" end="${resultDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/consumeSearch?pageNum=${i}&rs_minDate=${resultDTO.rs_minDate}&rs_maxDate=${resultDTO.rs_maxDate}">${i}</a>
 		</c:forEach>
 		</c:if>
 

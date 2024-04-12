@@ -9,6 +9,8 @@ public class ResultDTO {
 	private int item_num;// 재료번호
 	private int stock_num;// 재고번호
 	private String rs_date; // 영업일
+	private String rs_minDate; // 영업일
+	private String rs_maxDate; // 영업일
 	private int sales;// 판매량
 	private int consume;// 소모량
 	private int consumeBefore;// 소모량
@@ -25,7 +27,6 @@ public class ResultDTO {
 	public int getProd_type() {
 		return prod_type;
 	}
-
 	public void setProd_type(int prod_type) {
 		this.prod_type = prod_type;
 	}
@@ -169,6 +170,20 @@ public class ResultDTO {
 
 	//==페이징
 	
+	public String getRs_minDate() {
+		return rs_minDate;
+	}
+	public void setRs_minDate(String rs_minDate) {
+		this.rs_minDate = rs_minDate;
+	}
+	public String getRs_maxDate() {
+		return rs_maxDate;
+	}
+	public void setRs_maxDate(String rs_maxDate) {
+		this.rs_maxDate = rs_maxDate;
+	}
+
+
 	private int pageSize;
 	private String pageNum;
 	private int currentPage;

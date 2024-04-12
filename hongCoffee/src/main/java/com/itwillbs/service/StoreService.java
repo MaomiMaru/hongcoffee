@@ -134,7 +134,6 @@ public class StoreService {
 		int endRow = startRow + pageSize - 1;
 		
 		pageDTO.setStartRow(startRow - 1);
-		pageDTO.setPageSize(pageSize);
 		pageDTO.setEndRow(endRow);
 		return storeDAO.getReceiveList(pageDTO);
 	}//getReceiveList
@@ -160,7 +159,13 @@ public class StoreService {
 	//소모 출력
 	public List<ResultDTO> getConsumeList(PageDTO pageDTO){
 		System.out.println("StoreService getConsumeList()");
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
 		return storeDAO.getConsumeList(pageDTO);
 	}//getSomoList
 
@@ -168,39 +173,69 @@ public class StoreService {
 	//소모 필터링 출력
 	public List<ResultDTO> searchConsumeList(ResultDTO resultDTO) {
 		System.out.println("StoreService searchConsumeList()");
+		int currentPage = resultDTO.getCurrentPage();
+		int pageSize = resultDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		resultDTO.setStartRow(startRow - 1);
+		resultDTO.setEndRow(endRow);
 		return storeDAO.searchConsumeList(resultDTO);
 	}//searchSomoList
 	
 	
 	//판매 출력
-	public List<ResultDTO> getSellList(){
+	public List<ResultDTO> getSellList(PageDTO pageDTO){
 		System.out.println("StoreService getSellList()");
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
-		return storeDAO.getSellList();
-	}//getPanmeList
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
+		return storeDAO.getSellList(pageDTO);
+	}//getSellList
 
 	
 	//판매 필터링 출력
 	public List<ResultDTO> searchSellList(ResultDTO resultDTO) {
 		System.out.println("StoreService searchSellList()");
+		int currentPage = resultDTO.getCurrentPage();
+		int pageSize = resultDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		resultDTO.setStartRow(startRow - 1);
+		resultDTO.setEndRow(endRow);
 		return storeDAO.searchSellList(resultDTO);
-	}//searchPanmeList
+	}//searchSellList
 	
 	
 	//실적 출력
-	public List<ResultDTO> getResultList(){
+	public List<ResultDTO> getResultList(PageDTO pageDTO){
 		System.out.println("StoreService getEmpList()");
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
-		return storeDAO.getResultList();
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
+		return storeDAO.getResultList(pageDTO);
 	}//getResultList
 
 	
 	//실적 필터링 출력
 	public List<ResultDTO> searchResultList(ResultDTO resultDTO) {
 		System.out.println("StoreService searchResultList()");
-			
+		int currentPage = resultDTO.getCurrentPage();
+		int pageSize = resultDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		resultDTO.setStartRow(startRow - 1);
+		resultDTO.setEndRow(endRow);
 		return storeDAO.searchResultList(resultDTO);
 	}//searchResultList
 
@@ -357,6 +392,21 @@ public class StoreService {
 		return storeDAO.getReceiveCount(receiveDTO);
 	}
 	
+	public int getConsumeCount(ResultDTO resultDTO) {
+		System.out.println("StoreService getConsumeCount()");
+		return storeDAO.getConsumeCount(resultDTO);
+	}
+	
+	public int getSellCount(ResultDTO resultDTO) {
+		System.out.println("StoreService getSellCount()");
+		return storeDAO.getSellCount(resultDTO);
+	}
+	
+	public int getResultCount(ResultDTO resultDTO) {
+		System.out.println("StoreService getResultCount()");
+		return storeDAO.getResultCount(resultDTO);
+	}
+	
 	// == 페이징
 	public int getItemCount(PageDTO pageDTO) {
 		System.out.println("StoreService getItemCount()");
@@ -383,6 +433,19 @@ public class StoreService {
 		System.out.println("StoreService getConsumeCount()");
 		return storeDAO.getConsumeCount(pageDTO);
 	}
+
+	public int getSellCount(PageDTO pageDTO) {
+		System.out.println("StoreService getSellCount()");
+		return storeDAO.getSellCount(pageDTO);
+	}
+
+	public int getResultCount(PageDTO pageDTO) {
+		System.out.println("StoreService getResultCount()");
+		return storeDAO.getResultCount(pageDTO);
+	}
+
+
+	
 	
 	
 
