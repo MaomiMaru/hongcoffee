@@ -325,14 +325,41 @@ label input[type=radio]:checked:after{
 
 <script>
 // window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=1','홍커피','width=370,height=520')
+// function receive_insert() {
+// 	let rnum = $('input[name=radio1]:checked').val();
+// 	if(rnum == null   || rnum == undefined){
+// 		alert('입고 추가 하려는 내용을 선택해주세요');
+// 		return false;
+// 	}
+//     window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=' + rnum, '홍커피', 'width=450px,height=490px,top=100,left=200');
+// }
 function receive_insert() {
-	let rnum = $('input[name=radio1]:checked').val();
-	if(rnum == null   || rnum == undefined){
-		alert('입고 추가 하려는 내용을 선택해주세요');
-		return false;
-	}
-    window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=' + rnum, '홍커피', 'width=450px,height=490px,top=100,left=200');
+    // 선택된 발주 번호 가져오기
+    let selectedOrderNum = $('input[name=radio1]:checked').val();
+    
+    if (selectedOrderNum == null || selectedOrderNum == undefined) {
+        alert('입고 추가할 발주를 선택해주세요.');
+        return false;
+    }
+
+    // 선택된 발주의 출하 여부와 입고 여부 확인
+    let shipmentStatus = $('input[name=radio1]:checked').closest('tr').find('td:eq(6)').text().trim();
+    let receivedStatus = $('input[name=radio1]:checked').closest('tr').find('td:eq(7)').text().trim();
+
+    if (shipmentStatus === '미출하') {
+        alert('아직 출하되지 않은 발주입니다.');
+        return false;
+    }
+
+    if (receivedStatus === '입고완료') {
+        alert('이미 입고된 발주입니다.');
+        return false;
+    }
+
+    // 입고 추가 팝업 창 열기
+    window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=' + selectedOrderNum, '홍커피', 'width=450px,height=490px,top=100,left=200');
 }
+
 function order_update() {
 	let onum = $('input[name=radio1]:checked').val();
 	if(onum == null   || onum == undefined){
@@ -402,9 +429,9 @@ $(function(){
     });
 });
 
+
+
+
 </script>
-
 </body>
-
 </html>
-

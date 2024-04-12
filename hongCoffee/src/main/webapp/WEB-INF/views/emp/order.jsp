@@ -358,12 +358,17 @@ function order_update(){
 }
 
 function shipment_insert(){
-	let smnum = $('input[name=radio1]:checked').val();
-	if(smnum == null || smnum == undefined){
-		alert('출하된 목록을 선택해주세요');
-		return false;
-	}
-	window.open('${pageContext.request.contextPath}/emp/popup/shipment_insert?od_num='+smnum,'홍커피','width=460,height=540, top=100, left=200');
+    let smnum = $('input[name=radio1]:checked').val();
+    let shipmentStatus = $('input[name=radio1]:checked').closest('tr').find('td:eq(7)').text().trim();
+    if(smnum == null || smnum == undefined){
+        alert('출하된 목록을 선택해주세요');
+        return false;
+    }
+    if (shipmentStatus === "출하완료") {
+        alert("이미 출하된 항목입니다.");
+        return false;
+    }
+    window.open('${pageContext.request.contextPath}/emp/popup/shipment_insert?od_num='+smnum,'홍커피','width=460,height=540, top=100, left=200');
 }
 
 
