@@ -322,6 +322,7 @@ public class EmployeeService {
 			return employeeDAO.getTop5();
 		}
 
+
 // == 페이징		
 		public int getStoreCount(PageDTO pageDTO) {
 			System.out.println("getStoreCount()");
@@ -346,6 +347,17 @@ public class EmployeeService {
 		public int getEmployeeCount(PageDTO pageDTO) {
 			System.out.println("getEmployeeCount()");
 			return employeeDAO.getEmployeeCount(pageDTO);
+		}
+		
+		public List<ShipmentDTO> getShipmentListEx() {
+			System.out.println("EmployeeService getShipmentListEx()");
+			return employeeDAO.getShipmentListEx();
+		}
+
+		public List<OrderDTO> getOrderListEx() {
+			System.out.println("EmployeeService getOrderListEx()");
+			return employeeDAO.getOrderListEx();
+
 		}
 
 

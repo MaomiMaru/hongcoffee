@@ -39,7 +39,7 @@ public class EmployeeController {
 	@PostMapping("/loginPro")
 	public String loginPro(EmployeeDTO employeeDTO, HttpSession session) {
 		System.out.println("EmployeeService loginPro()");
-
+		
 		EmployeeDTO employeeDTO1 = employeeService.userCheck(employeeDTO);
 		if (employeeDTO1 != null) {
 			session.setAttribute("emp_num", employeeDTO1.getEmp_num());
@@ -71,13 +71,12 @@ public class EmployeeController {
 
 	//1-1. 13일의 금요일 제이슨
 		@GetMapping("/mainJson")
+		@ResponseBody
 		public ResponseEntity<List<SalesDTO>> mainJson() {
 			List<SalesDTO> salesList = employeeService.getTop5();
 			ResponseEntity<List<SalesDTO>> entity = new ResponseEntity<List<SalesDTO>>(salesList, HttpStatus.OK);
 			return entity;
 		}
-	
-	
 	
 	
 	//2. 기준 정보 관리

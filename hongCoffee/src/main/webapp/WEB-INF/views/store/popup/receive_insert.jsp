@@ -34,10 +34,11 @@ select{
 <sub></sub>
 <div><b>입고량</b></div><input type="text" name="rc_amount" class="rc_amount" value="${orderDTO.od_amount}"><br>
 <sub></sub>
-<div><b>적요</b></div><input type="text" name="rc_note" value="${orderDTO.od_note}"><br>
+<div><b>적요</b></div>
+<textarea name="stock_note" rows="30" cols="37" style="height: 210px; width: 410px;">${orderDTO.od_note}</textarea><br>
 <sub></sub>
-<span style="float:right; margin-right: 50px">
-<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;"> | <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
+<span style="float:right">
+<input type="submit" value="추가하기" style="background-color: black; color: #EFBDBC;">  <button type="button" style="background-color: black; color: #EFBDBC;" onclick="location.href='${pageContext.request.contextPath}/emp/popup/close'">취소하기</button>
 </span>
 </fieldset>
 </form>

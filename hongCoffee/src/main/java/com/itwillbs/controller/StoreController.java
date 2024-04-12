@@ -16,8 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.deser.std.UntypedObjectDeserializer;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.OrderDTO;
 import com.itwillbs.domain.ProductDTO;
@@ -75,34 +78,34 @@ public class StoreController {
 		return "store/main";
 
 	}
-	
+
 	//1-1. 13일의 금요일 제이슨
-		@GetMapping("/mainJson")
-		public ResponseEntity<List<StockDTO>> mainJson(HttpSession session) {
-			System.out.println("StoreController mainJson");
-			int num = (int)session.getAttribute("num");
-			List<StockDTO> stockList = storeService.getStock6(num);
-			ResponseEntity<List<StockDTO>> entity = new ResponseEntity<List<StockDTO>>(stockList, HttpStatus.OK);
-			return entity;
-		}
-		
-		
-		//1-2. 홍현희 남편 제이슨
-		@GetMapping("/mainJson2")
-		public ResponseEntity<List<ResultDTO>> mainJson2(HttpSession session) {
-			System.out.println("StoreController mainJson2");
-			int num = (int)session.getAttribute("num");
-			List<ResultDTO> resultList = storeService.getResultMain(num);
-			ResponseEntity<List<ResultDTO>> entity = new ResponseEntity<List<ResultDTO>>(resultList, HttpStatus.OK);
-			return entity;
-		}
+	@GetMapping("/mainJson")
+	public ResponseEntity<List<StockDTO>> mainJson(HttpSession session) {
+		System.out.println("StoreController mainJson");
+		int num = (int)session.getAttribute("num");
+		List<StockDTO> stockList = storeService.getStock6(num);
+		ResponseEntity<List<StockDTO>> entity = new ResponseEntity<List<StockDTO>>(stockList, HttpStatus.OK);
+		return entity;
+	}
+
+
+	//1-2. 홍현희 남편 제이슨
+	@GetMapping("/mainJson2")
+	public ResponseEntity<List<ResultDTO>> mainJson2(HttpSession session) {
+		System.out.println("StoreController mainJson2");
+		int num = (int)session.getAttribute("num");
+		List<ResultDTO> resultList = storeService.getResultMain(num);
+		ResponseEntity<List<ResultDTO>> entity = new ResponseEntity<List<ResultDTO>>(resultList, HttpStatus.OK);
+		return entity;
+	}
 
 	// 2. 기준 정보 관리 - 재료 관리
 	@GetMapping("/store/item")
 	public String item(HttpSession session, Model model, HttpServletRequest request) {
 		System.out.println("StoreController item()");
 
-		
+
 		List<ItemDTO> itemList = storeService.getItemList();
 
 		model.addAttribute("itemList", itemList);
@@ -266,13 +269,18 @@ public class StoreController {
 
 		return "/store/popup/stock_update";
 	}
-	
+
 	@PostMapping("/popup/stock_updatePro")
-	public String stock_updatePro(StockDTO stockDTO){
+	public String stock_updatePro(HttpServletRequest request){
 		System.out.println("StoreController stock_updatePro");
-		
+
+		StockDTO stockDTO = new StockDTO();
+		stockDTO.setStock_num(Integer.parseInt(request.getParameter("stock_num")));
+		stockDTO.setAmount(Integer.parseInt(request.getParameter("amount")));
+		stockDTO.setStock_note(request.getParameter("stock_note"));
+
 		storeService.stockUpdate(stockDTO);
-		
+
 		return "/store/popup/close";
 	}
 
@@ -295,7 +303,7 @@ public class StoreController {
 	@PostMapping("/orderSearch")
 	public String orderSearch(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		System.out.println("StoreController orderSearch()");
-		
+
 		OrderDTO orderDTO = new OrderDTO();
 
 		String item_name = request.getParameter("item_name");
@@ -355,7 +363,7 @@ public class StoreController {
 		System.out.println("StoreController receive()");
 
 		int num = (int)session.getAttribute("num");
-		
+
 		List<ReceiveDTO> receiveList = storeService.getReceiveList(num);
 
 		model.addAttribute("receiveList", receiveList);
@@ -463,7 +471,7 @@ public class StoreController {
 
 		return "store/popup/order_update";
 	}
-	
+
 	// 3-2-2. 물류 관리 - 발주 수정
 	@GetMapping("/popup/order_delete")
 	public String order_delete(HttpServletRequest request, Model model) {
@@ -535,9 +543,9 @@ public class StoreController {
 		String rs_maxDate = request.getParameter("rs_maxDate");
 
 		if (rs_minDate != "" || rs_maxDate != "") {
-//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//			Date d1 = format.parse(rs_date);
-//			Timestamp date1 = new Timestamp(d1.getTime());
+			//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			//			Date d1 = format.parse(rs_date);
+			//			Timestamp date1 = new Timestamp(d1.getTime());
 			resultDTO.setRs_minDate(rs_minDate);
 			resultDTO.setRs_maxDate(rs_maxDate);
 		}
@@ -573,8 +581,10 @@ public class StoreController {
 	}// somoList
 
 	@GetMapping("/popup/consume_insert")
-	public String consume_insert() {
+	public String consume_insert(HttpServletRequest request) {
 		System.out.println("StoreController consume_insert()");
+
+
 		return "/store/popup/consume_insert";
 	}
 
@@ -582,45 +592,66 @@ public class StoreController {
 	public String consume_insertPro(HttpServletRequest request) {
 		System.out.println("StoreController consume_insertPro()");
 		ResultDTO resultDTO = new ResultDTO(); 
-		int stock_num = storeService.getStockNum(request.getParameter("item_name")); 
-		
+		StockDTO stockDTO = new StockDTO();
+		stockDTO.setNum(Integer.parseInt(request.getParameter("num")));
+		stockDTO.setItem_name(request.getParameter("item_name"));
+		int stock_num = storeService.getStockNum(stockDTO); 
+
 		String rs_date = request.getParameter("rs_date");
-//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//		Date d1;
-//		try {
-//			d1 = format.parse(rs_date);
-//		} catch (ParseException e) {
-//			d1 = new Date();
-//		}
-//		Timestamp rdate = new Timestamp(d1.getTime());
-		
-		
+		//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		//		Date d1;
+		//		try {
+		//			d1 = format.parse(rs_date);
+		//		} catch (ParseException e) {
+		//			d1 = new Date();
+		//		}
+		//		Timestamp rdate = new Timestamp(d1.getTime());
+
+
 		resultDTO.setRs_date(rs_date);
 		resultDTO.setNum(Integer.parseInt(request.getParameter("num")));
 		resultDTO.setConsume(Integer.parseInt(request.getParameter("consume")));
 		resultDTO.setStock_num(stock_num);
-		storeService.consumeInsert(resultDTO);
+
+
+		//양을 들고 와야함
+		//아는 건 각 테이블의 외래키
 		
-		return "store/popup/close";
+
+		int amount = storeService.getAmount(stock_num);
+		int consume = resultDTO.getConsume();
+		System.out.println("컨슘 나와라 " + consume);
+		if(amount < consume) {
+			return "/store/popup/msg_error";
+		}else {
+			storeService.consumeInsert(resultDTO);
+			return "store/popup/close";
+		}
+	}
+
+	@GetMapping("/popup/msg_error")
+	public String msg_error() {
+		System.out.println("StoreController msg_error()");
+		return "/store/popup/msg_error";
 	}
 
 	@GetMapping("/popup/consume_update")
 	public String consume_update(HttpServletRequest request, Model model) {
 		System.out.println("StoreController consume_update()");
-		
+
 		int rs_num = Integer.parseInt(request.getParameter("rs_num"));
 		model.addAttribute("resultDTO", storeService.getConsume(rs_num));
-		
-		
+
+
 		return "/store/popup/consume_update";
 	}
 
 	@PostMapping("/popup/consume_updatePro")
 	public String consume_updatePro(ResultDTO resultDTO) {
 		System.out.println("StoreController consume_updatePro()");
-		
+
 		storeService.consumeUpdate(resultDTO);
-		
+
 		return "store/popup/close";
 	}
 
@@ -635,9 +666,9 @@ public class StoreController {
 		String rs_maxDate = request.getParameter("rs_maxDate");
 
 		if (rs_minDate != "" || rs_maxDate != "") {
-//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//			Date d2 = format.parse(rs_date);
-//			Timestamp date2 = new Timestamp(d2.getTime());
+			//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			//			Date d2 = format.parse(rs_date);
+			//			Timestamp date2 = new Timestamp(d2.getTime());
 			resultDTO.setRs_minDate(rs_minDate);
 			resultDTO.setRs_maxDate(rs_maxDate);
 		}
@@ -665,9 +696,9 @@ public class StoreController {
 		System.out.println("StoreController sell()");
 
 		int num = (int)session.getAttribute("num");
-	
-		List<ResultDTO> sellList = storeService.getSellList(num);
 
+		List<ResultDTO> sellList = storeService.getSellList(num);
+		System.out.println(sellList);
 		model.addAttribute("sellList", sellList);
 
 		return "store/sell";
@@ -684,13 +715,13 @@ public class StoreController {
 		String rs_maxDate = request.getParameter("rs_maxDate");
 
 		if (rs_minDate != "" || rs_maxDate != "") {
-//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//			Date d3 = format.parse(rs_date);
-//			Timestamp date3 = new Timestamp(d3.getTime());
+			//			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			//			Date d3 = format.parse(rs_date);
+			//			Timestamp date3 = new Timestamp(d3.getTime());
 			resultDTO.setRs_minDate(rs_minDate);
 			resultDTO.setRs_maxDate(rs_maxDate);
 		}
-		
+
 		int num = (int)session.getAttribute("num");
 		resultDTO.setNum(num);
 		List<ResultDTO> sellList;
@@ -707,48 +738,53 @@ public class StoreController {
 
 		return "/store/sell";
 	}// panmeSearch
-	
+
 	@GetMapping("popup/sell_insert")
-	public String sell_insert() {
+	public String sell_insert(HttpServletRequest request, Model model) {
 		System.out.println("StoreController sell_insert()");
-		
+
+
 		return "/store/popup/sell_insert";
 	}
-	
+
 	@PostMapping("popup/sell_insertPro")
 	public String sell_insertPro(HttpServletRequest request, ResultDTO resultDTO) {
 		System.out.println("StoreController sell_insertPro()");
-		
+
+		resultDTO.setNum(Integer.parseInt(request.getParameter("num")));
 		resultDTO.setRs_date(request.getParameter("rs_date"));
 		resultDTO.setProd_name(request.getParameter("prod_name"));
 		resultDTO.setSales(Integer.parseInt(request.getParameter("sales")));
-//		resultDTO.setProd_price(Integer.parseInt(request.getParameter("prod_price")));
-		
+		//		resultDTO.setProd_price(Integer.parseInt(request.getParameter("prod_price")));
+
+		System.out.println(resultDTO);
+
 		storeService.sellInsert(resultDTO);
-		
+
 		return "/store/popup/close";
 	}
-	
+
 	@GetMapping("/popup/sell_update")
 	public String sell_update(HttpServletRequest request, Model model) {
 		System.out.println("StoreController sell_update()");
-		
+
 		int rs_num = Integer.parseInt(request.getParameter("rs_num"));
 		model.addAttribute("resultDTO", storeService.getSales(rs_num));
-		
-		
+
+		System.out.println(rs_num);
+
 		return "/store/popup/sell_update";
 	}
-	
+
 	@PostMapping("/popup/sell_updatePro")
 	public String sell_updatePro(ResultDTO resultDTO) {
 		System.out.println("StoreController sell_updatePro()");
-		
+
 		storeService.salesUpdate(resultDTO);
-		
+
 		return "store/popup/close";
 	}
-	
+
 
 	// 창 닫기
 	@GetMapping("popup/close")
@@ -756,7 +792,7 @@ public class StoreController {
 		System.out.println("close()");
 		return "/emp/popup/close";
 	}
-	
+
 	//===============상세
 	//재료 상세
 	@GetMapping("detail/d_item")
@@ -767,43 +803,60 @@ public class StoreController {
 		model.addAttribute("itemDTO", itemDTO);
 		return "store/detail/d_item";
 	}
-	
-	//재고 상세
-		@GetMapping("detail/d_stock")
-		public String d_stock(HttpServletRequest request, Model model) {
-			System.out.println("StoreController d_stock");
-			int stock_num = Integer.parseInt(request.getParameter("stock_num"));
-			StockDTO stockDTO = storeService.getStock(stock_num);
-			model.addAttribute("stockDTO", stockDTO);
-			return "store/detail/d_stock";
-		}
-		
 
-		//발주 상세
-			@GetMapping("detail/d_order")
-			public String d_order(HttpServletRequest request, Model model) {
-				System.out.println("StoreController d_order");
-				int od_num = Integer.parseInt(request.getParameter("od_num"));
-				OrderDTO orderDTO = storeService.getOrder(od_num);
-				model.addAttribute("orderDTO", orderDTO);
-				return "store/detail/d_order";
-			}
-			
-		//입고 상세
-		@GetMapping("detail/d_receive")
-		public String d_receive(HttpServletRequest request, Model model) {
-			System.out.println("StoreController d_receive");
-			int od_num = Integer.parseInt(request.getParameter("od_num"));
-			ReceiveDTO receiveDTO = storeService.getReceive(od_num);
-			model.addAttribute("receiveDTO", receiveDTO);
-			return "store/detail/d_receive";
-		}
-		
-		// 3-4 결제
-		@GetMapping("/autoPay")
-		public void autoPay(HttpSession session) {
-			System.out.println("StoreController autoPay");
-			storeService.autoPay();
-		}
+	//재고 상세
+	@GetMapping("detail/d_stock")
+	public String d_stock(HttpServletRequest request, Model model) {
+		System.out.println("StoreController d_stock");
+		int stock_num = Integer.parseInt(request.getParameter("stock_num"));
+		StockDTO stockDTO = storeService.getStock(stock_num);
+		model.addAttribute("stockDTO", stockDTO);
+		return "store/detail/d_stock";
+	}
+
+
+	//발주 상세
+	@GetMapping("detail/d_order")
+	public String d_order(HttpServletRequest request, Model model) {
+		System.out.println("StoreController d_order");
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		OrderDTO orderDTO = storeService.getOrder(od_num);
+		model.addAttribute("orderDTO", orderDTO);
+		return "store/detail/d_order";
+	}
+
+	//입고 상세
+	@GetMapping("detail/d_receive")
+	public String d_receive(HttpServletRequest request, Model model) {
+		System.out.println("StoreController d_receive");
+		int od_num = Integer.parseInt(request.getParameter("od_num"));
+		ReceiveDTO receiveDTO = storeService.getReceive(od_num);
+		model.addAttribute("receiveDTO", receiveDTO);
+		return "store/detail/d_receive";
+	}
+
+	// 3-4 결제
+	@GetMapping("/autoPay")
+	public void autoPay(HttpSession session) {
+		System.out.println("StoreController autoPay");
+		storeService.autoPay();
+	}
+
+	//		@GetMapping("/check")
+	//		public ResponseEntity<List<StockDTO>> check(StockDTO stockDTO) {
+	//		    System.out.println("StoreController check()");
+	//		    
+	//		    List<StockDTO> stockDTOList = storeService.stockCheck(stockDTO.getStock_num());
+	//		    
+	////		    String result ="";
+	////		    if(stockDTOList.isEmpty()) {
+	////		        result = "out_of_stock";
+	////		    } else {
+	////		        result = "재고가 있습니다.";
+	////		    }
+	//		    ResponseEntity<List<StockDTO>> entity = new ResponseEntity<List<StockDTO>>(stockDTOList, HttpStatus.OK);
+	//			return entity;
+	//		}
+
 
 }

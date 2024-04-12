@@ -120,3 +120,5 @@ input[type=text]{
 		</div>
 	</div>
 </nav>
+
+<body>

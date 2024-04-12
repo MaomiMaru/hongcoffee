@@ -192,7 +192,7 @@ label input[type=radio]:checked:after{
 
 		<h2>재고 관리</h2><br>
 		<div><h3 style="margin-top: 15px;">재고 검색</h3></div>
-		<form action="${pageContext.request.contextPath}/store/stockSearch" class="stockSearch" method="post">
+		<form action="${pageContext.request.contextPath}/store/stockSearch" class="stockSearch" method="get">
 
 
 			<div id="search">
@@ -344,7 +344,7 @@ function stock_update() {
 		alert('수정하고자 하는 내용을 선택해주세요');
 		return false;
 	}
-    window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=' + snum, '홍커피', 'width=460,height=540, top=100, left=200');
+    window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=' + snum, '홍커피', 'width=460,height=470, top=100, left=200');
 }
 
 //stockSearch

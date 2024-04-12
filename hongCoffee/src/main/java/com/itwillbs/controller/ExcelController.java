@@ -39,7 +39,7 @@ public class ExcelController {
 	public void orderList(HttpServletRequest request, HttpServletResponse response, Model model,PageDTO pageDTO) throws Exception {
 		System.out.println("ExcelController orderList()");
 		
-		List<OrderDTO> orderList = employeeService.getOrderList(pageDTO);
+		List<OrderDTO> orderList = employeeService.getOrderListEx();
 		
 		//워크북 생성
 		Workbook o_wb = new HSSFWorkbook();
@@ -161,7 +161,7 @@ public class ExcelController {
 		
 		//엑셀 파일 생성
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=orderList.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=orderList.xlsx");
 		o_wb.write(response.getOutputStream());
 		o_wb.close();
 	}//orderList
@@ -170,7 +170,7 @@ public class ExcelController {
 	public void shipmentList(HttpServletRequest request, HttpServletResponse response, Model model, PageDTO pageDTO) throws Exception {
 		System.out.println("ExcelController shipmentList()");
 		
-		List<ShipmentDTO> shipmentList = employeeService.getShipmentList(pageDTO);
+		List<ShipmentDTO> shipmentList = employeeService.getShipmentListEx();
 		
 		//워크북 생성
 		Workbook s_wb = new HSSFWorkbook();
@@ -286,7 +286,7 @@ public class ExcelController {
 		
 		//엑셀 파일 생성
 		response.setContentType("application/vnd.ms-excel");
-		response.setHeader("Content-Disposition", "attachment;filename=shipmentList.xls");
+		response.setHeader("Content-Disposition", "attachment;filename=shipmentList.xlsx");
 		s_wb.write(response.getOutputStream());
 		s_wb.close();
 	}//shipmentList

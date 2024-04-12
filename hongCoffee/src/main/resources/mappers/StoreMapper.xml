@@ -147,7 +147,7 @@
 
 
  	<select id="getConsumeList" resultType="com.itwillbs.domain.ResultDTO"> 
-		select r.rs_date, i.item_name, r.consume, i.item_price
+		select r.rs_num, r.stock_num, r.rs_date, i.item_name, r.consume, i.item_price
 		from result r join stock s on r.stock_num = s.stock_num
 		join item i on s.item_num = i.item_num
 		where r.num = #{num}
@@ -250,7 +250,7 @@
 
 
     <select id="getSellList" resultType="com.itwillbs.domain.ResultDTO"> 
-	    select r.rs_date , p.prod_name, r.sales, p.prod_price
+	    select r.rs_num, r.rs_date , p.prod_name, r.sales, p.prod_price
         from result r join product p on r.prod_num = p.prod_num
         where r.num = #{num}
         order by r.rs_date desc 
@@ -337,12 +337,12 @@
 		select b.stock_num  	
  		from item a join stock b
  		on a.item_num = b.item_num
- 		where a.item_name like concat('%', #{item_name}, '%')
+ 		where a.item_name = #{item_name} and b.num = #{num}
  	</select>
  	
 	<insert id="consumeInsert">
 		insert into result(num, stock_num, rs_date, consume)
-		values(#{num}, #{stock_num}, #{rs_date}, #{consume}
+		values(#{num}, #{stock_num}, #{rs_date}, #{consume})
 	</insert>
 	
 	<update id="stockDecrease">
@@ -382,6 +382,7 @@
 	<insert id="sellInsert">
 		insert into result(num, prod_num, rs_date, sales)
 		values(#{num}, #{prod_num}, #{rs_date}, #{sales})
+
 	</insert>
 	
 	<update id="stockIncrease">
@@ -399,11 +400,11 @@
  	<select id="getProdNum" resultType="java.lang.Integer">
  		select prod_num
  		from product
- 		where prod_name like concat('%', #{prod_name}, '%')
+ 		where prod_name = #{prod_name}
  	</select>
 
 	<select id="getSales" resultType="com.itwillbs.domain.ResultDTO">
-		select a.rs_num, a.rs_date, a.sales, b.prod_name, b.prod_type, b.prod_price
+		select a.rs_num, a.rs_date, a.sales, a.prod_num, b.prod_name, b.prod_type, b.prod_price
 		from result a join product b
 		on a.prod_num = b.prod_num
         where rs_num = #{rs_num}
@@ -421,7 +422,7 @@
 	
 	<update id="stockDecreaseReset">
 		update stock
-		set amount = amount-#{rc_amount}
+		set amount = amount-#{rc_amountBefore}
 		where item_num = #{item_num} and num = #{num}
 	</update>
 
@@ -437,4 +438,18 @@
 		</if>
 		</where>
 	</update>
+
+
+	<select id="getAmount" resultType="java.lang.Integer">
+		select amount
+		from stock
+		where stock_num = #{stock_num}
+	</select>
+	
+	
+	
+	
+	
+	
 </mapper>
+

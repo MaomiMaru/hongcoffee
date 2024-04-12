@@ -43,16 +43,25 @@ background-color: #EEEEEE;
 
 	$(function(){
 		$('#login').submit(function(){
-		if($('.employee_num').val() === ''|| $('.employee_num').val === null || $('.employee_num').val === undefined){
-			$('#checkdiv').html("사원번호를 입력해주세요.").css("color","red");
-			$('.employee_num').focus();
+		if($('.num').val() === ''|| $('.num').val === null || $('.num').val === undefined){
+			$('#checkdiv').html("지점번호를 입력해주세요.").css("color","red");
+			$('.num').focus();
 			return false;
 		}
-		if($('.employee_pw').val() === ''|| $('.employee_pw').val === null || $('.employee_pw').val === undefined){
+		
+		if($('.pw').val() === ''|| $('.pw').val === null || $('.pw').val === undefined){
 			$('#checkdiv').html("비밀번호를 입력해주세요.").css("color","red");
-			$('.employee_pw').focus();
+			$('.pw').focus();
 			return false;
 		}
+		
+// 		var numCheck = RegExp(/^[0-9]{1,10}$/);
+// 		if (!numCheck.test($('.num').val())) {
+// 			alert("지점번호 또는 비밀 번호를 확인해주세요."); //보안상 메세지 내용을 이와 같이함
+// 			$('.num').focus();
+// 			return false;
+// 		}		
+		
 	});
 });
 

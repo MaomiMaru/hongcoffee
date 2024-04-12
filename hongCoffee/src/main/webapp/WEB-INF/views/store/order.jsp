@@ -197,18 +197,20 @@ label input[type=radio]:checked:after{
 		<h2>발주 관리</h2><br>
 		<div><h3 style="margin-top: 15px;">발주 검색</h3></div>
 		
+
 		<form action="${pageContext.request.contextPath}/store/orderSearch" method="get">
+
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
-						<input type="text" name="item_name"></div></li>
+						<input type="text" name="item_name" class="item_name"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>단가</b></label>
-						<input type="text" name="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
-						<input type="text" name="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
+						<input type="text" name="item_minPrice" class="item_minPrice" placeholder="최소 금액" style="width : 140.5px;"> ~
+						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>발주일시</b></label>
-						<input type="date" name="od_time" max="9999-12-31"></div></li>
+						<input type="date" name="od_time" class="od_time" max="9999-12-31"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고여부</b></label>
 						<select class="choose" name="received_not">
@@ -217,7 +219,7 @@ label input[type=radio]:checked:after{
 							<option value="1">입고완료</option>
 						</select>
 
-					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button></span></div></li>
+					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
 				</ul>	
 			</div>
@@ -228,7 +230,7 @@ label input[type=radio]:checked:after{
 		<div style="width:50%; height:50px; float: left; vertical-align: bottom !important; "><h3 style="margin-top: 15px;">발주 목록</h3></div>
 		<div style="width:50%; height:50px; float: left; text-align: right !important; padding-top: 15px;" >
 		<button style="background-color: black; color: #EFBDBC" onclick="receive_insert()">입고 추가</button>
-		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/order_insert','홍커피','width=350,height=900')">발주 추가</button>
+		<button style="background-color: black; color: #EFBDBC" onclick="window.open('${pageContext.request.contextPath}/store/popup/order_insert','홍커피','width=450px,height=550px,top=100,left=200')">발주 추가</button>
 		<button style="background-color: black; color: #EFBDBC" onclick="order_update()">발주 수정</button>
 		<button style="background-color: black; color: #EFBDBC" onclick="order_delete()">발주 삭제</button></div>
 		
@@ -354,21 +356,48 @@ label input[type=radio]:checked:after{
 
 <script>
 // window.open('${pageContext.request.contextPath}/store/popup/stock_update?stock_num=1','홍커피','width=370,height=520')
+// function receive_insert() {
+// 	let rnum = $('input[name=radio1]:checked').val();
+// 	if(rnum == null   || rnum == undefined){
+// 		alert('입고 추가 하려는 내용을 선택해주세요');
+// 		return false;
+// 	}
+//     window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=' + rnum, '홍커피', 'width=450px,height=490px,top=100,left=200');
+// }
 function receive_insert() {
-	let rnum = $('input[name=radio1]:checked').val();
-	if(rnum == null   || rnum == undefined){
-		alert('입고 추가 하려는 내용을 선택해주세요');
-		return false;
-	}
-    window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=' + rnum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+    // 선택된 발주 번호 가져오기
+    let selectedOrderNum = $('input[name=radio1]:checked').val();
+    
+    if (selectedOrderNum == null || selectedOrderNum == undefined) {
+        alert('입고 추가할 발주를 선택해주세요.');
+        return false;
+    }
+
+    // 선택된 발주의 출하 여부와 입고 여부 확인
+    let shipmentStatus = $('input[name=radio1]:checked').closest('tr').find('td:eq(6)').text().trim();
+    let receivedStatus = $('input[name=radio1]:checked').closest('tr').find('td:eq(7)').text().trim();
+
+    if (shipmentStatus === '미출하') {
+        alert('아직 출하되지 않은 발주입니다.');
+        return false;
+    }
+
+    if (receivedStatus === '입고완료') {
+        alert('이미 입고된 발주입니다.');
+        return false;
+    }
+
+    // 입고 추가 팝업 창 열기
+    window.open('${pageContext.request.contextPath}/store/popup/receive_insert?od_num=' + selectedOrderNum, '홍커피', 'width=450px,height=490px,top=100,left=200');
 }
+
 function order_update() {
 	let onum = $('input[name=radio1]:checked').val();
 	if(onum == null   || onum == undefined){
 		alert('발주 수정 하려는 내용을 선택해주세요');
 		return false;
 	}
-    window.open('${pageContext.request.contextPath}/store/popup/order_update?od_num=' + onum, '홍커피', 'width=450px,height=900px,top=100,left=200');
+    window.open('${pageContext.request.contextPath}/store/popup/order_update?od_num=' + onum, '홍커피', 'width=450px,height=490px,top=100,left=200');
 }
 function order_delete() {
 	let onum = $('input[name=radio1]:checked').val();
@@ -378,9 +407,62 @@ function order_delete() {
 	}
     location.href='${pageContext.request.contextPath}/store/popup/order_delete?od_num='+onum
 }
+
+$('.orderSearch').submit(function(){
+	  var minPrice = $('.item_minPrice').val();
+	  var maxPrice = $('.item_maxPrice').val();
+
+	  if (minPrice !== '' && maxPrice !== '') {
+	     if (parseFloat(minPrice) > parseFloat(maxPrice)) {
+	        alert('최소 금액은 최대 금액보다 클 수 없습니다.');
+	        return false; 
+	        }
+	    }
+	    return true;
+	});
+	
+	$('.orderSearch').submit(function(){
+	var priceCheck = RegExp(/^[0-9]*$/);
+	if(!priceCheck.test($('.item_minPrice').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_minPrice').focus();
+		return false;
+	}
+	if(!priceCheck.test($('.item_maxPrice').val())){
+		alert('단가는 숫자만 입력이 가능합니다.');
+		$('.item_maxPrice').focus();
+		return false;
+	}
+		
+});
+
+	document.addEventListener('DOMContentLoaded', function() {
+	    document.querySelector('.orderSearch').addEventListener('submit', function(event) {
+	        var inputDate = new Date(document.querySelector('.od_time').value);
+	        
+	        var today = new Date();
+	        
+	        if (inputDate > today) {
+	            alert("발주일시는 오늘 날짜 이후로 선택할 수 없습니다.");
+	            event.preventDefault();
+	        }
+	    });
+	});
+	
+	
+	
+$(function(){
+    $('.orderSearch').submit(function(){
+        if($('.choose').val()=="100" && $('.od_time').val() =="" && $('.item_minPrice').val() == "" && $('.item_maxPrice').val() == "" && $('.item_name').val() == ""){
+            alert('발주를 조회하기 위해서는 재료명, 최소 금액, 최대 금액, 입고 여부 중 하나 이상 입력해야합니다.');
+            return false;
+        }
+    });
+});
+
+
+
+
 </script>
-
 </body>
-
 </html>
-

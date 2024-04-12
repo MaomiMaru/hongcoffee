@@ -28,9 +28,9 @@ select{
 <sub></sub>
 <div><b>재료명</b></div><input type="text" name="item_name" class="item_name" value="${orderDTO.item_name }" readonly><br>
 <sub></sub>
-<div><b>출하량</b></div><input type="text" name="sh_amount" class="sh_amount"><br>
+<div><b>출하량</b></div><input type="text" name="sh_amount" class="sh_amount" value="${orderDTO.od_amount}"><br>
 <sub></sub>
-<div><b>단가</b></div><input type="text" name="item_price" class="item_price" value="${orderDTO.item_price }" readonly><br>
+<div><b>단가</b></div><input type="text" name="item_price" class="item_price" value="${orderDTO.item_price}" readonly><br>
 <sub></sub>
 <div><b>출하일시</b></div><input type="datetime-local" name="sh_time" class="sh_time" style="width: 177px"><br>
 <sub></sub>

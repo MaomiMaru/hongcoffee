@@ -224,9 +224,9 @@ public class StoreDAO {
 	}
 
 
-	public int getStockNum(String item_name) {
+	public int getStockNum(StockDTO stockDTO) {
 		System.out.println("StoreDAO getStockNum()");
-		return sqlSession.selectOne(namespace+".getStockNum", item_name);
+		return sqlSession.selectOne(namespace+".getStockNum", stockDTO);
 	}
 
 
@@ -291,4 +291,24 @@ public class StoreDAO {
 	}
 
 
+
+	public ResultDTO getSell(int rs_num) {
+		System.out.println("StoreDAO getSell()");
+		return sqlSession.selectOne(namespace+".getSell", rs_num);
+	}
+
+
+	public int getAmount(int stock_num) {
+		System.out.println("StoreDAO getAmount()");
+		return sqlSession.selectOne(namespace+".getAmount", stock_num);
+	}
+
+
+//	public List<StockDTO> stockCheck(int stock_num) {
+//		System.out.println("StoreDAO stockCheck()");
+//		return sqlSession.selectList(namespace+".stockCheck", stock_num);
+//	}
+
+
 }
+

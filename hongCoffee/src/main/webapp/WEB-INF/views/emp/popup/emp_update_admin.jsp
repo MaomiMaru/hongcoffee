@@ -27,7 +27,7 @@ select{
 <sub></sub>
 <div><b>사원명</b></div><input type="text" name="emp_name" value="${employeeDTO.emp_name }"><br>
 <sub></sub>
-<div><b>생년월일</b></div><input type="date" name="emp_birth" style="width: 177px" value="${employeeDTO.emp_birth }"><br>
+<div><b>생년월일</b></div><input type="date" name="emp_birth" class="emp_birth" style="width: 177px" value="${employeeDTO.emp_birth }"><br>
 <sub></sub>
 <div><b>부서</b></div>
 <select name="emp_dept">
@@ -84,13 +84,7 @@ $(function(){
 			$('.emp_pw').focus();
 			return false;
 		}
-			
-		//사원명
-		if($('.emp_name').val()=='' || $('.emp_name').val()==null||$('.emp_name').val()==undefined){
-			alert('사원명을 입력해주세요.');
-			$('.emp_name').focus();
-			return false;
-		}
+
 // 		var phoneCheck = RegExp(/^[0-9\-]{9,13}$/);
 // 		if( ! phoneCheck.test($('.emp_name').val()) ){
 // 			alert("숫자만 입력가능합니다.");
@@ -149,6 +143,20 @@ $(".emp_phone").on('keydown keyup', function() {
 	}
 	
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.form').addEventListener('submit', function(event) {
+        var inputDate2 = new Date(document.querySelector('.emp_birth').value);
+        
+        var today = new Date();
+        
+        if (inputDate2 > today) {
+            alert("생년월일은 오늘 날짜 이후로 선택할 수 없습니다.");
+            event.preventDefault();
+        }
+    });
+});
+
 
 </script>
 

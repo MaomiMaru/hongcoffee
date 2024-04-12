@@ -159,10 +159,10 @@ function sample4_execDaumPostcode() {
 		}
 			
 		//이메일 => 아이디@주소
-		if($('.email').val()=='' || $('.email').val()==null||$('.email').val()==undefined){
-			alert('이메일을 입력해주세요.');
-			return false;
-		}
+// 		if($('.email').val()=='' || $('.email').val()==null||$('.email').val()==undefined){
+// 			alert('이메일을 입력해주세요.');
+// 			return false;
+// 		}
 		var emailCheck = RegExp(/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]/);
 			if( ! emailCheck.test($('.email').val()) ){
 				alert("이메일 형식이 아닙니다.");

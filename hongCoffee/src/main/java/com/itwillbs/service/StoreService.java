@@ -223,9 +223,9 @@ public class StoreService {
 	}
 
 
-	public int getStockNum(String item_name) {
+	public int getStockNum(StockDTO stockDTO) {
 		System.out.println("StoreService getStockNum()");
-		return storeDAO.getStockNum(item_name);
+		return storeDAO.getStockNum(stockDTO);
 	}
 
 
@@ -276,6 +276,29 @@ public class StoreService {
 		System.out.println(now);
 		storeDAO.autoPay(now);
 	}
+
+
+	public ResultDTO getSell(int rs_num) {
+		System.out.println("StoreService getSell()");
+		return storeDAO.getSell(rs_num);
+	}
+
+
+	public int getAmount(int stock_num) {
+		System.out.println("StoreService getAmount()");
+		return storeDAO.getAmount(stock_num);
+	}
+
+
+
+
+//	public List<StockDTO> stockCheck(int stock_num) {
+//		System.out.println("StoreService stockCheck()");
+//	    return storeDAO.stockCheck(stock_num);
+//	}
+
+
+
 
 
 

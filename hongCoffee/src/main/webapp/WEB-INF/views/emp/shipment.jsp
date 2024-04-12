@@ -202,7 +202,7 @@ label input[type=radio]:checked:after{
         <div class="content-wrapper">
 		<h2>출하 관리</h2><br>
 		<div><h3 style="margin-top: 15px;">출하 검색</h3></div>
-		<form action="${pageContext.request.contextPath}/emp/shipmentSearch" class="shipmentSearch" method="post">
+		<form action="${pageContext.request.contextPath}/emp/shipmentSearch" class="shipmentSearch" method="get">
 
 			<div id="search">
 				<ul>
