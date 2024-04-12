@@ -203,6 +203,7 @@ label input[type=radio]:checked:after{
 		<h2>출하 관리</h2><br>
 		<div><h3 style="margin-top: 15px;">출하 검색</h3></div>
 		<form action="${pageContext.request.contextPath}/emp/shipmentSearch" class="shipmentSearch" method="post">
+
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>지점명</b></label>
@@ -266,26 +267,45 @@ label input[type=radio]:checked:after{
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미입고</td>
   	</c:if>
   	 <c:if test="${ShipmentDTO.received_not eq 1}">
-      <td style="text-align: center !important; font-size:20px !important; color:red; ">입고완료</td>
+      <td style="text-align: center !important; font-size:20px !important; color:green; ">입고완료</td>
   	</c:if>
 
   	<c:if test="${ShipmentDTO.pay eq 0}">
       <td style="text-align: center !important; font-size:20px !important; color:red; ">미결제</td>
   	</c:if>
   	 <c:if test="${ShipmentDTO.pay eq 1}">
-      <td style="text-align: center !important; font-size:20px !important; color:red; ">결제완료</td>
+      <td style="text-align: center !important; font-size:20px !important; color:green; ">결제완료</td>
   	</c:if>
   </tr>
   		</c:forEach>
   
  		 </table>
  		 
+ 		 
  		 <div id="page_control">
-<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/emp/shipment?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
-</c:if>
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/emp/shipmentpageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+		</c:if>
+		
+		<c:if test="${pageDTO.count ne -1}">
+		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/emp/shipment?pageNum=${i}">${i}</a>
+		</c:forEach>
+		</c:if>
+		
+		<c:if test="${pageDTO.count eq -1}">
+		<c:forEach var="i" begin="${shipmentDTO.startPage}" end="${shipmentDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/emp/shipmentearch?pageNum=${i}&name=${shipmentDTO.name}
+			&item_name=${shipmentDTO.item_name}&item_minPrice=${orderDTO.item_minPrice}
+			&item_maxPrice=${orderDTO.item_maxPrice}&sh_time=${shipmentDTO.sh_time}">${i}</a>
+		</c:forEach>
+		</c:if>
 
-</div>
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/emp/shipment?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		</c:if>
+
+		</div>
 		</div>
         
         

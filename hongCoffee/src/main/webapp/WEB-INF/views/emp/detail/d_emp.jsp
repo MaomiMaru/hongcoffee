@@ -49,14 +49,14 @@ font-size: 16px;
 <tr>
 	<th>생년월일</th><td>${employeeDTO.emp_birth}</td>
 	<th>상태</th>
-	<c:if test="${employeeDTO.emp_state eq 0}">
- 		<td >재직</td>
- 		</c:if>
- 		<c:if test="${employeeDTO.emp_state eq 1}">
- 		<td >휴직</td>
+	<c:if test="${employeeDTO.emp_state eq 1}">
+ 		<td style="color:green;">재직</td>
  		</c:if>
  		<c:if test="${employeeDTO.emp_state eq 2}">
- 		<td >퇴직</td>
+ 		<td style="color:orange;">휴직</td>
+ 		</c:if>
+ 		<c:if test="${employeeDTO.emp_state eq 3}">
+ 		<td style="color:red;">퇴직</td>
  		</c:if>
 </tr>
 <tr>

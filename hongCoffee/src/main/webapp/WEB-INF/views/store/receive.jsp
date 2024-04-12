@@ -262,7 +262,7 @@ window.addEventListener('load',function(){
   </script>
 		
 		
-		<form action="${pageContext.request.contextPath}/store/receiveSearch" method="post">
+		<form action="${pageContext.request.contextPath}/store/receiveSearch" method="get">
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
@@ -328,6 +328,12 @@ window.addEventListener('load',function(){
   		</c:forEach>
   
  		 </table>
+ 		 
+ 		 
+ 		 
+ 		 
+ 		 
+ 		 
 		</div>
         
         

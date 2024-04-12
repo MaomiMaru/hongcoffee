@@ -397,14 +397,30 @@ label input[type=radio]:checked:after{
   
  		 </table>
  		 
- 		  <div id="page_control">
-<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-	<a href="${pageContext.request.contextPath}/emp/emp?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
-</c:if>
+ 		   <div id="page_control">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/emp/emp?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+		</c:if>
+		
+		<c:if test="${pageDTO.count ne -1}">
+		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/emp/emp?pageNum=${i}">${i}</a>
+		</c:forEach>
+		</c:if>
+		
+		<c:if test="${pageDTO.count eq -1}">
+		<c:forEach var="i" begin="${employeeDTO.startPage}" end="${employeeDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/emp/empSearch?pageNum=${i}&emp_dept=${employeeDTO.emp_dept}
+			&emp_rank=${employeeDTO.emp_rank}&emp_num=${employeeDTO.emp_num}
+			&emp_name=${employeeDTO.emp_name}">${i}</a>
+		</c:forEach>
+		</c:if>
 
- 		 
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/emp/emp?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		</c:if>
+
 		</div>
-        
         
         </div>
         </div>

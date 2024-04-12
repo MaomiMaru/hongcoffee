@@ -58,7 +58,7 @@ font-size: 16px;
       <td style="color:red; ">미입고</td>
   	</c:if>
   	 <c:if test="${shipmentDTO.received_not eq 1}">
-      <td style=" color:red; ">입고완료</td>
+      <td style=" color:green; ">입고완료</td>
   	</c:if>
 </tr>
 <tr>
@@ -67,7 +67,7 @@ font-size: 16px;
       <td style="color:red; ">미결제</td>
   	</c:if>
   	 <c:if test="${shipmentDTO.pay eq 1}">
-      <td style=" color:red; ">결제완료</td>
+      <td style=" color:green; ">결제완료</td>
   	</c:if>
 </tr>
 <tr>

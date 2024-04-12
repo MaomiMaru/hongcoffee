@@ -58,13 +58,13 @@ font-size: 16px;
 <tr>
 	<th>우편번호</th><td>${storeDTO.postalcode}</td>
 	<th>상태</th>
-<c:if test="${storeDTO.state eq 0}">
+<c:if test="${storeDTO.state eq 1}">
       <td style=" color:green; ">정상영업</td>
   	</c:if>
-  	  	<c:if test="${storeDTO.state eq 1}">
+  	  	<c:if test="${storeDTO.state eq 2}">
       <td style=" color:orange; ">미영업</td>
   		</c:if>
-  	  	<c:if test="${storeDTO.state eq 2}">
+  	  	<c:if test="${storeDTO.state eq 3}">
       <td style=" color:red; ">폐업</td>
   	</c:if>
 </tr>
