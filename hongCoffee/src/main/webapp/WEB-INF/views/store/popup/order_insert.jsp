@@ -110,8 +110,9 @@ $(function() {
         let itemPrice = $('#item_price');
 
         switch (itemName) {
-            case "에티오피아":
-            case "콜롬비아":
+            case "에티오피아 350g":
+            case "콜롬비아 350g":
+            case "우유 2L":
                 itemPrice.val(3500);
                 break;
             case "바닐라 시럽 500g":
@@ -173,6 +174,7 @@ function getAgreeType() {
             '사과 500g': '사과 500g',
             '오렌지 500g': '오렌지 500g',
             '탄산수 1L': '탄산수 1L',
+            '우유 2L': '우유 2L',
             '꿀 500g': '꿀 500g',
             '타피오카펄 500g': '타피오카펄 500g',
             '녹차 300g': '녹차 300g',

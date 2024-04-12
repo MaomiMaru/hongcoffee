@@ -101,20 +101,20 @@ function getCookie(cookieName) {
 
 <script type="text/javascript">
 
-	$(function(){
-		$('#login').submit(function(){
-		if($('.emp_num').val() === ''|| $('.emp_num').val === null || $('.emp_num').val === undefined){
-			$('#checkdiv').html("사원번호를 입력해주세요.").css("color","red");
-			$('.emp_num').focus();
-			return false;
-		}
-		if($('.emp_pw').val() === ''|| $('.emp_pw').val === null || $('.emp_pw').val === undefined){
-			$('#checkdiv').html("비밀번호를 입력해주세요.").css("color","red");
-			$('.emp_pw').focus();
-			return false;
-		}
-	});
-});
+// 	$(function(){
+// 		$('#login').submit(function(){
+// 		if($('.emp_num').val() === ''|| $('.emp_num').val === null || $('.emp_num').val === undefined){
+// 			$('#checkdiv').html("사원번호를 입력해주세요.").css("color","red");
+// 			$('.emp_num').focus();
+// 			return false;
+// 		}
+// 		if($('.emp_pw').val() === ''|| $('.emp_pw').val === null || $('.emp_pw').val === undefined){
+// 			$('#checkdiv').html("비밀번호를 입력해주세요.").css("color","red");
+// 			$('.emp_pw').focus();
+// 			return false;
+// 		}
+// 	});
+// });
 
 
 

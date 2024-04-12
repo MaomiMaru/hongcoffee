@@ -60,9 +60,9 @@ select{
 <sub></sub>
 <div><b>상태</b></div>
 <select name="emp_state">
-<option value="0" <c:if test="${employeeDTO.emp_state eq '0'}"> selected </c:if>>재직</option>
-<option value="1" <c:if test="${employeeDTO.emp_state eq '1'}"> selected </c:if>>휴직</option>
-<option value="2" <c:if test="${employeeDTO.emp_state eq '2'}"> selected </c:if>>퇴직</option>
+<option value="1" <c:if test="${employeeDTO.emp_state eq '1'}"> selected </c:if>>재직</option>
+<option value="2" <c:if test="${employeeDTO.emp_state eq '2'}"> selected </c:if>>휴직</option>
+<option value="3" <c:if test="${employeeDTO.emp_state eq '3'}"> selected </c:if>>퇴직</option>
 </select><br>
 <sub></sub>
 <b>적요</b><br><textarea rows="30" cols="37" name="emp_note" style="height: 210px; width: 410px;">${employeeDTO.emp_note }</textarea><br>

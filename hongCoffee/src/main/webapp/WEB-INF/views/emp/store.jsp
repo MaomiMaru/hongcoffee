@@ -216,9 +216,9 @@ label input[type=radio]:checked:after{
 					<li><div class="search_div"><label class="search_name"><b>상태</b></label>
 						<select name="state" class="choose">
 							<option value="100">-----------------------------------------------</option>
-							<option value="0">정상영업</option>
-							<option value="1">미영업</option>
-							<option value="2">폐업</option></select>
+							<option value="1">정상영업</option>
+							<option value="2">미영업</option>
+							<option value="3">폐업</option></select>
 
 					<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 				</ul>	
@@ -255,13 +255,13 @@ label input[type=radio]:checked:after{
     <td style="text-align: center !important; font-size:20px !important;">${StoreDTO.phone}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.email}</td>
    	<td style="text-align: center !important; font-size:20px !important;">${StoreDTO.address}</td>
-   	<c:if test="${StoreDTO.state eq 0}">
+   	<c:if test="${StoreDTO.state eq 1}">
       <td style="text-align: center !important; font-size:20px !important; color:green; ">정상영업</td>
   	</c:if>
-  	  	<c:if test="${StoreDTO.state eq 1}">
+  	  	<c:if test="${StoreDTO.state eq 2}">
       <td style="text-align: center !important; font-size:20px !important; color:orange; ">미영업</td>
   		</c:if>
-  	  	<c:if test="${StoreDTO.state eq 2}">
+  	  	<c:if test="${StoreDTO.state eq 3}">
       <td style="text-align: center !important; font-size:20px !important; color:red; ">폐업</td>
   	</c:if>
   </tr>

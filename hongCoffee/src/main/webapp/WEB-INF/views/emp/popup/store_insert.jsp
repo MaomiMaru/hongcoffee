@@ -42,9 +42,9 @@ select{
 <div><b>상태</b></div>
 <select name="state" class="state">
 <option value="100">상태를 선택해주세요</option>
-<option value="0">정상영업</option>
-<option value="1">미영업</option>
-<option value="2">폐업</option>
+<option value="1">정상영업</option>
+<option value="2">미영업</option>
+<option value="3">폐업</option>
 </select><br>
 <sub></sub>
 <b>적요</b><br><textarea rows="30" cols="35" name="note" style="height: 210px; width: 410px;"></textarea><br>

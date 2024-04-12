@@ -380,15 +380,15 @@ label input[type=radio]:checked:after{
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.emp_email}</td>
  	<td style="text-align: center !important; font-size:20px !important;">${EmployeeDTO.hire_date}</td>
 
- 		<c:if test="${EmployeeDTO.emp_state eq 0}">
+ 		<c:if test="${EmployeeDTO.emp_state eq 1}">
  		<td style="text-align: center !important; font-size:20px !important; color:green; ">재직</td>
  		</c:if>
  		
- 		<c:if test="${EmployeeDTO.emp_state eq 1}">
+ 		<c:if test="${EmployeeDTO.emp_state eq 2}">
  		<td style="text-align: center !important; font-size:20px !important; color:orange; ">휴직</td>
  		</c:if>
  		
- 		<c:if test="${EmployeeDTO.emp_state eq 2}">
+ 		<c:if test="${EmployeeDTO.emp_state eq 3}">
  		<td style="text-align: center !important; font-size:20px !important; color:red; ">퇴직</td>
  		</c:if>
 
