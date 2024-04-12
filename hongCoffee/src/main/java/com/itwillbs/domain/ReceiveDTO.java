@@ -10,6 +10,8 @@ public class ReceiveDTO {
 	private int rc_amount; //입고수량
 	private int rc_amountBefore; //입고 수정 전 수량
 	private Timestamp rc_time; //입고일시
+	private String rc_minTime; //입고일시 최소범위
+	private String rc_maxTime; //입고일시 최대범위
 	private String rc_note; //입고적요
 	private String sh_note; //출하적요
 	private int pay; //결제여부
@@ -22,24 +24,12 @@ public class ReceiveDTO {
 	
 	
 
-
 	public int getItem_type() {
 		return item_type;
 	}
-
 	public void setItem_type(int item_type) {
 		this.item_type = item_type;
 	}
-
-	@Override
-	public String toString() {
-		return "ReceiveDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", rc_amount=" + rc_amount
-				+ ", rc_time=" + rc_time + ", rc_note=" + rc_note + ", sh_note=" + sh_note + ", pay=" + pay
-				+ ", item_price=" + item_price + ", item_minPrice=" + item_minPrice + ", item_maxPrice=" + item_maxPrice
-				+ ", name=" + name + ", item_name=" + item_name + "]";
-
-	}
-	
 	public int getOd_num() {
 		return od_num;
 	}
@@ -78,6 +68,22 @@ public class ReceiveDTO {
 	public void setRc_time(Timestamp rc_time) {
 		this.rc_time = rc_time;
 	}
+	public String getRc_minTime() {
+		return rc_minTime;
+	}
+
+	public void setRc_minTime(String rc_minTime) {
+		this.rc_minTime = rc_minTime;
+	}
+
+	public String getRc_maxTime() {
+		return rc_maxTime;
+	}
+
+	public void setRc_maxTime(String rc_maxTime) {
+		this.rc_maxTime = rc_maxTime;
+	}
+
 	public String getRc_note() {
 		return rc_note;
 	}
@@ -203,6 +209,19 @@ public class ReceiveDTO {
 	}
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "ReceiveDTO [od_num=" + od_num + ", num=" + num + ", item_num=" + item_num + ", rc_amount=" + rc_amount
+				+ ", rc_time=" + rc_time + ", rc_minTime=" + rc_minTime + ", rc_maxTime=" + rc_maxTime + ", rc_note="
+				+ rc_note + ", sh_note=" + sh_note + ", pay=" + pay + ", item_price=" + item_price + ", item_minPrice="
+				+ item_minPrice + ", item_maxPrice=" + item_maxPrice + ", name=" + name + ", item_name=" + item_name
+				+ ", item_type=" + item_type + ", pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage="
+				+ currentPage + ", startRow=" + startRow + ", endRow=" + endRow + ", pageBlock=" + pageBlock
+				+ ", startPage=" + startPage + ", endPage=" + endPage + ", count=" + count + ", pageCount=" + pageCount
+				+ "]";
 	}
 	
 }

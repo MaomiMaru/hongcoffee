@@ -14,6 +14,8 @@ public class PageDTO {
 	
 	private int count;
 	private int pageCount;
+	
+	private int num; // 지점 번호
 		
 	
 	public int getPageSize() {
@@ -76,12 +78,18 @@ public class PageDTO {
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
 	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	
 	@Override
 	public String toString() {
 		return "PageDTO [pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
 				+ startRow + ", endRow=" + endRow + ", pageBlock=" + pageBlock + ", startPage=" + startPage
-				+ ", endPage=" + endPage + ", count=" + count + ", pageCount=" + pageCount + "]";
+				+ ", endPage=" + endPage + ", count=" + count + ", pageCount=" + pageCount + ", num=" + num + "]";
 	}
 	
 	

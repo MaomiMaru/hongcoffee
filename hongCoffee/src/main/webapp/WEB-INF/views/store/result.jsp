@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -204,12 +203,15 @@ label input[type=radio]:checked:after{
 		<h2>실적 관리</h2><br>
 		<div><h3 style="margin-top: 15px;">실적 검색</h3></div>
 		
+
 		<form action="${pageContext.request.contextPath}/store/resultSearch" class="resultSearch" method="get">
+
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>영업일</b></label>
 						<input type="date" name="rs_minDate" class="rs_minDate" max="9999-12-31" style="width : 140.5px;"> ~
 						<input type="date" name="rs_maxDate" class="rs_maxDate" max="9999-12-31" style="width : 140.5px;">
+
 
 						<span class="button"><button type="submit" style="background-color: black; color: #EFBDBC;">조회</button> <button type="reset" style="background-color: black; color: #EFBDBC;">초기화</button></span></div></li>
 
@@ -275,6 +277,30 @@ label input[type=radio]:checked:after{
   		</c:forEach>
   
  		 </table>
+ 		 
+ 		 <div id="page_control">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/store/result?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+		</c:if>
+		
+		<c:if test="${pageDTO.count ne -1}">
+		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/result?pageNum=${i}">${i}</a>
+		</c:forEach>
+		</c:if>
+		
+		<c:if test="${pageDTO.count eq -1}">
+		<c:forEach var="i" begin="${resultDTO.startPage}" end="${resultDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/resultSearch?pageNum=${i}&rs_minDate=${resultDTO.rs_minDate}&rs_maxDate=${resultDTO.rs_maxDate}">${i}</a>
+		</c:forEach>
+		</c:if>
+
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/store/result?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		</c:if>
+
+		</div>
+ 		 
 		</div>
         
         

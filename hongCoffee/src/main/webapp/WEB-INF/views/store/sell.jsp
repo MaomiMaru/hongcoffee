@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -181,45 +183,35 @@ label input[type=radio]:checked:after {
 
 
 
-		<!-- partial -->
-		<div class="container-fluid page-body-wrapper">
-			<!-- partial:partials/_settings-panel.html -->
-			<div class="theme-setting-wrapper">
-				<div id="settings-trigger">
-					<i class="ti-settings"></i>
-				</div>
-				<div id="theme-settings" class="settings-panel">
-					<i class="settings-close ti-close"></i>
-					<p class="settings-heading">사이드바 색상</p>
-					<div class="sidebar-bg-options selected" id="sidebar-light-theme">
-						<div class="img-ss rounded-circle bg-light border mr-3"></div>
-						Light
-					</div>
-					<div class="sidebar-bg-options" id="sidebar-dark-theme">
-						<div class="img-ss rounded-circle bg-dark border mr-3"></div>
-						Dark
-					</div>
-					<p class="settings-heading mt-2">헤더 색상</p>
-					<div class="color-tiles mx-0 px-4">
-						<div class="tiles success"></div>
-						<div class="tiles warning"></div>
-						<div class="tiles danger"></div>
-						<div class="tiles info"></div>
-						<div class="tiles dark"></div>
-						<div class="tiles default"></div>
-					</div>
-				</div>
-			</div>
 
-			<!-- partial -->
-			<!-- partial:partials/_sidebar.html -->
-
-
-
-			<!--     include left -->
-			<jsp:include page="inc/left.jsp" />
-
-
+		 <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div class="theme-setting-wrapper">
+        <div id="settings-trigger"><i class="ti-settings"></i></div>
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close ti-close"></i>
+          <p class="settings-heading">사이드바 색상</p>
+          <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+          <p class="settings-heading mt-2">헤더 색상</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles success"></div>
+            <div class="tiles warning"></div>
+            <div class="tiles danger"></div>
+            <div class="tiles info"></div>
+            <div class="tiles dark"></div>
+            <div class="tiles default"></div>
+          </div>
+        </div>
+      </div>
+     
+     
+     <!--     include left -->
+		<jsp:include page="inc/left.jsp"/>
+      
+      
+     
 
 			<!-- partial -->
 			<div class="main-panel">
@@ -304,6 +296,30 @@ label input[type=radio]:checked:after {
 							</c:forEach>
 
 						</table>
+						
+						 <div id="page_control">
+		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/store/sell?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+		</c:if>
+		
+		<c:if test="${pageDTO.count ne -1}">
+		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/sell?pageNum=${i}">${i}</a>
+		</c:forEach>
+		</c:if>
+		
+		<c:if test="${pageDTO.count eq -1}">
+		<c:forEach var="i" begin="${resultDTO.startPage}" end="${resultDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/store/sellSearch?pageNum=${i}&rs_minDate=${resultDTO.rs_minDate}&rs_maxDate=${resultDTO.rs_maxDate}">${i}</a>
+		</c:forEach>
+		</c:if>
+
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/store/sell?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		</c:if>
+
+		</div>
+		
 					</div>
 
 
@@ -317,10 +333,12 @@ label input[type=radio]:checked:after {
 			</div>
 			<!-- main-panel ends -->
 		</div>
+
 		<!-- page-body-wrapper ends -->
 	</div>
 	<!-- container-scroller -->
 
+</div>
 	<!-- plugins:js -->
 	<script
 		src="${pageContext.request.contextPath}/resources/vendors/js/vendor.bundle.base.js"></script>

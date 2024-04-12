@@ -9,8 +9,9 @@ public class ResultDTO {
 	private int item_num;// 재료번호
 	private int stock_num;// 재고번호
 	private String rs_date; // 영업일
-	private String rs_minDate; // 최소 영업일
-	private String rs_maxDate; // 최대 영업일
+
+	private String rs_minDate; // 영업일
+	private String rs_maxDate; // 영업일
 	private int sales;// 판매량
 	private int consume;// 소모량
 	private int consumeBefore;// 소모량
@@ -37,7 +38,9 @@ public class ResultDTO {
 				+ pageBlock + ", startPage=" + startPage + ", endPage=" + endPage + ", count=" + count + ", pageCount="
 				+ pageCount + "]";
 	}
-	
+
+
+
 	public int getRs_num() {
 		return rs_num;
 	}
@@ -74,18 +77,7 @@ public class ResultDTO {
 	public void setRs_date(String rs_date) {
 		this.rs_date = rs_date;
 	}
-	public String getRs_minDate() {
-		return rs_minDate;
-	}
-	public void setRs_minDate(String rs_minDate) {
-		this.rs_minDate = rs_minDate;
-	}
-	public String getRs_maxDate() {
-		return rs_maxDate;
-	}
-	public void setRs_maxDate(String rs_maxDate) {
-		this.rs_maxDate = rs_maxDate;
-	}
+
 	public int getSales() {
 		return sales;
 	}
@@ -162,6 +154,20 @@ public class ResultDTO {
 	
 	//==페이징
 	
+	public String getRs_minDate() {
+		return rs_minDate;
+	}
+	public void setRs_minDate(String rs_minDate) {
+		this.rs_minDate = rs_minDate;
+	}
+	public String getRs_maxDate() {
+		return rs_maxDate;
+	}
+	public void setRs_maxDate(String rs_maxDate) {
+		this.rs_maxDate = rs_maxDate;
+	}
+
+
 	private int pageSize;
 	private String pageNum;
 	private int currentPage;

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,7 +10,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
 /* 항목 스타일 */
-
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
    background: #EFBDBC !important;
 }
@@ -239,10 +238,6 @@ tr:hover {background-color: #F0F0F0;}
   		</c:forEach>
   
  		 </table>
- 		 
- 		 
- 		 
- 		 
  		 
  		 
  	<div id="page_control">

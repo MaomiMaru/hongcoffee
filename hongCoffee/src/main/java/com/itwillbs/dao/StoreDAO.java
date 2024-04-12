@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.itwillbs.domain.ItemDTO;
 import com.itwillbs.domain.NowDTO;
 import com.itwillbs.domain.OrderDTO;
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.domain.ReceiveDTO;
 import com.itwillbs.domain.ResultDTO;
 import com.itwillbs.domain.StockDTO;
@@ -26,10 +27,10 @@ public class StoreDAO {
 	private static final String namespace="com.itwillbs.mappers.StoreMapper";
 
 	//재료 목록
-	public List<ItemDTO> getItemList() {
+	public List<ItemDTO> getItemList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getItemList()");
 		
-		return sqlSession.selectList(namespace + ".getItemList");
+		return sqlSession.selectList(namespace + ".getItemList", pageDTO);
 	}//getItemList
 	
 	
@@ -42,10 +43,10 @@ public class StoreDAO {
 
 
 	//재고 목록
-	public List<StockDTO> getStockList(int num) {
+	public List<StockDTO> getStockList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getStockList()");
 		
-		return sqlSession.selectList(namespace + ".getStockList", num);
+		return sqlSession.selectList(namespace + ".getStockList", pageDTO);
 	}//getStockList
 
 	
@@ -58,10 +59,10 @@ public class StoreDAO {
 
 	
 	//발주 목록
-	public List<OrderDTO> getOrderList(int num) {
+	public List<OrderDTO> getOrderList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getOrderList()");
 		
-		return sqlSession.selectList(namespace + ".getOrderList", num);
+		return sqlSession.selectList(namespace + ".getOrderList",pageDTO);
 	}//getOrderList
 
 	
@@ -74,10 +75,11 @@ public class StoreDAO {
 	
 	
 	//입고 목록
-	public List<ReceiveDTO> getReceiveList(int num) {
+	public List<ReceiveDTO> getReceiveList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getReceiveList()");
 		
-		return sqlSession.selectList(namespace + ".getReceiveList", num);
+
+		return sqlSession.selectList(namespace + ".getReceiveList", pageDTO);
 	}//getReceiveList
 	
 	
@@ -90,11 +92,13 @@ public class StoreDAO {
 	
 	
 	//소모 목록
-	public List<ResultDTO> getConsumeList(int num) {
+
+	public List<ResultDTO> getConsumeList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getConsumeList()");
 		
-		return sqlSession.selectList(namespace + ".getConsumeList", num);
-	}//getSomoList
+
+		return sqlSession.selectList(namespace + ".getConsumeList", pageDTO);
+	}//getConsumeList
 	
 	
 	//소모 필터링 목록
@@ -102,15 +106,17 @@ public class StoreDAO {
 		System.out.println("StoreDAO searchConsumeList()");
 			
 		return sqlSession.selectList(namespace + ".searchConsumeList", resultDTO);
-	}//searchSomoList
+	}//searchConsumeList
 		
 
 	//판매 목록
-	public List<ResultDTO> getSellList(int num) {
+
+	public List<ResultDTO> getSellList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getSellList()");
 			
-		return sqlSession.selectList(namespace + ".getSellList", num);
-	}//getPanmeList
+
+		return sqlSession.selectList(namespace + ".getSellList", pageDTO);
+	}//getSellList
 
 		
 	//판매 필터링 출력
@@ -118,14 +124,16 @@ public class StoreDAO {
 		System.out.println("StoreDAO searchSellList()");
 			
 		return sqlSession.selectList(namespace + ".searchSellList", resultDTO);
-	}//searchPanmeList
+	}//searchSellList
 		
 
 	//실적 목록
-	public List<ResultDTO> getResultList(int num) {
+
+	public List<ResultDTO> getResultList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getResultList()");
 		
-		return sqlSession.selectList(namespace + ".getResultList", num);
+
+		return sqlSession.selectList(namespace + ".getResultList", pageDTO);
 	}//getResultList
 	
 
@@ -304,10 +312,83 @@ public class StoreDAO {
 	}
 
 
-//	public List<StockDTO> stockCheck(int stock_num) {
-//		System.out.println("StoreDAO stockCheck()");
-//		return sqlSession.selectList(namespace+".stockCheck", stock_num);
-//	}
+
+	public int getReceiveCount(ReceiveDTO receiveDTO) {
+		System.out.println("StoreDAO getReceiveCount()");
+		return sqlSession.selectOne(namespace + ".getReceiveCountR", receiveDTO);
+	}
+	
+	public int getReceiveCount(PageDTO pageDTO) {
+		System.out.println("StoreDAO getReceiveCount()");
+		return sqlSession.selectOne(namespace + ".getReceiveCount", pageDTO);
+	}
+
+	public int getConsumeCount(PageDTO pageDTO) {
+		System.out.println("StoreDAO getConsumeCount()");
+		return sqlSession.selectOne(namespace+".getConsumeCount", pageDTO);
+	}
+
+
+	public int getConsumeCount(ResultDTO resultDTO) {
+		System.out.println("StoreDAO getConsumeCount()");
+		return sqlSession.selectOne(namespace+".getConsumeCountC", resultDTO);
+	}
+
+
+	public int getSellCount(PageDTO pageDTO) {
+		System.out.println("StoreDAO getSellCount()");
+		return sqlSession.selectOne(namespace+".getSellCount", pageDTO);
+	}
+	
+	
+	public int getSellCount(ResultDTO resultDTO) {
+		System.out.println("StoreDAO getSellCount()");
+		return sqlSession.selectOne(namespace+".getSellCountS", resultDTO);
+	}
+
+	public int getOrderCount(PageDTO pageDTO) {
+		System.out.println("StoreDAO getOrderCount()");
+		return sqlSession.selectOne(namespace + ".getOrderCount", pageDTO);
+	}
+	
+	public int getOrderCount(OrderDTO orderDTO) {
+		System.out.println("StoreDAO getOrderCount()");
+		return sqlSession.selectOne(namespace + ".getOrderCountO", orderDTO);
+	}
+
+	public int getResultCount(PageDTO pageDTO) {
+		System.out.println("StoreDAO getResultCount()");
+		return sqlSession.selectOne(namespace+".getResultCount", pageDTO);
+	}
+	
+	
+	public int getResultCount(ResultDTO resultDTO) {
+		System.out.println("StoreDAO getResultCount()");
+		return sqlSession.selectOne(namespace+".getResultCountR", resultDTO);
+	}
+	
+	public int getItemCount(PageDTO pageDTO) {
+		System.out.println("StoreDAO getItemCount");
+		return sqlSession.selectOne(namespace + ".getItemCount", pageDTO);
+	}
+	
+	public int getStockCount(PageDTO pageDTO) {
+		System.out.println("StoreDAO getStockCount()");
+		return sqlSession.selectOne(namespace + ".getStockCount", pageDTO);
+	}
+	
+	public int getStockCount(StockDTO stockDTO) {
+		System.out.println("StoreDAO getStockCount()");
+		System.out.println(stockDTO.getItem_type()); 
+		return sqlSession.selectOne(namespace + ".getStockCountS", stockDTO);
+	}
+
+
+	public int getItemCount(ItemDTO itemDTO) {
+		System.out.println("StoreDAO getItemCount");
+		return sqlSession.selectOne(namespace + ".getItemCountI", itemDTO);
+	}
+
 
 
 }

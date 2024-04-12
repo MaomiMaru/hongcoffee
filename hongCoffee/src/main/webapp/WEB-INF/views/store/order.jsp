@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/ba-boya
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -308,9 +312,6 @@ label input[type=radio]:checked:after{
 		</c:if>
 
 		</div>
- 		 
- 		 
- 		 
  		 
 		</div>
         
