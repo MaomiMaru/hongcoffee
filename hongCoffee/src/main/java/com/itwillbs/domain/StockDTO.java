@@ -8,22 +8,14 @@ public class StockDTO {
 	private String item_name; //물품명
 	private int item_type; //유형
 	private int amount; //보유량
+	private int amount_min; //보유량 최소범위
+	private int amount_max; //보유량 최대범위
 	private int item_price; //단가
 	private int item_minPrice; //최소 단가
 	private int item_maxPrice; //최대 단가
 	private String stock_note; //재고 적요
 	private int item_state; //재료상태
 
-	
-	
-	@Override
-	public String toString() {
-		return "StockDTO [stock_num=" + stock_num + ", num=" + num + ", item_name=" + item_name + ", item_type="
-				+ item_type + ", amount=" + amount + ", item_price=" + item_price + ", item_minPrice=" + item_minPrice
-				+ ", item_maxPrice=" + item_maxPrice + ", stock_note=" + stock_note + ", item_state=" + item_state
-				+ "]";
-
-	}
 	
 	public int getStock_num() {
 		return stock_num;
@@ -54,6 +46,18 @@ public class StockDTO {
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+	public int getAmount_min() {
+		return amount_min;
+	}
+	public void setAmount_min(int amount_min) {
+		this.amount_min = amount_min;
+	}
+	public int getAmount_max() {
+		return amount_max;
+	}
+	public void setAmount_max(int amount_max) {
+		this.amount_max = amount_max;
 	}
 	public int getItem_price() {
 		return item_price;
@@ -170,6 +174,17 @@ public class StockDTO {
 	}
 	public void setPageCount(int pageCount) {
 		this.pageCount = pageCount;
+	}
+	
+	@Override
+	public String toString() {
+		return "StockDTO [stock_num=" + stock_num + ", num=" + num + ", item_num=" + item_num + ", item_name="
+				+ item_name + ", item_type=" + item_type + ", amount=" + amount + ", amount_min=" + amount_min
+				+ ", amount_max=" + amount_max + ", item_price=" + item_price + ", item_minPrice=" + item_minPrice
+				+ ", item_maxPrice=" + item_maxPrice + ", stock_note=" + stock_note + ", item_state=" + item_state
+				+ ", pageSize=" + pageSize + ", pageNum=" + pageNum + ", currentPage=" + currentPage + ", startRow="
+				+ startRow + ", endRow=" + endRow + ", pageBlock=" + pageBlock + ", startPage=" + startPage
+				+ ", endPage=" + endPage + ", count=" + count + ", pageCount=" + pageCount + "]";
 	}
 
 

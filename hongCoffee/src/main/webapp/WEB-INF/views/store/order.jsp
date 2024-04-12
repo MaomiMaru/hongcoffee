@@ -2,10 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/ba-boya
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -187,8 +183,6 @@ label input[type=radio]:checked:after{
 
             <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-
-    
     
          
       <!--     include left -->
@@ -214,7 +208,8 @@ label input[type=radio]:checked:after{
 						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>발주일시</b></label>
-						<input type="date" name="od_time" class="od_time" max="9999-12-31"></div></li>
+						<input type="date" name="od_minTime" class="od_minTime" max="9999-12-31" style="width : 140.5px;"> ~
+						<input type="date" name="od_maxTime" class="od_maxTime" max="9999-12-31" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고여부</b></label>
 						<select class="choose" name="received_not">
@@ -303,7 +298,7 @@ label input[type=radio]:checked:after{
 		<c:forEach var="i" begin="${orderDTO.startPage}" end="${orderDTO.endPage}" step="1">
 			<a href="${pageContext.request.contextPath}/store/orderSearch?pageNum=${i}
 			&item_name=${orderDTO.item_name}&item_minPrice=${orderDTO.item_minPrice}&item_maxPrice=${orderDTO.item_maxPrice}
-			&od_time=${orderDTO.od_time}&shipment_not=${orderDTO.shipment_not}">${i}</a>
+			&od_minTime=${orderDTO.od_minTime}&od_maxTime=${orderDTO.od_maxTime}&received_not=${orderDTO.received_not}">${i}</a>
 		</c:forEach>
 		</c:if>
 
@@ -439,7 +434,7 @@ $('.orderSearch').submit(function(){
 
 	document.addEventListener('DOMContentLoaded', function() {
 	    document.querySelector('.orderSearch').addEventListener('submit', function(event) {
-	        var inputDate = new Date(document.querySelector('.od_time').value);
+	        var inputDate = new Date(document.querySelector('.od_maxTime').value);
 	        
 	        var today = new Date();
 	        
@@ -454,8 +449,8 @@ $('.orderSearch').submit(function(){
 	
 $(function(){
     $('.orderSearch').submit(function(){
-        if($('.choose').val()=="100" && $('.od_time').val() =="" && $('.item_minPrice').val() == "" && $('.item_maxPrice').val() == "" && $('.item_name').val() == ""){
-            alert('발주를 조회하기 위해서는 재료명, 최소 금액, 최대 금액, 입고 여부 중 하나 이상 입력해야합니다.');
+        if($('.choose').val()=="100" && $('.od_minTime').val() =="" && $('.od_maxTime').val() =="" && $('.item_minPrice').val() == "" && $('.item_maxPrice').val() == "" && $('.item_name').val() == ""){
+            alert('발주를 조회하기 위해서는 재료명, 발주일시 범위, 최소 금액, 최대 금액, 입고 여부 중 하나 이상 입력해야합니다.');
             return false;
         }
     });

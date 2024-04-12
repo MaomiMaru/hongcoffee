@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
-     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-=======
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
-
->>>>>>> refs/remotes/origin/ba-boya
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
@@ -264,13 +258,10 @@ window.addEventListener('load',function(){
       console.log('이벤트가 잘 연결 됐는지 확인');
       tostOn()
   });
-
   </script>
 		
 		
-
 		<form action="${pageContext.request.contextPath}/store/receiveSearch" class="receiveSearch" method="get">
-
 			<div id="search">
 				<ul>
 					<li><div class="search_div"><label class="search_name"><b>재료명</b></label>
@@ -281,10 +272,8 @@ window.addEventListener('load',function(){
 						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고일시</b></label>
-
-						<input type="date" name="rc_minTime"  class="rc_time"  max="9999-12-31" style="width: 140.5px;"> ~
-						<input type="date" name="rc_maxTime" class="rc_time"  max="9999-12-31" style="width: 140.5px;"></div></li>
-
+						<input type="date" name="rc_minTime" class="rc_minTime"  max="9999-12-31" style="width: 140.5px;"> ~
+						<input type="date" name="rc_maxTime" class="rc_maxTime"  max="9999-12-31" style="width: 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>결제여부</b></label>
 						<select class="choose" name="pay">
@@ -484,8 +473,8 @@ $('.receiveSearch').submit(function(){
 
 $(function(){
   $('.receiveSearch').submit(function(){
-      if($('.rc_time').val() =="" && $('.item_minPrice').val() == "" && $('.item_maxPrice').val() == "" && $('.item_name').val() == ""){
-          alert('입고를 조회하기 위해서는 재료명, 최소 금액, 최대 금액, 입고 여부 중 하나 이상 입력해야합니다.');
+      if($('.rc_minTime').val() =="" && $('.rc_maxTime').val() =="" && $('.item_minPrice').val() == "" && $('.item_maxPrice').val() == "" && $('.item_name').val() == "" && $('.choose').val() == ""){
+          alert('입고를 조회하기 위해서는 재료명, 최소 금액, 최대 금액, 입고 일시, 결제 여부 중 하나 이상 입력해야합니다.');
           return false;
       }
   });

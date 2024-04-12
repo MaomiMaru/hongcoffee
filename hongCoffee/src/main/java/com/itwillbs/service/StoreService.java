@@ -58,11 +58,8 @@ public class StoreService {
 
 	
 	//재고 출력
-
 	public List<StockDTO> getStockList(PageDTO pageDTO){
-
 		System.out.println("StoreService getStockList()");
-		
 
 		int currentPage = pageDTO.getCurrentPage();
 		int pageSize = pageDTO.getPageSize();
@@ -70,18 +67,14 @@ public class StoreService {
 		int endRow = startRow + pageSize - 1;
 		
 		pageDTO.setStartRow(startRow - 1);
-		pageDTO.setPageSize(pageSize);
 		pageDTO.setEndRow(endRow);
-		
 		return storeDAO.getStockList(pageDTO);
-
 	}//getStockList
 	
 	
 	//재고 필터링 출력
 	public List<StockDTO> searchStockList(StockDTO stockDTO) {
 		System.out.println("StoreService searchStockList(()");
-		
 		int currentPage = stockDTO.getCurrentPage();
 		int pageSize = stockDTO.getPageSize();
 		int startRow = (currentPage - 1) * pageSize + 1;
@@ -89,9 +82,7 @@ public class StoreService {
 		
 		stockDTO.setStartRow(startRow - 1);
 		stockDTO.setEndRow(endRow);
-		
 		System.out.println("서비스" + stockDTO);
-		
 		return storeDAO.searchStockList(stockDTO);
 	}//searchStockList
 	
@@ -126,30 +117,22 @@ public class StoreService {
 		
 		orderDTO.setStartRow(startRow - 1);
 		orderDTO.setEndRow(endRow);
-		
 		System.out.println("서비스" + orderDTO);
-		
-		
 		return storeDAO.searchOrderList(orderDTO);
 	}//searchOrderList
 
 	
 	//입고 출력
-
 	public List<ReceiveDTO> getReceiveList(PageDTO pageDTO){
-
 		System.out.println("StoreService getReceiveList()");
 		int currentPage = pageDTO.getCurrentPage();
 		int pageSize = pageDTO.getPageSize();
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = startRow + pageSize - 1;
 		
-
 		pageDTO.setStartRow(startRow - 1);
-		pageDTO.setPageSize(pageSize);
 		pageDTO.setEndRow(endRow);
 		return storeDAO.getReceiveList(pageDTO);
-
 	}//getReceiveList
 	
 	
@@ -163,9 +146,7 @@ public class StoreService {
 		
 		receiveDTO.setStartRow(startRow - 1);
 		receiveDTO.setEndRow(endRow);
-		
 		System.out.println("서비스" + receiveDTO);
-		
 		return storeDAO.searchReceiveList(receiveDTO);
 	}//searchReceiveList
 	
@@ -173,7 +154,13 @@ public class StoreService {
 	//소모 출력
 	public List<ResultDTO> getConsumeList(PageDTO pageDTO){
 		System.out.println("StoreService getConsumeList()");
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
 		return storeDAO.getConsumeList(pageDTO);
 	}//getSomoList
 
@@ -181,7 +168,14 @@ public class StoreService {
 	//소모 필터링 출력
 	public List<ResultDTO> searchConsumeList(ResultDTO resultDTO) {
 		System.out.println("StoreService searchConsumeList()");
+		int currentPage = resultDTO.getCurrentPage();
+		int pageSize = resultDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		resultDTO.setStartRow(startRow - 1);
+		resultDTO.setEndRow(endRow);
+		System.out.println("서비스" + resultDTO);
 		return storeDAO.searchConsumeList(resultDTO);
 	}//searchSomoList
 	
@@ -189,7 +183,13 @@ public class StoreService {
 	//판매 출력
 	public List<ResultDTO> getSellList(PageDTO pageDTO){
 		System.out.println("StoreService getSellList()");
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
 		return storeDAO.getSellList(pageDTO);
 	}//getPanmeList
 
@@ -197,7 +197,14 @@ public class StoreService {
 	//판매 필터링 출력
 	public List<ResultDTO> searchSellList(ResultDTO resultDTO) {
 		System.out.println("StoreService searchSellList()");
+		int currentPage = resultDTO.getCurrentPage();
+		int pageSize = resultDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		resultDTO.setStartRow(startRow - 1);
+		resultDTO.setEndRow(endRow);
+		System.out.println("서비스" + resultDTO);
 		return storeDAO.searchSellList(resultDTO);
 	}//searchPanmeList
 	
@@ -205,7 +212,13 @@ public class StoreService {
 	//실적 출력
 	public List<ResultDTO> getResultList(PageDTO pageDTO){
 		System.out.println("StoreService getEmpList()");
+		int currentPage = pageDTO.getCurrentPage();
+		int pageSize = pageDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
 		
+		pageDTO.setStartRow(startRow - 1);
+		pageDTO.setEndRow(endRow);
 		return storeDAO.getResultList(pageDTO);
 	}//getResultList
 
@@ -213,7 +226,14 @@ public class StoreService {
 	//실적 필터링 출력
 	public List<ResultDTO> searchResultList(ResultDTO resultDTO) {
 		System.out.println("StoreService searchResultList()");
-			
+		int currentPage = resultDTO.getCurrentPage();
+		int pageSize = resultDTO.getPageSize();
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize - 1;
+		
+		resultDTO.setStartRow(startRow - 1);
+		resultDTO.setEndRow(endRow);
+		System.out.println("서비스" + resultDTO);	
 		return storeDAO.searchResultList(resultDTO);
 	}//searchResultList
 

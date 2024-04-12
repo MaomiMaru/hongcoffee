@@ -78,7 +78,6 @@ public class StoreDAO {
 	public List<ReceiveDTO> getReceiveList(PageDTO pageDTO) {
 		System.out.println("StoreDAO getReceiveList()");
 		
-
 		return sqlSession.selectList(namespace + ".getReceiveList", pageDTO);
 	}//getReceiveList
 	
@@ -315,6 +314,7 @@ public class StoreDAO {
 
 	public int getReceiveCount(ReceiveDTO receiveDTO) {
 		System.out.println("StoreDAO getReceiveCount()");
+		System.out.println(receiveDTO); 
 		return sqlSession.selectOne(namespace + ".getReceiveCountR", receiveDTO);
 	}
 	
