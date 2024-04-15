@@ -47,7 +47,7 @@
 
  	<select id="getItemList" resultType="com.itwillbs.domain.ItemDTO"> 
  		select * from item 
- 		order by item_num desc
+ 		order by item_state, item_type, item_num
  		limit #{startRow},#{pageSize}
  	</select>
  	
@@ -78,7 +78,7 @@
 			</if>
 		</if>
 		</where>
-		order by item_num desc
+		order by item_state, item_type, item_num
  		limit #{startRow},#{pageSize}
 	</select>
  	
