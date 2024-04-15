@@ -20,26 +20,27 @@ select{
 <body>
 <form action="${pageContext.request.contextPath}/emp/popup/store_insertPro" method="post" class="form">
 <h2 style="margin-left: 10px">지점 추가</h2>
+<sub>&nbsp;&nbsp;<span style="color: red">*</span>포함된 항목은 필수항목입니다.</sub>
 <fieldset style="border:0px">
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 <div class="check"></div><br>
-<div><b>지점명</b></div><input type="text" name="name" class="name"><br>
+<div><b>지점명</b><span style="color: red">*</span></div><input type="text" name="name" class="name"><br>
 <sub></sub>
-<div><b>비밀번호</b></div><input type="password" name="pw" class="pw"><br>
+<div><b>비밀번호</b><span style="color: red">*</span></div><input type="password" name="pw" class="pw"><br>
 <sub></sub>
-<div><b>대표자명</b></div><input type="text" name="boss" class="boss"><br>
+<div><b>대표자명</b><span style="color: red">*</span></div><input type="text" name="boss" class="boss"><br>
 <sub></sub>
-<div><b>연락처</b></div><input type="tel" name="phone" class="phone"><br>
+<div><b>연락처</b><span style="color: red">*</span></div><input type="tel" name="phone" class="phone"><br>
 <sub></sub>
-<div><b>이메일</b></div><input type="text" name="email" class="email"><br>
+<div><b>이메일</b></div><input type="email" name="email" class="email"><br>
 <sub></sub>																																
-<div><b>우편번호</b></div><input type="text" id="sample4_postcode" placeholder="우편번호" name="postalcode"> <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="float:right; ;background-color: black; color: #EFBDBC;"><br>
+<div><b>우편번호</b><span style="color: red">*</span></div><input type="text" id="sample4_postcode" placeholder="우편번호" name="postalcode"> <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" style="float:right; ;background-color: black; color: #EFBDBC;"><br>
 <sub></sub>
-<div><b>도로명주소</b></div><input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="address"><br>
+<div><b>도로명주소</b><span style="color: red">*</span></div><input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="address"><br>
 <sub></sub>
 <div><b>상세주소</b></div><input type="text" id="sample4_detailAddress" placeholder="상세주소" name="address_detail"><br>
 <sub></sub>
-<div><b>상태</b></div>
+<div><b>상태</b><span style="color: red">*</span></div>
 <select name="state" class="state">
 <option value="100">상태를 선택해주세요</option>
 <option value="1">정상영업</option>
@@ -157,20 +158,8 @@ function sample4_execDaumPostcode() {
 				alert("한글 2자 이상 6자 이하만 입력가능합니다.");
 				$('.boss').focus();
 				return false;
-		}
-			
-		//이메일 => 아이디@주소
-// 		if($('.email').val()=='' || $('.email').val()==null||$('.email').val()==undefined){
-// 			alert('이메일을 입력해주세요.');
-// 			return false;
-// 		}
-		var emailCheck = RegExp(/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]/);
-			if( ! emailCheck.test($('.email').val()) ){
-				alert("이메일 형식이 아닙니다.");
-				$('.email').focus();
-				return false;
-		}
-			
+		}		
+		
 		//select 상자
 		if($('.state').val() == "100"){
 				alert("상태를 선택하세요.");

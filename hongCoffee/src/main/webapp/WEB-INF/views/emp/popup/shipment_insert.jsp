@@ -20,6 +20,7 @@ select{
 <body>
 <form action="${pageContext.request.contextPath}/emp/popup/shipment_insertPro" method="post" class="form">
 <h2 style="margin-left: 10px">출하 추가</h2>
+<sub>&nbsp;&nbsp;<span style="color: red">*</span>포함된 항목은 필수항목입니다.</sub>
 <fieldset style="border:0px">
 <input type="hidden" name="od_num" value="${orderDTO.od_num }">
 <input type="hidden" name="num" value="${orderDTO.num }">
@@ -28,7 +29,7 @@ select{
 <sub></sub>
 <div><b>재료명</b></div><input type="text" name="item_name" class="item_name" value="${orderDTO.item_name }" readonly><br>
 <sub></sub>
-<div><b>출하량</b></div><input type="text" name="sh_amount" class="sh_amount" value="${orderDTO.od_amount}"><br>
+<div><b>출하량</b><span style="color: red">*</span></div><input type="text" name="sh_amount" class="sh_amount" value="${orderDTO.od_amount}"><br>
 <sub></sub>
 <div><b>단가</b></div><input type="text" name="item_price" class="item_price" value="${orderDTO.item_price}" readonly><br>
 <sub></sub>

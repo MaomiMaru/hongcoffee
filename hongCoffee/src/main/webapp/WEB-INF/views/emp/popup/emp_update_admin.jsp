@@ -20,16 +20,17 @@ select{
 <body>
 <form action="${pageContext.request.contextPath}/emp/popup/emp_updateProAdmin" method="post" class="form">
 <h2 style="margin-left: 10px">사원 수정</h2>
+<sub>&nbsp;&nbsp;<span style="color: red">*</span>포함된 항목만 수정이 가능합니다.</sub>
 <fieldset style="border:0px">
 <div><b>사원번호</b></div><input type="text" name="emp_num" value="${employeeDTO.emp_num }" readonly><br>
 <sub></sub>
-<div><b>비밀번호</b></div><input type="password" name="emp_pw" class="emp_pw" value="${employeeDTO.emp_pw }"><br>
+<div><b>비밀번호</b><span style="color: red">*</span></div><input type="password" name="emp_pw" class="emp_pw" value="${employeeDTO.emp_pw }"><br>
 <sub></sub>
-<div><b>사원명</b></div><input type="text" name="emp_name" value="${employeeDTO.emp_name }"><br>
+<div><b>사원명</b><span style="color: red">*</span></div><input type="text" name="emp_name" value="${employeeDTO.emp_name }"><br>
 <sub></sub>
-<div><b>생년월일</b></div><input type="date" name="emp_birth" class="emp_birth" style="width: 177px" value="${employeeDTO.emp_birth }"><br>
+<div><b>생년월일</b><span style="color: red">*</span></div><input type="date" name="emp_birth" class="emp_birth" style="width: 177px" value="${employeeDTO.emp_birth }"><br>
 <sub></sub>
-<div><b>부서</b></div>
+<div><b>부서</b><span style="color: red">*</span></div>
 <select name="emp_dept">
 <option value="0" <c:if test="${employeeDTO.emp_dept eq '0'}"> selected </c:if>>무소속</option>
 <option value="1" <c:if test="${employeeDTO.emp_dept eq '1'}"> selected </c:if>>인사팀</option>
@@ -37,7 +38,7 @@ select{
 <option value="3" <c:if test="${employeeDTO.emp_dept eq '3'}"> selected </c:if>>재무팀</option>
 </select><br>
 <sub></sub>
-<div><b>직급</b></div>
+<div><b>직급</b><span style="color: red">*</span></div>
 <select name="emp_rank">
 <option value="0" <c:if test="${employeeDTO.emp_rank eq '0'}"> selected </c:if>>무보직</option>
 <option value="4" <c:if test="${employeeDTO.emp_rank eq '4'}"> selected </c:if>>사원</option>
@@ -46,26 +47,26 @@ select{
 <option value="1" <c:if test="${employeeDTO.emp_rank eq '1'}"> selected </c:if>>대표</option>
 </select><br>
 <sub></sub>
-<div><b>권한</b></div>
+<div><b>권한</b><span style="color: red">*</span></div>
 <select name="emp_right">
 <option value="0" <c:if test="${employeeDTO.emp_right eq '0'}"> selected </c:if>>사원</option>
 <option value="1" <c:if test="${employeeDTO.emp_right eq '1'}"> selected </c:if>>관리자</option>
 </select><br>
 <sub></sub>
-<div><b>연락처</b></div><input type="text" name="emp_phone" class="emp_phone" value="${employeeDTO.emp_phone }"><br>
+<div><b>연락처</b><span style="color: red">*</span></div><input type="text" name="emp_phone" class="emp_phone" value="${employeeDTO.emp_phone }"><br>
 <sub></sub>
-<div><b>이메일</b></div><input type="email" name="emp_email" class="emp_email" value="${employeeDTO.emp_email }"><br>
+<div><b>이메일</b><span style="color: red">*</span></div><input type="email" name="emp_email" class="emp_email" value="${employeeDTO.emp_email }"><br>
 <sub></sub>
-<div><b>입사일</b></div><input type="date" name="hire_date" style="width: 177px" value="${employeeDTO.hire_date }"><br>
+<div><b>입사일</b><span style="color: red">*</span></div><input type="date" name="hire_date" style="width: 177px" value="${employeeDTO.hire_date }"><br>
 <sub></sub>
-<div><b>상태</b></div>
+<div><b>상태</b><span style="color: red">*</span></div>
 <select name="emp_state">
 <option value="1" <c:if test="${employeeDTO.emp_state eq '1'}"> selected </c:if>>재직</option>
 <option value="2" <c:if test="${employeeDTO.emp_state eq '2'}"> selected </c:if>>휴직</option>
 <option value="3" <c:if test="${employeeDTO.emp_state eq '3'}"> selected </c:if>>퇴직</option>
 </select><br>
 <sub></sub>
-<b>적요</b><br><textarea rows="30" cols="37" name="emp_note" style="height: 210px; width: 410px;">${employeeDTO.emp_note }</textarea><br>
+<b>적요</b><span style="color: red">*</span><br><textarea rows="30" cols="37" name="emp_note" style="height: 210px; width: 410px;">${employeeDTO.emp_note }</textarea><br>
 <sub></sub>
 <br>
 <span style="float:right">
@@ -93,17 +94,6 @@ $(function(){
 // 			return false;
 // 		}
 		
-		//이메일 => 아이디@주소
-		if($('.emp_email').val()=='' || $('.emp_email').val()==null||$('.emp_email').val()==undefined){
-			alert('이메일을 입력해주세요.');
-			return false;
-		}
-		var emailCheck = RegExp(/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]/);
-			if( ! emailCheck.test($('.emp_email').val()) ){
-				alert("이메일 형식이 아닙니다.");
-				$('.emp_email').focus();
-				return false;
-		}
 		
 	});
 });	

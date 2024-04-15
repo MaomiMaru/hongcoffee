@@ -608,8 +608,6 @@ public class EmployeeController {
 		pageDTO.setPageNum(pageNum);
 		pageDTO.setCurrentPage(currentPage);
 		
-		
-		
 		// 페이징 작업
 		// 전체 글개수 구하기  int 리턴할형 count = getShipmentCount(pageDTO) 검색어 포함
 		int count = employeeService.getShipmentCount(pageDTO);
@@ -648,7 +646,6 @@ public class EmployeeController {
 	@GetMapping("/shipmentSearch")
 	public String shipmentSearch(HttpServletRequest request, Model model, PageDTO pageDTO) throws Exception {
 		System.out.println("EmployeeController shipmentSearch()");
-
 		ShipmentDTO shipmentDTO = new ShipmentDTO();
 
 		//===========페이징
@@ -725,10 +722,19 @@ public class EmployeeController {
 //		}
 
 		
+		// 필터 페이징 작업
+		// 전체 글개수 구하기  int 리턴할형 count = getItemCount(orderDTO) 검색어 포함
+		count = employeeService.getShipmentCount(shipmentDTO);
+		// 전체 페이지개수 구하기
+		pageCount = count / pageSize + (count % pageSize == 0 ? 0 : 1);
+		// 끝페이지 , 전체 페이지수 비교 => 끝페이지 크면 => 전체 페이지수로 끝페이지 변경
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		
 		
 		
 		//필터 페이징 shipmentDTO 저장
-		count = employeeService.getShipmentCount(shipmentDTO);
 		shipmentDTO.setPageSize(pageSize);
 		shipmentDTO.setPageNum(pageNum);
 		shipmentDTO.setCurrentPage(currentPage);
@@ -750,6 +756,7 @@ public class EmployeeController {
 		}
 
 		model.addAttribute("shipmentList", shipmentList);
+		model.addAttribute("pageDTO", pageDTO);
 
 		return "/emp/shipment";
 	}//shipmentSearch
@@ -806,7 +813,7 @@ public class EmployeeController {
 
 	
 	//4-1-1. 사원 필터링
-	@PostMapping("/empSearch")
+	@GetMapping("/empSearch")
 	public String empSearch(HttpServletRequest request, Model model,PageDTO pageDTO) {
 		System.out.println("EmployeeController empSearch()");
 		
@@ -888,16 +895,14 @@ public class EmployeeController {
 		
 		
 		//필터 페이징 employeeDTO 저장
-				count = employeeService.getEmployeeCount(employeeDTO);
-				employeeDTO.setPageSize(pageSize);
-				employeeDTO.setPageNum(pageNum);
-				employeeDTO.setCurrentPage(currentPage);
-				employeeDTO.setCount(count);
-				employeeDTO.setPageBlock(pageBlock);
-				employeeDTO.setStartPage(startPage);
-				employeeDTO.setEndPage(endPage);
-				employeeDTO.setPageCount(pageCount);
-		
+		employeeDTO.setPageSize(pageSize);
+		employeeDTO.setPageNum(pageNum);
+		employeeDTO.setCurrentPage(currentPage);
+		employeeDTO.setCount(count);
+		employeeDTO.setPageBlock(pageBlock);
+		employeeDTO.setStartPage(startPage);
+		employeeDTO.setEndPage(endPage);
+		employeeDTO.setPageCount(pageCount);
 		List<EmployeeDTO> empList;
 		
 		if (emp_sDept == null && emp_sRank == null && emp_sNum == "" && emp_name == "") {
@@ -906,10 +911,10 @@ public class EmployeeController {
 			empList = employeeService.searchEmpList(employeeDTO);
 			pageDTO.setCount(-1);
 			model.addAttribute("employeeDTO", employeeDTO);	
-			
 		}
 		
 		model.addAttribute("empList", empList);
+		model.addAttribute("pageDTO",pageDTO);
 		
 		return "/emp/emp";
 	}//empSearch

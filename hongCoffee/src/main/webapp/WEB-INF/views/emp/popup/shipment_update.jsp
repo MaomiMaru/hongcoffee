@@ -20,6 +20,7 @@ select{
 <body>
 <form action="${pageContext.request.contextPath}/emp/popup/shipment_updatePro" method="get" class="form">
 <h2 style="margin-left: 10px">출하 수정</h2>
+<sub>&nbsp;&nbsp;<span style="color: red">*</span>포함된 항목만 수정이 가능합니다.</sub>
 <fieldset style="border:0px">
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 <div class="check"></div><br>
@@ -32,9 +33,9 @@ select{
 <sub></sub>
 <div><b>단가</b></div><input type="text" value="${shipmentDTO.item_price}" class="item_price" readonly><br>
 <sub></sub>
-<div><b>출하일시</b></div><input type="datetime-local" name="sh_time" class="sh_time" style="width: 177px"><br>
+<div><b>출하일시</b><span style="color: red">*</span></div><input type="datetime-local" name="sh_time" class="sh_time" style="width: 177px"><br>
 <sub></sub>
-<b>적요</b><br><textarea rows="30" cols="37" name="sh_note" style="height: 210px; width: 410px;">${storeDTO.sh_note}</textarea><br>
+<b>적요</b><span style="color: red">*</span><br><textarea rows="30" cols="37" name="sh_note" style="height: 210px; width: 410px;">${storeDTO.sh_note}</textarea><br>
 <sub></sub>
 <br>
 <span style="float:right">

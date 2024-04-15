@@ -292,26 +292,40 @@ label input[type=radio]:checked:after{
  		 </table>
  		 
   <div id="page_control">
+  		
+  		<c:if test="${pageDTO.count ne -1}">
+  		
 		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
 			<a href="${pageContext.request.contextPath}/emp/order?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
 		</c:if>
 		
-		<c:if test="${pageDTO.count ne -1}">
 		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 			<a href="${pageContext.request.contextPath}/emp/order?pageNum=${i}">${i}</a>
 		</c:forEach>
+		
+		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/emp/order?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
 		</c:if>
 		
+		</c:if>
+		
+		
 		<c:if test="${pageDTO.count eq -1}">
+		
+		<c:if test="${orderDTO.startPage > orderDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/emp/order?pageNum=${orderDTO.startPage - orderDTO.pageBlock}">Prev</a>
+		</c:if>
+		
 		<c:forEach var="i" begin="${orderDTO.startPage}" end="${orderDTO.endPage}" step="1">
 			<a href="${pageContext.request.contextPath}/emp/orderSearch?pageNum=${i}&name=${orderDTO.name}
 			&item_name=${orderDTO.item_name}&item_minPrice=${orderDTO.item_minPrice}&item_maxPrice=${orderDTO.item_maxPrice}
-			&od_time=${orderDTO.od_time}&shipment_not=${orderDTO.shipment_not}">${i}</a>
+			&od_minTime=${orderDTO.od_minTime}&od_maxTime=${orderDTO.od_maxTime}&shipment_not=${orderDTO.shipment_not}">${i}</a>
 		</c:forEach>
+		
+		<c:if test="${orderDTO.endPage < orderDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/emp/order?pageNum=${orderDTO.startPage + orderDTO.pageBlock}">Next</a>
 		</c:if>
-
-		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
-			<a href="${pageContext.request.contextPath}/emp/order?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
+		
 		</c:if>
 
 		</div>
@@ -420,14 +434,21 @@ function shipment_insert(){
 	
 	document.addEventListener('DOMContentLoaded', function() {
 	    document.querySelector('.orderSearch').addEventListener('submit', function(event) {
-	        var inputDate = new Date(document.querySelector('.od_time').value);
+	        var inputDate1 = new Date(document.querySelector('.od_minTime').value);
+	        var inputDate2 = new Date(document.querySelector('.od_maxTime').value);
 	        
 	        var today = new Date();
 	        
-	        if (inputDate > today) {
+	        if (inputDate1 > today || inputDate2  >today) {
 	            alert("수주일시는 오늘 날짜 이후로 선택할 수 없습니다.");
 	            event.preventDefault();
 	        }
+	        
+	        if(inputDate1 > inputDate2 ){
+	        	alert("수주일시는 이전 날짜가 왼쪽에 와야합니다.");
+	            event.preventDefault();
+	        }
+	        
 	    });
 	});
 	

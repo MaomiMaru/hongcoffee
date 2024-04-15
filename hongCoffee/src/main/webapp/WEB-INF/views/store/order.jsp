@@ -6,7 +6,6 @@
 <html lang="ko">
 <!-- 목록 스타일 템플릿 -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <style>
 /* 항목 스타일 */
 .sidebar .nav:not(.sub-menu) > .nav-item.active{
@@ -132,6 +131,7 @@ label input[type=radio]:checked:after{
   border:1px #fff;
 }
 </style>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.7.1.min.js"></script>
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -208,8 +208,8 @@ label input[type=radio]:checked:after{
 						<input type="text" name="item_maxPrice" class="item_maxPrice" placeholder="최대 금액" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>발주일시</b></label>
-						<input type="date" name="od_minTime" class="od_minTime" max="9999-12-31" style="width : 140.5px;"> ~
-						<input type="date" name="od_maxTime" class="od_maxTime" max="9999-12-31" style="width : 140.5px;"></div></li>
+						<input type="date" name="od_minTime"  class="od_minTime"  max="9999-12-31" style="width : 140.5px;"> ~
+						<input type="date" name="od_maxTime"  class="od_maxTime" max="9999-12-31" style="width : 140.5px;"></div></li>
 						
 					<li><div class="search_div"><label class="search_name"><b>입고여부</b></label>
 						<select class="choose" name="received_not">
@@ -432,21 +432,6 @@ $('.orderSearch').submit(function(){
 	}
 		
 });
-
-	document.addEventListener('DOMContentLoaded', function() {
-	    document.querySelector('.orderSearch').addEventListener('submit', function(event) {
-	        var inputDate = new Date(document.querySelector('.od_maxTime').value);
-	        
-	        var today = new Date();
-	        
-	        if (inputDate > today) {
-	            alert("발주일시는 오늘 날짜 이후로 선택할 수 없습니다.");
-	            event.preventDefault();
-	        }
-	    });
-	});
-	
-	
 	
 $(function(){
     $('.orderSearch').submit(function(){
@@ -457,8 +442,25 @@ $(function(){
     });
 });
 
-
-
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.orderSearch').addEventListener('submit', function(event) {
+        var inputDate = new Date(document.querySelector('.od_minTime').value);
+        var inputDate2 = new Date(document.querySelector('.maxTime').value);
+        
+        var today = new Date();
+        
+        if (inputDate > today || inputDate2 > today) {
+            alert("발주일시는 오늘 날짜 이후로 선택할 수 없습니다.");
+            event.preventDefault();
+        }
+        
+        if(inputDate > inputDate2 ){
+        	alert("발주일시는 이전 날짜가 왼쪽에 와야합니다.");
+            event.preventDefault();
+        }
+        
+    });
+});
 
 </script>
 </body>

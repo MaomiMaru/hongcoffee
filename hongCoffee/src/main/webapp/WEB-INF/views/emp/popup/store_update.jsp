@@ -17,36 +17,37 @@ div{
 <body>
 <form action="${pageContext.request.contextPath}/emp/popup/store_updatePro" method="post" class="form">
 <h2 style="margin-left: 10px">지점 수정</h2>
+<sub>&nbsp;&nbsp;<span style="color: red">*</span>포함된 항목만 수정이 가능합니다.</sub>
 <fieldset style="border:0px">
 <div class="check"></div><br>
 <div><b>지점번호</b></div><input type="text" name="num"  value="${storeDTO.num}" readonly><br>
 <sub></sub>
 <div><b>지점명</b></div><input type="text" name="name" value="${storeDTO.name}" readonly><br>
 <sub></sub>
-<div><b>비밀번호</b></div><input type="password" name="pw" value="${storeDTO.pw}" class="pw"><br>
+<div><b>비밀번호</b><span style="color: red">*</span></div><input type="password" name="pw" value="${storeDTO.pw}" class="pw"><br>
 <sub>비밀번호를 변경을 원할 시 재작성해주세요.</sub><br>
-<div><b>대표자명</b></div><input type="text" name="boss" value="${storeDTO.boss}" class="boss"><br>
+<div><b>대표자명</b><span style="color: red">*</span></div><input type="text" name="boss" value="${storeDTO.boss}" class="boss"><br>
 <sub></sub>
-<div><b>연락처</b></div><input type="tel" name="phone" value="${storeDTO.phone}" class="phone"><br>
+<div><b>연락처</b><span style="color: red">*</span></div><input type="tel" name="phone" value="${storeDTO.phone}" class="phone"><br>
 <sub></sub>
-<div><b>지점 전화번호</b></div><input type="tel" name="tel" class="tel"><br>
+<div><b>지점 전화번호</b><span style="color: red">*</span></div><input type="tel" name="tel" class="tel"><br>
 <sub></sub>
-<div><b>이메일</b></div><input type="text" name="email" class="email"><br>
+<div><b>이메일</b><span style="color: red">*</span></div><input type="email" name="email" class="email"><br>
 <sub></sub>
 <div><b>우편번호</b></div><input type="text" id="sample4_postcode" value="${storeDTO.postalcode}" name="postalcode" readonly><br>
 <sub></sub>
 <div><b>도로명주소</b></div><input type="text" id="sample4_roadAddress" value="${storeDTO.address}" name="address" readonly><br>
 <sub></sub>
-<div><b>상세주소</b></div><input type="text" id="sample4_detailAddress" value="${storeDTO.address_detail}" name="address_detail" readonly><br>
+<div><b>상세주소</b><span style="color: red">*</span></div><input type="text" id="sample4_detailAddress" value="${storeDTO.address_detail}" name="address_detail" ><br>
 <sub></sub>
-<div><b>상태</b></div>
+<div><b>상태</b><span style="color: red">*</span></div>
 <select name="state" class="state" style="width: 177px">
 <option value="1" <c:if test="${storeDTO.state eq '1'}"> selected </c:if>>정상영업</option>
 <option value="2" <c:if test="${storeDTO.state eq '2'}"> selected </c:if>>미영업</option>
 <option value="3" <c:if test="${storeDTO.state eq '3'}"> selected </c:if>>폐업</option>
 </select><br>
 <sub></sub>
-<b>적요</b><br><textarea rows="30" cols="35" name="note" style="height: 210px; width: 410px;">${storeDTO.note }</textarea><br>
+<b>적요</b><span style="color: red">*</span><br><textarea rows="30" cols="35" name="note" style="height: 210px; width: 410px;">${storeDTO.note }</textarea><br>
 <sub></sub>
 <br>
 <span style="float:right">
@@ -95,21 +96,7 @@ $(function(){
 			return false;
 	}
 		
-		
-		//이메일 => 아이디@주소
-// 		if($('.email').val()=='' || $('.email').val()==null||$('.email').val()==undefined){
-// 			alert('이메일을 입력해주세요.');
-// 			return false;
-// 		}
-		if($('.email').val() != null && $('.email').val() != ''){ 
-			var emailCheck = RegExp(/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]/);
-				if( ! emailCheck.test($('.email').val()) ){
-					alert("이메일 형식이 아닙니다.");
-					$('.email').focus();
-					return false;
-			}
-		}
-		
+	
 		//select 상자
 		if($('.state').val() == "100"){
 				alert("상태를 선택하세요.");

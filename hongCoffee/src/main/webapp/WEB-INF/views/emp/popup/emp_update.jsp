@@ -20,14 +20,15 @@ select{
 <body>
 <form action="${pageContext.request.contextPath}/emp/popup/emp_updatePro" method="post" class="form">
 <h2 style="margin-left: 10px">사원 수정</h2>
+<sub>&nbsp;&nbsp;<span style="color: red">*</span>포함된 항목만 수정이 가능합니다.</sub>
 <fieldset style="border:0px">
 <!-- 중복 되는 내용이 있을 시 해당 div 영역에 표시 -->
 <div class="check"></div><br>
 <div><b>사원번호</b></div><input type="text" name="emp_num" value="${employeeDTO.emp_num}" readonly><br>
 <sub></sub>
-<div><b>비밀번호</b></div><input type="password" name="emp_pw" value="${employeeDTO.emp_pw }"><br>
+<div><b>비밀번호</b><span style="color: red">*</span></div><input type="password" name="emp_pw" value="${employeeDTO.emp_pw }"><br>
 <sub></sub>
-<div><b>사원명</b></div><input type="text" name="emp_name" value="${employeeDTO.emp_name}"><br>
+<div><b>사원명</b><span style="color: red">*</span></div><input type="text" name="emp_name" value="${employeeDTO.emp_name}"><br>
 <sub></sub>
 <div><b>생년월일</b></div><input type="text" name="emp_birth" value="${employeeDTO.emp_birth}" readonly style="width: 177px"><br>
 <sub></sub>
@@ -35,9 +36,9 @@ select{
 <sub></sub>
 <div><b>직급</b></div><input type="text" name="emp_rank" value="<c:if test="${employeeDTO.emp_rank eq 0}">무보직</c:if><c:if test="${employeeDTO.emp_rank eq 1}">대표</c:if><c:if test="${employeeDTO.emp_rank eq 2}">팀장</c:if><c:if test="${employeeDTO.emp_rank eq 3}">대리</c:if><c:if test="${employeeDTO.emp_rank eq 4}">사원</c:if>" readonly><br>
 <sub></sub>
-<div><b>연락처</b></div><input type="tel" name="emp_phone" value="${employeeDTO.emp_phone}"><br>
+<div><b>연락처</b><span style="color: red">*</span></div><input type="tel" name="emp_phone" value="${employeeDTO.emp_phone}"><br>
 <sub></sub>
-<div><b>이메일</b></div><input type="email" name="emp_email" value="${employeeDTO.emp_email }"><br>
+<div><b>이메일</b><span style="color: red">*</span></div><input type="email" name="emp_email" value="${employeeDTO.emp_email }"><br>
 <sub></sub>
 <div><b>입사일</b></div><input type="text" name="hire_date" value="${employeeDTO.hire_date }" readonly ><br>
 <sub></sub>

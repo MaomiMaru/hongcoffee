@@ -73,7 +73,7 @@ public class ExcelController {
 		o_bodyStyle.setVerticalAlignment(VerticalAlignment.CENTER);
 		
 		//헤더 생성
-		String[] o_arr = {"거래번호", "지점명", "재료명", "수주량", "단가", "총금액", "수주일시", "출하여부", "입고여부", "발주적요", "수주적요"};
+		String[] o_arr = {"거래번호", "지점명", "재료명", "수주량", "단가", "총금액", "수주일시", "출하여부", "발주적요", "수주적요"};
 		o_row = o_sheet.createRow(o_rowNo++);
 		for(int i = 0; i < o_arr.length; i++) {
 			o_cell = o_row.createCell(i);
@@ -136,25 +136,25 @@ public class ExcelController {
 				o_cell.setCellValue("출하완료");
 			}
 			
+//			o_sheet.autoSizeColumn(8);
+//			o_sheet.setColumnWidth(8, (o_sheet.getColumnWidth(8))+1024);
+//			o_cell = o_row.createCell(8);
+//			o_cell.setCellStyle(o_bodyStyle);
+//			if(orderDTO.getReceived_not() == 0) {
+//				o_cell.setCellValue("미입고");
+//			} else {
+//				o_cell.setCellValue("입고완료");
+//			}
+			
 			o_sheet.autoSizeColumn(8);
 			o_sheet.setColumnWidth(8, (o_sheet.getColumnWidth(8))+1024);
 			o_cell = o_row.createCell(8);
 			o_cell.setCellStyle(o_bodyStyle);
-			if(orderDTO.getReceived_not() == 0) {
-				o_cell.setCellValue("미입고");
-			} else {
-				o_cell.setCellValue("입고완료");
-			}
-			
-			o_sheet.autoSizeColumn(9);
-			o_sheet.setColumnWidth(9, (o_sheet.getColumnWidth(9))+1024);
-			o_cell = o_row.createCell(9);
-			o_cell.setCellStyle(o_bodyStyle);
 			o_cell.setCellValue(orderDTO.getOd_note());
 			
-			o_sheet.autoSizeColumn(10);
-			o_sheet.setColumnWidth(10, (o_sheet.getColumnWidth(10))+1024);
-			o_cell = o_row.createCell(10);
+			o_sheet.autoSizeColumn(9);
+			o_sheet.setColumnWidth(9, (o_sheet.getColumnWidth(9))+924);
+			o_cell = o_row.createCell(9);
 			o_cell.setCellStyle(o_bodyStyle);
 			o_cell.setCellValue(orderDTO.getOb_note());
 		}

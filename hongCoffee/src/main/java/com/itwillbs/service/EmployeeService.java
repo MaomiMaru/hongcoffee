@@ -155,7 +155,6 @@ public class EmployeeService {
 		int endRow = startRow + pageSize - 1;
 		
 		shipmentDTO.setStartRow(startRow - 1);
-//		pageDTO.setPageSize(pageSize);
 		shipmentDTO.setEndRow(endRow);
 		return employeeDAO.searchShipmentList(shipmentDTO);
 	}//searchShipmentList
@@ -185,7 +184,6 @@ public class EmployeeService {
 		int endRow = startRow + pageSize - 1;
 		
 		employeeDTO.setStartRow(startRow - 1);
-		employeeDTO.setPageSize(pageSize);
 		employeeDTO.setEndRow(endRow);
 		return employeeDAO.searchEmpList(employeeDTO);
 	}//searchEmpList
@@ -273,13 +271,13 @@ public class EmployeeService {
 	}
 
 	public EmployeeDTO getEmployee(int emp_num) {
-		System.out.println("EmployeeDTO getEmployee()");
+		System.out.println("EmployeeService getEmployee()");
 		return employeeDAO.getEmployee(emp_num);
 	}
 
 
 	public void shipmentDelete(int od_num) {
-		System.out.println("EmployeeDTO shipmentDelete()");
+		System.out.println("EmployeeService shipmentDelete()");
 		employeeDAO.shipmentDelete(od_num);
 	}
 
@@ -288,30 +286,30 @@ public class EmployeeService {
 
 	//지점
 		public int getStoreCount(StoreDTO storeDTO) {
-			System.out.println("getStoreCount()");
+			System.out.println("EmployeeService getStoreCount()");
 			return employeeDAO.getStoreCount(storeDTO);
 		}
 
 		//재료
 		public int getItemCount(ItemDTO itemDTO) {
-			System.out.println("getIngredientCount()");
+			System.out.println("EmployeeService getIngredientCount()");
 			return employeeDAO.getItemCount(itemDTO);
 		}
 	    //수주
 		public int getOrderCount(OrderDTO orderDTO) {
-			System.out.println("getOrderCount()");
+			System.out.println("EmployeeService getOrderCount()");
 			return employeeDAO.getOrderCount(orderDTO);
 		}
 		
 		//출하
 		public int getShipmentCount(ShipmentDTO shipmentDTO) {
-			System.out.println("getShipmentCount()");
+			System.out.println("EmployeeService getShipmentCount()");
 			return employeeDAO.getShipmentCount(shipmentDTO);
 		}
 	    
 		//사원
 		public int getEmployeeCount(EmployeeDTO employeeDTO) {
-			System.out.println("getEmpCount()");
+			System.out.println("EmployeeService getEmpCount()");
 			return employeeDAO.getEmployeeCount(employeeDTO);
 		}
 
@@ -325,27 +323,27 @@ public class EmployeeService {
 
 // == 페이징		
 		public int getStoreCount(PageDTO pageDTO) {
-			System.out.println("getStoreCount()");
+			System.out.println("EmployeeService getStoreCount()");
 			return employeeDAO.getStoreCount(pageDTO);
 		}
 
 		public int getItemCount(PageDTO pageDTO) {
-			System.out.println("getItemCount()");
+			System.out.println("EmployeeService getItemCount()");
 			return employeeDAO.getItemCount(pageDTO);
 		}
 
 		public int getOrderCount(PageDTO pageDTO) {
-			System.out.println("getOrderCount()");
+			System.out.println("EmployeeService getOrderCount()");
 			return employeeDAO.getOrderCount(pageDTO);
 		}
 
 		public int getShipmentCount(PageDTO pageDTO) {
-			System.out.println("getShipmentCount()");
+			System.out.println("EmployeeService getShipmentCount()");
 			return employeeDAO.getShipmentCount(pageDTO);
 		}
 
 		public int getEmployeeCount(PageDTO pageDTO) {
-			System.out.println("getEmployeeCount()");
+			System.out.println("EmployeeService getEmployeeCount()");
 			return employeeDAO.getEmployeeCount(pageDTO);
 		}
 		

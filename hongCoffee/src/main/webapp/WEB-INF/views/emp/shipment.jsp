@@ -296,27 +296,43 @@ label input[type=radio]:checked:after{
  		 
  		 
  		 <div id="page_control">
+		<c:if test="${pageDTO.count ne -1}">
+  		
 		<c:if test="${pageDTO.startPage > pageDTO.pageBlock}">
-			<a href="${pageContext.request.contextPath}/emp/shipmentpageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
+			<a href="${pageContext.request.contextPath}/emp/shipment?pageNum=${pageDTO.startPage - pageDTO.pageBlock}">Prev</a>
 		</c:if>
 		
-		<c:if test="${pageDTO.count ne -1}">
 		<c:forEach var="i" begin="${pageDTO.startPage}" end="${pageDTO.endPage}" step="1">
 			<a href="${pageContext.request.contextPath}/emp/shipment?pageNum=${i}">${i}</a>
 		</c:forEach>
-		</c:if>
 		
-		<c:if test="${pageDTO.count eq -1}">
-		<c:forEach var="i" begin="${shipmentDTO.startPage}" end="${shipmentDTO.endPage}" step="1">
-			<a href="${pageContext.request.contextPath}/emp/shipmentearch?pageNum=${i}&name=${shipmentDTO.name}
-			&item_name=${shipmentDTO.item_name}&item_minPrice=${orderDTO.item_minPrice}
-			&item_maxPrice=${orderDTO.item_maxPrice}&sh_time=${shipmentDTO.sh_time}">${i}</a>
-		</c:forEach>
-		</c:if>
-
 		<c:if test="${pageDTO.endPage < pageDTO.pageCount}">
 			<a href="${pageContext.request.contextPath}/emp/shipment?pageNum=${pageDTO.startPage + pageDTO.pageBlock}">Next</a>
 		</c:if>
+		
+		</c:if>
+		
+		
+		<c:if test="${pageDTO.count eq -1}">
+		
+		<c:if test="${shipmentDTO.startPage > shipmentDTO.pageBlock}">
+			<a href="${pageContext.request.contextPath}/emp/shipment?pageNum=${shipmentDTO.startPage - shipmentDTO.pageBlock}">Prev</a>
+		</c:if>
+		
+		<c:forEach var="i" begin="${shipmentDTO.startPage}" end="${shipmentDTO.endPage}" step="1">
+			<a href="${pageContext.request.contextPath}/emp/shipmentSearch?pageNum=${i}&name=${shipmentDTO.name}
+			&item_name=${shipmentDTO.item_name}&item_minPrice=${shipmentDTO.item_minPrice}
+			&item_maxPrice=${shipmentDTO.item_maxPrice}&sh_minTime=${shipmentDTO.sh_minTime}
+			&sh_maxTime=${shipmentDTO.sh_maxTime}&received_not=${shipmentDTO.received_not}">${i}</a>
+		</c:forEach>
+		
+		<c:if test="${shipmentDTO.endPage < shipmentDTO.pageCount}">
+			<a href="${pageContext.request.contextPath}/emp/shipment?pageNum=${shipmentDTO.startPage + shipmentDTO.pageBlock}">Next</a>
+		</c:if>
+		
+		</c:if>
+		
+
 
 		</div>
 		</div>
@@ -416,16 +432,25 @@ if(!priceCheck.test($('.item_maxPrice').val())){
 
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.shipmentSearch').addEventListener('submit', function(event) {
-        var inputDate = new Date(document.querySelector('.sh_time').value);
+        var inputDate1 = new Date(document.querySelector('.sh_minTime').value);
+        var inputDate2 = new Date(document.querySelector('.sh_maxTime').value);
         
         var today = new Date();
+
         
-        if (inputDate > today) {
+        if (inputDate1 > today || inputDate2  >today) {
             alert("출하일시는 오늘 날짜 이후로 선택할 수 없습니다.");
             event.preventDefault();
         }
+        
+        if(inputDate1 > inputDate2 ){
+        	alert("출하일시는 이전 날짜가 왼쪽에 와야합니다.");
+            event.preventDefault();
+        }
+        
     });
 });
+
 
 $(function(){
     $('.shipmentSearch').submit(function(){

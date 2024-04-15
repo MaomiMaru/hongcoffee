@@ -382,6 +382,34 @@ $('.stockSearch').submit(function(){
 	}
 		
 });
+	
+	$('.stockSearch').submit(function(){
+		  var minA = $('.amount_min').val();
+		  var maxA = $('.amount_max').val();
+
+		  if (minA !== '' && maxA !== '') {
+		     if (parseFloat(minA) > parseFloat(maxA)) {
+		        alert('최소 보유량은 최대 보유량보다 클 수 없습니다.');
+		        return false; 
+		        }
+		    }
+		    return true;
+		});
+		
+		$('.stockSearch').submit(function(){
+		var priceCheck = RegExp(/^[0-9]*$/);
+		if(!priceCheck.test($('.amount_min').val())){
+			alert('보유량은 숫자만 입력이 가능합니다.');
+			$('.amount_min').focus();
+			return false;
+		}
+		if(!priceCheck.test($('.amount_max').val())){
+			alert('보유량은 숫자만 입력이 가능합니다.');
+			$('.amount_max').focus();
+			return false;
+		}
+			
+	});
 
 	$(function(){
 	    $('.stockSearch').submit(function(){
