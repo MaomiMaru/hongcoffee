@@ -127,8 +127,8 @@ $(function() {
         let itemPrice = $('#item_price');
 
         switch (itemName) {
-            case "에티오피아 350g":
-            case "콜롬비아 350g":
+            case "에티오피아 250g":
+            case "콜롬비아 250g":
             case "우유 2L":
                 itemPrice.val(3500);
                 break;
@@ -174,8 +174,8 @@ function getAgreeType() {
     let obj = {
         "식품": {
             '100': '선택해주세요',
-            '에티오피아 350g': '에티오피아 350g',
-            '콜롬비아 350g': '콜롬비아 350g',
+            '에티오피아 250g': '에티오피아 250g',
+            '콜롬비아 250g': '콜롬비아 250g',
             '바닐라 시럽 500g': '바닐라 시럽 500g',
             '초코 시럽 500g': '초코 시럽 500g',
             '딸기 시럽 500g': '딸기 시럽 500g',
